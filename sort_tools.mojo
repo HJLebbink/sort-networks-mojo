@@ -106,3 +106,5 @@ fn test_perm_code():
         0, 1, 2, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 13, 14, 15
     )
     constrained[l9_obs == l9_exp, "l9"]()
+
+    print("test_perm_code: DONE")
