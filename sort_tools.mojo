@@ -3,10 +3,11 @@ alias SwapData = VariadicList[Swaps]
 
 
 fn gen_merge_mask[swaps: Swaps, width: Int]() -> SIMD[DType.bool, width]:
-    var movMask = 0
+    constrained[width <= 64]()
+    var movMask: UInt64 = 0
     alias size: Int = swaps.__len__()  # NOTE: but cannot use len(swaps)
     for i in range(size):
-        movMask |= 1 << swaps[i].get[0, Int]()
+        movMask |= UInt64(1) << swaps[i].get[0, Int]()
 
     var result = SIMD[DType.bool, width]()
     for i in range(width):
@@ -16,7 +17,8 @@ fn gen_merge_mask[swaps: Swaps, width: Int]() -> SIMD[DType.bool, width]:
 
 
 fn gen_perm[swaps: Swaps, width: Int]() -> StaticIntTuple[width]:
-    var result = StaticIntTuple[width](32)
+    constrained[(width <= 64) & (width > 0)]()
+    var result = StaticIntTuple[width]()
     for i in range(width):
         result[i] = i
 
