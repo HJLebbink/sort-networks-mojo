@@ -3,16 +3,24 @@ from algorithm.sort import sort
 from random import random_ui64
 from time import time_function
 
-from sort16_32bit import sort16_32bit
-from sort32_16bit import sort32_16bit
-from sort64_8bit import sort64_8bit
+from sort_32bit import sort_32bit_16x
+from sort_16bit import sort_16bit_32x
+from sort_8bit_64 import sort_8bit_64
 
 
-fn gen_random_data[T: DType, width: Int]() -> SIMD[T, width]:
+fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     var result = SIMD[T, width]()
     # TODO: use faster methods
     for i in range(width):
         result[i] = random_ui64(0, 100).cast[T]()
+    return result
+
+
+fn gen_random_vec[T: DType](size: Int) -> DynamicVector[SIMD[T, 1]]:
+    var result = DynamicVector[SIMD[T, 1]](size)
+    # TODO: use faster methods
+    for i in range(size):
+        result.push_back(random_ui64(0, 100).cast[T]())
     return result
 
 
@@ -41,11 +49,11 @@ fn measure_time_mojo_sort[T: DType](samples: Int, size: Int) -> Int:
 fn measure_time_netw_sort16[T: DType](samples: Int) -> Int:
     var best = -1
     for sample in range(samples):
-        let data1 = gen_random_data[T, 16]()
+        let data1 = gen_random_SIMD[T, 16]()
 
         @parameter
         fn runner():
-            let data2 = sort16_32bit[T](data1)
+            let data2 = sort_32bit_16x[T](data1)
 
             # Avoid compiler optimizing things away
             # keep(data2) #crash due to bug
@@ -60,11 +68,11 @@ fn measure_time_netw_sort16[T: DType](samples: Int) -> Int:
 fn measure_time_netw_sort32[T: DType](samples: Int) -> Int:
     var best = -1
     for sample in range(samples):
-        let data1 = gen_random_data[T, 32]()
+        let data1 = gen_random_SIMD[T, 32]()
 
         @parameter
         fn runner():
-            let data2 = sort32_16bit[T](data1)
+            let data2 = sort_16bit_32x[T](data1)
 
             # Avoid compiler optimizing things away
             # keep(data2) #crash due to bug
@@ -80,11 +88,11 @@ fn measure_time_netw_sort32[T: DType](samples: Int) -> Int:
 fn measure_time_netw_sort64[T: DType](samples: Int) -> Int:
     var best = -1
     for sample in range(samples):
-        let data1 = gen_random_data[T, 64]()
+        let data1 = gen_random_SIMD[T, 64]()
 
         @parameter
         fn runner():
-            let data2 = sort64_8bit[T](data1)
+            let data2 = sort_8bit_64[T](data1)
 
             # Avoid compiler optimizing things away
             # keep(data2) #crash due to bug
