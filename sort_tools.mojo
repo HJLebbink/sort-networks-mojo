@@ -36,6 +36,20 @@ fn gen_perm[swaps: Swaps, width: Int]() -> StaticIntTuple[width]:
 
 
 @always_inline
+fn swap_8x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 8]) -> SIMD[T, 8]:
+    alias p = gen_perm[swaps, 8]()
+    alias merge_mask = gen_merge_mask[swaps, 8]()
+
+    let v2 = v.shuffle[p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]]()
+
+    @parameter
+    if assending:
+        return merge_mask.select(v.min(v2), v.max(v2))
+    else:
+        return merge_mask.select(v.max(v2), v.min(v2))
+
+
+@always_inline
 fn swap_16x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 16]) -> SIMD[T, 16]:
     alias p = gen_perm[swaps, 16]()
     alias merge_mask = gen_merge_mask[swaps, 16]()

@@ -1,51 +1,26 @@
 from utils.vector import DynamicVector
-
 from math import isnan
 from algorithm.sort import sort
 import benchmark
 
-from sort_32bit import sort_32bit_16x, sort16_32bit_16x_2x, sort16_32bit_16x_idx, test_sort
-from sort_16bit import sort_16bit_32x, sort_16bit_16x
-from sort_8bit_64 import sort_8bit_64
+from sort_base import sort16_32bit_16x_2x, sort16_32bit_16x_idx
 from sort_tools import test_perm_code
-
 from sort_network import sort_network
-
+from tests import test_sort
 
 from performance import (
     test_performance,
     gen_random_SIMD,
     gen_random_vec,
+    compare_generic
 )
 
 
-fn test_32bit_16[T: DType, assending: Bool]():
-    let data1 = gen_random_SIMD[T, 16]()
-    print("before 16: " + String(data1))
-    let data2 = sort_32bit_16x[T, assending](data1)
-    print("after 16:  " + String(data2))
-
-
-fn test_16bit_32x[T: DType, assending: Bool]():
-    let data1 = gen_random_SIMD[T, 32]()
-    print("before 32: " + String(data1))
-    let data2 = sort_16bit_32x[T, assending](data1)
-    print("after 32:  " + String(data2))
-
-
-fn test_16bit_16x[T: DType, assending: Bool]():
-    let data1 = gen_random_SIMD[T, 16]()
-    print("before 32: " + String(data1))
-    let data2 = sort_16bit_16x[T, assending](data1)
-    print("after 32:  " + String(data2))
-
-
-
-fn test_8bit_64x[T: DType, assending: Bool]():
-    let data1 = gen_random_SIMD[T, 64]()
-    print("before 64: " + String(data1))
-    let data2 = sort_8bit_64[T, assending](data1)
-    print("after 64:  " + String(data2))
+fn test_network[T: DType, width: Int, assending: Bool]():
+    let data1 = gen_random_SIMD[T, width]()
+    print("before " + str(width) + ": " + String(data1))
+    let data2 = sort_network[T, width, assending](data1)
+    print("after " + str(width) + ": " + String(data2))
 
 
 fn test_32bit_16x_2x[T1: DType, T2: DType, assending1: Bool, assending2: Bool]():
@@ -108,24 +83,32 @@ fn main():
     #test_perm_code()
     #test_sort()
 
-    #test_32bit_16[DType.uint32, True]()
-    #test_32bit_16[DType.int32, True]()
-    #test_32bit_16[DType.float32, True]()
+    #test_network[DType.uint64, 8, True]()
+    #test_network[DType.int64, 8, True]()
+    #test_network[DType.float64, 8, True]()
+
+    #test_network[DType.uint32, 16, True]()
+    #test_network[DType.int32, 16, True]()
+    #test_network[DType.float32, 16, True]()
 
     #test_32bit_16x_2x[DType.int32, DType.uint32, True, True]()
     #test_32bit_16x_idx[DType.int32, DType.uint32, False]()
 
-    #test_16bit_32x[DType.uint16, True]()
-    #test_16bit_32x[DType.int16, True]()
-    #test_16bit_32x[DType.float16, True]()
-    #test_16bit_32x[DType.bfloat16, True]() # Does not seem to work
+    #test_network[DType.uint16, 32, True]()
+    test_network[DType.uint16, 16, True]()
+    test_network[DType.uint16, 8, True]()
 
-    #test_16bit_16x[DType.int16, True]()
+    #test_network[DType.int16, 32, True]()
+    #test_network[DType.float16, 32, True]()
+    #test_network[DType.bfloat16, 32, True]() # Does not seem to work
 
-    #test_8bit_64x[DType.int8, True]() # Crash with shuffle on 64 bytes
-    #test_8bit_64x[DType.uint8, True]()
+
+    #test_network[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
+    #test_network[DType.uint8, 64, True]()
 
     #test_performance(10000, "./perf/results.csv")
-    #sort_mojo[DType.uint32]()
-    sort_net[DType.uint32](16)
+    #sort_mojo[DType.uint32](16)
+    #sort_net[DType.uint32](16)
+
+    #compare_generic()
     
