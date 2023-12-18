@@ -17,50 +17,49 @@ In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: Dynamic
 
 
 ```
-         size    mojo    netw
-uint64   8       50      24
-uint64   16      107     33
-uint64   32      330     59
+uint64  8       37      24
+uint64  16      97      33
+uint64  32      312     58
 
-int64    8       49      24
-int64    16      106     33
-int64    32      333     58
+int64   8       38      24
+int64   16      95      33
+int64   32      305     58
 
-float64  8       49      25
-float64  16      115     33
-float64  32      333     44
+float64 8       35      25
+float64 16      98      33
+float64 32      323     43
 
-uint32   8       50      19
-uint32   16      109     24
-uint32   32      324     34
+uint32  8       35      19
+uint32  16      67      24
+uint32  32      292     34
 
-int32    8       49      19
-int32    16      94      24
-int32    32      326     34
+int32   8       34      19
+int32   16      78      24
+int32   32      270     34
 
-float32  8       45      23
-float32  16      101     32
-float32  32      329     38
+float32 8       33      23
+float32 16      79      32
+float32 32      300     39
 
-uint16   8       50      17
-uint16   16      73      36
-uint16   32      277     34
+uint16  8       33      18
+uint16  16      53      36
+uint16  32      266     34
 
-int16    8       46      17
-int16    16      74      36
-int16    32      278     34
+int16   8       34      18
+int16   16      54      36
+int16   32      243     34
 
-float16  8       47      25
-float16  16      73      37
-float16  32      297     45
+float16 8       37      25
+float16 16      51      38
+float16 32      270     45
 
-uint8    8       52      18
-uint8    16      84      24
-uint8    32      255     43
+uint8   8       32      18
+uint8   16      57      24
+uint8   32  [CRASH]
 
-int8     8       48      18
-int8     16      69      24
-int8     32      214     43
+int8    16  [CRASH]
+int8    16      54      23
+int8    16  [CRASH]
 ```
 
 Overall, a sorting network is about 4 times faster.

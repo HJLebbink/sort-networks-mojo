@@ -31,11 +31,11 @@ fn measure_time_mojo_sort[T: DType](samples: Int, size: Int) -> Int:
 
         @parameter
         fn runner():
-            # make a copy to prevent a bug
-            var x = data_vec
-            sort[T](x)
+            #NOTE: make a copy to prevent a bug; TODO: remove this code an rerun the benchmarks!
+            #var x = data_vec
+            sort[T](data_vec)
             # Avoid compiler optimizing things away
-            keep(x)
+            keep(data_vec)
 
         let ns = time_function[runner]()
         if best < 0 or ns < best:
