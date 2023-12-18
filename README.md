@@ -5,12 +5,12 @@ Efficient sorting in Modular Mojo optimized for small datasets (with a number of
 The primary objective is to create a drop-in replacement for the `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]])`
 function, utilizing sorting networks when the dataset is 64 elements or fewer. However, there are still a few areas that need refinement.
 
-The sorting networks are shamelessly borrowed from the work of [Bert Dobbellaere](https://bertdobbelaere.github.io/sorting_networks_extended.html) who did all the hard searching!
+The sorting networks are shamelessly borrowed from the work of [Bert Dobbelaere](https://bertdobbelaere.github.io/sorting_networks_extended.html) who did all the hard searching!
 
 ## Performance compared to stdlib sort
 
 I would love to present comprehensive scientific results, complete with boxplots, once a proper statistics library is available for computing standard deviations and confidence intervals. 
-If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken in ms of 1_000_000 runs is what I can present.
+If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken (in ms) of the minimum of 1_000_000 runs is what I can present.
 
 
 In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. Under the `netw` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, assending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in `test_performance` function.

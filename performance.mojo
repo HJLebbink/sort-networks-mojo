@@ -103,7 +103,7 @@ fn experiment[T: DType, size: Int](n_samples: Int, name: String, sep: String) ->
 
 
 fn test_performance(n_samples: Int):
-    alias sep = ';\t'
+    alias sep = '\t'
     print(sep + "size" + sep + "mojo" + sep + "netw")
 
     print(experiment[DType.uint64, 8](n_samples, "uint64", sep))

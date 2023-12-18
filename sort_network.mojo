@@ -33,10 +33,12 @@ fn sort_network[
             sort_64element[T, assending](rebind[SIMD[T, 64]](v))
         )
     else:
-        constrained[False]()
+        constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
+        # unreachable
     return v
 
 
+# sort SIMD v, and apply the same reodering of v to idx
 fn sort_network_idx[
     T1: DType, T2: DType, width: Int, assending: Bool = True
 ](v: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
@@ -46,28 +48,32 @@ fn sort_network_idx[
         let idx2 = rebind[SIMD[T2, 8]](idx)
         let t = sort_8element_idx[T1, T2, assending](v2, idx2)
         let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 8]]())
-        let idx3 = rebind[SIMD[T2, width]](t.get[0, SIMD[T2, 8]]())
+        let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 8]]())
         return (v3, idx3)
     elif width == 16:
         let v2 = rebind[SIMD[T1, 16]](v)
         let idx2 = rebind[SIMD[T2, 16]](idx)
         let t = sort_16element_idx[T1, T2, assending](v2, idx2)
         let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 16]]())
-        let idx3 = rebind[SIMD[T2, width]](t.get[0, SIMD[T2, 16]]())
+        let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 16]]())
+        return (v3, idx3)
     elif width == 32:
         let v2 = rebind[SIMD[T1, 32]](v)
         let idx2 = rebind[SIMD[T2, 32]](idx)
         let t = sort_32element_idx[T1, T2, assending](v2, idx2)
         let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 32]]())
-        let idx3 = rebind[SIMD[T2, width]](t.get[0, SIMD[T2, 32]]())
+        let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 32]]())
+        return (v3, idx3)
     elif width == 64:
         let v2 = rebind[SIMD[T1, 64]](v)
         let idx2 = rebind[SIMD[T2, 64]](idx)
         let t = sort_64element_idx[T1, T2, assending](v2, idx2)
         let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 64]]())
-        let idx3 = rebind[SIMD[T2, width]](t.get[0, SIMD[T2, 64]]())
+        let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 64]]())
+        return (v3, idx3)
     else:
-        constrained[False]()
+        constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
+        # unreachable
     return (v, idx)
 
 

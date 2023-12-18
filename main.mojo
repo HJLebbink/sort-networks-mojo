@@ -1,7 +1,5 @@
 from utils.vector import DynamicVector
-from math import isnan
 from algorithm.sort import sort
-import benchmark
 
 from sort_tools import test_perm_code
 from sort_network import sort_network, sort_network_idx, sort_16element_2x
