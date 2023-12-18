@@ -10,8 +10,7 @@ from tests import test_sort
 from performance import (
     test_performance,
     gen_random_SIMD,
-    gen_random_vec,
-    compare_generic
+    gen_random_vec
 )
 
 
@@ -74,10 +73,6 @@ fn sort_net[T: DType](size: Int):
     print("")
 
 
-fn test_correctness():
-    pass  # TODO
-
-
 fn main():
     test_perm_code()
     test_sort()
@@ -104,11 +99,11 @@ fn main():
     #test_network[DType.float16, 32, True]()
     #test_network[DType.bfloat16, 32, True]() # Does not seem to work
 
-
     #test_network[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
     #test_network[DType.uint8, 64, True]()
 
-    #test_performance(10000, "./perf/results.csv")
+    test_performance(1000000)
+    
     #sort_mojo[DType.uint32](16)
     #sort_net[DType.uint32](16)
 
