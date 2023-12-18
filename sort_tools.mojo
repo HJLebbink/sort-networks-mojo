@@ -15,7 +15,7 @@ fn gen_merge_mask[swaps: Swaps, width: Int]() -> SIMD[DType.bool, width]:
 
     return result
 
-
+# generate a index permutation (of size width) from the provided swaps
 fn gen_perm[swaps: Swaps, width: Int]() -> StaticIntTuple[width]:
     constrained[(width <= 64) & (width > 0)]()
     var result = StaticIntTuple[width]()

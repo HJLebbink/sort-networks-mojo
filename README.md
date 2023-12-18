@@ -13,10 +13,12 @@ I would love to present comprehensive scientific results, complete with boxplots
 If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken (in ms) of the minimum of 1_000_000 runs is what I can present.
 
 
-In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. Under the `netw` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, assending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in `test_performance` function.
+In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. Under the `netw` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, assending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in the `test_performance` function.
 
 
 ```
+        size    mojo    netw
+
 uint64  8       37      24
 uint64  16      97      33
 uint64  32      312     58
@@ -55,11 +57,11 @@ float16 32      270     45
 
 uint8   8       32      18
 uint8   16      57      24
-uint8   32  [CRASH]
+uint8   32  [CRASH](https://github.com/modularml/mojo/issues/1514)
 
-int8    16  [CRASH]
+int8    8   [CRASH](https://github.com/modularml/mojo/issues/1514)
 int8    16      54      23
-int8    16  [CRASH]
+int8    32  [CRASH](https://github.com/modularml/mojo/issues/1514)
 ```
 
 Overall, a sorting network is about 4 times faster.

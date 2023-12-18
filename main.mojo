@@ -63,7 +63,6 @@ fn sort_net[T: DType](size: Int):
         print_no_newline(str(data_vec[i]) + " ")
     print("")
 
-    sort[T](data_vec)
     sort_network[T](data_vec)
 
     for i in range(size):
@@ -101,9 +100,7 @@ fn main():
     #test_network[DType.uint8, 64, True]()
 
     test_performance(1000000)
-    
+
     #sort_mojo[DType.uint32](16)
     #sort_net[DType.uint32](16)
 
-    #compare_generic()
-    

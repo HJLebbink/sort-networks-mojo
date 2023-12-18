@@ -28,12 +28,14 @@ fn sort_network[
         return rebind[SIMD[T, width]](
             sort_32element[T, assending](rebind[SIMD[T, 32]](v))
         )
-    elif width == 64:
-        return rebind[SIMD[T, width]](
-            sort_64element[T, assending](rebind[SIMD[T, 64]](v))
-        )
+    # TODO enable this once https://github.com/modularml/mojo/issues/1505 is resolved
+    #elif width == 64:
+    #    return rebind[SIMD[T, width]](
+    #        sort_64element[T, assending](rebind[SIMD[T, 64]](v))
+    #    )
     else:
-        constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
+        print("width "+str(width))
+        #constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
         # unreachable
     return v
 
@@ -83,36 +85,25 @@ fn sort_network[
 ](inout v: DynamicVector[SIMD[type, 1]]):
     let size: Int = v.size
 
-    @parameter
-    if type.bitwidth() == 8:
-        if size > 64:
-            sort[type](v)
-        else:
-            pass
-    elif type.bitwidth() == 16:
-        if size > 32:
-            sort[type](v)
-        else:
-            var v1 = SIMD[type, 32]()  # set all values to zero
-            for i in range(size):
-                v1[i] = v[i]
-            let v2 = sort_network[type, 32, assending](v1)
-            for i in range(size):
-                v[i] = v2[i]
-    elif type.bitwidth() == 32:
-        if size > 16:
-            sort[type](v)
-        else:
-            pass
-    elif type.bitwidth() == 64:
-        if size > 8:
-            sort[type](v)
-        else:
-            pass
+    @always_inline
+    fn x[size: Int](inout v: DynamicVector[SIMD[type, 1]]):
+        var v1 = SIMD[type, size]()
+        for i in range(size):
+            v1[i] = v[i]
+        let v2 = sort_network[type, size, assending](v1)
+        for i in range(size):
+            v[i] = v2[i]
+
+    if size <= 8:
+        x[8](v)
+    elif size <= 16:
+        x[16](v)
+    elif size <= 32:
+        x[32](v)
+    elif size <= 64:
+        x[64](v)
     else:
-        sort[type](v)
-
-
+        sort[type](v) # use stdlib sort
 
 
 # sort SIMD array v

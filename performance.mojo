@@ -46,7 +46,6 @@ fn measure_time_mojo_sort[T: DType](samples: Int, size: Int) -> Int:
 
 fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int) -> Int:
     var best = -1
-
     for sample in range(samples):
         let data1 = gen_random_SIMD[T, width]()
         @parameter
@@ -67,14 +66,15 @@ fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int) -> Int:
 fn measure_time_netw_sort_generic[T: DType](samples: Int, size: Int) -> Int:
     var best = -1
     for sample in range(samples):
-        let data = gen_random_vec[T](size)
+        let data_vec = gen_random_vec[T](size)
         @parameter
         fn runner():
-            sort_network[T](data)
+            var x = data_vec # to be consistent with measure_time_mojo_sort
+            sort_network[T](x)
 
             # Avoid compiler optimizing things away
             # keep(data2) #crash due to bug
-            keep(data)
+            keep(x)
 
         let ns = time_function[runner]()
         if best < 0 or ns < best:
@@ -99,12 +99,14 @@ fn experiment[T: DType, size: Int](n_samples: Int, name: String, sep: String) ->
     result += str(measure_time_mojo_sort[T](n_samples, size))
     result += sep
     result += str(measure_time_netw_sort_SIMD[T, size](n_samples))
+#    result += sep
+#    result += str(measure_time_netw_sort_generic[T](n_samples, size))
     return result
 
 
 fn test_performance(n_samples: Int):
     alias sep = '\t'
-    print(sep + "size" + sep + "mojo" + sep + "netw")
+    print(sep + "size" + sep + "mojo" + sep + "netw_SIMD" + sep + "netw_vec")
 
     print(experiment[DType.uint64, 8](n_samples, "uint64", sep))
     print(experiment[DType.uint64, 16](n_samples, "uint64", sep))
@@ -153,9 +155,9 @@ fn test_performance(n_samples: Int):
 
     print(experiment[DType.uint8, 8](n_samples, "uint8", sep))
     print(experiment[DType.uint8, 16](n_samples, "uint8", sep))
-    print(experiment[DType.uint8, 32](n_samples, "uint8", sep))
+    #print(experiment[DType.uint8, 32](n_samples, "uint8", sep))
     print("")
 
-    print(experiment[DType.int8, 8](n_samples, "int8", sep))
+    #print(experiment[DType.int8, 8](n_samples, "int8", sep))
     print(experiment[DType.int8, 16](n_samples, "int8", sep))
-    print(experiment[DType.int8, 32](n_samples, "int8", sep))
+    #print(experiment[DType.int8, 32](n_samples, "int8", sep))
