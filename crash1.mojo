@@ -1,6 +1,3 @@
-from random import random_ui64
-
-
 fn gen_perm() -> StaticIntTuple[64]:
     var result = StaticIntTuple[64]()
     for i in range(64):
@@ -10,13 +7,10 @@ fn gen_perm() -> StaticIntTuple[64]:
 
 fn main():
     alias p = gen_perm()
-    print("perm " + str(p))
+    #print("perm " + str(p))
 
-    # generate random data to prevent that everything gets simplified
-    var data1 = SIMD[DType.uint8, 64]()
-    for i in range(64):
-        data1[i] = random_ui64(0, 100).cast[DType.uint8]()
-    print(data1)
+    let data1 = SIMD[DType.uint8, 64]()
+    #print(data1)
 
     let data2 = data1.shuffle[
         p[0],

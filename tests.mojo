@@ -1,4 +1,4 @@
-from sort_base import sort16_32bit_16x_idx
+from sort_network import sort_16element_idx
 
 
 
@@ -16,7 +16,7 @@ fn test_sort():
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
     )
 
-    alias t1a = sort16_32bit_16x_idx[assending=True](data_1, idx_1)
+    alias t1a = sort_16element_idx[assending=True](data_1, idx_1)
     alias data_1a_obs = t1a.get[0, SIMD[DType.int32, 16]]()
     alias data_1a_exp = SIMD[DType.int32, 16](
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
@@ -39,7 +39,7 @@ fn test_sort():
         print("idx_1a exp " + str(idx_1a_exp))
         print("idx_1a obs " + str(idx_1a_obs))
 
-    alias t1b = sort16_32bit_16x_idx[assending=False](data_1, idx_1)
+    alias t1b = sort_16element_idx[assending=False](data_1, idx_1)
     alias data_1b_obs = t1b.get[0, SIMD[DType.int32, 16]]()
     alias data_1b_exp = SIMD[DType.int32, 16](
         15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0

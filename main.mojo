@@ -3,9 +3,8 @@ from math import isnan
 from algorithm.sort import sort
 import benchmark
 
-from sort_base import sort16_32bit_16x_2x, sort16_32bit_16x_idx
 from sort_tools import test_perm_code
-from sort_network import sort_network
+from sort_network import sort_network, sort_network_idx, sort_16element_2x
 from tests import test_sort
 
 from performance import (
@@ -29,7 +28,7 @@ fn test_32bit_16x_2x[T1: DType, T2: DType, assending1: Bool, assending2: Bool]()
 
     print("before: " + String(data1a))
     print("before: " + String(data1b))
-    let data2 = sort16_32bit_16x_2x[T1, T2, assending1, assending2](data1a, data1b)
+    let data2 = sort_16element_2x[T1, T2, assending1, assending2](data1a, data1b)
     let data2a = data2.get[0, SIMD[T1, 16]]()
     let data2b = data2.get[1, SIMD[T2, 16]]()
     print("after:  " + String(data2a))
@@ -41,7 +40,7 @@ fn test_32bit_16x_idx[T1: DType, T2: DType, assending: Bool]():
     let data1b = SIMD[T2, 16](0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
     print("before: " + String(data1a))
     print("before: " + String(data1b))
-    let data2 = sort16_32bit_16x_idx[T1, T2, assending](data1a, data1b)
+    let data2 = sort_16element_2x[T1, T2, assending](data1a, data1b)
     let data2a = data2.get[0, SIMD[T1, 16]]()
     let data2b = data2.get[1, SIMD[T2, 16]]()
     print("after:  " + String(data2a))
@@ -80,23 +79,26 @@ fn test_correctness():
 
 
 fn main():
-    #test_perm_code()
-    #test_sort()
+    test_perm_code()
+    test_sort()
 
     #test_network[DType.uint64, 8, True]()
     #test_network[DType.int64, 8, True]()
     #test_network[DType.float64, 8, True]()
+    #test_network[DType.uint64, 32, True]()
 
     #test_network[DType.uint32, 16, True]()
     #test_network[DType.int32, 16, True]()
     #test_network[DType.float32, 16, True]()
+    #test_network[DType.uint32, 32, True]()
+    #test_network[DType.uint32, 64, True]()
 
     #test_32bit_16x_2x[DType.int32, DType.uint32, True, True]()
     #test_32bit_16x_idx[DType.int32, DType.uint32, False]()
 
     #test_network[DType.uint16, 32, True]()
-    test_network[DType.uint16, 16, True]()
-    test_network[DType.uint16, 8, True]()
+    #test_network[DType.uint16, 16, True]()
+    #test_network[DType.uint16, 8, True]()
 
     #test_network[DType.int16, 32, True]()
     #test_network[DType.float16, 32, True]()

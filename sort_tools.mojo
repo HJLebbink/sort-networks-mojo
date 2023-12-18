@@ -36,42 +36,12 @@ fn gen_perm[swaps: Swaps, width: Int]() -> StaticIntTuple[width]:
 
 
 @always_inline
-fn swap_8x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 8]) -> SIMD[T, 8]:
-    alias p = gen_perm[swaps, 8]()
-    alias merge_mask = gen_merge_mask[swaps, 8]()
-
-    let v2 = v.shuffle[p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]]()
-
-    @parameter
-    if assending:
-        return merge_mask.select(v.min(v2), v.max(v2))
-    else:
-        return merge_mask.select(v.max(v2), v.min(v2))
-
-
-@always_inline
-fn swap_16x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 16]) -> SIMD[T, 16]:
-    alias p = gen_perm[swaps, 16]()
-    alias merge_mask = gen_merge_mask[swaps, 16]()
-
-    let v2 = v.shuffle[
-        p[0],
-        p[1],
-        p[2],
-        p[3],
-        p[4],
-        p[5],
-        p[6],
-        p[7],
-        p[8],
-        p[9],
-        p[10],
-        p[11],
-        p[12],
-        p[13],
-        p[14],
-        p[15],
-    ]()
+fn swap_n[
+    T: DType, width: Int, swaps: Swaps, assending: Bool
+](v: SIMD[T, width]) -> SIMD[T, width]:
+    alias permutations = gen_perm[swaps, width]()
+    alias merge_mask = gen_merge_mask[swaps, width]()
+    let v2 = my_shuffle[T, width, permutations](v)
 
     @parameter
     if assending:
@@ -81,193 +51,16 @@ fn swap_16x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 16]) -> SIMD[T, 
 
 
 @always_inline
-fn swap_16x_idx[
-    T1: DType, T2: DType, swaps: Swaps, assending: Bool
-](data: Tuple[SIMD[T1, 16], SIMD[T2, 16]]) -> (SIMD[T1, 16], SIMD[T2, 16]):
-    alias p = gen_perm[swaps, 16]()
-    alias merge_mask = gen_merge_mask[swaps, 16]()
-
-    let dataA = data.get[0, SIMD[T1, 16]]()
-    let dataB = data.get[1, SIMD[T2, 16]]()
-
-    let shuffled_data = dataA.shuffle[
-        p[0],
-        p[1],
-        p[2],
-        p[3],
-        p[4],
-        p[5],
-        p[6],
-        p[7],
-        p[8],
-        p[9],
-        p[10],
-        p[11],
-        p[12],
-        p[13],
-        p[14],
-        p[15],
-    ]()
-    let min_ = dataA.min(shuffled_data)
-    let max_ = dataA.max(shuffled_data)
-
-    let dataA_sorted: SIMD[T1, 16]
-
-    @parameter
-    if assending:
-        dataA_sorted = merge_mask.select(min_, max_)
-    else:
-        dataA_sorted = merge_mask.select(max_, min_)
-
-    let change_mask = dataA_sorted != dataA
-    let dataB_2 = dataB.shuffle[
-        p[0],
-        p[1],
-        p[2],
-        p[3],
-        p[4],
-        p[5],
-        p[6],
-        p[7],
-        p[8],
-        p[9],
-        p[10],
-        p[11],
-        p[12],
-        p[13],
-        p[14],
-        p[15],
-    ]()
-    return (dataA_sorted, change_mask.select(dataB_2, dataB))
-
-
-@always_inline
-fn swap_32x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 32]) -> SIMD[T, 32]:
-    alias p = gen_perm[swaps, 32]()
-    alias merge_mask = gen_merge_mask[swaps, 32]()
-
-    let v2 = v.shuffle[
-        p[0],
-        p[1],
-        p[2],
-        p[3],
-        p[4],
-        p[5],
-        p[6],
-        p[7],
-        p[8],
-        p[9],
-        p[10],
-        p[11],
-        p[12],
-        p[13],
-        p[14],
-        p[15],
-        p[16],
-        p[17],
-        p[18],
-        p[19],
-        p[20],
-        p[21],
-        p[22],
-        p[23],
-        p[24],
-        p[25],
-        p[26],
-        p[27],
-        p[28],
-        p[29],
-        p[30],
-        p[31],
-    ]()
-
-    @parameter
-    if assending:
-        return merge_mask.select(v.min(v2), v.max(v2))
-    else:
-        return merge_mask.select(v.max(v2), v.min(v2))
-
-
-@always_inline
-fn swap_64x[T: DType, swaps: Swaps, assending: Bool](v: SIMD[T, 64]) -> SIMD[T, 64]:
-    alias p = gen_perm[swaps, 64]()
-    alias merge_mask = gen_merge_mask[swaps, 64]()
-
-    constrained[p.__len__() == 64]()
-
-    let v2 = v.shuffle[
-        p[0],
-        p[1],
-        p[2],
-        p[3],
-        p[4],
-        p[5],
-        p[6],
-        p[7],
-        p[8],
-        p[9],
-        p[10],
-        p[11],
-        p[12],
-        p[13],
-        p[14],
-        p[15],
-        p[16],
-        p[17],
-        p[18],
-        p[19],
-        p[20],
-        p[21],
-        p[22],
-        p[23],
-        p[24],
-        p[25],
-        p[26],
-        p[27],
-        p[28],
-        p[29],
-        p[30],
-        p[31],
-        p[32],
-        p[33],
-        p[34],
-        p[35],
-        p[36],
-        p[37],
-        p[38],
-        p[39],
-        p[40],
-        p[41],
-        p[42],
-        p[43],
-        p[44],
-        p[45],
-        p[46],
-        p[47],
-        p[48],
-        p[49],
-        p[50],
-        p[51],
-        p[52],
-        p[53],
-        p[54],
-        p[55],
-        p[56],
-        p[57],
-        p[58],
-        p[59],
-        p[60],
-        p[61],
-        p[62],
-        p[63],
-    ]()
-
-    @parameter
-    if assending:
-        return merge_mask.select(v.min(v2), v.max(v2))
-    else:
-        return merge_mask.select(v.max(v2), v.min(v2))
-
+fn swap_idx[
+    T1: DType, T2: DType, width: Int, swaps: Swaps, assending: Bool
+](t: Tuple[SIMD[T1, width], SIMD[T2, width]]) -> (SIMD[T1, width], SIMD[T2, width]):
+    alias permutations = gen_perm[swaps, width]()
+    let data = t.get[0, SIMD[T1, width]]()
+    let idx = t.get[1, SIMD[T2, width]]()
+    let data_sorted = swap_n[T1, width, swaps, assending](data)
+    let change_mask = data_sorted != data
+    let idx_shuffled = my_shuffle[T2, width, permutations](idx)
+    return (data_sorted, change_mask.select(idx_shuffled, idx))
 
 
 fn test_perm_code():
@@ -346,3 +139,145 @@ fn test_perm_code():
     constrained[l9_obs == l9_exp, "l9"]()
 
     print("test_perm_code: DONE")
+
+
+@always_inline
+fn my_shuffle[
+    T: DType, width: Int, p: StaticIntTuple[width]
+](v: SIMD[T, width]) -> SIMD[T, width]:
+    @parameter
+    if width == 8:
+        return v.shuffle[
+            p[0],
+            p[1],
+            p[2],
+            p[3],
+            p[4],
+            p[5],
+            p[6],
+            p[7],
+        ]()
+    elif width == 16:
+        return v.shuffle[
+            p[0],
+            p[1],
+            p[2],
+            p[3],
+            p[4],
+            p[5],
+            p[6],
+            p[7],
+            p[8],
+            p[9],
+            p[10],
+            p[11],
+            p[12],
+            p[13],
+            p[14],
+            p[15],
+        ]()
+    elif width == 32:
+        return v.shuffle[
+            p[0],
+            p[1],
+            p[2],
+            p[3],
+            p[4],
+            p[5],
+            p[6],
+            p[7],
+            p[8],
+            p[9],
+            p[10],
+            p[11],
+            p[12],
+            p[13],
+            p[14],
+            p[15],
+            p[16],
+            p[17],
+            p[18],
+            p[19],
+            p[20],
+            p[21],
+            p[22],
+            p[23],
+            p[24],
+            p[25],
+            p[26],
+            p[27],
+            p[28],
+            p[29],
+            p[30],
+            p[31],
+        ]()
+    elif width == 64:
+        return v.shuffle[
+            p[0],
+            p[1],
+            p[2],
+            p[3],
+            p[4],
+            p[5],
+            p[6],
+            p[7],
+            p[8],
+            p[9],
+            p[10],
+            p[11],
+            p[12],
+            p[13],
+            p[14],
+            p[15],
+            p[16],
+            p[17],
+            p[18],
+            p[19],
+            p[20],
+            p[21],
+            p[22],
+            p[23],
+            p[24],
+            p[25],
+            p[26],
+            p[27],
+            p[28],
+            p[29],
+            p[30],
+            p[31],
+            p[32],
+            p[33],
+            p[34],
+            p[35],
+            p[36],
+            p[37],
+            p[38],
+            p[39],
+            p[40],
+            p[41],
+            p[42],
+            p[43],
+            p[44],
+            p[45],
+            p[46],
+            p[47],
+            p[48],
+            p[49],
+            p[50],
+            p[51],
+            p[52],
+            p[53],
+            p[54],
+            p[55],
+            p[56],
+            p[57],
+            p[58],
+            p[59],
+            p[60],
+            p[61],
+            p[62],
+            p[63],
+        ]()
+    else:
+        constrained[False]()
+        return v
