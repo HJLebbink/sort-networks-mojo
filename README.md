@@ -19,52 +19,52 @@ In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: Dynamic
 ```
         size    mojo    netw
 
-uint64  8       37      24
-uint64  16      97      33
-uint64  32      312     58
+uint64  8       43      24
+uint64  16      112     33
+uint64  32      328     58
 
-int64   8       38      24
-int64   16      95      33
-int64   32      305     58
+int64   8       40      24
+int64   16      108     33
+int64   32      312     58
 
-float64 8       35      25
-float64 16      98      33
-float64 32      323     43
+float64 8       40      25
+float64 16      112     32
+float64 32      334     44
 
-uint32  8       35      19
-uint32  16      67      24
-uint32  32      292     34
+uint32  8       40      19
+uint32  16      113     24
+uint32  32      335     34
 
-int32   8       34      19
-int32   16      78      24
-int32   32      270     34
+int32   8       41      19
+int32   16      103     22
+int32   32      328     33
 
-float32 8       33      23
-float32 16      79      32
-float32 32      300     39
+float32 8       42      23
+float32 16      110     31
+float32 32      343     41
 
-uint16  8       33      18
-uint16  16      53      36
-uint16  32      266     34
+uint16  8       38      17
+uint16  16      100     36
+uint16  32      316     34
 
-int16   8       34      18
-int16   16      54      36
-int16   32      243     34
+int16   8       45      18
+int16   16      112     36
+int16   32      325     34
 
-float16 8       37      25
-float16 16      51      38
-float16 32      270     45
+float16 8       40      25
+float16 16      111     38
+float16 32      363     45
 
-uint8   8       32      18
-uint8   16      57      24
-uint8   32  [CRASH](https://github.com/modularml/mojo/issues/1514)
+uint8   8       40      18
+uint8   16      105     24
+uint8   32      311     43
 
-int8    8   [CRASH](https://github.com/modularml/mojo/issues/1514)
-int8    16      54      23
-int8    32  [CRASH](https://github.com/modularml/mojo/issues/1514)
+int8    8       40      18
+int8    16      102     23
+int8    32      326     43
 ```
 
-Overall, a sorting network is about 4 times faster.
+Overall, a sorting network is about 4 times faster. Benchmarks were run on a Xeon w5-2455X (Sapphire Rapids).
 
 Note that sorts of size 64 are currently not reported due to a bug. If you are in a position to address this issue, please take a look at https://github.com/modularml/mojo/issues/1505.
 

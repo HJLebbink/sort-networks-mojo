@@ -1,7 +1,7 @@
 from benchmark import keep
 from algorithm.sort import sort
 from random import random_ui64
-from time import time_function
+from time import time_function, now
 
 from sort_network import sort_network
 
@@ -23,64 +23,55 @@ fn gen_random_vec[T: DType](size: Int) -> DynamicVector[SIMD[T, 1]]:
 
 
 fn measure_time_mojo_sort[T: DType](samples: Int, size: Int) -> Int:
-    var best = -1
+    var best_time_ms: Int = 1 << 62
     for sample in range(samples):
         var data_vec = DynamicVector[SIMD[T, 1]](size)
         for i in range(size):
             data_vec.push_back(random_ui64(0, 100).cast[T]())
 
-        @parameter
-        fn runner():
-            #NOTE: make a copy to prevent a bug; TODO: remove this code an rerun the benchmarks!
-            #var x = data_vec
-            sort[T](data_vec)
-            # Avoid compiler optimizing things away
-            keep(data_vec)
+        let start_time_ms = now()
+        sort[T](data_vec)
+        let elapsed_time_ms = now() - start_time_ms
+        keep(data_vec)
 
-        let ns = time_function[runner]()
-        if best < 0 or ns < best:
-            best = ns
+        _ = data_vec # to prevent a bug: https://github.com/modularml/mojo/issues/1514
+        if elapsed_time_ms < best_time_ms:
+            best_time_ms = elapsed_time_ms
 
-    return best
+    return best_time_ms
 
 
 fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int) -> Int:
-    var best = -1
+    var best_time_ms: Int = 1 << 62
     for sample in range(samples):
         let data1 = gen_random_SIMD[T, width]()
-        @parameter
-        fn runner():
-            let data2 = sort_network[T, width](data1)
+        
+        let start_time_ms = now()
+        let data2 = sort_network[T, width](data1)
+        let elapsed_time_ms = now() - start_time_ms
+        #keep(data2.reduce_and()) #crash
+        keep(data2.reduce_add())
 
-            # Avoid compiler optimizing things away
-            # keep(data2) #crash due to bug
-            keep(data2.__getitem__(0))
+        if elapsed_time_ms < best_time_ms:
+            best_time_ms = elapsed_time_ms
 
-        let ns = time_function[runner]()
-        if best < 0 or ns < best:
-            best = ns
-
-    return best
+    return best_time_ms
 
 
 fn measure_time_netw_sort_generic[T: DType](samples: Int, size: Int) -> Int:
-    var best = -1
+    var best_time_ms: Int = 1 << 62
     for sample in range(samples):
-        let data_vec = gen_random_vec[T](size)
-        @parameter
-        fn runner():
-            var x = data_vec # to be consistent with measure_time_mojo_sort
-            sort_network[T](x)
+        var data_vec = gen_random_vec[T](size)
 
-            # Avoid compiler optimizing things away
-            # keep(data2) #crash due to bug
-            keep(x)
+        let start_time_ms = now()
+        sort_network[T](data_vec)
+        let elapsed_time_ms = now() - start_time_ms
+        keep(data_vec)
 
-        let ns = time_function[runner]()
-        if best < 0 or ns < best:
-            best = ns
+        if elapsed_time_ms < best_time_ms:
+            best_time_ms = elapsed_time_ms
 
-    return best
+    return best_time_ms
 
 
 fn load_file(filename: StringLiteral) -> String:
@@ -99,8 +90,8 @@ fn experiment[T: DType, size: Int](n_samples: Int, name: String, sep: String) ->
     result += str(measure_time_mojo_sort[T](n_samples, size))
     result += sep
     result += str(measure_time_netw_sort_SIMD[T, size](n_samples))
-#    result += sep
-#    result += str(measure_time_netw_sort_generic[T](n_samples, size))
+    #result += sep
+    #result += str(measure_time_netw_sort_generic[T](n_samples, size))
     return result
 
 
@@ -155,9 +146,9 @@ fn test_performance(n_samples: Int):
 
     print(experiment[DType.uint8, 8](n_samples, "uint8", sep))
     print(experiment[DType.uint8, 16](n_samples, "uint8", sep))
-    #print(experiment[DType.uint8, 32](n_samples, "uint8", sep))
+    print(experiment[DType.uint8, 32](n_samples, "uint8", sep))
     print("")
 
-    #print(experiment[DType.int8, 8](n_samples, "int8", sep))
+    print(experiment[DType.int8, 8](n_samples, "int8", sep))
     print(experiment[DType.int8, 16](n_samples, "int8", sep))
-    #print(experiment[DType.int8, 32](n_samples, "int8", sep))
+    print(experiment[DType.int8, 32](n_samples, "int8", sep))

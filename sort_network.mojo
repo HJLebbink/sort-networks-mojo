@@ -12,6 +12,7 @@ from sort_network_data import (
     swap_data_64,
 )
 
+@always_inline
 fn sort_network[
     T: DType, width: Int, assending: Bool = True
 ](v: SIMD[T, width]) -> SIMD[T, width]:
@@ -41,6 +42,7 @@ fn sort_network[
 
 
 # sort SIMD v, and apply the same reodering of v to idx
+@always_inline
 fn sort_network_idx[
     T1: DType, T2: DType, width: Int, assending: Bool = True
 ](v: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
@@ -80,6 +82,7 @@ fn sort_network_idx[
 
 
 # drop in replacement for `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]))`
+@always_inline
 fn sort_network[
     type: DType, assending: Bool = True
 ](inout v: DynamicVector[SIMD[type, 1]]):
@@ -107,6 +110,7 @@ fn sort_network[
 
 
 # sort SIMD array v
+@always_inline
 fn sort_8element[T: DType, assending: Bool = True](v: SIMD[T, 8]) -> SIMD[T, 8]:
     let v0 = swap_n[T, 8, swap_data_8[0], assending](v)
     let v1 = swap_n[T, 8, swap_data_8[1], assending](v0)
@@ -118,6 +122,7 @@ fn sort_8element[T: DType, assending: Bool = True](v: SIMD[T, 8]) -> SIMD[T, 8]:
 
 
 # sort SIMD a, and apply the same reodering of a to idx
+@always_inline
 fn sort_8element_idx[
     T1: DType, T2: DType, assending: Bool = True
 ](a: SIMD[T1, 8], idx: SIMD[T2, 8]) -> (SIMD[T1, 8], SIMD[T2, 8]):
@@ -131,6 +136,7 @@ fn sort_8element_idx[
 
 
 # sort SIMD array v
+@always_inline
 fn sort_16element[T: DType, assending: Bool = True](v: SIMD[T, 16]) -> SIMD[T, 16]:
     let v0 = swap_n[T, 16, swap_data_16[0], assending](v)
     let v1 = swap_n[T, 16, swap_data_16[1], assending](v0)
@@ -145,6 +151,7 @@ fn sort_16element[T: DType, assending: Bool = True](v: SIMD[T, 16]) -> SIMD[T, 1
 
 
 # sort SIMD a, and apply the same reodering of a to idx
+@always_inline
 fn sort_16element_idx[
     T1: DType, T2: DType, assending: Bool = True
 ](a: SIMD[T1, 16], idx: SIMD[T2, 16]) -> (SIMD[T1, 16], SIMD[T2, 16]):
@@ -161,6 +168,7 @@ fn sort_16element_idx[
 
 
 # sort SIMD array v
+@always_inline
 fn sort_32element[T: DType, assending: Bool = True](v: SIMD[T, 32]) -> SIMD[T, 32]:
     let v0 = swap_n[T, 32, swap_data_32[0], assending](v)
     let v1 = swap_n[T, 32, swap_data_32[1], assending](v0)
@@ -180,6 +188,7 @@ fn sort_32element[T: DType, assending: Bool = True](v: SIMD[T, 32]) -> SIMD[T, 3
 
 
 # sort SIMD a, and apply the same reodering of a to idx
+@always_inline
 fn sort_32element_idx[
     T1: DType, T2: DType, assending: Bool = True
 ](a: SIMD[T1, 32], idx: SIMD[T2, 32]) -> (SIMD[T1, 32], SIMD[T2, 32]):
@@ -201,6 +210,7 @@ fn sort_32element_idx[
 
 
 # sort SIMD array v
+@always_inline
 fn sort_64element[T: DType, assending: Bool = True](v: SIMD[T, 64]) -> SIMD[T, 64]:
     let v0 = swap_n[T, 64, swap_data_64[0], assending](v)
     let v1 = swap_n[T, 64, swap_data_64[1], assending](v0)
@@ -226,6 +236,7 @@ fn sort_64element[T: DType, assending: Bool = True](v: SIMD[T, 64]) -> SIMD[T, 6
 
 
 # sort SIMD a, and apply the same reodering of a to idx
+@always_inline
 fn sort_64element_idx[
     T1: DType, T2: DType, assending: Bool = True
 ](a: SIMD[T1, 64], idx: SIMD[T2, 64]) -> (SIMD[T1, 64], SIMD[T2, 64]):
@@ -253,6 +264,7 @@ fn sort_64element_idx[
 
 
 # sort SIMD arrays va and vb (for the price of one)
+@always_inline
 fn sort_16element_2x[
     T1: DType, T2: DType, assending1: Bool = True, assending2: Bool = True
 ](va: SIMD[T1, 16], vb: SIMD[T2, 16]) -> (SIMD[T1, 16], SIMD[T2, 16]):

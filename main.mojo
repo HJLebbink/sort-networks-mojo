@@ -1,5 +1,7 @@
 from utils.vector import DynamicVector
 from algorithm.sort import sort
+from time import now
+from benchmark import keep
 
 from sort_tools import test_perm_code
 from sort_network import sort_network, sort_network_idx, sort_16element_2x
@@ -11,12 +13,16 @@ from performance import (
     gen_random_vec
 )
 
-
+@always_inline
 fn test_network[T: DType, width: Int, assending: Bool]():
     let data1 = gen_random_SIMD[T, width]()
-    print("before " + str(width) + ": " + String(data1))
+    #print("before " + str(width) + ": " + str(data1))
+    let start_time_ms = now()
     let data2 = sort_network[T, width, assending](data1)
-    print("after " + str(width) + ": " + String(data2))
+    let elapsed_time_ms = now() - start_time_ms
+    #print("after " + str(width) + ": " + str(data2))
+    keep(data2.reduce_add())
+    print("time spend " + str(elapsed_time_ms) + " ns")
 
 
 fn test_32bit_16x_2x[T1: DType, T2: DType, assending1: Bool, assending2: Bool]():
@@ -46,20 +52,20 @@ fn test_32bit_16x_idx[T1: DType, T2: DType, assending: Bool]():
 fn sort_mojo[T: DType](size: Int):
     var data_vec = gen_random_vec[T](size)
 
-    for i in range(16):
+    for i in range(size):
         print_no_newline(str(data_vec[i]) + " ")
     print("")
 
     sort[T](data_vec)
 
-    for i in range(16):
+    for i in range(size):
         print_no_newline(str(data_vec[i]) + " ")
     print("")
 
 fn sort_net[T: DType](size: Int):
     var data_vec = gen_random_vec[T](size)
 
-    for i in range(16):
+    for i in range(size):
         print_no_newline(str(data_vec[i]) + " ")
     print("")
 
@@ -71,8 +77,8 @@ fn sort_net[T: DType](size: Int):
 
 
 fn main():
-    test_perm_code()
-    test_sort()
+    #test_perm_code()
+    #test_sort()
 
     #test_network[DType.uint64, 8, True]()
     #test_network[DType.int64, 8, True]()
@@ -99,8 +105,8 @@ fn main():
     #test_network[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
     #test_network[DType.uint8, 64, True]()
 
-    test_performance(1000000)
+    test_performance(1_000_000)
 
     #sort_mojo[DType.uint32](16)
-    #sort_net[DType.uint32](16)
+    #sort_net[DType.uint32](64)
 
