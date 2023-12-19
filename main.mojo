@@ -69,7 +69,7 @@ fn sort_net[T: DType](size: Int):
         print_no_newline(str(data_vec[i]) + " ")
     print("")
 
-    sort_network[T](data_vec)
+    #sort_network[T](data_vec, size)
 
     for i in range(size):
         print_no_newline(str(data_vec[i]) + " ")
@@ -105,7 +105,7 @@ fn main():
     #test_network[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
     #test_network[DType.uint8, 64, True]()
 
-    test_performance(1_000_000)
+    test_performance(1000, 1000)
 
     #sort_mojo[DType.uint32](16)
     #sort_net[DType.uint32](64)

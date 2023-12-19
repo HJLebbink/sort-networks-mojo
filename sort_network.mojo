@@ -81,32 +81,30 @@ fn sort_network_idx[
     return (v, idx)
 
 
-# drop in replacement for `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]))`
+# drop-in replacement for `sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)`
 @always_inline
 fn sort_network[
     type: DType, assending: Bool = True
-](inout v: DynamicVector[SIMD[type, 1]]):
-    let size: Int = v.size
+](inout v: DTypePointer[type], size: Int):
 
     @always_inline
-    fn x[size: Int](inout v: DynamicVector[SIMD[type, 1]]):
-        var v1 = SIMD[type, size]()
-        for i in range(size):
-            v1[i] = v[i]
+    fn load_sort_store[type: DType, assending: Bool, size: Int](inout v: DTypePointer[type]):
+        let v1 = v.simd_load[size](0)
         let v2 = sort_network[type, size, assending](v1)
-        for i in range(size):
-            v[i] = v2[i]
+        v.simd_store[size](v2)
 
     if size <= 8:
-        x[8](v)
+        load_sort_store[type, assending, 8](v)
     elif size <= 16:
-        x[16](v)
+        load_sort_store[type, assending, 16](v)
     elif size <= 32:
-        x[32](v)
+        load_sort_store[type, assending, 32](v)
     elif size <= 64:
-        x[64](v)
+        load_sort_store[type, assending, 64](v)
     else:
-        sort[type](v) # use stdlib sort
+        pass
+        #TODO
+        #sort[type](v, size) # use stdlib sort
 
 
 # sort SIMD array v
