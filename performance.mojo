@@ -22,6 +22,22 @@ fn gen_random_vec[T: DType](size: Int) -> DynamicVector[SIMD[T, 1]]:
     return result
 
 
+fn gen_random_pointer[T: DType](size: Int) -> Pointer[SIMD[T, 1]]:
+    let result = Pointer[SIMD[T, 1]].aligned_alloc(16, size)
+    # TODO: use faster methods
+    for i in range(size):
+        result[i] = random_ui64(0, 100).cast[T]()
+    return result
+
+
+fn gen_random_DTypePointer[T: DType](size: Int) -> DTypePointer[T, 0]:
+    let result = DTypePointer[T].alloc(size)
+    # TODO: use faster methods
+    for i in range(size):
+        result[i] = random_ui64(0, 100).cast[T]()
+    return result
+
+
 fn measure_time_mojo_sort[T: DType](samples: Int, n_iterations: Int, size: Int) -> Float32:
     var best_time_ms: Int = 1 << 62
     let buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(16, size * n_iterations)
@@ -57,7 +73,7 @@ fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int, n_iterations:
             data2 = sort_network[T, width](data2)
 
         let elapsed_time_ms = now() - start_time_ms
-        keep(data2.reduce_add())
+        keep(data2)
 
         if elapsed_time_ms < best_time_ms:
             best_time_ms = elapsed_time_ms
@@ -69,11 +85,11 @@ fn measure_time_netw_sort_generic[T: DType](samples: Int, n_iterations: Int, siz
     var best_time_ms: Int = 1 << 62
 
     let buff = DTypePointer[T].aligned_alloc(16, size * n_iterations)
-    #let buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(16, size * n_iterations)
-    for iteration in range(size * n_iterations):
-        buff[iteration] = random_ui64(0, 100).cast[T]()
 
     for sample in range(samples):
+        for iteration in range(size * n_iterations):
+            buff[iteration] = random_ui64(0, 100).cast[T]()
+
         var ptr = buff
         let start_time_ms = now()
 
