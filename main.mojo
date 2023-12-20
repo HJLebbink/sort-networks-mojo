@@ -1,10 +1,16 @@
 from collections.vector import DynamicVector
+from collections.vector import InlinedFixedVector
 from algorithm.sort import sort
 from time import now
 from benchmark import keep
 
 from sort_tools import test_perm_code
-from sort_network import sort_network, sort_network_idx, sort_16element_2x
+from sort_network import (
+    sort_network,
+    sort_network_idx,
+    sort_16element_2x,
+    sort_network_n,
+)
 from tests import test_sort
 
 from performance import (
@@ -55,11 +61,11 @@ fn test_netw_vec_sort[T: DType](size: Int):
 
 fn test_netw_SIMD_sort[T: DType, width: Int, ascending: Bool]():
     let data1 = gen_random_SIMD[T, width]()
-    # print("before " + str(width) + ": " + str(data1))
+    print("before " + str(width) + ": " + str(data1))
     let start_time_ms = now()
-    let data2 = sort_network[T, width, assending](data1)
+    let data2 = sort_network[T, width, ascending](data1)
     let elapsed_time_ms = now() - start_time_ms
-    # print("after " + str(width) + ": " + str(data2))
+    print("after " + str(width) + ": " + str(data2))
     keep(data2.reduce_add())
     print("time spend " + str(elapsed_time_ms) + " ns")
 
@@ -111,40 +117,56 @@ fn test_netw_SIMD_sort_2x_B[
     print("after:  " + String(data2b))
 
 
+fn test_netw_SIMD_sort_2x_C[T: DType, width: Int, ascending: Bool = True]():
+    let data1a = gen_random_SIMD[T, width]()
+    let data1b = gen_random_SIMD[T, width]()
+    let d = data1a.join(data1b)
+
+    print("before: " + str(d))
+
+    let d2 = sort_network_n[T, width, 2, ascending](rebind[SIMD[T, width * 2]](d))
+    print("after:  " + str(d2))
+
+
 fn main():
     # test_perm_code()
     # test_sort()
 
-    # test_netw_SIMD_sort[DType.uint64, 8, True]()
-    # test_netw_SIMD_sort[DType.int64, 8, True]()
-    # test_netw_SIMD_sort[DType.float64, 8, True]()
+    # test_netw_SIMD_sort[DType.uint64, 8, True]() #crash
+    # test_netw_SIMD_sort[DType.int64, 8, True]() #crash
+    # test_netw_SIMD_sort[DType.float64, 8, True]() #crash
     # test_netw_SIMD_sort[DType.uint64, 32, True]()
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
     # test_netw_SIMD_sort[DType.int32, 16, True]()
     # test_netw_SIMD_sort[DType.float32, 16, True]()
     # test_netw_SIMD_sort[DType.uint32, 32, True]()
-    # test_netw_SIMD_sort[DType.uint32, 64, True]()
+    # test_netw_SIMD_sort[DType.uint32, 64, True]() #not implemented yet
 
-    # test_netw_SIMD_sort_2x[DType.int32, DType.uint32, True, True]()
-    # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, False]()
+    # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
+    # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
 
     # test_netw_SIMD_sort[DType.uint16, 32, True]()
     # test_netw_SIMD_sort[DType.uint16, 16, True]()
-    # test_netw_SIMD_sort[DType.uint16, 8, True]()
+    # test_netw_SIMD_sort[DType.uint16, 8, True]() #crash
 
     # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
     # test_netw_SIMD_sort[DType.float16, 32, True]()
-    # test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Does not seem to work
+    #test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Error: "Not a valid 512-bit x86 vector type!""
 
     # test_netw_SIMD_sort[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
     # test_netw_SIMD_sort[DType.uint8, 64, True]()
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
-    # test_netw_vec_sort[DType.uint32](16)
+    #test_netw_vec_sort[DType.uint32](16) #Crash
     # test_mojo_sort[DType.uint32](16)
 
-    test_performance(1000, 1000)
+    # test_netw_SIMD_sort[DType.uint8, 8, True]() #crash
+    test_netw_SIMD_sort[DType.uint32, 16, True]()
+
+    # test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
+
+    # test_netw_SIMD_sort_2x_C[DType.int8, 8]()
