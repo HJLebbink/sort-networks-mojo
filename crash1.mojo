@@ -7,10 +7,10 @@ fn gen_perm() -> StaticIntTuple[64]:
 
 fn main():
     alias p = gen_perm()
-    #print("perm " + str(p))
+    # print("perm " + str(p))
 
     let data1 = SIMD[DType.uint8, 64]()
-    #print(data1)
+    # print(data1)
 
     let data2 = data1.shuffle[
         p[0],

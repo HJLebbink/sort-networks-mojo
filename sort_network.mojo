@@ -10,7 +10,9 @@ from sort_network_data import (
     swap_data_26,
     swap_data_32,
     swap_data_64,
+    swap_data_128,
 )
+
 
 @always_inline
 fn sort_network[
@@ -30,13 +32,17 @@ fn sort_network[
             sort_32element[T, assending](rebind[SIMD[T, 32]](v))
         )
     # TODO enable this once https://github.com/modularml/mojo/issues/1505 is resolved
-    #elif width == 64:
+    # elif width == 64:
     #    return rebind[SIMD[T, width]](
     #        sort_64element[T, assending](rebind[SIMD[T, 64]](v))
     #    )
+    # elif width == 128:
+    #    return rebind[SIMD[T, width]](
+    #        sort_128element[T, assending](rebind[SIMD[T, 128]](v))
+    #    )
     else:
-        print("width "+str(width))
-        #constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
+        print("width " + str(width))
+        # constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
         # unreachable
     return v
 
@@ -75,6 +81,13 @@ fn sort_network_idx[
         let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 64]]())
         let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 64]]())
         return (v3, idx3)
+    elif width == 128:
+        let v2 = rebind[SIMD[T1, 128]](v)
+        let idx2 = rebind[SIMD[T2, 128]](idx)
+        let t = sort_128element_idx[T1, T2, assending](v2, idx2)
+        let v3 = rebind[SIMD[T1, width]](t.get[0, SIMD[T1, 128]]())
+        let idx3 = rebind[SIMD[T2, width]](t.get[1, SIMD[T2, 128]]())
+        return (v3, idx3)
     else:
         constrained[False, "unsupported width: only 8, 16, 32 or 64 supported"]()
         # unreachable
@@ -86,9 +99,10 @@ fn sort_network_idx[
 fn sort_network[
     type: DType, assending: Bool = True
 ](inout v: DTypePointer[type], size: Int):
-
     @always_inline
-    fn load_sort_store[type: DType, assending: Bool, size: Int](inout v: DTypePointer[type]):
+    fn load_sort_store[
+        type: DType, assending: Bool, size: Int
+    ](inout v: DTypePointer[type]):
         let v1 = v.simd_load[size](0)
         let v2 = sort_network[type, size, assending](v1)
         v.simd_store[size](v2)
@@ -101,10 +115,12 @@ fn sort_network[
         load_sort_store[type, assending, 32](v)
     elif size <= 64:
         load_sort_store[type, assending, 64](v)
+    elif size <= 128:
+        load_sort_store[type, assending, 128](v)
     else:
         pass
-        #TODO
-        #sort[type](v, size) # use stdlib sort
+        # TODO
+        # sort[type](v, size) # use stdlib sort
 
 
 # sort SIMD array v
@@ -233,6 +249,39 @@ fn sort_64element[T: DType, assending: Bool = True](v: SIMD[T, 64]) -> SIMD[T, 6
     return v19
 
 
+# sort SIMD array v
+@always_inline
+fn sort_128element[T: DType, assending: Bool = True](v: SIMD[T, 128]) -> SIMD[T, 128]:
+    let v0 = swap_n[T, 128, swap_data_128[0], assending](v)
+    let v1 = swap_n[T, 128, swap_data_128[1], assending](v0)
+    let v2 = swap_n[T, 128, swap_data_128[2], assending](v1)
+    let v3 = swap_n[T, 128, swap_data_128[3], assending](v2)
+    let v4 = swap_n[T, 128, swap_data_128[4], assending](v3)
+    let v5 = swap_n[T, 128, swap_data_128[5], assending](v4)
+    let v6 = swap_n[T, 128, swap_data_128[6], assending](v5)
+    let v7 = swap_n[T, 128, swap_data_128[7], assending](v6)
+    let v8 = swap_n[T, 128, swap_data_128[8], assending](v7)
+    let v9 = swap_n[T, 128, swap_data_128[9], assending](v8)
+    let v10 = swap_n[T, 128, swap_data_128[10], assending](v9)
+    let v11 = swap_n[T, 128, swap_data_128[11], assending](v10)
+    let v12 = swap_n[T, 128, swap_data_128[12], assending](v11)
+    let v13 = swap_n[T, 128, swap_data_128[13], assending](v12)
+    let v14 = swap_n[T, 128, swap_data_128[14], assending](v13)
+    let v15 = swap_n[T, 128, swap_data_128[15], assending](v14)
+    let v16 = swap_n[T, 128, swap_data_128[16], assending](v15)
+    let v17 = swap_n[T, 128, swap_data_128[17], assending](v16)
+    let v18 = swap_n[T, 128, swap_data_128[18], assending](v17)
+    let v19 = swap_n[T, 128, swap_data_128[19], assending](v18)
+    let v20 = swap_n[T, 128, swap_data_128[20], assending](v19)
+    let v21 = swap_n[T, 128, swap_data_128[21], assending](v20)
+    let v22 = swap_n[T, 128, swap_data_128[22], assending](v21)
+    let v23 = swap_n[T, 128, swap_data_128[23], assending](v22)
+    let v24 = swap_n[T, 128, swap_data_128[24], assending](v23)
+    let v25 = swap_n[T, 128, swap_data_128[25], assending](v24)
+    let v26 = swap_n[T, 128, swap_data_128[26], assending](v25)
+    return v26
+
+
 # sort SIMD a, and apply the same reodering of a to idx
 @always_inline
 fn sort_64element_idx[
@@ -259,6 +308,41 @@ fn sort_64element_idx[
     let t18 = swap_idx[T1, T2, 64, swap_data_64[18], assending](t17)
     let t19 = swap_idx[T1, T2, 64, swap_data_64[19], assending](t18)
     return t19
+
+
+# sort SIMD a, and apply the same reodering of a to idx
+@always_inline
+fn sort_128element_idx[
+    T1: DType, T2: DType, assending: Bool = True
+](a: SIMD[T1, 128], idx: SIMD[T2, 128]) -> (SIMD[T1, 128], SIMD[T2, 128]):
+    let t0 = swap_idx[T1, T2, 128, swap_data_128[0], assending]((a, idx))
+    let t1 = swap_idx[T1, T2, 128, swap_data_128[1], assending](t0)
+    let t2 = swap_idx[T1, T2, 128, swap_data_128[2], assending](t1)
+    let t3 = swap_idx[T1, T2, 128, swap_data_128[3], assending](t2)
+    let t4 = swap_idx[T1, T2, 128, swap_data_128[4], assending](t3)
+    let t5 = swap_idx[T1, T2, 128, swap_data_128[5], assending](t4)
+    let t6 = swap_idx[T1, T2, 128, swap_data_128[6], assending](t5)
+    let t7 = swap_idx[T1, T2, 128, swap_data_128[7], assending](t6)
+    let t8 = swap_idx[T1, T2, 128, swap_data_128[8], assending](t7)
+    let t9 = swap_idx[T1, T2, 128, swap_data_128[9], assending](t8)
+    let t10 = swap_idx[T1, T2, 128, swap_data_128[10], assending](t9)
+    let t11 = swap_idx[T1, T2, 128, swap_data_128[11], assending](t10)
+    let t12 = swap_idx[T1, T2, 128, swap_data_128[12], assending](t11)
+    let t13 = swap_idx[T1, T2, 128, swap_data_128[13], assending](t12)
+    let t14 = swap_idx[T1, T2, 128, swap_data_128[14], assending](t13)
+    let t15 = swap_idx[T1, T2, 128, swap_data_128[15], assending](t14)
+    let t16 = swap_idx[T1, T2, 128, swap_data_128[16], assending](t15)
+    let t17 = swap_idx[T1, T2, 128, swap_data_128[17], assending](t16)
+    let t18 = swap_idx[T1, T2, 128, swap_data_128[18], assending](t17)
+    let t19 = swap_idx[T1, T2, 128, swap_data_128[19], assending](t18)
+    let t20 = swap_idx[T1, T2, 128, swap_data_128[20], assending](t19)
+    let t21 = swap_idx[T1, T2, 128, swap_data_128[21], assending](t20)
+    let t22 = swap_idx[T1, T2, 128, swap_data_128[22], assending](t21)
+    let t23 = swap_idx[T1, T2, 128, swap_data_128[23], assending](t22)
+    let t24 = swap_idx[T1, T2, 128, swap_data_128[24], assending](t23)
+    let t25 = swap_idx[T1, T2, 128, swap_data_128[25], assending](t24)
+    let t26 = swap_idx[T1, T2, 128, swap_data_128[26], assending](t25)
+    return t26
 
 
 # sort SIMD arrays va and vb (for the price of one)

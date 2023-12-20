@@ -13,8 +13,9 @@ from performance import (
     gen_random_SIMD,
     gen_random_vec,
     gen_random_pointer,
-    gen_random_DTypePointer
+    gen_random_DTypePointer,
 )
+
 
 fn test_mojo_sort[T: DType](size: Int):
     let buff = gen_random_pointer[T](size)
@@ -33,6 +34,7 @@ fn test_mojo_sort[T: DType](size: Int):
     print("\ntime spend " + str(elapsed_time_ms) + " ns")
     buff.free()
 
+
 fn test_netw_vec_sort[T: DType](size: Int):
     let buff = gen_random_DTypePointer[T](size)
 
@@ -50,15 +52,17 @@ fn test_netw_vec_sort[T: DType](size: Int):
     print("\ntime spend " + str(elapsed_time_ms) + " ns")
     buff.free()
 
+
 fn test_netw_SIMD_sort[T: DType, width: Int, assending: Bool]():
     let data1 = gen_random_SIMD[T, width]()
-    #print("before " + str(width) + ": " + str(data1))
+    # print("before " + str(width) + ": " + str(data1))
     let start_time_ms = now()
     let data2 = sort_network[T, width, assending](data1)
     let elapsed_time_ms = now() - start_time_ms
-    #print("after " + str(width) + ": " + str(data2))
+    # print("after " + str(width) + ": " + str(data2))
     keep(data2.reduce_add())
     print("time spend " + str(elapsed_time_ms) + " ns")
+
 
 fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, width: Int, assending: Bool]():
     let data = gen_random_SIMD[T1, width]()
@@ -74,10 +78,13 @@ fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, width: Int, assending: Bool]():
     print("after:  " + String(idx2))
 
 
-# conclusion comparing test_netw_SIMD_sort_2x_A with test_netw_SIMD_sort_2x_B: 
+# conclusion comparing test_netw_SIMD_sort_2x_A with test_netw_SIMD_sort_2x_B:
 # sort_16element_2x is slightly more efficient, but not much
 
-fn test_netw_SIMD_sort_2x_A[T1: DType, T2: DType, width: Int, assending1: Bool = True, assending2: Bool = True]():
+
+fn test_netw_SIMD_sort_2x_A[
+    T1: DType, T2: DType, width: Int, assending1: Bool = True, assending2: Bool = True
+]():
     let data1a = gen_random_SIMD[T1, width]()
     let data1b = gen_random_SIMD[T2, width]()
 
@@ -89,7 +96,9 @@ fn test_netw_SIMD_sort_2x_A[T1: DType, T2: DType, width: Int, assending1: Bool =
     print("after:  " + String(data2b))
 
 
-fn test_netw_SIMD_sort_2x_B[T1: DType, T2: DType, assending1: Bool = True, assending2: Bool = True]():
+fn test_netw_SIMD_sort_2x_B[
+    T1: DType, T2: DType, assending1: Bool = True, assending2: Bool = True
+]():
     let data1a = gen_random_SIMD[T1, 16]()
     let data1b = gen_random_SIMD[T2, 16]()
 
@@ -103,40 +112,39 @@ fn test_netw_SIMD_sort_2x_B[T1: DType, T2: DType, assending1: Bool = True, assen
 
 
 fn main():
-    #test_perm_code()
-    #test_sort()
+    # test_perm_code()
+    # test_sort()
 
-    #test_netw_SIMD_sort[DType.uint64, 8, True]()
-    #test_netw_SIMD_sort[DType.int64, 8, True]()
-    #test_netw_SIMD_sort[DType.float64, 8, True]()
-    #test_netw_SIMD_sort[DType.uint64, 32, True]()
+    # test_netw_SIMD_sort[DType.uint64, 8, True]()
+    # test_netw_SIMD_sort[DType.int64, 8, True]()
+    # test_netw_SIMD_sort[DType.float64, 8, True]()
+    # test_netw_SIMD_sort[DType.uint64, 32, True]()
 
-    #test_netw_SIMD_sort[DType.uint32, 16, True]()
-    #test_netw_SIMD_sort[DType.int32, 16, True]()
-    #test_netw_SIMD_sort[DType.float32, 16, True]()
-    #test_netw_SIMD_sort[DType.uint32, 32, True]()
-    #test_netw_SIMD_sort[DType.uint32, 64, True]()
+    # test_netw_SIMD_sort[DType.uint32, 16, True]()
+    # test_netw_SIMD_sort[DType.int32, 16, True]()
+    # test_netw_SIMD_sort[DType.float32, 16, True]()
+    # test_netw_SIMD_sort[DType.uint32, 32, True]()
+    # test_netw_SIMD_sort[DType.uint32, 64, True]()
 
-    #test_netw_SIMD_sort_2x[DType.int32, DType.uint32, True, True]()
-    #test_netw_SIMD_sort_idx[DType.int32, DType.uint32, False]()
+    # test_netw_SIMD_sort_2x[DType.int32, DType.uint32, True, True]()
+    # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, False]()
 
-    #test_netw_SIMD_sort[DType.uint16, 32, True]()
-    #test_netw_SIMD_sort[DType.uint16, 16, True]()
-    #test_netw_SIMD_sort[DType.uint16, 8, True]()
+    # test_netw_SIMD_sort[DType.uint16, 32, True]()
+    # test_netw_SIMD_sort[DType.uint16, 16, True]()
+    # test_netw_SIMD_sort[DType.uint16, 8, True]()
 
-    #test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
-    #test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
+    # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
+    # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    #test_netw_SIMD_sort[DType.float16, 32, True]()
-    #test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Does not seem to work
+    # test_netw_SIMD_sort[DType.float16, 32, True]()
+    # test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Does not seem to work
 
-    #test_netw_SIMD_sort[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
-    #test_netw_SIMD_sort[DType.uint8, 64, True]()
+    # test_netw_SIMD_sort[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
+    # test_netw_SIMD_sort[DType.uint8, 64, True]()
 
-
-    #test_netw_SIMD_sort[DType.uint32, 16, True]()
-    #test_netw_vec_sort[DType.uint32](16)
-    #test_mojo_sort[DType.uint32](16)
+    # test_netw_SIMD_sort[DType.uint32, 16, True]()
+    # test_netw_vec_sort[DType.uint32](16)
+    # test_mojo_sort[DType.uint32](16)
 
     test_performance(1000, 1000)
-    #print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
+    # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))

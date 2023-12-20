@@ -38,9 +38,13 @@ fn gen_random_DTypePointer[T: DType](size: Int) -> DTypePointer[T, 0]:
     return result
 
 
-fn measure_time_mojo_sort[T: DType](samples: Int, n_iterations: Int, size: Int) -> Float32:
+fn measure_time_mojo_sort[
+    T: DType
+](samples: Int, n_iterations: Int, size: Int) -> Float32:
     var best_time_ms: Int = 1 << 62
-    let buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(16, size * n_iterations)
+    let buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(
+        16, size * n_iterations
+    )
     for iteration in range(size * n_iterations):
         buff[iteration] = random_ui64(0, 100).cast[T]()
 
@@ -49,7 +53,7 @@ fn measure_time_mojo_sort[T: DType](samples: Int, n_iterations: Int, size: Int) 
         let start_time_ms = now()
 
         for iteration in range(n_iterations):
-            #sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
+            # sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
             sort[T](ptr, size)
             ptr += size
 
@@ -59,10 +63,12 @@ fn measure_time_mojo_sort[T: DType](samples: Int, n_iterations: Int, size: Int) 
             best_time_ms = elapsed_time_ms
     keep(buff)
     buff.free()
-    return Float32(best_time_ms)/n_iterations
+    return Float32(best_time_ms) / n_iterations
 
 
-fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int, n_iterations: Int) -> Float32:
+fn measure_time_netw_sort_SIMD[
+    T: DType, width: Int
+](samples: Int, n_iterations: Int) -> Float32:
     var best_time_ms: Int = 1 << 62
     for sample in range(samples):
         let data1 = gen_random_SIMD[T, width]()
@@ -78,10 +84,12 @@ fn measure_time_netw_sort_SIMD[T: DType, width: Int](samples: Int, n_iterations:
         if elapsed_time_ms < best_time_ms:
             best_time_ms = elapsed_time_ms
 
-    return Float32(best_time_ms)/n_iterations
+    return Float32(best_time_ms) / n_iterations
 
 
-fn measure_time_netw_sort_generic[T: DType](samples: Int, n_iterations: Int, size: Int) -> Float32:
+fn measure_time_netw_sort_generic[
+    T: DType
+](samples: Int, n_iterations: Int, size: Int) -> Float32:
     var best_time_ms: Int = 1 << 62
 
     let buff = DTypePointer[T].aligned_alloc(16, size * n_iterations)
@@ -94,7 +102,7 @@ fn measure_time_netw_sort_generic[T: DType](samples: Int, n_iterations: Int, siz
         let start_time_ms = now()
 
         for iteration in range(n_iterations):
-            #sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
+            # sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
             sort_network[T](ptr, size)
             ptr += size
 
@@ -105,7 +113,7 @@ fn measure_time_netw_sort_generic[T: DType](samples: Int, n_iterations: Int, siz
 
     keep(buff)
     buff.free()
-    return Float32(best_time_ms)/n_iterations
+    return Float32(best_time_ms) / n_iterations
 
 
 fn load_file(filename: StringLiteral) -> String:
@@ -116,7 +124,10 @@ fn load_file(filename: StringLiteral) -> String:
         print("Error " + str(e))
         return ""
 
-fn experiment[T: DType, size: Int](n_samples: Int, n_iterations: Int, name: String, sep: String) -> String:
+
+fn experiment[
+    T: DType, size: Int
+](n_samples: Int, n_iterations: Int, name: String, sep: String) -> String:
     var result = name
     result += sep
     result += str(size)
@@ -130,59 +141,81 @@ fn experiment[T: DType, size: Int](n_samples: Int, n_iterations: Int, name: Stri
 
 
 fn test_performance(n_samples: Int, n_iterations: Int):
-    alias sep = '\t'
+    alias sep = "\t"
     print(sep + "size" + sep + "mojo" + sep + "netw_SIMD" + sep + "netw_vec")
 
     print(experiment[DType.uint64, 8](n_samples, n_iterations, "uint64", sep))
-    print(experiment[DType.uint64, 16](n_samples, n_iterations,"uint64", sep))
-    print(experiment[DType.uint64, 32](n_samples, n_iterations,"uint64", sep))
-    print("")
-    
-    print(experiment[DType.int64, 8](n_samples, n_iterations,"int64", sep))
-    print(experiment[DType.int64, 16](n_samples, n_iterations,"int64", sep))
-    print(experiment[DType.int64, 32](n_samples, n_iterations,"int64", sep))
+    print(experiment[DType.uint64, 16](n_samples, n_iterations, "uint64", sep))
+    print(experiment[DType.uint64, 32](n_samples, n_iterations, "uint64", sep))
+    # print(experiment[DType.uint64, 64](n_samples, n_iterations,"uint64", sep))
+    # print(experiment[DType.uint64, 128](n_samples, n_iterations,"uint64", sep))
     print("")
 
-    print(experiment[DType.float64, 8](n_samples, n_iterations,"float64", sep))
-    print(experiment[DType.float64, 16](n_samples, n_iterations,"float64", sep))
-    print(experiment[DType.float64, 32](n_samples, n_iterations,"float64", sep))
+    print(experiment[DType.int64, 8](n_samples, n_iterations, "int64", sep))
+    print(experiment[DType.int64, 16](n_samples, n_iterations, "int64", sep))
+    print(experiment[DType.int64, 32](n_samples, n_iterations, "int64", sep))
+    # print(experiment[DType.int64, 64](n_samples, n_iterations,"int64", sep))
+    # print(experiment[DType.int64, 128](n_samples, n_iterations,"int64", sep))
     print("")
 
-    print(experiment[DType.uint32, 8](n_samples, n_iterations,"uint32", sep))
-    print(experiment[DType.uint32, 16](n_samples, n_iterations,"uint32", sep))
+    print(experiment[DType.float64, 8](n_samples, n_iterations, "float64", sep))
+    print(experiment[DType.float64, 16](n_samples, n_iterations, "float64", sep))
+    print(experiment[DType.float64, 32](n_samples, n_iterations, "float64", sep))
+    # print(experiment[DType.float64, 64](n_samples, n_iterations,"float64", sep))
+    # print(experiment[DType.float64, 128](n_samples, n_iterations,"float64", sep))
+    print("")
+
+    print(experiment[DType.uint32, 8](n_samples, n_iterations, "uint32", sep))
+    print(experiment[DType.uint32, 16](n_samples, n_iterations, "uint32", sep))
     print(experiment[DType.uint32, 32](n_samples, n_iterations, "uint32", sep))
+    # print(experiment[DType.uint32, 64](n_samples, n_iterations,"uint32", sep))
+    # print(experiment[DType.uint32, 128](n_samples, n_iterations, "uint32", sep))
     print("")
 
-    print(experiment[DType.int32, 8](n_samples, n_iterations,"int32", sep))
-    print(experiment[DType.int32, 16](n_samples, n_iterations,"int32", sep))
-    print(experiment[DType.int32, 32](n_samples, n_iterations,"int32", sep))
+    print(experiment[DType.int32, 8](n_samples, n_iterations, "int32", sep))
+    print(experiment[DType.int32, 16](n_samples, n_iterations, "int32", sep))
+    print(experiment[DType.int32, 32](n_samples, n_iterations, "int32", sep))
+    # print(experiment[DType.int32, 64](n_samples, n_iterations,"int32", sep))
+    # print(experiment[DType.int32, 128](n_samples, n_iterations,"int32", sep))
     print("")
 
-    print(experiment[DType.float32, 8](n_samples, n_iterations,"float32", sep))
-    print(experiment[DType.float32, 16](n_samples, n_iterations,"float32", sep))
-    print(experiment[DType.float32, 32](n_samples, n_iterations,"float32", sep))
+    print(experiment[DType.float32, 8](n_samples, n_iterations, "float32", sep))
+    print(experiment[DType.float32, 16](n_samples, n_iterations, "float32", sep))
+    print(experiment[DType.float32, 32](n_samples, n_iterations, "float32", sep))
+    # print(experiment[DType.float32, 64](n_samples, n_iterations,"float32", sep))
+    # print(experiment[DType.float32, 128](n_samples, n_iterations,"float32", sep))
     print("")
 
-    print(experiment[DType.uint16, 8](n_samples, n_iterations,"uint16", sep))
-    print(experiment[DType.uint16, 16](n_samples, n_iterations,"uint16", sep))
-    print(experiment[DType.uint16, 32](n_samples, n_iterations,"uint16", sep))
+    print(experiment[DType.uint16, 8](n_samples, n_iterations, "uint16", sep))
+    print(experiment[DType.uint16, 16](n_samples, n_iterations, "uint16", sep))
+    print(experiment[DType.uint16, 32](n_samples, n_iterations, "uint16", sep))
+    # print(experiment[DType.uint16, 64](n_samples, n_iterations,"uint16", sep))
+    # print(experiment[DType.uint16, 128](n_samples, n_iterations,"uint16", sep))
     print("")
 
-    print(experiment[DType.int16, 8](n_samples, n_iterations,"int16", sep))
-    print(experiment[DType.int16, 16](n_samples, n_iterations,"int16", sep))
-    print(experiment[DType.int16, 32](n_samples, n_iterations,"int16", sep))
+    print(experiment[DType.int16, 8](n_samples, n_iterations, "int16", sep))
+    print(experiment[DType.int16, 16](n_samples, n_iterations, "int16", sep))
+    print(experiment[DType.int16, 32](n_samples, n_iterations, "int16", sep))
+    # print(experiment[DType.int16, 64](n_samples, n_iterations,"int16", sep))
+    # print(experiment[DType.int16, 128](n_samples, n_iterations,"int16", sep))
     print("")
 
-    print(experiment[DType.float16, 8](n_samples, n_iterations,"float16", sep))
-    print(experiment[DType.float16, 16](n_samples, n_iterations,"float16", sep))
-    print(experiment[DType.float16, 32](n_samples, n_iterations,"float16", sep))
+    print(experiment[DType.float16, 8](n_samples, n_iterations, "float16", sep))
+    print(experiment[DType.float16, 16](n_samples, n_iterations, "float16", sep))
+    print(experiment[DType.float16, 32](n_samples, n_iterations, "float16", sep))
+    # print(experiment[DType.float16, 64](n_samples, n_iterations,"float16", sep))
+    # print(experiment[DType.float16, 128](n_samples, n_iterations,"float16", sep))
     print("")
 
-    print(experiment[DType.uint8, 8](n_samples, n_iterations,"uint8", sep))
-    print(experiment[DType.uint8, 16](n_samples, n_iterations,"uint8", sep))
-    print(experiment[DType.uint8, 32](n_samples, n_iterations,"uint8", sep))
+    print(experiment[DType.uint8, 8](n_samples, n_iterations, "uint8", sep))
+    print(experiment[DType.uint8, 16](n_samples, n_iterations, "uint8", sep))
+    print(experiment[DType.uint8, 32](n_samples, n_iterations, "uint8", sep))
+    # print(experiment[DType.uint8, 64](n_samples, n_iterations,"uint8", sep))
+    # print(experiment[DType.uint8, 128](n_samples, n_iterations,"uint8", sep))
     print("")
 
-    print(experiment[DType.int8, 8](n_samples, n_iterations,"int8", sep))
-    print(experiment[DType.int8, 16](n_samples, n_iterations,"int8", sep))
-    print(experiment[DType.int8, 32](n_samples, n_iterations,"int8", sep))
+    print(experiment[DType.int8, 8](n_samples, n_iterations, "int8", sep))
+    print(experiment[DType.int8, 16](n_samples, n_iterations, "int8", sep))
+    print(experiment[DType.int8, 32](n_samples, n_iterations, "int8", sep))
+    # print(experiment[DType.int8, 64](n_samples, n_iterations,"int8", sep))
+    # print(experiment[DType.int8, 128](n_samples, n_iterations,"int8", sep))

@@ -1,7 +1,6 @@
 from sort_network import sort_16element_idx
 
 
-
 fn test_sort():
     fn eq[T: DType, s: Int](v1: SIMD[T, s], v2: SIMD[T, s]) -> Bool:
         for i in range(s):
