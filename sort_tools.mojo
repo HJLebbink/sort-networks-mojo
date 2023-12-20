@@ -2,11 +2,14 @@ alias Swaps = VariadicList[Tuple[Int, Int]]
 alias SwapData = VariadicList[Swaps]
 
 
-fn gen_merge_mask[swaps: Swaps, width: Int]() -> SIMD[DType.bool, width]:
+fn gen_merge_mask[swaps: Swaps, width: Int, assending: Bool]() -> SIMD[DType.bool, width]:
     var result = SIMD[DType.bool, width]()
     alias size: Int = swaps.__len__()  # NOTE: but cannot use len(swaps)
     for i in range(size):
-        result[swaps[i].get[0, Int]()] = True
+        if ascending:
+            result[swaps[i].get[0, Int]()] = True # set the left side of the comparison to true to get ascending
+        else:
+            result[swaps[i].get[1, Int]()] = True # set the right side of the comparison to true to get descending
     return result
 
 
@@ -31,28 +34,23 @@ fn gen_perm[swaps: Swaps, width: Int]() -> StaticIntTuple[width]:
 
 @always_inline
 fn swap_n[
-    T: DType, width: Int, swaps: Swaps, assending: Bool
+    T: DType, width: Int, swaps: Swaps, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias permutations = gen_perm[swaps, width]()
     constrained[len(permutations) == width]()
-    alias merge_mask = gen_merge_mask[swaps, width]()
+    alias merge_mask = gen_merge_mask[swaps, width, ascending]()
     let v2 = my_shuffle[T, width, permutations](v)
-
-    @parameter
-    if assending:
-        return merge_mask.select(v.min(v2), v.max(v2))
-    else:
-        return merge_mask.select(v.max(v2), v.min(v2))
+    return merge_mask.select(v.min(v2), v.max(v2))
 
 
 @always_inline
 fn swap_idx[
-    T1: DType, T2: DType, width: Int, swaps: Swaps, assending: Bool
+    T1: DType, T2: DType, width: Int, swaps: Swaps, ascending: Bool
 ](t: Tuple[SIMD[T1, width], SIMD[T2, width]]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias permutations = gen_perm[swaps, width]()
     let data = t.get[0, SIMD[T1, width]]()
     let idx = t.get[1, SIMD[T2, width]]()
-    let data_sorted = swap_n[T1, width, swaps, assending](data)
+    let data_sorted = swap_n[T1, width, swaps, ascending](data)
     let change_mask = data_sorted != data
     let idx_shuffled = my_shuffle[T2, width, permutations](idx)
     return (data_sorted, change_mask.select(idx_shuffled, idx))

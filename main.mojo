@@ -53,7 +53,7 @@ fn test_netw_vec_sort[T: DType](size: Int):
     buff.free()
 
 
-fn test_netw_SIMD_sort[T: DType, width: Int, assending: Bool]():
+fn test_netw_SIMD_sort[T: DType, width: Int, ascending: Bool]():
     let data1 = gen_random_SIMD[T, width]()
     # print("before " + str(width) + ": " + str(data1))
     let start_time_ms = now()
@@ -64,14 +64,14 @@ fn test_netw_SIMD_sort[T: DType, width: Int, assending: Bool]():
     print("time spend " + str(elapsed_time_ms) + " ns")
 
 
-fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, width: Int, assending: Bool]():
+fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, width: Int, ascending: Bool]():
     let data = gen_random_SIMD[T1, width]()
     var idx = SIMD[T2, width]()
     for i in range(width):
         idx[i] = i
     print("before: " + String(data))
     print("before: " + String(idx))
-    let t = sort_network_idx[T1, T2, width, assending](data, idx)
+    let t = sort_network_idx[T1, T2, width, ascending](data, idx)
     let data2 = t.get[0, SIMD[T1, width]]()
     let idx2 = t.get[1, SIMD[T2, width]]()
     print("after:  " + String(data2))
@@ -83,28 +83,28 @@ fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, width: Int, assending: Bool]():
 
 
 fn test_netw_SIMD_sort_2x_A[
-    T1: DType, T2: DType, width: Int, assending1: Bool = True, assending2: Bool = True
+    T1: DType, T2: DType, width: Int, ascending1: Bool = True, ascending2: Bool = True
 ]():
     let data1a = gen_random_SIMD[T1, width]()
     let data1b = gen_random_SIMD[T2, width]()
 
     print("before: " + String(data1a))
     print("before: " + String(data1b))
-    let data2a = sort_network[T1, width, assending1](data1a)
-    let data2b = sort_network[T2, width, assending2](data1b)
+    let data2a = sort_network[T1, width, ascending1](data1a)
+    let data2b = sort_network[T2, width, ascending2](data1b)
     print("after:  " + String(data2a))
     print("after:  " + String(data2b))
 
 
 fn test_netw_SIMD_sort_2x_B[
-    T1: DType, T2: DType, assending1: Bool = True, assending2: Bool = True
+    T1: DType, T2: DType, ascending1: Bool = True, ascending2: Bool = True
 ]():
     let data1a = gen_random_SIMD[T1, 16]()
     let data1b = gen_random_SIMD[T2, 16]()
 
     print("before: " + String(data1a))
     print("before: " + String(data1b))
-    let data2 = sort_16element_2x[T1, T2, assending1, assending2](data1a, data1b)
+    let data2 = sort_16element_2x[T1, T2, ascending1, ascending2](data1a, data1b)
     let data2a = data2.get[0, SIMD[T1, 16]]()
     let data2b = data2.get[1, SIMD[T2, 16]]()
     print("after:  " + String(data2a))

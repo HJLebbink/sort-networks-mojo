@@ -13,7 +13,7 @@ I would love to present comprehensive scientific results, complete with boxplots
 If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken (in ms) of the minimum of 1_000_000 runs is what I can present.
 
 
-In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. Under the `netw` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, assending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in the `test_performance` function.
+In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. Under the `netw` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, ascending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in the `test_performance` function.
 
 
 ```
