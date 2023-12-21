@@ -8,8 +8,8 @@ from sort_tools import test_perm_code
 from sort_network import (
     sort_network,
     sort_network_idx,
-    sort_16element_2x,
-    sort_network_n,
+    sort_16elements_2x_A,
+    sort_16elements_2x_B,
 )
 from tests import test_sort
 
@@ -110,21 +110,18 @@ fn test_netw_SIMD_sort_2x_B[
 
     print("before: " + String(data1a))
     print("before: " + String(data1b))
-    let data2 = sort_16element_2x[T1, T2, ascending1, ascending2](data1a, data1b)
+    let data2 = sort_16elements_2x_A[T1, T2, ascending1, ascending2](data1a, data1b)
     let data2a = data2.get[0, SIMD[T1, 16]]()
     let data2b = data2.get[1, SIMD[T2, 16]]()
     print("after:  " + String(data2a))
     print("after:  " + String(data2b))
 
 
-fn test_netw_SIMD_sort_2x_C[T: DType, width: Int, ascending: Bool = True]():
-    let data1a = gen_random_SIMD[T, width]()
-    let data1b = gen_random_SIMD[T, width]()
-    let d = data1a.join(data1b)
+fn test_netw_SIMD_sort_2x_C[T: DType, width: Int, ascending: Bool]():
+    let data = gen_random_SIMD[T, 2 * width]()
+    print("before: " + str(data))
 
-    print("before: " + str(d))
-
-    let d2 = sort_network_n[T, width, 2, ascending](rebind[SIMD[T, width * 2]](d))
+    let d2 = sort_16elements_2x_B[T, ascending](rebind[SIMD[T, 32]](data))
     print("after:  " + str(d2))
 
 
@@ -164,9 +161,9 @@ fn main():
     # test_mojo_sort[DType.uint32](16)
 
     # test_netw_SIMD_sort[DType.uint8, 8, True]() #crash
-    test_netw_SIMD_sort[DType.uint32, 16, True]()
 
     # test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
-    # test_netw_SIMD_sort_2x_C[DType.int8, 8]()
+    test_netw_SIMD_sort[DType.uint32, 16, True]()
+    test_netw_SIMD_sort_2x_C[DType.uint16, 16, True]()
