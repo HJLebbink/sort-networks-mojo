@@ -1,4 +1,65 @@
-from SwapData import SwapData
+from SwapData import Layer, SwapData
+
+# join_swap_data joins two swap data's into one sorting network.
+# The number of layers doe not increase, only the number of swaps increases
+fn join_swap_data(sd1: SwapData, sd2: SwapData) -> SwapData:
+    var result = SwapData()
+    let width1 = sd1.get_width()
+    let width2 = sd2.get_width()
+    if width1 != width2:
+        print("ERROR join_swap_data: currently only equal widths are supported")
+        return result
+    for i in range(sd1.count_layers()):
+        var x = DynamicVector[Tuple[Int, Int]]()
+        for j in range(len(sd1[i].data)):
+            x.push_back(Tuple[Int, Int](sd1[i].get_min(j), sd1[i].get_max(j)))
+        for j in range(len(sd2[i].data)):
+            x.push_back(Tuple[Int, Int](sd2[i].get_min(j) + width1, sd2[i].get_max(j) + width1))
+        result.add(x)
+    return result
+
+fn join_swap_data2[sd1: SwapData, sd2: SwapData]() -> SwapData:
+    var result = SwapData()
+    alias width1 = sd1.get_width()
+    alias width2 = sd2.get_width()
+    if width1 != width2:
+        print("ERROR join_swap_data: currently only equal widths are supported")
+        return result
+    for i in range(sd1.count_layers()):
+        var x = DynamicVector[Tuple[Int, Int]](len(sd1[i].data) + len(sd2[i].data))
+        for j in range(len(sd1[i].data)):
+            x.push_back(Tuple[Int, Int](sd1[i].get_min(j), sd1[i].get_max(j)))
+        for j in range(len(sd2[i].data)):
+            x.push_back(Tuple[Int, Int](sd2[i].get_min(j) + width1, sd2[i].get_max(j) + width1))
+        result.add(x)
+    return result
+
+
+
+
+fn swap_data_8x8() -> SwapData:
+    var result = SwapData()
+    result.add(VariadicList((0,2),(1,3),(4,6),(5,7),(8,10),(9,11),(12,14),(13,15),(16,18),(17,19),(20,22),(21,23),(24,26),(25,27),(28,30),(29,31),(32,34),(33,35),(36,38),(37,39),(40,42),(41,43),(44,46),(45,47),(48,50),(49,51),(52,54),(53,55),(56,58),(57,59),(60,62),(61,63)))
+    result.add(VariadicList((0,4),(1,5),(2,6),(3,7),(8,12),(9,13),(10,14),(11,15),(16,20),(17,21),(18,22),(19,23),(24,28),(25,29),(26,30),(27,31),(32,36),(33,37),(34,38),(35,39),(40,44),(41,45),(42,46),(43,47),(48,52),(49,53),(50,54),(51,55),(56,60),(57,61),(58,62),(59,63)))
+    result.add(VariadicList((0,1),(2,3),(4,5),(6,7),(8,9),(10,11),(12,13),(14,15),(16,17),(18,19),(20,21),(22,23),(24,25),(26,27),(28,29),(30,31),(32,33),(34,35),(36,37),(38,39),(40,41),(42,43),(44,45),(46,47),(48,49),(50,51),(52,53),(54,55),(56,57),(58,59),(60,61),(62,63)))
+    result.add(VariadicList((2,4),(3,5),(10,12),(11,13),(18,20),(19,21),(26,28),(27,29),(34,36),(35,37),(42,44),(43,45),(50,52),(51,53),(58,60),(59,61)))
+    result.add(VariadicList((1,4),(3,6),(9,12),(11,14),(17,20),(19,22),(25,28),(27,30),(33,36),(35,38),(41,44),(43,46),(49,52),(51,54),(57,60),(59,62)))
+    result.add(VariadicList((1,2),(3,4),(5,6),(9,10),(11,12),(13,14),(17,18),(19,20),(21,22),(25,26),(27,28),(29,30),(33,34),(35,36),(37,38),(41,42),(43,44),(45,46),(49,50),(51,52),(53,54),(57,58),(59,60),(61,62)))
+    return result
+
+
+fn swap_data_16x2() -> SwapData:
+    var result = SwapData()
+    result.add(VariadicList((0,5),(1,4),(2,12),(3,13),(6,7),(8,9),(10,15),(11,14),(16,21),(17,20),(18,28),(19,29),(22,23),(24,25),(26,31),(27,30)))
+    result.add(VariadicList((0,2),(1,10),(3,6),(4,7),(5,14),(8,11),(9,12),(13,15),(16,18),(17,26),(19,22),(20,23),(21,30),(24,27),(25,28),(29,31)))
+    result.add(VariadicList((0,8),(1,3),(2,11),(4,13),(5,9),(6,10),(7,15),(12,14),(16,24),(17,19),(18,27),(20,29),(21,25),(22,26),(23,31),(28,30)))
+    result.add(VariadicList((0,1),(2,4),(3,8),(5,6),(7,12),(9,10),(11,13),(14,15),(16,17),(18,20),(19,24),(21,22),(23,28),(25,26),(27,29),(30,31)))
+    result.add(VariadicList((1,3),(2,5),(4,8),(6,9),(7,11),(10,13),(12,14),(17,19),(18,21),(20,24),(22,25),(23,27),(26,29),(28,30)))
+    result.add(VariadicList((1,2),(3,5),(4,11),(6,8),(7,9),(10,12),(13,14),(17,18),(19,21),(20,27),(22,24),(23,25),(26,28),(29,30)))
+    result.add(VariadicList((2,3),(4,5),(6,7),(8,9),(10,11),(12,13),(18,19),(20,21),(22,23),(24,25),(26,27),(28,29)))
+    result.add(VariadicList((4,6),(5,7),(8,10),(9,11),(20,22),(21,23),(24,26),(25,27)))
+    result.add(VariadicList((3,4),(5,6),(7,8),(9,10),(11,12),(19,20),(21,22),(23,24),(25,26),(27,28)))
+    return result
 
 
 fn swap_data[n_elements: Int]() -> SwapData:

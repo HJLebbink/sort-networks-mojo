@@ -1,8 +1,9 @@
 
 fn main():
     let data = SIMD[DType.uint16, 16](0)
-    alias sd1 = swap_data()
-    alias sd = dummy_function(sd1) # crash here!
+    alias sd1 = swap_data1()
+    alias sd2 = swap_data2()
+    alias sd = dummy_function[sd1, sd2]() # crash here!
     #alias sd = sd1 # no crash if you were to just use an alias
 
     let d2 = swap_nX[sd.get(0)](data)
@@ -10,15 +11,24 @@ fn main():
 
 
 @always_inline
-fn dummy_function(sd1: SwapData) -> SwapData:
-    return sd1
+fn dummy_function[sd1: SwapData, sd2: SwapData]() -> SwapData:
+    alias len1 = len(sd1.data)
+    alias len2 = len(sd2.data)
+    if len1 != len2:
+        return sd1
+    else:
+        return sd2
 
 
-fn swap_data() -> SwapData:
+fn swap_data1() -> SwapData:
     var result = SwapData()
     result.add(VariadicList((0,2),(1,3),(4,6),(5,7)))
     return result
 
+fn swap_data2() -> SwapData:
+    var result = SwapData()
+    result.add(VariadicList((0,2),(1,3),(4,6),(5,6)))
+    return result
 
 @always_inline
 fn swap_nX[swaps: Layer](v: SIMD[DType.uint16, 16]) -> SIMD[DType.uint16, 16]:

@@ -1,4 +1,3 @@
-from collections.vector import DynamicVector
 
 
 # A sorting network consists of a collection of compare/exchange elements (tuples) ordered in layers
@@ -66,7 +65,6 @@ struct SwapData(Stringable):
         return result + 1 # plus one because we start counting at zero
 
 
-#@nonmaterializable(LayerRuntime)
 struct Layer(CollectionElement, Sized, Stringable):
     var data: DynamicVector[Int]
 
@@ -139,4 +137,39 @@ struct Layer(CollectionElement, Sized, Stringable):
     @always_inline("nodebug")
     fn get_max(self, idx: Int) -> Int:
         return Layer.unpack(self.data[idx]).get[1, Int]()
+
+
+
+fn join_swap_data2[sd1: SwapData, sd2: SwapData]() -> SwapData:
+    var result = SwapData()
+    alias width1 = sd1.get_width()
+    alias width2 = sd2.get_width()
+    if width1 != width2:
+        print("ERROR join_swap_data: currently only equal widths are supported")
+        return result
+    for i in range(sd1.count_layers()):
+        var x = DynamicVector[Tuple[Int, Int]](len(sd1[i].data) + len(sd2[i].data))
+        for j in range(len(sd1[i].data)):
+            x.push_back(Tuple[Int, Int](sd1[i].get_min(j), sd1[i].get_max(j)))
+        for j in range(len(sd2[i].data)):
+            x.push_back(Tuple[Int, Int](sd2[i].get_min(j) + width1, sd2[i].get_max(j) + width1))
+        result.add(x)
+    return result
+
+fn swap_data() -> SwapData:
+    var result = SwapData()
+    result.add(VariadicList((0,2),(1,3),(4,6),(5,7)))
+    result.add(VariadicList((0,4),(1,5),(2,6),(3,7)))
+    result.add(VariadicList((0,1),(2,3),(4,5),(6,7)))
+    result.add(VariadicList((2,4),(3,5)))
+    result.add(VariadicList((1,4),(3,6)))
+    result.add(VariadicList((1,2),(3,4),(5,6)))
+    return result
+
+fn main():
+
+    alias sd1 = swap_data()
+    print(str(sd1))
+    alias sd2 = join_swap_data2[sd1, sd1]()
+    print(str(sd2))
 

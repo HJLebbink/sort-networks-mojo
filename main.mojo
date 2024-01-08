@@ -1,9 +1,9 @@
-from collections.vector import DynamicVector
-from collections.vector import InlinedFixedVector
+from collections.vector import DynamicVector, InlinedFixedVector
 from algorithm.sort import sort
 from time import now
 from benchmark import keep
 
+from sort_network_data import swap_data, join_swap_data, join_swap_data2
 from sort_tools import test_perm_code
 from sort_network import (
     sort_network,
@@ -126,44 +126,70 @@ fn test_netw_SIMD_sort_2x_C[T: DType, width: Int, ascending: Bool]():
 
 
 fn main():
+    let start_time_ns = now()
+
     # test_perm_code()
     # test_sort()
 
-    # test_netw_SIMD_sort[DType.uint64, 8, True]() #crash
-    # test_netw_SIMD_sort[DType.int64, 8, True]() #crash
-    # test_netw_SIMD_sort[DType.float64, 8, True]() #crash
+    # test_netw_SIMD_sort[DType.uint64, 8, True]()
+    # test_netw_SIMD_sort[DType.int64, 8, True]()
+    # test_netw_SIMD_sort[DType.float64, 8, True]()
     # test_netw_SIMD_sort[DType.uint64, 32, True]()
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
     # test_netw_SIMD_sort[DType.int32, 16, True]()
     # test_netw_SIMD_sort[DType.float32, 16, True]()
     # test_netw_SIMD_sort[DType.uint32, 32, True]()
-    # test_netw_SIMD_sort[DType.uint32, 64, True]() #not implemented yet
+    # test_netw_SIMD_sort[DType.uint32, 64, True]() #crash 0.6.1 Crash with shuffle on 64 elements
 
     # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
     # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
 
     # test_netw_SIMD_sort[DType.uint16, 32, True]()
     # test_netw_SIMD_sort[DType.uint16, 16, True]()
-    # test_netw_SIMD_sort[DType.uint16, 8, True]() #crash
+    # test_netw_SIMD_sort[DType.uint16, 8, True]()
 
     # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
     # test_netw_SIMD_sort[DType.float16, 32, True]()
-    #test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Error: "Not a valid 512-bit x86 vector type!""
+    # test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Error: 0.6.1 "Not a valid 512-bit x86 vector type!""
 
-    # test_netw_SIMD_sort[DType.int8, 64, True]() # Crash with shuffle on 64 bytes
-    # test_netw_SIMD_sort[DType.uint8, 64, True]()
+    # test_netw_SIMD_sort[DType.int8, 64, True]() #crash 0.6.1 Crash with shuffle on 64 elements
+    # test_netw_SIMD_sort[DType.uint8, 64, True]() #crash 0.6.1 Crash with shuffle on 64 elements
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
-    #test_netw_vec_sort[DType.uint32](16) #Crash
+    # test_netw_vec_sort[DType.uint32](16) #Crash 0.6.1
     # test_mojo_sort[DType.uint32](16)
 
-    # test_netw_SIMD_sort[DType.uint8, 8, True]() #crash
+    # test_netw_SIMD_sort[DType.uint8, 8, True]() #crash 0.6.1
 
     # test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
-    test_netw_SIMD_sort[DType.uint32, 16, True]()
-    test_netw_SIMD_sort_2x_C[DType.uint16, 16, True]()
+    # test_netw_SIMD_sort[DType.uint32, 16, True]()
+    # test_netw_SIMD_sort_2x_C[DType.uint16, 16, True]()
+    # test_netw_SIMD_sort[DType.uint16, 16, True]()
+
+    let do_test = True
+    if do_test:
+        alias sd1 = swap_data[8]()
+        print(str(sd1))
+        let sd2 = join_swap_data(sd1, sd1)
+        print(str(sd2))
+        let sd4 = join_swap_data(sd2, sd2)
+        print(str(sd4))
+        let sd8 = join_swap_data(sd4, sd4)
+        print(str(sd8))
+
+        alias sd2b = join_swap_data2[sd1, sd1]()
+        print(str(sd2))
+
+
+
+    let elapsed_time_ns = now() - start_time_ns
+    print_no_newline("Elapsed time " + str(elapsed_time_ns) + " ns")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000) + " μs")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000_000) + " ms")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000_000_000) + " s\n")
+
