@@ -3,6 +3,7 @@ from algorithm.sort import sort
 from time import now
 from benchmark import keep
 
+from sort_by_counting import sort_by_counting
 from sort_network_data import swap_data, join_swap_data, join_swap_data2
 from sort_tools import test_perm_code
 from sort_network import (
@@ -21,6 +22,8 @@ from performance import (
     gen_random_pointer,
     gen_random_DTypePointer,
 )
+
+
 
 
 fn test_mojo_sort[T: DType](size: Int):
@@ -64,6 +67,7 @@ fn test_netw_SIMD_sort[T: DType, width: Int, ascending: Bool]():
     print("before " + str(width) + ": " + str(data1))
     let start_time_ms = now()
     let data2 = sort_network[T, width, ascending](data1)
+    #let data2 = sort_by_counting[T, width, ascending](data1)
     let elapsed_time_ms = now() - start_time_ms
     print("after " + str(width) + ": " + str(data2))
     keep(data2.reduce_add())
@@ -167,11 +171,11 @@ fn main():
     # test_netw_SIMD_sort[DType.int16, 64, True]()
     # test_netw_SIMD_sort[DType.int16, 128, True]()
 
-    # test_netw_SIMD_sort[DType.uint8, 8, True]()
+    test_netw_SIMD_sort[DType.uint8, 8, True]()
     # test_netw_SIMD_sort[DType.uint8, 16, True]()
     # test_netw_SIMD_sort[DType.uint8, 32, True]()
     # test_netw_SIMD_sort[DType.uint8, 64, True]()
-    test_netw_SIMD_sort[DType.uint8, 128, True]()
+    # test_netw_SIMD_sort[DType.uint8, 128, True]()
 
 
     # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
@@ -180,14 +184,14 @@ fn main():
     # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    # test_performance(1000, 1000)
+    test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
     # test_netw_SIMD_sort_2x_C[DType.uint16, 16, True]()
     # test_netw_SIMD_sort[DType.uint16, 16, True]()
 
-    let do_test = True 
+    let do_test = False
     if do_test:
         alias sd1 = swap_data[8]()
         print(str(sd1))

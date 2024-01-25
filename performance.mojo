@@ -4,6 +4,7 @@ from random import random_ui64
 from time import time_function, now
 
 from sort_network import sort_network
+from sort_by_counting import sort_by_counting
 
 
 fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
@@ -64,6 +65,27 @@ fn measure_time_mojo_sort[
     keep(buff)
     buff.free()
     return Float32(best_time_ms) / n_iterations
+
+fn measure_time_mojo_sort_by_counting[
+    T: DType, width: Int
+](samples: Int, n_iterations: Int) -> Float32:
+    var best_time_ms: Int = 1 << 62
+    for sample in range(samples):
+        let data1 = gen_random_SIMD[T, width]()
+        var data2 = data1
+
+        let start_time_ms = now()
+        for i in range(n_iterations):
+            data2 = sort_by_counting[T, width](data2)
+
+        let elapsed_time_ms = now() - start_time_ms
+        keep(data2)
+
+        if elapsed_time_ms < best_time_ms:
+            best_time_ms = elapsed_time_ms
+
+    return Float32(best_time_ms) / n_iterations
+
 
 
 fn measure_time_netw_sort_SIMD[
@@ -137,6 +159,11 @@ fn experiment[
     result += str(measure_time_netw_sort_SIMD[T, size](n_samples, n_iterations))
     result += sep
     result += str(measure_time_netw_sort_generic[T](n_samples, n_iterations, size))
+
+    if T.sizeof() == 1:
+        result += sep
+        result += str(measure_time_mojo_sort[T](n_samples, n_iterations, size))
+
     return result
 
 

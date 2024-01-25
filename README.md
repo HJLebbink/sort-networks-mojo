@@ -1,23 +1,24 @@
 # High Performance Sorting in Mojo
 
-Efficient sorting in Modular Mojo optimized for small datasets (with a number of elements less than or equal to 64).
+Efficient sorting in Modular Mojo optimized for small datasets (with a number of elements less than or equal to 128).
 
 The primary objective is to create a drop-in replacement for the `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]])`
-function, utilizing sorting networks when the dataset is 64 elements or fewer. However, there are still a few areas that need refinement.
+function, utilizing sorting networks when the dataset is 128 elements or fewer. However, there are still a few areas that need refinement.
 
 The sorting networks are shamelessly borrowed from the work of [Bert Dobbelaere](https://bertdobbelaere.github.io/sorting_networks_extended.html) who did all the hard searching!
 
 ## Performance compared to stdlib sort
 
-I would love to present comprehensive scientific results, complete with boxplots, once a proper statistics library is available for computing standard deviations and confidence intervals. 
-If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken (in ns) of the minimum of 1_000_000 runs is what I can present.
+I would love to present comprehensive scientific results, complete with boxplots, once a proper statistics library is available for computing standard deviations and confidence intervals. If you find yourself in need of ideas for a useful Mojo project, please consider it. In the meantime, humble time taken (in ns) of the minimum of total 1_000_000 runs is what I can present.
 
+1. In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. These numbers are average ns of a run of 1000 samples, and this is done 10000 times and only the minimum is reported.
 
-1. In the `mojo` column, you'll find a call to: `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]]` with the specified type and vector size. These numbers are average ns of a run of 1000 samples, and this is done 1000 times and only the minimum is reported.
 2. Under the `netw_SIMD` column is a call to the sorting network: `fn sort_network[T: DType, width: Int, ascending: Bool = True](v: SIMD[T, width]) -> SIMD[T, width]`. If you are sceptical (and you should be), please take a look at the code in the `test_performance` function.
-3. In column `netw_vec` is a similar function that uses a DTypePointer instead of a SIMD register, `fn sort_network[type: DType, ascending: Bool = True](inout v: DTypePointer[type], size: Int)`. Note that mojo is able to cheat (a bit) by optimizing over multiple sample steps.
+
+3. In column `netw_vec` is a similar function that uses a DTypePointer instead of a SIMD registers, `fn sort_network[type: DType, ascending: Bool = True](inout v: DTypePointer[type], size: Int)`. Note that mojo is able to cheat (a bit) by optimizing over multiple sample steps.
 
 
+Results from Sapphire Rapids (Intel(R) Xeon(R) w5-2455X 3.19 GHz)
 ```
         size    mojo                    netw_SIMD               netw_vec
 uint64  8       20.273000717163086      13.581000328063965      4.6510000228881836
@@ -87,7 +88,79 @@ int8    64      141.73300170898438      32.689998626708984      12.1160001754760
 int8    128     308.25698852539062      53.620998382568359      34.612998962402344
 ```
 
-Overall, a sorting network is about 4 times faster. Benchmarks were run on a Xeon w5-2455X (Sapphire Rapids).
+```
+Results from Emerald Rapids (Intel(R) Xeon(R) ?? 1.7 GHz)
+        size    mojo                    netw_SIMD               netw_vec
+uint64  8       27.791000366210938      20.422000885009766      7.3550000190734863
+uint64  16      32.803001403808594      33.422000885009766      27.797000885009766
+uint64  32      122.26399993896484      82.86199951171875       83.290000915527344
+uint64  64      223.39799499511719      228.552001953125        227.84500122070312
+uint64  128     478.69100952148438      538.88897705078125      536.98602294921875
+
+int64   8       26.641000747680664      20.422000885009766      7.3610000610351562
+int64   16      32.807998657226562      33.424999237060547      27.790000915527344
+int64   32      117.85600280761719      82.860000610351562      83.291999816894531
+int64   64      223.14300537109375      228.55099487304688      227.82200622558594
+int64   128     484.18499755859375      538.8900146484375       536.98199462890625
+
+float64 8       30.49799919128418       27.63599967956543       10.373000144958496
+float64 16      35.863998413085938      48.244998931884766      31.976999282836914
+float64 32      145.55900573730469      102.96800231933594      101.15399932861328
+float64 64      268.17498779296875      252.70399475097656      260.26901245117188
+float64 128     596.2239990234375       657.43402099609375      667.83599853515625
+
+uint32  8       27.006999969482422      11.060999870300293      3.7309999465942383
+uint32  16      34.424999237060547      17.33799934387207       7.0060000419616699
+uint32  32      116.31300354003906      33.462001800537109      22.275999069213867
+uint32  64      204.51199340820312      84.58599853515625       82.709999084472656
+uint32  128     442.9119873046875       179.36799621582031      179.79100036621094
+
+int32   8       28.940999984741211      10.868000030517578      3.7190001010894775
+int32   16      38.169998168945312      17.339000701904297      6.9850001335144043
+int32   32      147.83000183105469      33.451999664306641      22.235000610351562
+int32   64      284.40301513671875      84.636001586914062      82.153999328613281
+int32   128     641.84600830078125      179.36399841308594      179.90400695800781
+
+float32 8       28.200000762939453      25.253999710083008      7.9130001068115234
+float32 16      34.761001586914062      41.203998565673828      17.174999237060547
+float32 32      120.22899627685547      75.650001525878906      59.050998687744141
+float32 64      221.822998046875        157.47200012207031      154.09199523925781
+float32 128     518.968994140625        339.24099731445312      340.75
+
+uint16  8       28.165000915527344      8.0579996109008789      3.5130000114440918
+uint16  16      32.837001800537109      22.895000457763672      6.3600001335144043
+uint16  32      114.80500030517578      35.465000152587891      15.109000205993652
+uint16  64      204.48300170898438      83.19000244140625       61.066001892089844
+uint16  128     453.56900024414062      139.95399475097656      132.66499328613281
+
+int16   8       28.25200080871582       8.0649995803833008      3.5039999485015869
+int16   16      33.259998321533203      22.892999649047852      6.3569998741149902
+int16   32      114.947998046875        35.465999603271484      15.116999626159668
+int16   64      207.40299987792969      83.19000244140625       61.062000274658203
+int16   128     452.95498657226562      139.83700561523438      132.86399841308594
+
+float16 8       27.378999710083008      24.954999923706055      7.8639998435974121
+float16 16      33.935001373291016      49.456001281738281      16.621000289916992
+float16 32      117.83300018310547      80.332000732421875      36.534999847412109
+float16 64      221.02099609375         152.37399291992188      129.11700439453125
+float16 128     522.46002197265625      245.54800415039062      243.36000061035156
+
+uint8   8       27.99799919128418       9.7910003662109375      3.0350000858306885
+uint8   16      32.863998413085938      16.569999694824219      5.6020002365112305
+uint8   32      113.04599761962891      32.797000885009766      9.6079998016357422
+uint8   64      205.45799255371094      51.645000457763672      18.542999267578125
+uint8   128     447.67498779296875      80.572998046875         56.722000122070312
+
+int8    8       28.150999069213867      9.7969999313354492      3.0339999198913574
+int8    16      32.794998168945312      16.569999694824219      5.5999999046325684
+int8    32      118.37799835205078      32.793998718261719      9.6129999160766602
+int8    64      212.61599731445312      51.645000457763672      18.607000350952148
+int8    128     457.52200317382812      80.58599853515625       56.761001586914062
+```
+
+
+
+Overall, a sorting network is about 4 times faster.
 
 Note that sorts of size 64 are currently not reported due to a bug. If you are in a position to address this issue, please take a look at https://github.com/modularml/mojo/issues/1505.
 
