@@ -66,7 +66,6 @@ struct SwapData(Stringable):
         return result + 1 # plus one because we start counting at zero
 
 
-#@nonmaterializable(LayerRuntime)
 struct Layer(CollectionElement, Sized, Stringable):
     var data: DynamicVector[Int]
 

@@ -39,7 +39,7 @@ fn sort_network[
 
 
 @always_inline
-fn sort_network_NEW[
+fn sort_network_NEW[  # CRASH 0.7.0 free(): invalid next size (fast)
     T: DType, width: Int, ascending: Bool = True
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd = swap_data[width]()
