@@ -1,7 +1,7 @@
 from algorithm.sort import sort
 from collections.vector import InlinedFixedVector
 
-from sort_tools import swap_n, swap_idx, gen_perm, swap_data_concat
+from sort_tools import swap_n, swap_idx, gen_perm
 from SwapData import SwapData
 from sort_network_data import swap_data, swap_data_16x2
 
@@ -43,7 +43,7 @@ fn sort_network_NEW[  # CRASH 0.7.0 free(): invalid next size (fast)
     T: DType, width: Int, ascending: Bool = True
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd = swap_data[width]()
-    return sort_network_internal_CRASHES_2[T, width, sd, ascending](v)
+    return sort_network_internal_CRASHES_1[T, width, sd, ascending](v)
  
 
 @always_inline

@@ -8,7 +8,6 @@ fn join_swap_data[sd1: SwapData, sd2: SwapData]() -> SwapData:
     var result = SwapData(width1 + width2)
     for i in range(sd1.count_layers()):
         result.add_layer_l(Layer.merge(sd1[i], sd2[i], width1))
-
     return result
 
 

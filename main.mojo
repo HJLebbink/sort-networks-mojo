@@ -12,7 +12,7 @@ from sort_network import (
     sort_16elements_2x_A,
     sort_16elements_2x_B,
 )
-from tests import test_sort
+from tests import test_sort, test_sort_X
 
 from performance import (
     test_performance,
@@ -134,6 +134,7 @@ fn main():
 
     test_perm_code()
     test_sort()
+    test_sort_X(0xFFFF)
 
     # test_netw_SIMD_sort[DType.uint64, 8, True]()
     # test_netw_SIMD_sort[DType.uint64, 16, True]()
@@ -181,10 +182,10 @@ fn main():
     # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
     # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
 
-    # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
-    # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
+    #test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
+    #test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    test_performance(1000, 1000)
+    # test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
     # test_netw_SIMD_sort[DType.uint32, 16, True]()
@@ -197,7 +198,6 @@ fn main():
         print(str(sd1))
         alias sd2 = join_swap_data[sd1, sd1]()
         print(str(sd2))
-
 
 
     let elapsed_time_ns = now() - start_time_ns

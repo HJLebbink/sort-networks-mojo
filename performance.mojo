@@ -1,43 +1,11 @@
 from benchmark import keep
 from algorithm.sort import sort
-from random import random_ui64
 from time import time_function, now
+from random import random_ui64
 
 from sort_network import sort_network
 from sort_by_counting import sort_by_counting
-
-
-fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
-    var result = SIMD[T, width]()
-    # TODO: use faster methods
-    for i in range(width):
-        result[i] = random_ui64(0, 100).cast[T]()
-    return result
-
-
-fn gen_random_vec[T: DType](size: Int) -> DynamicVector[SIMD[T, 1]]:
-    var result = DynamicVector[SIMD[T, 1]](size)
-    # TODO: use faster methods
-    for i in range(size):
-        result.push_back(random_ui64(0, 100).cast[T]())
-    return result
-
-
-fn gen_random_pointer[T: DType](size: Int) -> Pointer[SIMD[T, 1]]:
-    let result = Pointer[SIMD[T, 1]].aligned_alloc(16, size)
-    # TODO: use faster methods
-    for i in range(size):
-        result[i] = random_ui64(0, 100).cast[T]()
-    return result
-
-
-fn gen_random_DTypePointer[T: DType](size: Int) -> DTypePointer[T, 0]:
-    let result = DTypePointer[T].alloc(size)
-    # TODO: use faster methods
-    for i in range(size):
-        result[i] = random_ui64(0, 100).cast[T]()
-    return result
-
+from test_tools import gen_random_SIMD, gen_random_vec, gen_random_pointer, gen_random_DTypePointer
 
 fn measure_time_mojo_sort[
     T: DType
@@ -178,6 +146,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.uint64, 32](n_samples, n_iterations, "uint64", sep))
     print(experiment[DType.uint64, 64](n_samples, n_iterations, "uint64", sep))
     print(experiment[DType.uint64, 128](n_samples, n_iterations, "uint64", sep))
+    #print(experiment[DType.uint64, 256](n_samples, n_iterations, "uint64", sep))
     print("")
 
     print(experiment[DType.int64, 8](n_samples, n_iterations, "int64", sep))
@@ -185,6 +154,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.int64, 32](n_samples, n_iterations, "int64", sep))
     print(experiment[DType.int64, 64](n_samples, n_iterations, "int64", sep))
     print(experiment[DType.int64, 128](n_samples, n_iterations, "int64", sep))
+    #print(experiment[DType.int64, 256](n_samples, n_iterations, "int64", sep))
     print("")
 
     print(experiment[DType.float64, 8](n_samples, n_iterations, "float64", sep))
@@ -192,6 +162,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.float64, 32](n_samples, n_iterations, "float64", sep))
     print(experiment[DType.float64, 64](n_samples, n_iterations, "float64", sep))
     print(experiment[DType.float64, 128](n_samples, n_iterations, "float64", sep))
+    #print(experiment[DType.float64, 256](n_samples, n_iterations, "float64", sep))
     print("")
 
     print(experiment[DType.uint32, 8](n_samples, n_iterations, "uint32", sep))
@@ -199,6 +170,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.uint32, 32](n_samples, n_iterations, "uint32", sep))
     print(experiment[DType.uint32, 64](n_samples, n_iterations, "uint32", sep))
     print(experiment[DType.uint32, 128](n_samples, n_iterations, "uint32", sep))
+    #print(experiment[DType.uint32, 256](n_samples, n_iterations, "uint32", sep))
     print("")
 
     print(experiment[DType.int32, 8](n_samples, n_iterations, "int32", sep))
@@ -206,6 +178,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.int32, 32](n_samples, n_iterations, "int32", sep))
     print(experiment[DType.int32, 64](n_samples, n_iterations, "int32", sep))
     print(experiment[DType.int32, 128](n_samples, n_iterations, "int32", sep))
+    #print(experiment[DType.int32, 256](n_samples, n_iterations, "int32", sep))
     print("")
 
     print(experiment[DType.float32, 8](n_samples, n_iterations, "float32", sep))
@@ -213,6 +186,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.float32, 32](n_samples, n_iterations, "float32", sep))
     print(experiment[DType.float32, 64](n_samples, n_iterations, "float32", sep))
     print(experiment[DType.float32, 128](n_samples, n_iterations, "float32", sep))
+    #print(experiment[DType.float32, 256](n_samples, n_iterations, "float32", sep))
     print("")
 
     print(experiment[DType.uint16, 8](n_samples, n_iterations, "uint16", sep))
@@ -220,6 +194,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.uint16, 32](n_samples, n_iterations, "uint16", sep))
     print(experiment[DType.uint16, 64](n_samples, n_iterations, "uint16", sep))
     print(experiment[DType.uint16, 128](n_samples, n_iterations, "uint16", sep))
+    #print(experiment[DType.uint16, 256](n_samples, n_iterations, "uint16", sep))
     print("")
 
     print(experiment[DType.int16, 8](n_samples, n_iterations, "int16", sep))
@@ -227,6 +202,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.int16, 32](n_samples, n_iterations, "int16", sep))
     print(experiment[DType.int16, 64](n_samples, n_iterations, "int16", sep))
     print(experiment[DType.int16, 128](n_samples, n_iterations, "int16", sep))
+    #print(experiment[DType.int16, 256](n_samples, n_iterations, "int16", sep))
     print("")
 
     print(experiment[DType.float16, 8](n_samples, n_iterations, "float16", sep))
@@ -234,6 +210,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.float16, 32](n_samples, n_iterations, "float16", sep))
     print(experiment[DType.float16, 64](n_samples, n_iterations, "float16", sep))
     print(experiment[DType.float16, 128](n_samples, n_iterations, "float16", sep))
+    #print(experiment[DType.float16, 256](n_samples, n_iterations, "float16", sep))
     print("")
 
     print(experiment[DType.uint8, 8](n_samples, n_iterations, "uint8", sep))
@@ -241,6 +218,7 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.uint8, 32](n_samples, n_iterations, "uint8", sep))
     print(experiment[DType.uint8, 64](n_samples, n_iterations, "uint8", sep))
     print(experiment[DType.uint8, 128](n_samples, n_iterations, "uint8", sep))
+    #print(experiment[DType.uint8, 256](n_samples, n_iterations, "uint8", sep))
     print("")
 
     print(experiment[DType.int8, 8](n_samples, n_iterations, "int8", sep))
@@ -248,3 +226,4 @@ fn test_performance(n_samples: Int, n_iterations: Int):
     print(experiment[DType.int8, 32](n_samples, n_iterations, "int8", sep))
     print(experiment[DType.int8, 64](n_samples, n_iterations, "int8", sep))
     print(experiment[DType.int8, 128](n_samples, n_iterations, "int8", sep))
+    #print(experiment[DType.int8, 256](n_samples, n_iterations, "int8", sep))

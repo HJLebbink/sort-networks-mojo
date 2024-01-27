@@ -1,4 +1,7 @@
-from sort_network import sort_network_idx
+from algorithm.sort import sort
+
+from sort_network import sort_network_idx, sort_network
+from test_tools import gen_random_SIMD
 
 
 fn test_sort():
@@ -62,3 +65,38 @@ fn test_sort():
         print("idx_1b obs " + str(idx_1b_obs))
 
     print("test_sort: DONE")
+
+
+fn test_sort_N[T: DType, size: Int](n_experiments: Int):
+    var buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].alloc(size)
+    for i in range(n_experiments):
+        if i == 0:
+            print_no_newline("test_sort_N " + str(size) +": ")
+        elif (i & 0xFFFF) == 0:
+            print_no_newline("x")
+
+        let data = gen_random_SIMD[T, size]()
+        for i in range(size):
+            buff[i] = data[i]
+
+        # sort with Mojo as reference impl
+        sort[T](buff, size)
+
+        # sort with SortingNetwork
+        let sorted_data = sort_network[T](data)
+
+        # check if reference and SortingNetwork yield equal results
+        for i in range(size):
+            if sorted_data[i] != buff[i]:
+                print("NOT equal!")
+                return
+    
+    print(" " + str(n_experiments) + " tests successes")
+
+
+fn test_sort_X(n_experiments: Int):
+    test_sort_N[DType.uint8, 8](n_experiments)
+    test_sort_N[DType.uint8, 16](n_experiments)
+    test_sort_N[DType.uint8, 32](n_experiments)
+    test_sort_N[DType.uint8, 64](n_experiments)
+    test_sort_N[DType.uint8, 128](n_experiments)
