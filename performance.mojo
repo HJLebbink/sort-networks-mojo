@@ -160,9 +160,11 @@ fn experiment[
     result += sep
     result += str(measure_time_netw_sort_generic[T](n_samples, n_iterations, size))
 
-    if T.sizeof() == 1:
-        result += sep
-        result += str(measure_time_mojo_sort[T](n_samples, n_iterations, size))
+    @parameter
+    if False:
+        if T.sizeof() == 1:
+            result += sep
+            result += str(measure_time_mojo_sort[T](n_samples, n_iterations, size))
 
     return result
 

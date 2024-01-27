@@ -4,7 +4,7 @@ from time import now
 from benchmark import keep
 
 from sort_by_counting import sort_by_counting
-from sort_network_data import swap_data, join_swap_data, join_swap_data2
+from sort_network_data import swap_data, join_swap_data
 from sort_tools import test_perm_code
 from sort_network import (
     sort_network,
@@ -171,7 +171,7 @@ fn main():
     # test_netw_SIMD_sort[DType.int16, 64, True]()
     # test_netw_SIMD_sort[DType.int16, 128, True]()
 
-    test_netw_SIMD_sort[DType.uint8, 8, True]()
+    # test_netw_SIMD_sort[DType.uint8, 8, True]()
     # test_netw_SIMD_sort[DType.uint8, 16, True]()
     # test_netw_SIMD_sort[DType.uint8, 32, True]()
     # test_netw_SIMD_sort[DType.uint8, 64, True]()
@@ -195,14 +195,8 @@ fn main():
     if do_test:
         alias sd1 = swap_data[8]()
         print(str(sd1))
-        let sd2 = join_swap_data(sd1, sd1)
+        alias sd2 = join_swap_data[sd1, sd1]()
         print(str(sd2))
-        let sd4 = join_swap_data(sd2, sd2)
-        print(str(sd4))
-        let sd8 = join_swap_data(sd4, sd4)
-        print(str(sd8))
-#        alias sd2b = join_swap_data2[sd1, sd1]() # compilation crashes
-#        print(str(sd2))
 
 
 

@@ -39,7 +39,7 @@ fn swap_data_concat(sd1: SwapData, sd2: SwapData) -> SwapData:
     if n_layers1 != n_layers2:
         return sd1
 
-    let width_1 = sd1.get_width()
+    # let width_1 = sd1.width
     #alias sd = sd1 #SwapData()
     
     #for i in range(n_layers1):
