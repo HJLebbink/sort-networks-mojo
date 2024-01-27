@@ -18,7 +18,7 @@ fn test_sort():
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
     )
 
-    alias t1a = sort_network_idx[width=16, ascending=True](data_1, idx_1)
+    alias t1a = sort_network_idx[channels=16, ascending=True](data_1, idx_1)
     alias data_1a_obs = t1a.get[0, SIMD[DType.int32, 16]]()
     alias data_1a_exp = SIMD[DType.int32, 16](
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
@@ -41,7 +41,7 @@ fn test_sort():
         print("idx_1a exp " + str(idx_1a_exp))
         print("idx_1a obs " + str(idx_1a_obs))
 
-    alias t1b = sort_network_idx[width=16, ascending=False](data_1, idx_1)
+    alias t1b = sort_network_idx[channels=16, ascending=False](data_1, idx_1)
     alias data_1b_obs = t1b.get[0, SIMD[DType.int32, 16]]()
     alias data_1b_exp = SIMD[DType.int32, 16](
         15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
@@ -71,7 +71,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
     var buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].alloc(size)
     for i in range(n_experiments):
         if i == 0:
-            print_no_newline("test_sort_N " + str(size) +": ")
+            print_no_newline("test_sort_N " + str(size) + ": ")
         elif (i & 0xFFFF) == 0:
             print_no_newline("x")
 
@@ -90,7 +90,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
             if sorted_data[i] != buff[i]:
                 print("NOT equal!")
                 return
-    
+
     print(" " + str(n_experiments) + " tests successes")
 
 

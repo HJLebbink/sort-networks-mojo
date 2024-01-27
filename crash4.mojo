@@ -7,7 +7,7 @@ fn main():
 
 fn swap_data() -> DynamicVector[Layer]:
     var result = DynamicVector[Layer]()
-    result.push_back(VariadicList((0,2),(1,3),(4,6),(5,7)))
+    result.push_back(VariadicList((0, 2), (1, 3), (4, 6), (5, 7)))
     return result
 
 
@@ -15,11 +15,11 @@ fn xyzzy[swaps: Layer](v: SIMD[DType.uint16, 16]) -> SIMD[DType.uint16, 16]:
     fn gen_perm[swaps: Layer]() -> StaticIntTuple[16]:
         let result = StaticIntTuple[16]()
         for i in range(len(swaps.data)):
-            let from_ = swaps.data[i] # removing this line removes the crash
+            let from_ = swaps.data[i]  # removing this line removes the crash
         return result
 
-    alias permutations = gen_perm[swaps]() # changing alias to let removes the crash
-    return v # just do nothing, removing gen_perm removes the crash
+    alias permutations = gen_perm[swaps]()  # changing alias to let removes the crash
+    return v  # just do nothing, removing gen_perm removes the crash
 
 
 struct Layer(CollectionElement):

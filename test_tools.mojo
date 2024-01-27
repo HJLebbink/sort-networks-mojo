@@ -1,5 +1,5 @@
-
 from random import random_ui64
+
 
 fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     var result = SIMD[T, width]()
@@ -31,4 +31,3 @@ fn gen_random_DTypePointer[T: DType](size: Int) -> DTypePointer[T, 0]:
     for i in range(size):
         result[i] = random_ui64(0, 100).cast[T]()
     return result
-

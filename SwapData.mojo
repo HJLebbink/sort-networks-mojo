@@ -1,20 +1,24 @@
 from collections.vector import DynamicVector
 from Layer import Layer
 
+
 # A sorting network consists of a collection of compare/exchange elements (tuples) ordered in layers
 struct SwapData(Stringable):
     var data: DynamicVector[Layer]
-    var width: Int
+    var channels: Int
+    var n_layers: Int
 
     @always_inline("nodebug")
-    fn __init__(inout self, width: Int):
+    fn __init__(inout self, channels: Int, n_layers: Int):
         self.data = DynamicVector[Layer]()
-        self.width = width
+        self.channels = channels
+        self.n_layers = n_layers
 
     @always_inline("nodebug")
     fn __copyinit__(inout self, existing: Self):
         self.data = existing.data
-        self.width = existing.width
+        self.channels = existing.channels
+        self.n_layers = existing.n_layers
 
     # get the i-th layer
     @always_inline("nodebug")
@@ -27,9 +31,11 @@ struct SwapData(Stringable):
 
     # add a layer of swaps
     @always_inline("nodebug")
-    fn add_layer(inout self, layer: VariadicList[Tuple[Int, Int]]):
-        let x = Layer(layer)
-        self.data.push_back(x^)
+    fn add_layer(
+        inout self, layer_id: Int, layer_content: VariadicList[Tuple[Int, Int]]
+    ):
+        let x = Layer(layer_content)
+        self.data.push_back(x ^)
 
     @always_inline("nodebug")
     fn add_layer_l(inout self, layer: Layer):
@@ -44,6 +50,14 @@ struct SwapData(Stringable):
         for i in range(len(self.data)):
             result += str(self.data[i]) + "\n"
         return result
+
+    fn to_code(self) -> String:
+        let n_layers = self.count_layers()
+        var result: String = "var result = SwapData("+str(self.channels)+", "+str(n_layers)+")\n"
+        for i in range(n_layers):
+            result += "result.add_layer("+str(i)+", VariadicList("+str(self.data[i])+"))\n"
+        return result
+
 
     # count number of compare/exchange elements
     @always_inline("nodebug")

@@ -3,7 +3,7 @@
 Efficient sorting in Modular Mojo optimized for small datasets (with a number of elements less than or equal to 128).
 
 The primary objective is to create a drop-in replacement for the `sort[type: DType](inout v: DynamicVector[SIMD[type, 1]])`
-function, utilizing sorting networks when the dataset is 128 elements or fewer. However, there are still a few areas that need refinement.
+function, using sorting networks when the dataset is 128 elements or fewer. However, there are still a few areas that need refinement.
 
 The sorting networks are shamelessly borrowed from the work of [Bert Dobbelaere](https://bertdobbelaere.github.io/sorting_networks_extended.html) who did all the hard searching!
 
@@ -168,7 +168,7 @@ Note that the performance of float code is notably different compared to sorts w
 
 ## How does it work?
 
-A sorting network represents the smallest number of comparisons and swaps required to sort an array. For instance, the sorting network for 16 inputs has 61 compare/exchange elements (CEs) organized into 9 layers. Layers consist of parallel CE operations, allowing them to be executed in any order. However, the order of the layers remains fixed.
+A sorting network represents the smallest number of comparisons and swaps required to sort an array. For instance, the sorting network for 16 inputs has 61 compare/exchange elements (CEs) organized into 9 layers. Layers consist of parallel CE operations, allowing them to be executed in any order. However, the order of the layers remains fixed. The big advantage of sorting networks is that they can be implemented without any data-dependent control flow. Thus, a single sorting network is just a linear branch-free sequence of instructions. Just what we need. For some interesting details see [here](https://jix.one/proving-50-year-old-sorting-networks-optimal-part-1/).
 
 ![net16](https://github.com/HJLebbink/sort-networks-mojo/blob/main/img/sort-network-16.png "Sorting Network 16")
 
