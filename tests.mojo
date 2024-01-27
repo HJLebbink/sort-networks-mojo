@@ -71,7 +71,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
     var buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].alloc(size)
     for i in range(n_experiments):
         if i == 0:
-            print_no_newline("test_sort_N " + str(size) +": ")
+            print_no_newline("test_sort_N " + str(size) + ": ")
         elif (i & 0xFFFF) == 0:
             print_no_newline("x")
 
@@ -90,7 +90,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
             if sorted_data[i] != buff[i]:
                 print("NOT equal!")
                 return
-    
+
     print(" " + str(n_experiments) + " tests successes")
 
 

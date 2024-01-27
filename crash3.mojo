@@ -1,5 +1,3 @@
-
-
 # A sorting network consists of a collection of compare/exchange elements (tuples) ordered in layers
 struct SwapData(Stringable):
     var data: DynamicVector[Layer]
@@ -30,7 +28,6 @@ struct SwapData(Stringable):
     fn add(inout self, layer: Layer):
         self.data.push_back(layer)
 
-
     # trait Stringable
     @always_inline("nodebug")
     fn __str__(self) -> String:
@@ -56,13 +53,13 @@ struct SwapData(Stringable):
 
     @always_inline("nodebug")
     fn get_width(self) -> Int:
-        var result : Int = -1
+        var result: Int = -1
         for i in range(len(self.data)):
             for j in range(len(self.data[i])):
                 let m = self.data[i].get_max(j)
                 if m > result:
                     result = m
-        return result + 1 # plus one because we start counting at zero
+        return result + 1  # plus one because we start counting at zero
 
 
 struct Layer(CollectionElement, Sized, Stringable):
@@ -119,10 +116,16 @@ struct Layer(CollectionElement, Sized, Stringable):
     fn __str__(self) -> String:
         var result: String = "["
         let size = len(self.data)
-        if (size > 0):
-            for i in range(size-1):
+        if size > 0:
+            for i in range(size - 1):
                 result += "(" + str(self.get_min(i)) + "," + str(self.get_max(i)) + "),"
-            result += "(" + str(self.get_min(size-1)) + "," + str(self.get_max(size-1)) + ")"
+            result += (
+                "("
+                + str(self.get_min(size - 1))
+                + ","
+                + str(self.get_max(size - 1))
+                + ")"
+            )
         return result + "]"
 
     # trait Sized
@@ -139,7 +142,6 @@ struct Layer(CollectionElement, Sized, Stringable):
         return Layer.unpack(self.data[idx]).get[1, Int]()
 
 
-
 fn join_swap_data2[sd1: SwapData, sd2: SwapData]() -> SwapData:
     var result = SwapData()
     alias width1 = sd1.get_width()
@@ -152,24 +154,26 @@ fn join_swap_data2[sd1: SwapData, sd2: SwapData]() -> SwapData:
         for j in range(len(sd1[i].data)):
             x.push_back(Tuple[Int, Int](sd1[i].get_min(j), sd1[i].get_max(j)))
         for j in range(len(sd2[i].data)):
-            x.push_back(Tuple[Int, Int](sd2[i].get_min(j) + width1, sd2[i].get_max(j) + width1))
+            x.push_back(
+                Tuple[Int, Int](sd2[i].get_min(j) + width1, sd2[i].get_max(j) + width1)
+            )
         result.add(x)
     return result
 
+
 fn swap_data() -> SwapData:
     var result = SwapData()
-    result.add(VariadicList((0,2),(1,3),(4,6),(5,7)))
-    result.add(VariadicList((0,4),(1,5),(2,6),(3,7)))
-    result.add(VariadicList((0,1),(2,3),(4,5),(6,7)))
-    result.add(VariadicList((2,4),(3,5)))
-    result.add(VariadicList((1,4),(3,6)))
-    result.add(VariadicList((1,2),(3,4),(5,6)))
+    result.add(VariadicList((0, 2), (1, 3), (4, 6), (5, 7)))
+    result.add(VariadicList((0, 4), (1, 5), (2, 6), (3, 7)))
+    result.add(VariadicList((0, 1), (2, 3), (4, 5), (6, 7)))
+    result.add(VariadicList((2, 4), (3, 5)))
+    result.add(VariadicList((1, 4), (3, 6)))
+    result.add(VariadicList((1, 2), (3, 4), (5, 6)))
     return result
 
-fn main():
 
+fn main():
     alias sd1 = swap_data()
     print(str(sd1))
     alias sd2 = join_swap_data2[sd1, sd1]()
     print(str(sd2))
-

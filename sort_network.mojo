@@ -12,7 +12,7 @@ fn sort_network[
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     # get the number of layers for the provided number of elements in the list to be sorted
     alias sd = swap_data[width]()
-    alias n_layers = sd.count_layers()
+    alias n_layers = sd.n_layers
 
     @parameter
     if n_layers == 6:
@@ -44,14 +44,14 @@ fn sort_network_NEW[  # CRASH 0.7.0 free(): invalid next size (fast)
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd = swap_data[width]()
     return sort_network_internal_CRASHES_1[T, width, sd, ascending](v)
- 
+
 
 @always_inline
 fn sort_network_internal_CRASHES_2[
     T: DType, width: Int, sd: SwapData, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     # get the number of layers for the provided number of elements in the list to be soreted
-    alias n_layers = sd.count_layers()
+    alias n_layers = sd.n_layers
 
     @parameter
     if n_layers == 6:
@@ -157,7 +157,7 @@ fn sort_network_internal_CRASHES_2[
 fn sort_network_internal_CRASHES_1[
     T: DType, width: Int, sd: SwapData, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
-    alias n_layers = sd.count_layers()
+    alias n_layers = sd.n_layers
 
     let v0 = swap_n[T, width, sd[0], ascending](v)
 
@@ -283,7 +283,7 @@ fn sort_network_idx[
 ](v: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     # get the number of layers for the provided number of elements in the list to be sorted
     alias sd = swap_data[width]()
-    alias n_layers = sd.count_layers()
+    alias n_layers = sd.n_layers
 
     @parameter
     if n_layers == 6:
@@ -339,9 +339,11 @@ fn sort_network[
 
 
 @always_inline
-fn sn_6layer[T: DType, width: Int, ascending: Bool](v: SIMD[T, width]) -> SIMD[T, width]:
+fn sn_6layer[
+    T: DType, width: Int, ascending: Bool
+](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd: SwapData = swap_data[width]()
-    constrained[6 == sd.count_layers()]()
+    constrained[6 == sd.n_layers]()
     let v0 = swap_n[T, width, sd[0], ascending](v)
     let v1 = swap_n[T, width, sd[1], ascending](v0)
     let v2 = swap_n[T, width, sd[2], ascending](v1)
@@ -350,10 +352,13 @@ fn sn_6layer[T: DType, width: Int, ascending: Bool](v: SIMD[T, width]) -> SIMD[T
     let v5 = swap_n[T, width, sd[5], ascending](v4)
     return v5
 
+
 # sort SIMD a, and apply the same reodering of a to idx
-fn sn_6layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
+fn sn_6layer_idx[
+    T1: DType, T2: DType, width: Int, ascending: Bool
+](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias sd: SwapData = swap_data[width]()
-    constrained[6 == sd.count_layers()]()
+    constrained[6 == sd.n_layers]()
     let t0 = swap_idx[T1, T2, width, sd[0], ascending]((a, idx))
     let t1 = swap_idx[T1, T2, width, sd[1], ascending](t0)
     let t2 = swap_idx[T1, T2, width, sd[2], ascending](t1)
@@ -362,10 +367,13 @@ fn sn_6layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, 
     let t5 = swap_idx[T1, T2, width, sd[5], ascending](t4)
     return t5
 
+
 @always_inline
-fn sn_9layer[T: DType, width: Int, ascending: Bool](v: SIMD[T, width]) -> SIMD[T, width]:
+fn sn_9layer[
+    T: DType, width: Int, ascending: Bool
+](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd: SwapData = swap_data[width]()
-    constrained[9 == sd.count_layers()]()
+    constrained[9 == sd.n_layers]()
     let v0 = swap_n[T, width, sd[0], ascending](v)
     let v1 = swap_n[T, width, sd[1], ascending](v0)
     let v2 = swap_n[T, width, sd[2], ascending](v1)
@@ -377,11 +385,14 @@ fn sn_9layer[T: DType, width: Int, ascending: Bool](v: SIMD[T, width]) -> SIMD[T
     let v8 = swap_n[T, width, sd[8], ascending](v7)
     return v8
 
+
 # sort SIMD a, and apply the same reodering of a to idx
 @always_inline
-fn sn_9layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
+fn sn_9layer_idx[
+    T1: DType, T2: DType, width: Int, ascending: Bool
+](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias sd: SwapData = swap_data[width]()
-    constrained[9 == sd.count_layers()]()
+    constrained[9 == sd.n_layers]()
     let t0 = swap_idx[T1, T2, width, sd[0], ascending]((a, idx))
     let t1 = swap_idx[T1, T2, width, sd[1], ascending](t0)
     let t2 = swap_idx[T1, T2, width, sd[2], ascending](t1)
@@ -398,7 +409,7 @@ fn sn_14layer[
     T: DType, width: Int, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd: SwapData = swap_data[width]()
-    constrained[14 == sd.count_layers()]()
+    constrained[14 == sd.n_layers]()
     let v0 = swap_n[T, width, sd[0], ascending](v)
     let v1 = swap_n[T, width, sd[1], ascending](v0)
     let v2 = swap_n[T, width, sd[2], ascending](v1)
@@ -415,11 +426,14 @@ fn sn_14layer[
     let v13 = swap_n[T, width, sd[13], ascending](v12)
     return v13
 
+
 # sort SIMD a, and apply the same reodering of a to idx
 @always_inline
-fn sn_14layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
+fn sn_14layer_idx[
+    T1: DType, T2: DType, width: Int, ascending: Bool
+](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias sd: SwapData = swap_data[width]()
-    constrained[14 == sd.count_layers()]()
+    constrained[14 == sd.n_layers]()
     let t0 = swap_idx[T1, T2, width, sd[0], ascending]((a, idx))
     let t1 = swap_idx[T1, T2, width, sd[1], ascending](t0)
     let t2 = swap_idx[T1, T2, width, sd[2], ascending](t1)
@@ -442,7 +456,7 @@ fn sn_20layer[
     T: DType, width: Int, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd: SwapData = swap_data[width]()
-    constrained[20 == sd.count_layers()]()
+    constrained[20 == sd.n_layers]()
     let v0 = swap_n[T, width, sd[0], ascending](v)
     let v1 = swap_n[T, width, sd[1], ascending](v0)
     let v2 = swap_n[T, width, sd[2], ascending](v1)
@@ -465,11 +479,14 @@ fn sn_20layer[
     let v19 = swap_n[T, width, sd[19], ascending](v18)
     return v19
 
+
 # sort SIMD a, and apply the same reodering of a to idx
 @always_inline
-fn sn_20layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
+fn sn_20layer_idx[
+    T1: DType, T2: DType, width: Int, ascending: Bool
+](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias sd: SwapData = swap_data[width]()
-    constrained[20 == sd.count_layers()]()
+    constrained[20 == sd.n_layers]()
     let t0 = swap_idx[T1, T2, width, sd[0], ascending]((a, idx))
     let t1 = swap_idx[T1, T2, width, sd[1], ascending](t0)
     let t2 = swap_idx[T1, T2, width, sd[2], ascending](t1)
@@ -499,7 +516,7 @@ fn sn_27layer[
     T: DType, width: Int, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias sd: SwapData = swap_data[width]()
-    constrained[27 == sd.count_layers()]()
+    constrained[27 == sd.n_layers]()
     let v0 = swap_n[T, width, sd[0], ascending](v)
     let v1 = swap_n[T, width, sd[1], ascending](v0)
     let v2 = swap_n[T, width, sd[2], ascending](v1)
@@ -529,11 +546,14 @@ fn sn_27layer[
     let v26 = swap_n[T, width, sd[26], ascending](v25)
     return v26
 
+
 # sort SIMD a, and apply the same reodering of a to idx
 @always_inline
-fn sn_27layer_idx[T1: DType, T2: DType, width: Int, ascending: Bool](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
+fn sn_27layer_idx[
+    T1: DType, T2: DType, width: Int, ascending: Bool
+](a: SIMD[T1, width], idx: SIMD[T2, width]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias sd: SwapData = swap_data[width]()
-    constrained[27 == sd.count_layers()]()
+    constrained[27 == sd.n_layers]()
     let t0 = swap_idx[T1, T2, width, sd[0], ascending]((a, idx))
     let t1 = swap_idx[T1, T2, width, sd[1], ascending](t0)
     let t2 = swap_idx[T1, T2, width, sd[2], ascending](t1)
@@ -570,7 +590,7 @@ fn sort_16elements_2x_A[
     T1: DType, T2: DType, ascending1: Bool = True, ascending2: Bool = True
 ](va: SIMD[T1, 16], vb: SIMD[T2, 16]) -> (SIMD[T1, 16], SIMD[T2, 16]):
     alias sd: SwapData = swap_data[16]()
-    constrained[9 == sd.count_layers()]()
+    constrained[9 == sd.n_layers]()
     let v0a = swap_n[T1, 16, sd[0], ascending1](va)
     let v0b = swap_n[T2, 16, sd[0], ascending2](vb)
     let v1a = swap_n[T1, 16, sd[1], ascending1](v0a)
@@ -591,6 +611,7 @@ fn sort_16elements_2x_A[
     let v8b = swap_n[T2, 16, sd[8], ascending2](v7b)
     return (v8a, v8b)
 
+
 @always_inline
 fn sort_16elements_x2[T: DType, ascending: Bool = True](v: SIMD[T, 32]) -> SIMD[T, 32]:
     alias sd = swap_data_16x2()
@@ -605,12 +626,15 @@ fn sort_16elements_x2[T: DType, ascending: Bool = True](v: SIMD[T, 32]) -> SIMD[
     let v8 = swap_n[T, 32, sd[8], ascending](v7)
     return v8
 
+
 @always_inline
-fn sort_16elements_2x_B[T: DType, ascending: Bool = True](v: SIMD[T, 32]) -> SIMD[T, 32]:
-    #alias sd1 = swap_data[16]()
-    #alias sd2 = swap_data[16]()
-    #alias sd = swap_data_concat(sd1, sd2)
-    #constrained[sd.count_layers() == 9]()
+fn sort_16elements_2x_B[
+    T: DType, ascending: Bool = True
+](v: SIMD[T, 32]) -> SIMD[T, 32]:
+    # alias sd1 = swap_data[16]()
+    # alias sd2 = swap_data[16]()
+    # alias sd = swap_data_concat(sd1, sd2)
+    # constrained[sd.count_layers() == 9]()
 
     alias sd = swap_data_16x2()
     let v0 = swap_n[T, 32, sd[0], ascending](v)
@@ -623,7 +647,6 @@ fn sort_16elements_2x_B[T: DType, ascending: Bool = True](v: SIMD[T, 32]) -> SIM
     let v7 = swap_n[T, 32, sd[7], ascending](v6)
     let v8 = swap_n[T, 32, sd[8], ascending](v7)
     return v8
-
 
 
 # sort SIMD array v

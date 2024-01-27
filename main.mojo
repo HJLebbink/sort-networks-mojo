@@ -24,8 +24,6 @@ from performance import (
 )
 
 
-
-
 fn test_mojo_sort[T: DType](size: Int):
     let buff = gen_random_pointer[T](size)
 
@@ -67,7 +65,7 @@ fn test_netw_SIMD_sort[T: DType, width: Int, ascending: Bool]():
     print("before " + str(width) + ": " + str(data1))
     let start_time_ms = now()
     let data2 = sort_network[T, width, ascending](data1)
-    #let data2 = sort_by_counting[T, width, ascending](data1)
+    # let data2 = sort_by_counting[T, width, ascending](data1)
     let elapsed_time_ms = now() - start_time_ms
     print("after " + str(width) + ": " + str(data2))
     keep(data2.reduce_add())
@@ -178,12 +176,11 @@ fn main():
     # test_netw_SIMD_sort[DType.uint8, 64, True]()
     # test_netw_SIMD_sort[DType.uint8, 128, True]()
 
-
     # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
     # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
 
-    #test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
-    #test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
+    # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
+    # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
     # test_performance(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
@@ -199,11 +196,9 @@ fn main():
         alias sd2 = join_swap_data[sd1, sd1]()
         print(str(sd2))
 
-
     let elapsed_time_ns = now() - start_time_ns
     print_no_newline("Elapsed time " + str(elapsed_time_ns) + " ns")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000) + " μs")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000_000) + " ms")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns)/1_000_000_000) + " s")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns)/60_000_000_000) + " min\n")
-
+    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000) + " μs")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000_000) + " ms")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000_000_000) + " s")
+    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 60_000_000_000) + " min\n")
