@@ -1,31 +1,31 @@
 from testing import assert_true
 from sort_network_data import swap_data
-from SwapData import Layer, SwapData
+from SwapData import SwapData
 
 
 fn gen_merge_mask[
-    swaps: Layer, width: Int, ascending: Bool
+    swaps: SwapData.Layer, width: Int, ascending: Bool
 ]() -> SIMD[DType.bool, width]:
     var result = SIMD[DType.bool, width]()
     for i in range(len(swaps)):
         if ascending:
             # set the minium of the comparison to true to get ascending
-            result[swaps.get_min(i)] = True
+            result[SwapData.get_min(swaps[i])] = True
         else:
             # set the maximum of the comparison to true to get descending
-            result[swaps.get_max(i)] = True
+            result[SwapData.get_max(swaps[i])] = True
     return result
 
 
 # generate a index permutation (of size width) from the provided swaps in Layer
-fn gen_perm[swaps: Layer, width: Int]() -> StaticIntTuple[width]:
+fn gen_perm[swaps: SwapData.Layer, width: Int]() -> StaticIntTuple[width]:
     var result = StaticIntTuple[width]()
     for i in range(width):
         result[i] = i
 
     for i in range(len(swaps)):
-        let from_ = swaps.get_min(i)
-        let to_ = swaps.get_max(i)
+        let from_ = SwapData.get_min(swaps[i])
+        let to_ = SwapData.get_max(swaps[i])
 
         let tmp = result[to_]
         result[to_] = result[from_]
@@ -36,7 +36,7 @@ fn gen_perm[swaps: Layer, width: Int]() -> StaticIntTuple[width]:
 
 @always_inline
 fn swap_n[
-    T: DType, width: Int, swaps: Layer, ascending: Bool
+    T: DType, width: Int, swaps: SwapData.Layer, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias permutations = gen_perm[swaps, width]()
     constrained[len(permutations) == width]()
@@ -47,7 +47,7 @@ fn swap_n[
 
 @always_inline
 fn swap_idx[
-    T1: DType, T2: DType, width: Int, swaps: Layer, ascending: Bool
+    T1: DType, T2: DType, width: Int, swaps: SwapData.Layer, ascending: Bool
 ](t: Tuple[SIMD[T1, width], SIMD[T2, width]]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias permutations = gen_perm[swaps, width]()
     let data = t.get[0, SIMD[T1, width]]()

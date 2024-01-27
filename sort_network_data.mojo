@@ -1,14 +1,12 @@
-from SwapData import Layer, SwapData
+from SwapData import SwapData
 
 
 # join_swap_data joins two swap data's into one sorting network.
 # The number of layers doe not increase, only the number of swaps increases
 fn join_swap_data[sd1: SwapData, sd2: SwapData]() -> SwapData:
-    alias width1 = sd1.width
-    alias width2 = sd2.width
+    var result = sd1
+    result.merge(sd2)
     var result = SwapData(width1 + width2, sd1.n_layers)
-    for i in range(sd1.count_layers()):
-        result.add_layer_l(Layer.merge(sd1[i], sd2[i], width1))
     return result
 
 

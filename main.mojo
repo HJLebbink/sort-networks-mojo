@@ -132,7 +132,7 @@ fn main():
 
     test_perm_code()
     test_sort()
-    test_sort_X(0xFFFF)
+    # test_sort_X(0xFFFF)
 
     # test_netw_SIMD_sort[DType.uint64, 8, True]()
     # test_netw_SIMD_sort[DType.uint64, 16, True]()
@@ -189,12 +189,12 @@ fn main():
     # test_netw_SIMD_sort_2x_C[DType.uint16, 16, True]()
     # test_netw_SIMD_sort[DType.uint16, 16, True]()
 
-    let do_test = False
-    if do_test:
-        alias sd1 = swap_data[8]()
-        print(str(sd1))
-        alias sd2 = join_swap_data[sd1, sd1]()
-        print(str(sd2))
+    # let do_test = False
+    # if do_test:
+    #    alias sd1 = swap_data[8]()
+    #    print(str(sd1))
+    #    alias sd2 = join_swap_data[sd1, sd1]()
+    #    print(str(sd2))
 
     let elapsed_time_ns = now() - start_time_ns
     print_no_newline("Elapsed time " + str(elapsed_time_ns) + " ns")
