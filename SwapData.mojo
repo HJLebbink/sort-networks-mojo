@@ -53,11 +53,12 @@ struct SwapData(Stringable):
 
     fn to_code(self) -> String:
         let n_layers = self.count_layers()
-        var result: String = "var result = SwapData("+str(self.channels)+", "+str(n_layers)+")\n"
+        # fmt: off
+        var result: String = "var result = SwapData(" + str(self.channels) + ", " + str(n_layers) + ")\n"
         for i in range(n_layers):
-            result += "result.add_layer("+str(i)+", VariadicList("+str(self.data[i])+"))\n"
+            result += "result.add_layer(" + str(i) + ", VariadicList(" + str(self.data[i]) + "))\n"
         return result
-
+        # fmt: on
 
     # count number of compare/exchange elements
     @always_inline("nodebug")

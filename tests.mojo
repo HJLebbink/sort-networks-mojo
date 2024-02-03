@@ -1,6 +1,6 @@
 from algorithm.sort import sort
 
-from sort_network import sort_network_idx, sort_network
+from sort_network import sn_idx, sn
 from test_tools import gen_random_SIMD
 
 
@@ -18,7 +18,7 @@ fn test_sort():
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
     )
 
-    alias t1a = sort_network_idx[channels=16, ascending=True](data_1, idx_1)
+    alias t1a = sn_idx[channels=16, ascending=True](data_1, idx_1)
     alias data_1a_obs = t1a.get[0, SIMD[DType.int32, 16]]()
     alias data_1a_exp = SIMD[DType.int32, 16](
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
@@ -41,7 +41,7 @@ fn test_sort():
         print("idx_1a exp " + str(idx_1a_exp))
         print("idx_1a obs " + str(idx_1a_obs))
 
-    alias t1b = sort_network_idx[channels=16, ascending=False](data_1, idx_1)
+    alias t1b = sn_idx[channels=16, ascending=False](data_1, idx_1)
     alias data_1b_obs = t1b.get[0, SIMD[DType.int32, 16]]()
     alias data_1b_exp = SIMD[DType.int32, 16](
         15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
@@ -83,7 +83,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
         sort[T](buff, size)
 
         # sort with SortingNetwork
-        let sorted_data = sort_network[T](data)
+        let sorted_data = sn[T](data)
 
         # check if reference and SortingNetwork yield equal results
         for i in range(size):

@@ -1,8 +1,16 @@
-from sort_network import sort_network, sort_network_ml_4n, sort_network_2x_interleave, sort_network_2x_parallel
+from sort_network import (
+    sn,
+    sn_ml_4n,
+    sn_2x_interleave,
+    sn_2x_parallel,
+)
 from SwapData import SwapData
 
+
 # sorting network multi-layer 4N: divide width in two; and use sorting network 4
-fn sort_network_ml_4xN[T: DType, channels: Int, ascending: Bool](data: SIMD[T, channels]) -> SIMD[T, channels]:
+fn sn_ml_4xN[
+    T: DType, channels: Int, ascending: Bool
+](data: SIMD[T, channels]) -> SIMD[T, channels]:
     alias sub_size = channels >> 2
     alias use_interleave_parallel_sorts = False
     # Sorting network for 4 inputs, 5 CEs, 3 layers:
@@ -15,38 +23,39 @@ fn sort_network_ml_4xN[T: DType, channels: Int, ascending: Bool](data: SIMD[T, c
     var d2 = data.slice[sub_size](2 * sub_size)
     var d3 = data.slice[sub_size](3 * sub_size)
 
-    let d02: SIMD[T, 2*sub_size]
-    let d13: SIMD[T, 2*sub_size]
+    let d02: SIMD[T, 2 * sub_size]
+    let d13: SIMD[T, 2 * sub_size]
+
     @parameter
     if use_interleave_parallel_sorts:
-        d02 = sort_network[T, 2*sub_size, ascending](d0.join(d2))
-        d13 = sort_network[T, 2*sub_size, ascending](d1.join(d3))
+        d02 = sn[T, 2 * sub_size, ascending](d0.join(d2))
+        d13 = sn[T, 2 * sub_size, ascending](d1.join(d3))
     else:
-        #d02, d13 = sort_network_2x_interleave[T, T, 2*sub_size, ascending](d0.join(d2), d1.join(d3))
-        d02, d13 = sort_network_2x_parallel[T, 2*sub_size, ascending](d0.join(d2), d1.join(d3))
-
+        d02, d13 = sn_2x_interleave[T, T, 2*sub_size, ascending](d0.join(d2), d1.join(d3))
+        #d02, d13 = sn_2x_parallel[T, 2 * sub_size, ascending](d0.join(d2), d1.join(d3))
 
     d0 = d02.slice[sub_size](0)
     d1 = d13.slice[sub_size](0)
     d2 = d02.slice[sub_size](sub_size)
     d3 = d13.slice[sub_size](sub_size)
 
-    let d01: SIMD[T, 2*sub_size]
-    let d23: SIMD[T, 2*sub_size]
+    let d01: SIMD[T, 2 * sub_size]
+    let d23: SIMD[T, 2 * sub_size]
+
     @parameter
     if use_interleave_parallel_sorts:
-        d01 = sort_network_ml_4n[T, 2*sub_size, ascending](d0.join(d1))
-        d23 = sort_network_ml_4n[T, 2*sub_size, ascending](d2.join(d3))
+        d01 = sn_ml_4n[T, 2 * sub_size, ascending](d0.join(d1))
+        d23 = sn_ml_4n[T, 2 * sub_size, ascending](d2.join(d3))
     else:
-        #d01, d23 = sort_network_2x_interleave[T, T, 2*sub_size, ascending](d0.join(d1), d2.join(d3))
-        d01, d23 = sort_network_2x_parallel[T, 2*sub_size, ascending](d0.join(d1), d2.join(d3))
+        d01, d23 = sn_2x_interleave[T, T, 2*sub_size, ascending](d0.join(d1), d2.join(d3))
+        #d01, d23 = sn_2x_parallel[T, 2 * sub_size, ascending](d0.join(d1), d2.join(d3))
 
     d0 = d01.slice[sub_size](0)
     d1 = d01.slice[sub_size](sub_size)
     d2 = d23.slice[sub_size](0)
     d3 = d23.slice[sub_size](sub_size)
 
-    let d12: SIMD[T, 2*sub_size] = sort_network_ml_4n[T, 2*sub_size, ascending](d1.join(d2))
+    let d12: SIMD[T, 2 * sub_size] = sn_ml_4n[T, 2 * sub_size, ascending](d1.join(d2))
 
     d1 = d12.slice[sub_size](0)
     d2 = d12.slice[sub_size](sub_size)

@@ -48,11 +48,15 @@ struct Layer(CollectionElement, Sized, Stringable):
     @always_inline("nodebug")
     fn __str__(self) -> String:
         var result: String = ""
-        let size = len(self.data)
-        if size > 0:
-            for i in range(size - 1):
-                result += "(" + str(self.get_min(i)) + "," + str(self.get_max(i)) + "),"
-            result += "(" + str(self.get_min(size-1)) + "," + str(self.get_max(size-1)) + ")"
+        let s = len(self.data)
+        if s > 0:
+            for i in range(s - 1):
+                let min = self.get_min(i)
+                let max = self.get_max(i)
+                result += "(" + str(min) + "," + str(max) + "),"
+            let min = self.get_min(s - 1)
+            let max = self.get_max(s - 1)
+            result += "(" + str(min) + "," + str(max) + ")"
         return result
 
     # trait Sized

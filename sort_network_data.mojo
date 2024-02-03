@@ -11,6 +11,7 @@ fn join_swap_data[sd1: SwapData, sd2: SwapData]() -> SwapData:
         result.add_layer_l(Layer.merge(sd1[i], sd2[i], channels1))
     return result
 
+
 fn join_swap_data(sd1: SwapData, sd2: SwapData) -> SwapData:
     let channels1 = sd1.channels
     let channels2 = sd2.channels
@@ -96,8 +97,6 @@ fn swap_data_2x[channels: Int]() -> SwapData:
     return SwapData(0, 0)
 
 
-
-
 fn swap_data_8x8() -> SwapData:
     var result = SwapData(64, 6)
     # fmt: off
@@ -109,6 +108,7 @@ fn swap_data_8x8() -> SwapData:
     result.add_layer(5, VariadicList((1,2),(3,4),(5,6),(9,10),(11,12),(13,14),(17,18),(19,20),(21,22),(25,26),(27,28),(29,30),(33,34),(35,36),(37,38),(41,42),(43,44),(45,46),(49,50),(51,52),(53,54),(57,58),(59,60),(61,62)))
     # fmt: on
     return result
+
 
 # chanels 0..7 are already sorted, and 8..15 are also already sorted
 fn swap_data_already_sorted_8_8() -> SwapData:
@@ -134,7 +134,7 @@ fn swap_data_already_sorted_16_16() -> SwapData:
     return result
 
 
-fn swap_data_already_sorted_32_32() -> SwapData: 
+fn swap_data_already_sorted_32_32() -> SwapData:
     var result = SwapData(64, 7)
     # fmt: off
     result.add_layer(0, VariadicList((0,32),(1,33),(2,34),(3,35),(4,36),(5,37),(6,38),(7,39),(8,40),(9,41),(10,42),(11,43),(12,44),(13,45),(14,46),(15,47),(16,48),(17,49),(18,50),(19,51),(20,52),(21,53),(22,54),(23,55),(24,56),(25,57),(26,58),(27,59),(28,60),(29,61),(30,62),(31,63)))
