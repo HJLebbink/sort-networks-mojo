@@ -12,7 +12,6 @@ from sort_network.sort_network_data import (
 )
 
 
-@always_inline
 fn sn[
     T: DType, channels: Int, ascending: Bool = True
 ](v: SIMD[T, channels]) -> SIMD[T, channels]:
