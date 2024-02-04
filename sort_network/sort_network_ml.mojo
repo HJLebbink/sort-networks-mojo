@@ -1,10 +1,10 @@
-from sort_network import (
+from sort_network.sort_network import (
     sn,
     sn_ml_4n,
     sn_2x_interleave,
     sn_2x_parallel,
 )
-from SwapData import SwapData
+from sort_network.SwapData import SwapData
 
 
 # sorting network multi-layer 4N: divide width in two; and use sorting network 4

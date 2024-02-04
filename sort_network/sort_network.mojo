@@ -1,9 +1,9 @@
 from algorithm.sort import sort
 from collections.vector import InlinedFixedVector
 
-from sort_tools import swap_n, swap_idx, gen_perm
-from SwapData import SwapData
-from sort_network_data import (
+from sort_network.sort_tools import swap_n, swap_idx, gen_perm
+from sort_network.SwapData import SwapData
+from sort_network.sort_network_data import (
     swap_data,
     swap_data_2x,
     swap_data_already_sorted_32_32,

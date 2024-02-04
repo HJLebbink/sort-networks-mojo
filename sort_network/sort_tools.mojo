@@ -1,6 +1,7 @@
 from testing import assert_true
-from sort_network_data import swap_data
-from SwapData import Layer, SwapData
+
+from sort_network.sort_network_data import swap_data
+from sort_network.SwapData import Layer, SwapData
 
 
 fn gen_merge_mask[

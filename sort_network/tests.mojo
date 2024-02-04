@@ -1,7 +1,7 @@
 from algorithm.sort import sort
 
-from sort_network import sn_idx, sn
-from test_tools import gen_random_SIMD
+from sort_network.sort_network import sn_idx, sn
+from sort_network.test_tools import gen_random_SIMD
 
 
 fn test_sort():

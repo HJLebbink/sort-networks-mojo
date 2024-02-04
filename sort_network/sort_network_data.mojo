@@ -1,4 +1,4 @@
-from SwapData import Layer, SwapData
+from sort_network.SwapData import Layer, SwapData
 
 
 # join_swap_data joins two swap data's into one sorting network.

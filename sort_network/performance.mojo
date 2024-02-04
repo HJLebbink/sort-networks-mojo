@@ -3,18 +3,18 @@ from algorithm.sort import sort
 from time import time_function, now
 from random import random_ui64
 
-from sort_network import (
+from sort_network.sort_network import (
     sn,
     sn_2x_interleave,
     sn_2x_parallel,
 )
-from test_tools import (
+from sort_network.test_tools import (
     gen_random_SIMD,
     gen_random_vec,
     gen_random_pointer,
     gen_random_DTypePointer,
 )
-from sort_network_ml import sn_ml_4xN
+from sort_network.sort_network_ml import sn_ml_4xN
 
 
 fn load_file(filename: StringLiteral) -> String:

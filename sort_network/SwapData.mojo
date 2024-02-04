@@ -1,5 +1,5 @@
 from collections.vector import DynamicVector
-from Layer import Layer
+from sort_network.Layer import Layer
 
 
 # A sorting network consists of a collection of compare/exchange elements (tuples) ordered in layers
