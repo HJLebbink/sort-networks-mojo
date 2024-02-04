@@ -183,19 +183,19 @@ fn main():
     # test_netw_SIMD_sort[DType.int32, 16, True]()
     # test_netw_SIMD_sort[DType.int32, 32, True]()
     # test_netw_SIMD_sort[DType.int32, 64, True]()
-    # test_netw_SIMD_sort[DType.int32, 128, True]()
+    test_netw_SIMD_sort[DType.int32, 128, True]()
 
     # test_netw_SIMD_sort[DType.int16, 8, True]()
     # test_netw_SIMD_sort[DType.int16, 16, True]()
-    # test_netw_SIMD_sort[DType.int18, 32, True]()
+    # test_netw_SIMD_sort[DType.int16, 32, True]()
     # test_netw_SIMD_sort[DType.int16, 64, True]()
     # test_netw_SIMD_sort[DType.int16, 128, True]()
 
-    # test_netw_SIMD_sort[DType.uint8, 8, True]()
-    # test_netw_SIMD_sort[DType.uint8, 16, True]()
-    # test_netw_SIMD_sort[DType.uint8, 32, True]()
-    # test_netw_SIMD_sort[DType.uint8, 64, True]()
-    # test_netw_SIMD_sort[DType.uint8, 128, True]()
+    # test_netw_SIMD_sort[DType.int8, 8, True]()   #6.5ns
+    # test_netw_SIMD_sort[DType.int8, 16, True]()  #11 ns
+    # test_netw_SIMD_sort[DType.int8, 32, True]()  #32 ns  XX
+    # test_netw_SIMD_sort[DType.int8, 64, True]()  #32 ns
+    # test_netw_SIMD_sort[DType.int8, 128, True]() #53 ns
 
     # test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
     # test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
@@ -203,7 +203,7 @@ fn main():
     # test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    test_performance1(1000, 1000)
+    #test_performance1(1000, 1000)
     # test_performance2(1000, 1000)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
