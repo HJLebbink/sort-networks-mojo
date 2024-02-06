@@ -111,6 +111,17 @@ fn swap_data_8x8() -> SwapData:
 
 
 # chanels 0..7 are already sorted, and 8..15 are also already sorted
+fn swap_data_already_sorted_4_4() -> SwapData:
+    var result = SwapData(8, 3)
+    # fmt: off
+    result.add_layer(0, VariadicList((0,4),(1,5),(2,6),(3,7)))
+    result.add_layer(1, VariadicList((2,4),(3,5)))
+    result.add_layer(2, VariadicList((1,2),(3,4),(5,6)))
+    # fmt: on
+    return result
+
+
+# chanels 0..7 are already sorted, and 8..15 are also already sorted
 fn swap_data_already_sorted_8_8() -> SwapData:
     var result = SwapData(16, 4)
     # fmt: off

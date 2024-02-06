@@ -45,7 +45,7 @@ fn main():
     # sn.test_netw_SIMD_sort[DType.int32, 64, True]()
     # sn.test_netw_SIMD_sort[DType.int32, 128, True]()
 
-    sn.test_netw_SIMD_sort[DType.int16, 8, True]()
+    # sn.test_netw_SIMD_sort[DType.int16, 8, True]()
     # sn.test_netw_SIMD_sort[DType.int16, 16, True]()
     # sn.test_netw_SIMD_sort[DType.int16, 32, True]()
     # sn.test_netw_SIMD_sort[DType.int16, 64, True]()
@@ -63,8 +63,8 @@ fn main():
     # sn.test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # sn.test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    # sn.test_performance1(1000, 1000)
-    # sn.test_performance2(1000, 1000)
+    sn.test_performance1(10000, 100)
+    # sn.test_performance2(10000, 100)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
     # sn.test_netw_SIMD_sort[DType.uint32, 16, True]()

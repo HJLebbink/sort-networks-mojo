@@ -14,7 +14,7 @@ from sort_network.test_tools import (
     gen_random_pointer,
     gen_random_DTypePointer,
 )
-from sort_network.sort_network_ml import sn_ml_4xN
+from sort_network.sort_network_ml import sn_ml_4n, sn_ml_8n
 
 
 fn load_file(filename: StringLiteral) -> String:
@@ -63,13 +63,12 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
             T: DType, channels: Int
         ](n_samples: Int, n_iterations: Int) -> Float32:
             @parameter
-            if channels == 256:
-                return 0
+            if channels == 256 or channels == 512:
+                return -1
             else:
+                var data2 = gen_random_SIMD[T, channels]()
                 var best_time_ms: Int = 1 << 62
                 for sample in range(n_samples):
-                    var data2 = gen_random_SIMD[T, channels]()
-
                     let start_time_ms = now()
                     for i in range(n_iterations):
                         data2 = sn[T, channels](data2)
@@ -82,30 +81,57 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
 
                 return Float32(best_time_ms) / n_iterations
 
-        fn measure_time_netw_sort_SIMD_multi_layer[
+        fn measure_time_netw_sort_SIMD_ml4[
             T: DType, channels: Int
         ](n_samples: Int, n_iterations: Int) -> Float32:
-            var best_time_ms: Int = 1 << 62
-            for sample in range(n_samples):
+            @parameter
+            if channels == 8 or channels == 512:
+                return -1
+            else:
                 var data2 = gen_random_SIMD[T, channels]()
+                var best_time_ms: Int = 1 << 62
+                for sample in range(n_samples):
+                    let start_time_ms = now()
+                    for i in range(n_iterations):
+                        data2 = sn_ml_4n[T, channels, True](data2)
 
-                let start_time_ms = now()
-                for i in range(n_iterations):
-                    data2 = sn_ml_4xN[T, channels, True](data2)
+                    let elapsed_time_ms = now() - start_time_ms
+                    keep(data2)
 
-                let elapsed_time_ms = now() - start_time_ms
-                keep(data2)
+                    if elapsed_time_ms < best_time_ms:
+                        best_time_ms = elapsed_time_ms
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
+                return Float32(best_time_ms) / n_iterations
 
-            return Float32(best_time_ms) / n_iterations
+        fn measure_time_netw_sort_SIMD_ml8[
+            T: DType, channels: Int
+        ](n_samples: Int, n_iterations: Int) -> Float32:
+            @parameter
+            if channels == 8 or channels == 16:
+                return -1
+            else:
+                var data2 = gen_random_SIMD[T, channels]()
+                var best_time_ms: Int = 1 << 62
+                for sample in range(n_samples):
+                    let start_time_ms = now()
+                    for i in range(n_iterations):
+                        data2 = sn_ml_8n[T, channels, True](data2)
+
+                    let elapsed_time_ms = now() - start_time_ms
+                    keep(data2)
+
+                    if elapsed_time_ms < best_time_ms:
+                        best_time_ms = elapsed_time_ms
+
+                return Float32(best_time_ms) / n_iterations
+
+
 
         fn measure_time_netw_sort_generic[
             T: DType
         ](n_samples: Int, n_iterations: Int, channels: Int) -> Float32:
-            if channels == 256:
-                return 0
+            if channels == 256 or channels == 512:
+                return -1
 
             var best_time_ms: Int = 1 << 62
             let buff = DTypePointer[T].aligned_alloc(16, channels * n_iterations)
@@ -140,15 +166,10 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
         result += str(measure_time_netw_sort_SIMD[T, channels](n_samples, n_iterations))
         result += sep
         result += str(measure_time_netw_sort_generic[T](n_samples, n_iterations, channels))
-
-        @parameter
-        if channels == 256 or channels == 128 or channels == 64 or channels == 32:
-            result += sep
-            result += str(
-                measure_time_netw_sort_SIMD_multi_layer[T, channels](
-                    n_samples, n_iterations
-                )
-            )
+        result += sep
+        result += str(measure_time_netw_sort_SIMD_ml4[T, channels](n_samples, n_iterations))
+        result += sep
+        result += str(measure_time_netw_sort_SIMD_ml8[T, channels](n_samples, n_iterations))
         return result
 
     fn test_perf[T: DType](n_samples: Int, n_iterations: Int, name: String):
@@ -158,6 +179,7 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
         print(experiment1[T, 64](n_samples, n_iterations, name, sep))
         print(experiment1[T, 128](n_samples, n_iterations, name, sep))
         print(experiment1[T, 256](n_samples, n_iterations, name, sep))
+        print(experiment1[T, 512](n_samples, n_iterations, name, sep))
         print("")
 
     print(sep + "channels" + sep + "mojo" + sep + "netw_SIMD" + sep + "netw_vec")
@@ -184,9 +206,9 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         fn measure_time_2x_sequential[
             T: DType, channels: Int
         ](samples: Int, n_iterations: Int) -> Float32:
+            var data3 = gen_random_SIMD[T, channels]()
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
-                var data3 = gen_random_SIMD[T, channels]()
                 var data4 = data3
                 let start_time_ms = now()
                 for i in range(n_iterations):
@@ -205,9 +227,9 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         fn measure_time_2x_interleaved[
             T: DType, channels: Int
         ](samples: Int, n_iterations: Int) -> Float32:
+            var data3 = gen_random_SIMD[T, channels]()
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
-                var data3 = gen_random_SIMD[T, channels]()
                 var data4 = data3
                 let start_time_ms = now()
                 for i in range(n_iterations):
@@ -227,9 +249,9 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         fn measure_time_2x_parallel[
             T: DType, channels: Int
         ](samples: Int, n_iterations: Int) -> Float32:
+            var data3 = gen_random_SIMD[T, channels]()
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
-                var data3 = gen_random_SIMD[T, channels]()
                 var data4 = data3
                 let start_time_ms = now()
                 for i in range(n_iterations):

@@ -9,6 +9,7 @@ from sort_network.sort_network_data import (
     swap_data_already_sorted_32_32,
     swap_data_already_sorted_16_16,
     swap_data_already_sorted_8_8,
+    swap_data_already_sorted_4_4,
 )
 
 
@@ -23,157 +24,131 @@ fn sn[
     @parameter
     if n_layers == 1:
         return v0
-
     let v1 = swap_n[T, channels, sd[1], ascending](v0)
 
     @parameter
     if n_layers == 2:
         return v1
-
     let v2 = swap_n[T, channels, sd[2], ascending](v1)
 
     @parameter
     if n_layers == 3:
         return v2
-
     let v3 = swap_n[T, channels, sd[3], ascending](v2)
 
     @parameter
     if n_layers == 4:
         return v3
-
     let v4 = swap_n[T, channels, sd[4], ascending](v3)
 
     @parameter
     if n_layers == 5:
         return v4
-
     let v5 = swap_n[T, channels, sd[5], ascending](v4)
 
     @parameter
     if n_layers == 6:
         return v5
-
     let v6 = swap_n[T, channels, sd[6], ascending](v5)
 
     @parameter
     if n_layers == 7:
         return v6
-
     let v7 = swap_n[T, channels, sd[7], ascending](v6)
 
     @parameter
     if n_layers == 8:
         return v7
-
     let v8 = swap_n[T, channels, sd[8], ascending](v7)
 
     @parameter
     if n_layers == 9:
         return v8
-
     let v9 = swap_n[T, channels, sd[9], ascending](v8)
 
     @parameter
     if n_layers == 10:
         return v9
-
     let v10 = swap_n[T, channels, sd[10], ascending](v9)
 
     @parameter
     if n_layers == 11:
         return v10
-
     let v11 = swap_n[T, channels, sd[11], ascending](v10)
 
     @parameter
     if n_layers == 12:
         return v11
-
     let v12 = swap_n[T, channels, sd[12], ascending](v11)
 
     @parameter
     if n_layers == 13:
         return v12
-
     let v13 = swap_n[T, channels, sd[13], ascending](v12)
 
     @parameter
     if n_layers == 14:
         return v13
-
     let v14 = swap_n[T, channels, sd[14], ascending](v13)
 
     @parameter
     if n_layers == 15:
         return v14
-
     let v15 = swap_n[T, channels, sd[15], ascending](v14)
 
     @parameter
     if n_layers == 16:
         return v15
-
     let v16 = swap_n[T, channels, sd[16], ascending](v15)
 
     @parameter
     if n_layers == 17:
         return v16
-
     let v17 = swap_n[T, channels, sd[17], ascending](v16)
 
     @parameter
     if n_layers == 18:
         return v17
-
     let v18 = swap_n[T, channels, sd[18], ascending](v17)
 
     @parameter
     if n_layers == 19:
         return v18
-
     let v19 = swap_n[T, channels, sd[19], ascending](v18)
 
     @parameter
     if n_layers == 20:
         return v19
-
     let v20 = swap_n[T, channels, sd[20], ascending](v19)
 
     @parameter
     if n_layers == 21:
         return v20
-
     let v21 = swap_n[T, channels, sd[21], ascending](v20)
 
     @parameter
     if n_layers == 22:
         return v21
-
     let v22 = swap_n[T, channels, sd[22], ascending](v21)
 
     @parameter
     if n_layers == 23:
         return v22
-
     let v23 = swap_n[T, channels, sd[23], ascending](v22)
 
     @parameter
     if n_layers == 24:
         return v23
-
     let v24 = swap_n[T, channels, sd[24], ascending](v23)
 
     @parameter
     if n_layers == 25:
         return v24
-
     let v25 = swap_n[T, channels, sd[25], ascending](v24)
 
     @parameter
     if n_layers == 26:
         return v25
-
     let v26 = swap_n[T, channels, sd[26], ascending](v25)
 
     @parameter
@@ -262,7 +237,7 @@ fn sn_internal_CRASHES[
 # sort SIMD v, and apply the same reodering of v to idx
 @always_inline
 fn sn_idx[
-    T1: DType, T2: DType, channels: Int, ascending: Bool = True
+    T1: DType, T2: DType, channels: Int, ascending: Bool
 ](v: SIMD[T1, channels], idx: SIMD[T2, channels]) -> (
     SIMD[T1, channels],
     SIMD[T2, channels],
@@ -756,13 +731,20 @@ fn sn_2x_parallel[
     return va, vb
 
 
-# sorting network multi-layer 4N: divide channels in two; and use sorting network 4
+# sorting network for merging: upper and lower half of channels are already sorted
 @always_inline
-fn sn_ml_4n[
+fn sn_merge[
     T: DType, channels: Int, ascending: Bool
 ](v: SIMD[T, channels]) -> SIMD[T, channels]:
     @parameter
-    if channels == 16:
+    if channels == 8:
+        alias sd: SwapData = swap_data_already_sorted_4_4()
+        constrained[3 == sd.n_layers]()
+        let v0 = swap_n[T, channels, sd[0], ascending](v)
+        let v1 = swap_n[T, channels, sd[1], ascending](v0)
+        let v2 = swap_n[T, channels, sd[2], ascending](v1)
+        return v2
+    elif channels == 16:
         alias sd: SwapData = swap_data_already_sorted_8_8()
         constrained[4 == sd.n_layers]()
         let v0 = swap_n[T, channels, sd[0], ascending](v)
