@@ -15,7 +15,7 @@ fn main():
 
     # sn.test_netw_SIMD_sort_multi_layer[DType.uint8, True]()
 
-    # sn.test_netw_SIMD_sort[DType.uint64, 8, True]()
+    sn.test_netw_SIMD_sort[DType.uint64, 8, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 16, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 32, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 64, True]()
@@ -32,6 +32,8 @@ fn main():
     # sn.test_netw_SIMD_sort[DType.float32, 32, True]()
     # sn.test_netw_SIMD_sort[DType.float32, 64, True]()
     # sn.test_netw_SIMD_sort[DType.float32, 128, True]()
+
+    # sn.test_netw_SIMD_sort[DType.float16, 16, True]()
 
     # sn.test_netw_SIMD_sort[DType.bfloat16, 8, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
     # sn.test_netw_SIMD_sort[DType.bfloat16, 16, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
@@ -63,7 +65,7 @@ fn main():
     # sn.test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # sn.test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    sn.test_performance1(10000, 100)
+    # sn.test_performance1(10000, 100)
     # sn.test_performance2(10000, 100)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 

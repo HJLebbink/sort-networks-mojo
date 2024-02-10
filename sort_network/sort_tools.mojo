@@ -40,7 +40,7 @@ fn swap_n[
     T: DType, width: Int, swaps: Layer, ascending: Bool
 ](v: SIMD[T, width]) -> SIMD[T, width]:
     alias permutations = gen_perm[swaps, width]()
-    constrained[len(permutations) == width]()
+    constrained[len(permutations) == width, "invalid number of permutations"]()
     alias merge_mask = gen_merge_mask[swaps, width, ascending]()
     let v2 = my_shuffle[T, width, permutations](v)
     return merge_mask.select(v.min(v2), v.max(v2))
