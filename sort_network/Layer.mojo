@@ -1,5 +1,8 @@
+from collections.vector import DynamicVector
+
 struct Layer(CollectionElement, Sized, Stringable):
-    alias LayerData = SIMD[DType.uint16, 2]
+    alias T = DType.uint16
+    alias LayerData = SIMD[Self.T, 2]
     var data: DynamicVector[Self.LayerData]
 
     @staticmethod
@@ -9,10 +12,14 @@ struct Layer(CollectionElement, Sized, Stringable):
         for i in range(len(layer1.data)):
             result.data.push_back(layer1.data[i])
         for i in range(len(layer2.data)):
-            let min: SIMD[DType.uint16, 1] = layer2.get_min(i) + width1
-            let max: SIMD[DType.uint16, 1] = layer2.get_max(i) + width1
-            result.data.push_back(SIMD[DType.uint16, 2](min, max))
+            let min: SIMD[Self.T, 1] = layer2.get_min(i) + width1
+            let max: SIMD[Self.T, 1] = layer2.get_max(i) + width1
+            result.data.push_back(Self.LayerData(min, max))
         return result ^
+
+    @always_inline("nodebug")
+    fn __init__(inout self):
+        self.data = DynamicVector[Self.LayerData]()
 
     @always_inline("nodebug")
     fn __init__(inout self, v: VariadicList[Tuple[Int, Int]]):
@@ -21,13 +28,13 @@ struct Layer(CollectionElement, Sized, Stringable):
             let v1 = v[i].get[0, Int]()
             let v2 = v[i].get[1, Int]()
             if v1 < v2:
-                self.data.push_back(SIMD[DType.uint16, 2](v1, v2))
+                self.data.push_back(Self.LayerData(v1, v2))
             else:
-                self.data.push_back(SIMD[DType.uint16, 2](v2, v1))
+                self.data.push_back(Self.LayerData(v2, v1))
 
     @always_inline("nodebug")
-    fn __init__(inout self):
-        self.data = DynamicVector[Self.LayerData]()
+    fn __init__(inout self, owned v: DynamicVector[Self.LayerData]):
+        self.data = v ^
 
     # trait CollectionElement
     @always_inline("nodebug")

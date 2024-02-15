@@ -3,8 +3,9 @@ from algorithm.sort import sort
 from time import now
 from benchmark import keep
 
+from sort_network.SwapData import SwapData
 import sort_network as sn
-
+import sort_network.ktop as kt
 
 fn main():
     let start_time_ns = now()
@@ -15,7 +16,7 @@ fn main():
 
     # sn.test_netw_SIMD_sort_multi_layer[DType.uint8, True]()
 
-    sn.test_netw_SIMD_sort[DType.uint64, 8, True]()
+    # sn.test_netw_SIMD_sort[DType.uint64, 8, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 16, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 32, True]()
     # sn.test_netw_SIMD_sort[DType.uint64, 64, True]()
@@ -79,6 +80,17 @@ fn main():
         print(str(sd1))
         alias sd2 = sn.join_swap_data[sd1, sd1]()
         print(str(sd2))
+
+    @parameter
+    if True:
+        alias channels = 4
+        alias sd1: SwapData = sn.swap_data[channels]()
+        print(str(sd1))
+        #let sd2: SwapData = kt.swap_data_ktop[channels, 4, True]()
+        #print(str(sd2))
+
+
+
 
     @parameter
     if False:
