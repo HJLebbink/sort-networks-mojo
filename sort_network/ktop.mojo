@@ -6,6 +6,15 @@ from sort_network.SwapData import SwapData
 from sort_network.sort_network_data import swap_data
 import sort_network.sort_tools
 
+fn print_linear(d: DynamicVector[SIMD[DType.uint16, 2]]): 
+    for i in range(len(d)):
+        print_no_newline("(")
+        print_no_newline(d[i][0])
+        print_no_newline(",")
+        print_no_newline(d[i][1])
+        print_no_newline("),")
+    print("")
+
 fn keep_ktop[channels: Int, k: Int, ascending: Bool](d: DynamicVector[SIMD[DType.uint16, 2]]) -> DynamicVector[SIMD[DType.uint16, 2]]:
     var result = DynamicVector[SIMD[DType.uint16, 2]]()
     for p in range (len(d)):
