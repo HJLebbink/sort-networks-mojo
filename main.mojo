@@ -6,6 +6,8 @@ from benchmark import keep
 from sort_network.SwapData import SwapData
 import sort_network as sn
 import sort_network.ktop as kt
+import sort_network.sort_tools
+
 
 fn main():
     let start_time_ns = now()
@@ -83,13 +85,10 @@ fn main():
 
     @parameter
     if True:
-        alias channels = 4
-        alias sd1: SwapData = sn.swap_data[channels]()
-        print(str(sd1))
-        #let sd2: SwapData = kt.swap_data_ktop[channels, 4, True]()
-        #print(str(sd2))
-
-
+        alias sd1 = sort_tools.layers_to_linear(sn.swap_data[8]())
+        alias sd2 = sort_tools.linear_add(sort_tools.layers_to_linear(sn.swap_data[56]()), 8)
+        sort_tools.linear_print(sd1)
+        sort_tools.linear_print(sd2)
 
 
     @parameter
@@ -101,14 +100,7 @@ fn main():
 
     @parameter
     if False:  # print a network as a sequence of CE's
-        let sd = sn.swap_data[128]()
-        for i in range(sd.n_layers):
-            for j in range(len(sd[i])):
-                print_no_newline("(")
-                print_no_newline(sd[i].get_min(j))
-                print_no_newline(",")
-                print_no_newline(sd[i].get_max(j))
-                print_no_newline("),")
+        sort_tools.linear_print(sort_tools.layers_to_linear(sn.swap_data[128]()))
 
     @parameter
     if False:  # print code

@@ -1,4 +1,7 @@
 from testing import assert_true
+from algorithm.sort import sort
+from math import max
+from collections.dict import Dict, KeyElement
 
 from sort_network.sort_network_data import swap_data
 from sort_network.SwapData import Layer, SwapData
@@ -57,6 +60,95 @@ fn swap_idx[
     let change_mask = data_sorted != data
     let idx_shuffled = my_shuffle[T2, width, permutations](idx)
     return (data_sorted, change_mask.select(idx_shuffled, idx))
+
+@value 
+struct IntKey(KeyElement):
+    var d: Int
+
+    fn __init__(inout self, d: Int):
+        self.d = d
+
+    fn __hash__(self) -> Int:
+        return self.d
+
+    fn __eq__(self, other: Self) -> Bool:
+        return self.d == other.d
+
+
+# Converts a linear network representation as pairs into a layer representation.
+fn linear_to_layers[](
+    linear_lst: DynamicVector[SIMD[DType.uint16, 2]]
+) -> SwapData:
+
+    var tmp = DynamicVector[DynamicVector[Int]]()
+    var lbl_state = Dict[IntKey, Int]()
+
+    var channels = 0
+
+    for p in range (len(linear_lst)):
+        let x = linear_lst[p]
+        let i: Int = x[0].to_int()
+        let j: Int = x[1].to_int()
+
+        if not lbl_state.__contains__(IntKey(i)):
+            lbl_state[i] = 0
+        if not lbl_state.__contains__(IntKey(j)):
+            lbl_state[j] = 0
+
+        let k: Int
+        try:
+            k = max(lbl_state.__getitem__(i), lbl_state.__getitem__(j))
+        except:
+            print("ERROR: linear_to_layers")
+            k = 0
+
+        if k >= len(tmp):
+            tmp.push_back(DynamicVector[Int]())
+
+        tmp[k].push_back((i << 16) | j)
+        lbl_state[i] = lbl_state[j] = k + 1
+
+    for p in range (len(tmp)):
+        sort(tmp[p])
+
+
+    let n_layers = len(tmp)
+
+    var result = SwapData(channels, n_layers)
+    for p in range (len(tmp)):
+        let org = tmp[p]
+        var new = DynamicVector[Layer.LayerData]()
+        for k in range(len(org)):
+            let x: SIMD[DType.uint16, 1] = org[k] >> 16
+            let y: SIMD[DType.uint16, 1] = org[k] & 0xFFFF
+            new.push_back(SIMD[DType.uint16, 2](x, y))
+        result.add_layer_l(new)
+    return result
+
+
+fn layers_to_linear(sd: SwapData) -> DynamicVector[SIMD[DType.uint16, 2]]:
+    var result = DynamicVector[SIMD[DType.uint16, 2]]()
+    for p in range (sd.count_layers()):
+        let layer: Layer = sd[p]
+        for k in range(len(layer.data)):
+            result.push_back(layer.data[k])
+    return result
+
+fn linear_add(a: DynamicVector[SIMD[DType.uint16, 2]], b: Int) -> DynamicVector[SIMD[DType.uint16, 2]]:
+    var result = a
+    for i in range (len(a)):
+        result[i] += b
+    return result
+
+fn linear_print(a: DynamicVector[SIMD[DType.uint16, 2]]):
+    for i in range(len(a)):
+        print_no_newline("(")
+        print_no_newline(a[i][0])
+        print_no_newline(",")
+        print_no_newline(a[i][1])
+        print_no_newline("),")
+
+
 
 
 fn test_perm_code():
