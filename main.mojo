@@ -7,6 +7,7 @@ from sort_network.SwapData import SwapData
 import sort_network as sn
 import sort_network.ktop as kt
 import sort_network.sort_tools
+import sort_network.batcher_odd_even_merging;
 
 
 fn main():
@@ -78,24 +79,31 @@ fn main():
 
     @parameter
     if False:
-        alias sd1 = sn.swap_data[8]()
+        alias sd1: SwapData = sn.swap_data[8]()
         print(str(sd1))
-        alias sd2 = sn.join_swap_data[sd1, sd1]()
+        alias sd2: SwapData = sn.join_swap_data[sd1, sd1]()
         print(str(sd2))
 
     @parameter
-    if True:
+    if False:
         alias sd1 = sort_tools.layers_to_linear(sn.swap_data[8]())
         alias sd2 = sort_tools.linear_add(sort_tools.layers_to_linear(sn.swap_data[56]()), 8)
         sort_tools.linear_print(sd1)
         sort_tools.linear_print(sd2)
 
+    @parameter
+    if True:
+        alias channels = 128
+        alias sd1: SwapData = sn.swap_data[channels]()
+        print(str(sd1))
+        let sd2: SwapData = batcher_odd_even_merging.batcher_odd_even_merge_network[channels]()
+        print(str(sd2))
 
     @parameter
     if False:
-        let sd = sn.swap_data[64]()
+        let sd: SwapData = sn.swap_data[64]()
         print(str(sd))
-        let sd_2x = sn.join_swap_data(sd, sd)
+        let sd_2x: SwapData = sn.join_swap_data(sd, sd)
         print(sd_2x.to_code())
 
     @parameter
