@@ -1,5 +1,4 @@
-from collections.vector import DynamicVector, InlinedFixedVector
-from algorithm.sort import sort
+from collections import List, InlinedFixedVector
 from time import now
 from benchmark import keep
 
@@ -11,7 +10,7 @@ import sort_network.batcher_odd_even_merging;
 
 
 fn main():
-    let start_time_ns = now()
+    var CONST_start_time_ns = now()
 
     # sn.test_perm_code()
     # sn.test_sort()
@@ -69,7 +68,7 @@ fn main():
     # sn.test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
     # sn.test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    # sn.test_performance1(10000, 100)
+    sn.test_performance1(10000, 100)
     # sn.test_performance2(10000, 100)
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
@@ -92,18 +91,18 @@ fn main():
         sort_tools.linear_print(sd2)
 
     @parameter
-    if True:
+    if False: # crash
         alias channels = 128
         alias sd1: SwapData = sn.swap_data[channels]()
         print(str(sd1))
-        let sd2: SwapData = batcher_odd_even_merging.batcher_odd_even_merge_network[channels]()
+        alias sd2: SwapData = batcher_odd_even_merging.batcher_odd_even_merge_network[channels]()
         print(str(sd2))
 
     @parameter
     if False:
-        let sd: SwapData = sn.swap_data[64]()
+        alias sd: SwapData = sn.swap_data[64]()
         print(str(sd))
-        let sd_2x: SwapData = sn.join_swap_data(sd, sd)
+        alias sd_2x: SwapData = sn.join_swap_data[sd, sd]()
         print(sd_2x.to_code())
 
     @parameter
@@ -141,9 +140,9 @@ fn main():
             print("        return v"+str(i+1)+".slice[channels](0), v"+str(i+1)+".slice[channels](channels)")
             # fmt: on
 
-    let elapsed_time_ns = now() - start_time_ns
-    print_no_newline("Elapsed time " + str(elapsed_time_ns) + " ns")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000) + " μs")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000_000) + " ms")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 1_000_000_000) + " s")
-    print_no_newline(" = " + str(Float32(elapsed_time_ns) / 60_000_000_000) + " min\n")
+    var CONST_elapsed_time_ns = now() - CONST_start_time_ns
+    print("Elapsed time " + str(CONST_elapsed_time_ns) + " ns", end="")
+    print(" = " + str(Float32(CONST_elapsed_time_ns) / 1_000) + " μs", end="")
+    print(" = " + str(Float32(CONST_elapsed_time_ns) / 1_000_000) + " ms", end="")
+    print(" = " + str(Float32(CONST_elapsed_time_ns) / 1_000_000_000) + " s", end="")
+    print(" = " + str(Float32(CONST_elapsed_time_ns) / 60_000_000_000) + "min")

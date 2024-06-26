@@ -1,5 +1,5 @@
 from benchmark import keep
-from algorithm.sort import sort
+#from algorithm.sort import sort
 from time import time_function, now
 from random import random_ui64
 
@@ -36,27 +36,28 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
             T: DType
         ](n_samples: Int, n_iterations: Int, channels: Int) -> Float32:
             var best_time_ms: Int = 1 << 62
-            let buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(
-                16, channels * n_iterations
+            #let CONST_buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].aligned_alloc(
+            var CONST_buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].alloc(
+                channels * n_iterations
             )
             for iteration in range(channels * n_iterations):
-                buff[iteration] = random_ui64(0, 100).cast[T]()
+                CONST_buff[iteration] = random_ui64(0, 100).cast[T]()
 
             for sample in range(n_samples):
-                var ptr = buff
-                let start_time_ms = now()
+                var ptr = CONST_buff
+                var CONST_n_layerstart_time_ms = now()
 
                 for iteration in range(n_iterations):
-                    # sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
+                    # sort[type: DType](inout CONST_buff: Pointer[SIMD[type, 1], 0], len: Int)
                     sort[T](ptr, channels)
                     ptr += channels
 
-                let elapsed_time_ms = now() - start_time_ms
+                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
-            keep(buff)
-            buff.free()
+                if CONST_elapsed_time_ms < best_time_ms:
+                    best_time_ms = CONST_elapsed_time_ms
+            keep(CONST_buff)
+            CONST_buff.free()
             return Float32(best_time_ms) / n_iterations
 
         fn measure_time_netw_sort_SIMD[
@@ -69,15 +70,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 var data2 = gen_random_SIMD[T, channels]()
                 var best_time_ms: Int = 1 << 62
                 for sample in range(n_samples):
-                    let start_time_ms = now()
+                    var CONST_n_layerstart_time_ms = now()
                     for i in range(n_iterations):
                         data2 = sn[T, channels](data2)
 
-                    let elapsed_time_ms = now() - start_time_ms
+                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                     keep(data2)
 
-                    if elapsed_time_ms < best_time_ms:
-                        best_time_ms = elapsed_time_ms
+                    if CONST_elapsed_time_ms < best_time_ms:
+                        best_time_ms = CONST_elapsed_time_ms
 
                 return Float32(best_time_ms) / n_iterations
 
@@ -91,15 +92,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 var data2 = gen_random_SIMD[T, channels]()
                 var best_time_ms: Int = 1 << 62
                 for sample in range(n_samples):
-                    let start_time_ms = now()
+                    var CONST_n_layerstart_time_ms = now()
                     for i in range(n_iterations):
                         data2 = sn_ml_4n[T, channels, True](data2)
 
-                    let elapsed_time_ms = now() - start_time_ms
+                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                     keep(data2)
 
-                    if elapsed_time_ms < best_time_ms:
-                        best_time_ms = elapsed_time_ms
+                    if CONST_elapsed_time_ms < best_time_ms:
+                        best_time_ms = CONST_elapsed_time_ms
 
                 return Float32(best_time_ms) / n_iterations
 
@@ -113,15 +114,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 var data2 = gen_random_SIMD[T, channels]()
                 var best_time_ms: Int = 1 << 62
                 for sample in range(n_samples):
-                    let start_time_ms = now()
+                    var CONST_n_layerstart_time_ms = now()
                     for i in range(n_iterations):
                         data2 = sn_ml_8n[T, channels, True](data2)
 
-                    let elapsed_time_ms = now() - start_time_ms
+                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                     keep(data2)
 
-                    if elapsed_time_ms < best_time_ms:
-                        best_time_ms = elapsed_time_ms
+                    if CONST_elapsed_time_ms < best_time_ms:
+                        best_time_ms = CONST_elapsed_time_ms
 
                 return Float32(best_time_ms) / n_iterations
 
@@ -134,27 +135,29 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 return -1
 
             var best_time_ms: Int = 1 << 62
-            let buff = DTypePointer[T].aligned_alloc(16, channels * n_iterations)
+
+            #var CONST_buff = DTypePointer[T].aligned_alloc(16, channels * n_iterations)
+            var CONST_buff = DTypePointer[T].alloc(channels * n_iterations)
 
             for sample in range(n_samples):
                 for iteration in range(channels * n_iterations):
-                    buff[iteration] = random_ui64(0, 100).cast[T]()
+                    CONST_buff[iteration] = random_ui64(0, 100).cast[T]()
 
-                var ptr = buff
-                let start_time_ms = now()
+                var ptr = CONST_buff
+                var CONST_n_layerstart_time_ms = now()
 
                 for iteration in range(n_iterations):
-                    # sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)
+                    # sort[type: DType](inout CONST_buff: Pointer[SIMD[type, 1], 0], len: Int)
                     sn[T](ptr, channels)
                     ptr += channels
 
-                let elapsed_time_ms = now() - start_time_ms
+                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
+                if CONST_elapsed_time_ms < best_time_ms:
+                    best_time_ms = CONST_elapsed_time_ms
 
-            keep(buff)
-            buff.free()
+            keep(CONST_buff)
+            CONST_buff.free()
             return Float32(best_time_ms) / n_iterations
 
         var result = name
@@ -210,17 +213,17 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
                 var data4 = data3
-                let start_time_ms = now()
+                var CONST_n_layerstart_time_ms = now()
                 for i in range(n_iterations):
                     data3 = sn[T, channels, True](data3)
                     data4 = sn[T, channels, True](data4)
 
-                let elapsed_time_ms = now() - start_time_ms
+                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                 keep(data3)
                 keep(data4)
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
+                if CONST_elapsed_time_ms < best_time_ms:
+                    best_time_ms = CONST_elapsed_time_ms
 
             return Float32(best_time_ms) / n_iterations
 
@@ -231,18 +234,18 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
                 var data4 = data3
-                let start_time_ms = now()
+                var CONST_n_layerstart_time_ms = now()
                 for i in range(n_iterations):
                     data3, data4 = sn_2x_interleave[T, T, channels, True, True](
                         data3, data4
                     )
 
-                let elapsed_time_ms = now() - start_time_ms
+                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                 keep(data3)
                 keep(data4)
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
+                if CONST_elapsed_time_ms < best_time_ms:
+                    best_time_ms = CONST_elapsed_time_ms
 
             return Float32(best_time_ms) / n_iterations
 
@@ -253,16 +256,16 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
             var best_time_ms: Int = 1 << 62
             for sample in range(samples):
                 var data4 = data3
-                let start_time_ms = now()
+                var CONST_n_layerstart_time_ms = now()
                 for i in range(n_iterations):
                     data3, data4 = sn_2x_parallel[T, channels, True](data3, data4)
 
-                let elapsed_time_ms = now() - start_time_ms
+                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
                 keep(data3)
                 keep(data4)
 
-                if elapsed_time_ms < best_time_ms:
-                    best_time_ms = elapsed_time_ms
+                if CONST_elapsed_time_ms < best_time_ms:
+                    best_time_ms = CONST_elapsed_time_ms
 
             return Float32(best_time_ms) / n_iterations
 

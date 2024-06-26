@@ -1,39 +1,45 @@
-from collections.vector import DynamicVector
+from collections.list import List
+
+@value
+@register_passable
+struct SwapPair: # swap pair
+    var x: Int
+    var y: Int
 
 struct Layer(CollectionElement, Sized, Stringable):
     alias T = DType.uint16
     alias LayerData = SIMD[Self.T, 2]
-    var data: DynamicVector[Self.LayerData]
+    var data: List[Self.LayerData]
 
     @staticmethod
     @always_inline("nodebug")
     fn merge(layer1: Self, layer2: Self, width1: Int) -> Self:
         var result = Self()
         for i in range(len(layer1.data)):
-            result.data.push_back(layer1.data[i])
+            result.data.append(layer1.data[i])
         for i in range(len(layer2.data)):
-            let min: SIMD[Self.T, 1] = layer2.get_min(i) + width1
-            let max: SIMD[Self.T, 1] = layer2.get_max(i) + width1
-            result.data.push_back(Self.LayerData(min, max))
+            var min: Scalar[Self.T] = layer2.get_min(i) + width1
+            var max: Scalar[Self.T] = layer2.get_max(i) + width1
+            result.data.append(Self.LayerData(min, max))
         return result ^
 
     @always_inline("nodebug")
     fn __init__(inout self):
-        self.data = DynamicVector[Self.LayerData]()
+        self.data = List[Self.LayerData]()
 
     @always_inline("nodebug")
-    fn __init__(inout self, v: VariadicList[Tuple[Int, Int]]):
-        self.data = DynamicVector[Self.LayerData]()
-        for i in range(v.__len__()):
-            let v1 = v[i].get[0, Int]()
-            let v2 = v[i].get[1, Int]()
+    fn __init__(inout self, v: List[SwapPair]):
+        self.data = List[Self.LayerData]()
+        for i in range(len(v)):
+            var v1 = v[i].x
+            var v2 = v[i].y
             if v1 < v2:
-                self.data.push_back(Self.LayerData(v1, v2))
+                self.data.append(Self.LayerData(v1, v2))
             else:
-                self.data.push_back(Self.LayerData(v2, v1))
+                self.data.append(Self.LayerData(v2, v1))
 
     @always_inline("nodebug")
-    fn __init__(inout self, owned v: DynamicVector[Self.LayerData]):
+    fn __init__(inout self, owned v: List[Self.LayerData]):
         self.data = v ^
 
     # trait CollectionElement
@@ -55,14 +61,14 @@ struct Layer(CollectionElement, Sized, Stringable):
     @always_inline("nodebug")
     fn __str__(self) -> String:
         var result: String = ""
-        let s = len(self.data)
+        var s = len(self.data)
         if s > 0:
             for i in range(s - 1):
-                let min = self.get_min(i)
-                let max = self.get_max(i)
+                var min = self.get_min(i)
+                var max = self.get_max(i)
                 result += "(" + str(min) + "," + str(max) + "),"
-            let min = self.get_min(s - 1)
-            let max = self.get_max(s - 1)
+            var min = self.get_min(s - 1)
+            var max = self.get_max(s - 1)
             result += "(" + str(min) + "," + str(max) + ")"
         return result
 
@@ -73,8 +79,8 @@ struct Layer(CollectionElement, Sized, Stringable):
 
     @always_inline("nodebug")
     fn get_min(self, idx: Int) -> Int:
-        return self.data[idx][0].to_int()
+        return int(self.data[idx][0])
 
     @always_inline("nodebug")
     fn get_max(self, idx: Int) -> Int:
-        return self.data[idx][1].to_int()
+        return int(self.data[idx][1])

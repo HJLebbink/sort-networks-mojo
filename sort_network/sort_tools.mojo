@@ -1,6 +1,4 @@
 from testing import assert_true
-from algorithm.sort import sort
-from math import max
 from collections.dict import Dict, KeyElement
 
 from sort_network.sort_network_data import swap_data
@@ -21,19 +19,19 @@ fn gen_merge_mask[
     return result
 
 
-# generate a index permutation (of size width) from the provided swaps in Layer
 fn gen_perm[swaps: Layer, width: Int]() -> StaticIntTuple[width]:
+    """Generate a index permutation (of size width) from the provided swaps in Layer."""
     var result = StaticIntTuple[width]()
     for i in range(width):
         result[i] = i
 
     for i in range(len(swaps)):
-        let from_ = swaps.get_min(i)
-        let to_ = swaps.get_max(i)
+        var CONST_from_ = swaps.get_min(i)
+        var CONST_to_ = swaps.get_max(i)
 
-        let tmp = result[to_]
-        result[to_] = result[from_]
-        result[from_] = tmp
+        var CONST_tmp = result[CONST_to_]
+        result[CONST_to_] = result[CONST_from_]
+        result[CONST_from_] = CONST_tmp
 
     return result
 
@@ -45,8 +43,8 @@ fn swap_n[
     alias permutations = gen_perm[swaps, width]()
     constrained[len(permutations) == width, "invalid number of permutations"]()
     alias merge_mask = gen_merge_mask[swaps, width, ascending]()
-    let v2 = my_shuffle[T, width, permutations](v)
-    return merge_mask.select(v.min(v2), v.max(v2))
+    var CONST_v2 = my_shuffle[T, width, permutations](v)
+    return merge_mask.select(v.min(CONST_v2), v.max(CONST_v2))
 
 
 @always_inline
@@ -54,14 +52,14 @@ fn swap_idx[
     T1: DType, T2: DType, width: Int, swaps: Layer, ascending: Bool
 ](t: Tuple[SIMD[T1, width], SIMD[T2, width]]) -> (SIMD[T1, width], SIMD[T2, width]):
     alias permutations = gen_perm[swaps, width]()
-    let data = t.get[0, SIMD[T1, width]]()
-    let idx = t.get[1, SIMD[T2, width]]()
-    let data_sorted = swap_n[T1, width, swaps, ascending](data)
-    let change_mask = data_sorted != data
-    let idx_shuffled = my_shuffle[T2, width, permutations](idx)
-    return (data_sorted, change_mask.select(idx_shuffled, idx))
+    let CONST_data = t.get[0, SIMD[T1, width]]()
+    let CONST_idx = t.get[1, SIMD[T2, width]]()
+    let CONST_data_sorted = swap_n[T1, width, swaps, ascending](CONST_data)
+    let CONST_change_mask = CONST_data_sorted != CONST_data
+    let CONST_idx_shuffled = my_shuffle[T2, width, permutations](CONST_idx)
+    return (CONST_data_sorted, CONST_change_mask.select(CONST_idx_shuffled, CONST_idx))
 
-@value 
+@value
 struct IntKey(KeyElement):
     var d: Int
 
@@ -74,85 +72,83 @@ struct IntKey(KeyElement):
     fn __eq__(self, other: Self) -> Bool:
         return self.d == other.d
 
+    fn __ne__(self, other: Self) -> Bool:
+        return self.d != other.d
 
-# Converts a linear network representation as pairs into a layer representation.
+
+
 fn linear_to_layers[](
-    linear_lst: DynamicVector[SIMD[DType.uint16, 2]]
+    linear_lst: List[SIMD[DType.uint16, 2]]
 ) -> SwapData:
-
-    var tmp = DynamicVector[DynamicVector[Int]]()
+    """Converts a linear network representation as pairs into a layer representation."""
+   
+    var tmp = List[List[Int]]()
     var lbl_state = Dict[IntKey, Int]()
 
     var channels = 0
 
     for p in range (len(linear_lst)):
-        let x = linear_lst[p]
-        let i: Int = x[0].to_int()
-        let j: Int = x[1].to_int()
+        var CONST_x = linear_lst[p]
+        var CONST_i: Int = int(CONST_x[0])
+        var CONST_j: Int = int(CONST_x[1])
 
-        if not lbl_state.__contains__(IntKey(i)):
-            lbl_state[i] = 0
-        if not lbl_state.__contains__(IntKey(j)):
-            lbl_state[j] = 0
+        if not lbl_state.__contains__(IntKey(CONST_i)):
+            lbl_state[CONST_i] = 0
+        if not lbl_state.__contains__(IntKey(CONST_j)):
+            lbl_state[CONST_j] = 0
 
-        let k: Int
+        var k: Int
         try:
-            k = max(lbl_state.__getitem__(i), lbl_state.__getitem__(j))
+            k = max(lbl_state.__getitem__(CONST_i), lbl_state.__getitem__(CONST_j))
         except:
-            print("ERROR: linear_to_layers")
+            print("ERROR: linear_CONST_to_layers")
             k = 0
 
         if k >= len(tmp):
-            tmp.push_back(DynamicVector[Int]())
+            tmp.append(List[Int]())
 
-        tmp[k].push_back((i << 16) | j)
-        lbl_state[i] = lbl_state[j] = k + 1
+        tmp[k].append((CONST_i << 16) | CONST_j)
+        lbl_state[CONST_i] = lbl_state[CONST_j] = k + 1
 
     for p in range (len(tmp)):
         sort(tmp[p])
 
 
-    let n_layers = len(tmp)
+    var CONST_n_layers = len(tmp)
 
-    var result = SwapData(channels, n_layers)
+    var result = SwapData(channels, CONST_n_layers)
     for p in range (len(tmp)):
-        let org = tmp[p]
-        var new = DynamicVector[Layer.LayerData]()
-        for k in range(len(org)):
-            let x: SIMD[DType.uint16, 1] = org[k] >> 16
-            let y: SIMD[DType.uint16, 1] = org[k] & 0xFFFF
-            new.push_back(SIMD[DType.uint16, 2](x, y))
+        var CONST_org = tmp[p]
+        var new = List[Layer.LayerData]()
+        for k in range(len(CONST_org)):
+            var CONST_x: SIMD[DType.uint16, 1] = CONST_org[k] >> 16
+            var CONST_y: SIMD[DType.uint16, 1] = CONST_org[k] & 0xFFFF
+            new.append(SIMD[DType.uint16, 2](CONST_x, CONST_y))
         result.add_layer_l(new)
     return result
 
 
-fn layers_to_linear(sd: SwapData) -> DynamicVector[SIMD[DType.uint16, 2]]:
-    var result = DynamicVector[SIMD[DType.uint16, 2]]()
+fn layers_to_linear(sd: SwapData) -> List[SIMD[DType.uint16, 2]]:
+    var result = List[SIMD[DType.uint16, 2]]()
     for p in range (sd.count_layers()):
-        let layer: Layer = sd[p]
-        for k in range(len(layer.data)):
-            result.push_back(layer.data[k])
+        var CONST_layer: Layer = sd[p]
+        for k in range(len(CONST_layer.data)):
+            result.append(CONST_layer.data[k])
     return result
 
-fn linear_add(a: DynamicVector[SIMD[DType.uint16, 2]], b: Int) -> DynamicVector[SIMD[DType.uint16, 2]]:
+fn linear_add(a: List[SIMD[DType.uint16, 2]], b: Int) -> List[SIMD[DType.uint16, 2]]:
     var result = a
     for i in range (len(a)):
         result[i] += b
     return result
 
-fn linear_print(a: DynamicVector[SIMD[DType.uint16, 2]]):
+fn linear_print(a: List[SIMD[DType.uint16, 2]]):
     for i in range(len(a)):
-        print_no_newline("(")
-        print_no_newline(a[i][0])
-        print_no_newline(",")
-        print_no_newline(a[i][1])
-        print_no_newline("),")
-
-
+        print("(" + str(a[i][0]) + ","+ str(a[i][1]) + "),", end='')
 
 
 fn test_perm_code():
-    alias swap16 = swap_data[16]()
+    alias swap16 = swap_CONST_data[16]()
 
     alias l1_obs = gen_perm[swap16[0], 16]()
     alias l1_exp = StaticIntTuple[16](

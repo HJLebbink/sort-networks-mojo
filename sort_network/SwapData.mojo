@@ -1,16 +1,15 @@
-from collections.vector import DynamicVector
-from sort_network.Layer import Layer
-
+from collections.list import List
+from sort_network.Layer import Layer, SwapPair
 
 # A sorting network consists of a collection of compare/exchange elements (tuples) ordered in layers
 struct SwapData(Stringable):
-    var data: DynamicVector[Layer]
+    var data: List[Layer]
     var channels: Int
     var n_layers: Int
 
     @always_inline("nodebug")
     fn __init__(inout self, channels: Int, n_layers: Int):
-        self.data = DynamicVector[Layer]()
+        self.data = List[Layer]()
         self.channels = channels
         self.n_layers = n_layers
 
@@ -32,30 +31,30 @@ struct SwapData(Stringable):
     # add a layer of swaps
     @always_inline("nodebug")
     fn add_layer(
-        inout self, layer_id: Int, layer_content: VariadicList[Tuple[Int, Int]]
+        inout self, layer_id: Int, layer_content: List[SwapPair]
     ):
-        let x = Layer(layer_content)
-        self.data.push_back(x ^)
+        var x = Layer(layer_content)
+        self.data.append(x ^)
 
     @always_inline("nodebug")
     fn add_layer_l(inout self, layer: Layer):
-        self.data.push_back(layer)
+        self.data.append(layer)
 
     # trait Stringable
     @always_inline("nodebug")
     fn __str__(self) -> String:
-        let n_layer = str(self.count_layers())
-        let n_ce = str(self.count_ce())
-        var result: String = "Sorting network for ? inputs, " + n_ce + " CEs, " + n_layer + " layers:\n"
+        var CONST_n_layers = str(self.count_layers())
+        var n_ce = str(self.count_ce())
+        var result: String = "Sorting network for ? inputs, " + n_ce + " CEs, " + CONST_n_layers + " layers:\n"
         for i in range(len(self.data)):
             result += str(self.data[i]) + "\n"
         return result
 
     fn to_code(self) -> String:
-        let n_layers = self.count_layers()
+        var CONST_n_layers = self.count_layers()
         # fmt: off
-        var result: String = "var result = SwapData(" + str(self.channels) + ", " + str(n_layers) + ")\n"
-        for i in range(n_layers):
+        var result: String = "var result = SwapData(" + str(self.channels) + ", " + str(CONST_n_layers) + ")\n"
+        for i in range(CONST_n_layers):
             result += "result.add_layer(" + str(i) + ", VariadicList(" + str(self.data[i]) + "))\n"
         return result
         # fmt: on

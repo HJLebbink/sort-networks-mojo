@@ -1,6 +1,5 @@
 from collections.vector import DynamicVector
 
-
 fn my_cast[T: DType, SIZE: Int](v: DynamicVector[SIMD[T, SIZE]]) -> DTypePointer[T]:
     return rebind[DTypePointer[T]](v.data.value)
 
@@ -69,7 +68,7 @@ fn calc_n_blocks[block_size: Int](n: Int) -> Int:
         return x
     else: 
         return x+1
-    
+
 fn my_sort[T: DType, block_size: Int = 64, ascending: Bool = True](inout data: DynamicVector[SIMD[T, 1]]):
     let n: Int = len(data)
     let n_blocks: Int = calc_n_blocks[block_size](n)
@@ -83,9 +82,9 @@ fn main():
     var data = DynamicVector[SIMD[T, 1]]()
     data.resize(128, 0)
     alias block_size: Int = 64
-    
+
     for i in range(len(data)):
-        _ = print_no_newline(str(data[i])+" ")
+        _ = print(str(data[i])+" ", end='')
     my_sort[T, block_size, True](data)
     for i in range(len(data)):
-        _ = print_no_newline(str(data[i])+" ")
+        _ = print(str(data[i])+" ", end='')
