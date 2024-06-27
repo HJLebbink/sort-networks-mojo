@@ -9,16 +9,16 @@ fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     return result
 
 
-fn gen_random_vec[T: DType](size: Int) -> DynamicVector[SIMD[T, 1]]:
-    var result = DynamicVector[SIMD[T, 1]](size)
+fn gen_random_vec[T: DType](size: Int) -> List[SIMD[T, 1]]:
+    var result = List[SIMD[T, 1]](size)
     # TODO: use faster methods
     for i in range(size):
-        result.push_back(random_ui64(0, 100).cast[T]())
+        result.append(random_ui64(0, 100).cast[T]())
     return result
 
 
 fn gen_random_pointer[T: DType](size: Int) -> Pointer[SIMD[T, 1]]:
-    let result = Pointer[SIMD[T, 1]].aligned_alloc(16, size)
+    var result = Pointer[SIMD[T, 1]].alloc(size)
     # TODO: use faster methods
     for i in range(size):
         result[i] = random_ui64(0, 100).cast[T]()
@@ -26,7 +26,7 @@ fn gen_random_pointer[T: DType](size: Int) -> Pointer[SIMD[T, 1]]:
 
 
 fn gen_random_DTypePointer[T: DType](size: Int) -> DTypePointer[T, 0]:
-    let result = DTypePointer[T].alloc(size)
+    var result = DTypePointer[T].alloc(size)
     # TODO: use faster methods
     for i in range(size):
         result[i] = random_ui64(0, 100).cast[T]()

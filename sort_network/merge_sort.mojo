@@ -1,18 +1,17 @@
-from collections.vector import DynamicVector
 
-fn my_cast[T: DType, SIZE: Int](v: DynamicVector[SIMD[T, SIZE]]) -> DTypePointer[T]:
-    return rebind[DTypePointer[T]](v.data.value)
+#fn my_cast[T: DType, SIZE: Int](v: List[SIMD[T, SIZE]]) -> DTypePointer[T]:
+#    return rebind[DTypePointer[T]](v.data.value)
 
 # Merge function to merge two sorted subarrays
 fn merge[T: DType, block_size: Int, ascending: Bool](
     inout data: DTypePointer[T], data_size: Int,
     left: Int, mid: Int, right: Int):
 
-    let left2 = left * block_size
-    let mid2 = mid * block_size
-    let right2 = right * block_size
+    var left2 = left * block_size
+    var mid2 = mid * block_size
+    var right2 = right * block_size
 
-    var temp = DynamicVector[SIMD[T, 1]]()
+    var temp = List[SIMD[T, 1]]()
     temp.resize(data_size, 0)
     var i: Int = left2
     var j: Int = mid2
@@ -46,7 +45,7 @@ fn merge[T: DType, block_size: Int, ascending: Bool](
 fn merge_sort[T: DType, block_size: Int, ascending: Bool](
     inout data: DTypePointer[T], data_size: Int, left: Int, right: Int
 ):
-    let diff: Int = right-left
+    var diff: Int = right-left
     if diff <= 0:
         pass
         # error
@@ -54,7 +53,7 @@ fn merge_sort[T: DType, block_size: Int, ascending: Bool](
         pass
         # sort_network
     else:
-        let mid: Int = left + (diff // 2) # TODO make block of block_size
+        var mid: Int = left + (diff // 2) # TODO make block of block_size
         # sort the first half
         merge_sort[T, block_size, ascending](data, data_size, left, mid)
         # sort the second half
@@ -63,23 +62,24 @@ fn merge_sort[T: DType, block_size: Int, ascending: Bool](
         merge[T, block_size, ascending](data, data_size, left, mid, right)
 
 fn calc_n_blocks[block_size: Int](n: Int) -> Int:
-    let x: Int = n // block_size
+    var x: Int = n // block_size
     if (x * block_size) == n:
         return x
     else: 
         return x+1
 
-fn my_sort[T: DType, block_size: Int = 64, ascending: Bool = True](inout data: DynamicVector[SIMD[T, 1]]):
-    let n: Int = len(data)
-    let n_blocks: Int = calc_n_blocks[block_size](n)
+fn my_sort[T: DType, block_size: Int = 64, ascending: Bool = True](inout data: List[SIMD[T, 1]]):
+    var n: Int = len(data)
+    var n_blocks: Int = calc_n_blocks[block_size](n)
     print("n="+str(n)+"; n_blocks="+str(n_blocks))
-    var ptr: DTypePointer[T] = my_cast[T, 1](data)
-    merge_sort[T, block_size, ascending](ptr, n, 0, n_blocks)
+    #TODO
+    #var ptr: DTypePointer[T] = my_cast[T, 1](data)
+    #merge_sort[T, block_size, ascending](ptr, n, 0, n_blocks)
 
 
-fn main():
+fn main_x():
     alias T = DType.float32
-    var data = DynamicVector[SIMD[T, 1]]()
+    var data = List[SIMD[T, 1]]()
     data.resize(128, 0)
     alias block_size: Int = 64
 

@@ -1,6 +1,11 @@
 echo "making sort_network package"
 mojo package ../sort_network -o sort_network.mojopkg
 
+ID="float32_16"
+echo "disassembling $ID"
+mojo build main_$ID.mojo -o main
+gdb main -ex 'set disassembly-flavor intel' -ex 'disassemble main' -ex q > $ID.asm
+
 ID="int8_8"
 echo "disassembling $ID"
 mojo build main_$ID.mojo -o main

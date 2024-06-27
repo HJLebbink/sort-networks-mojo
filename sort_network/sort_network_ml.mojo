@@ -6,16 +6,16 @@ from sort_network.sort_network import (
 )
 from sort_network.SwapData import SwapData
 
-fn sort_2x[T: DType, sub_chan: Int, sequential: Bool, ascending: Bool](
-    d0: SIMD[T, sub_chan],
-    d1: SIMD[T, sub_chan],
-) -> (SIMD[T, sub_chan], SIMD[T, sub_chan]):
+fn sort_2x[T: DType, sd: SwapData, sequential: Bool, ascending: Bool](
+    d0: SIMD[T, sd.channels],
+    d1: SIMD[T, sd.channels],
+) -> (SIMD[T, sd.channels], SIMD[T, sd.channels]):
     @parameter
     if sequential:
-        return (sn[T, sub_chan, ascending](d0), sn[T, sub_chan, ascending](d1))
+        return (sn[T, sd, ascending](d0), sn[T, sd, ascending](d1))
     else:
-        return sn_2x_interleave[T, T, sub_chan, ascending](d0, d1)
-        #return sn_2x_parallel[T, sub_size, ascending](d0, d1)
+        return sn_2x_interleave[T, T, sd, ascending](d0, d1)
+        #return sn_2x_parallel[T, sd, ascending](d0, d1)
 
 
 
@@ -35,9 +35,12 @@ fn sn_ml_4n[
     var d2: SIMD[T, sub_size] = data.slice[sub_size, offset=2 * sub_size]()
     var d3: SIMD[T, sub_size] = data.slice[sub_size, offset=3 * sub_size]()
 
-    var CONST_d02: SIMD[T, 2 * sub_size]
-    var CONST_d13: SIMD[T, 2 * sub_size]
-    CONST_d02, CONST_d13 = sort_2x[T, 2*sub_size, sequential, ascending](d0.join(d2), d1.join(d3))
+    alias sd = swap_data[2*sub_size]()
+    var CONST_d02: SIMD[T, sd.channels]
+    var CONST_d13: SIMD[T, sd.channels]
+    var tmp1: SIMD[T, sd.channels] = d0.join(d2)
+    var tmp2: SIMD[T, sd.channels] = d1.join(d3)
+    CONST_d02, CONST_d13 = sort_2x[T, sd, sequential, ascending](tmp1, tmp2)
 
     d0 = CONST_d02.slice[sub_size, offset=0]()
     d1 = CONST_d13.slice[sub_size, offset=0]()

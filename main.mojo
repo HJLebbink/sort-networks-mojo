@@ -1,20 +1,24 @@
-from collections import List, InlinedFixedVector
+#from collections import List
 from time import now
-from benchmark import keep
+#from benchmark import keep
 
-from sort_network.SwapData import SwapData
 import sort_network as sn
 import sort_network.ktop as kt
 import sort_network.sort_tools
 import sort_network.batcher_odd_even_merging;
+import sort_network.test_individual
+import sort_network.tests
+from sort_network.sort_network_data import swap_data
+from sort_network.SwapData import SwapData
+from sort_network.ktop import swap_data_ktop, print_linear, keep_ktop
 
 
 fn main():
     var CONST_start_time_ns = now()
 
-    # sn.test_perm_code()
-    # sn.test_sort()
-    # sn.test_sort_X(0xFFFF)
+    @parameter
+    if False:
+        tests.test_sort_X(0xFFFF)
 
     # sn.test_netw_SIMD_sort_multi_layer[DType.uint8, True]()
 
@@ -38,38 +42,54 @@ fn main():
 
     # sn.test_netw_SIMD_sort[DType.float16, 16, True]()
 
-    # sn.test_netw_SIMD_sort[DType.bfloat16, 8, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
-    # sn.test_netw_SIMD_sort[DType.bfloat16, 16, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
-    # sn.test_netw_SIMD_sort[DType.bfloat16, 32, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
-    # sn.test_netw_SIMD_sort[DType.bfloat16, 64, True]() # Error: 0.7.0 "JIT session error: Symbols not found: [ __truncsfbf2 ]"
-    # sn.test_netw_SIMD_sort[DType.bfloat16, 128, True]()
+    @parameter
+    if False:
+        sn.test_netw_SIMD_sort[DType.bfloat16, 8, True]()
+        sn.test_netw_SIMD_sort[DType.bfloat16, 16, True]()
+        sn.test_netw_SIMD_sort[DType.bfloat16, 32, True]()
+        sn.test_netw_SIMD_sort[DType.bfloat16, 64, True]()
+        sn.test_netw_SIMD_sort[DType.bfloat16, 128, True]()
 
-    # sn.test_netw_SIMD_sort[DType.int32, 8, True]()
-    # sn.test_netw_SIMD_sort[DType.int32, 16, True]()
-    # sn.test_netw_SIMD_sort[DType.int32, 32, True]()
-    # sn.test_netw_SIMD_sort[DType.int32, 64, True]()
-    # sn.test_netw_SIMD_sort[DType.int32, 128, True]()
+    @parameter
+    if False:
+        sn.test_netw_SIMD_sort[DType.int32, 8, True]()
+        sn.test_netw_SIMD_sort[DType.int32, 16, True]()
+        sn.test_netw_SIMD_sort[DType.int32, 32, True]()
+        sn.test_netw_SIMD_sort[DType.int32, 64, True]()
+        sn.test_netw_SIMD_sort[DType.int32, 128, True]()
 
-    # sn.test_netw_SIMD_sort[DType.int16, 8, True]()
-    # sn.test_netw_SIMD_sort[DType.int16, 16, True]()
-    # sn.test_netw_SIMD_sort[DType.int16, 32, True]()
-    # sn.test_netw_SIMD_sort[DType.int16, 64, True]()
-    # sn.test_netw_SIMD_sort[DType.int16, 128, True]()
+    @parameter
+    if False:
+        sn.test_netw_SIMD_sort[DType.int16, 8, True]()
+        sn.test_netw_SIMD_sort[DType.int16, 16, True]()
+        sn.test_netw_SIMD_sort[DType.int16, 32, True]()
+        sn.test_netw_SIMD_sort[DType.int16, 64, True]()
+        sn.test_netw_SIMD_sort[DType.int16, 128, True]()
 
-    # sn.test_netw_SIMD_sort[DType.int8, 8, True]()   #6.5ns
-    # sn.test_netw_SIMD_sort[DType.int8, 16, True]()  #11 ns
-    # sn.test_netw_SIMD_sort[DType.int8, 32, True]()  #32 ns  XX
-    # sn.test_netw_SIMD_sort[DType.int8, 64, True]()  #32 ns
-    # sn.test_netw_SIMD_sort[DType.int8, 128, True]() #53 ns
+    @parameter
+    if False:
+        sn.test_netw_SIMD_sort[DType.int8, 8, True]()   #6.5ns
+        sn.test_netw_SIMD_sort[DType.int8, 16, True]()  #11 ns
+        sn.test_netw_SIMD_sort[DType.int8, 32, True]()  #32 ns
+        sn.test_netw_SIMD_sort[DType.int8, 64, True]()  #32 ns
+        sn.test_netw_SIMD_sort[DType.int8, 128, True]() #53 ns
 
-    # sn.test_netw_SIMD_sort_2x_B[DType.int32, DType.uint32, True, True]()
-    # sn.test_netw_SIMD_sort_idx[DType.int32, DType.uint32, 32, False]()
+    @parameter
+    if False:
+        alias sd: SwapData = sn.swap_data[32]()
+        test_individual.test_netw_SIMD_sort_2x_B[DType.int32, DType.int32, True, True]()
+        #test_individual.test_netw_SIMD_sort_idx[DType.int32, DType.uint32, sd, False]()
 
-    # sn.test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
-    # sn.test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
+    @parameter
+    if False:
+        test_individual.test_netw_SIMD_sort_2x_A[DType.int8, DType.int8, 16]()
+        test_individual.test_netw_SIMD_sort_2x_B[DType.uint8, DType.uint8]()
 
-    sn.test_performance1(10000, 100)
-    # sn.test_performance2(10000, 100)
+    @parameter
+    if False:
+        #sn.test_performance1(10000, 100)
+        sn.test_performance2(10000, 100)
+
     # print(measure_time_netw_sort_generic[DType.int8](10000, 100, 15))
 
     # sn.test_netw_SIMD_sort[DType.uint32, 16, True]()
@@ -78,20 +98,13 @@ fn main():
 
     @parameter
     if False:
-        alias sd1: SwapData = sn.swap_data[8]()
-        print(str(sd1))
-        alias sd2: SwapData = sn.join_swap_data[sd1, sd1]()
-        print(str(sd2))
-
-    @parameter
-    if False:
-        alias sd1 = sort_tools.layers_to_linear(sn.swap_data[8]())
-        alias sd2 = sort_tools.linear_add(sort_tools.layers_to_linear(sn.swap_data[56]()), 8)
+        alias sd1 = sort_tools.layers_to_linear(swap_data[8]())
+        alias sd2 = sort_tools.linear_add(sort_tools.layers_to_linear(swap_data[56]()), 8)
         sort_tools.linear_print(sd1)
         sort_tools.linear_print(sd2)
 
     @parameter
-    if False: # crash
+    if False: # runtime crash
         alias channels = 128
         alias sd1: SwapData = sn.swap_data[channels]()
         print(str(sd1))
@@ -99,11 +112,24 @@ fn main():
         print(str(sd2))
 
     @parameter
-    if False:
-        alias sd: SwapData = sn.swap_data[64]()
-        print(str(sd))
-        alias sd_2x: SwapData = sn.join_swap_data[sd, sd]()
-        print(sd_2x.to_code())
+    if False: # test Ktop
+        alias channels = 8
+        alias k: Int = 4
+        alias ascending: Bool = True
+
+        alias sd1: SwapData = sn.swap_data[channels]()
+        print(str(sd1))
+
+        alias sd1_lin = sort_tools.layers_to_linear(sd1)
+        alias sd2_lin = keep_ktop[channels, k, ascending](sd1_lin)
+        #crash in the next line:
+        alias x: SwapData = sort_tools.linear_to_layers(sd2_lin)
+        # but the next line works
+        #var x: SwapData = sort_tools.linear_to_layers(sd2_lin)
+        print(str(x))
+        
+        #alias sd2: SwapData = swap_data_ktop[sd1, k, ascending]()
+        #print(str(sd2))
 
     @parameter
     if False:  # print a network as a sequence of CE's
