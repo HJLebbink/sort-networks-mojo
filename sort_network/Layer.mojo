@@ -1,12 +1,18 @@
 from collections.list import List
 
-@value
+
 @register_passable
-struct SwapPair: # swap pair
+struct SwapPair(Copyable, Movable):  # swap pair
     var x: Int
     var y: Int
 
-struct Layer(CollectionElement, Sized, Stringable):
+    @always_inline("nodebug")
+    fn __init__(out self, x: Int, y: Int):
+        self.x = x
+        self.y = y
+
+
+struct Layer(AnyType, Copyable, ImplicitlyCopyable, Movable, Sized, Stringable):
     alias T = DType.uint16
     alias LayerData = SIMD[Self.T, 2]
     var data: List[Self.LayerData]
@@ -21,14 +27,14 @@ struct Layer(CollectionElement, Sized, Stringable):
             var min: Scalar[Self.T] = layer2.get_min(i) + width1
             var max: Scalar[Self.T] = layer2.get_max(i) + width1
             result.data.append(Self.LayerData(min, max))
-        return result ^
+        return result^
 
     @always_inline("nodebug")
-    fn __init__(inout self):
+    fn __init__(out self):
         self.data = List[Self.LayerData]()
 
     @always_inline("nodebug")
-    fn __init__(inout self, v: List[SwapPair]):
+    fn __init__(out self, v: List[SwapPair]):
         self.data = List[Self.LayerData]()
         for i in range(len(v)):
             var v1 = v[i].x
@@ -39,22 +45,22 @@ struct Layer(CollectionElement, Sized, Stringable):
                 self.data.append(Self.LayerData(v2, v1))
 
     @always_inline("nodebug")
-    fn __init__(inout self, owned v: List[Self.LayerData]):
-        self.data = v ^
+    fn __init__(out self, var v: List[Self.LayerData]):
+        self.data = v^
 
     # trait CollectionElement
     @always_inline("nodebug")
-    fn __copyinit__(inout self, existing: Self):
-        self.data = existing.data
+    fn __copyinit__(out self, existing: Self):
+        self.data = existing.data.copy()
 
     # trait CollectionElement
     @always_inline("nodebug")
-    fn __moveinit__(inout self, owned existing: Self):
-        self.data = existing.data
+    fn __moveinit__(out self, deinit existing: Self):
+        self.data = existing.data^
 
     # trait CollectionElement
     @always_inline("nodebug")
-    fn __del__(owned self: Self):
+    fn __del__(deinit self):
         pass
 
     # trait Stringable
@@ -66,10 +72,10 @@ struct Layer(CollectionElement, Sized, Stringable):
             for i in range(s - 1):
                 var min = self.get_min(i)
                 var max = self.get_max(i)
-                result += "(" + str(min) + "," + str(max) + "),"
+                result += "(" + String(min) + "," + String(max) + "),"
             var min = self.get_min(s - 1)
             var max = self.get_max(s - 1)
-            result += "(" + str(min) + "," + str(max) + ")"
+            result += "(" + String(min) + "," + String(max) + ")"
         return result
 
     # trait Sized
@@ -79,8 +85,8 @@ struct Layer(CollectionElement, Sized, Stringable):
 
     @always_inline("nodebug")
     fn get_min(self, idx: Int) -> Int:
-        return int(self.data[idx][0])
+        return Int(self.data[idx][0])
 
     @always_inline("nodebug")
     fn get_max(self, idx: Int) -> Int:
-        return int(self.data[idx][1])
+        return Int(self.data[idx][1])

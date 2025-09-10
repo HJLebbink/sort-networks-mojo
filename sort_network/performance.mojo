@@ -1,10 +1,9 @@
 from benchmark import keep
-from time import time_function, now
+from time import time_function, perf_counter_ns
 from random import random_ui64
 from sort_network.SwapData import SwapData
 from sort_network.sort_network_data import swap_data
-
-
+from memory import Span
 
 from sort_network.sort_network import (
     sn,
@@ -14,8 +13,8 @@ from sort_network.sort_network import (
 from sort_network.test_tools import (
     gen_random_SIMD,
     gen_random_vec,
-    gen_random_pointer,
-    gen_random_DTypePointer,
+    gen_random_pointer_SIMD,
+    gen_random_pointer_SCALAR,
 )
 from sort_network.sort_network_ml import sn_ml_4n, sn_ml_8n
 
@@ -25,7 +24,7 @@ fn load_file(filename: StringLiteral) -> String:
         with open(filename, "r") as f:
             return f.read()
     except e:
-        print("Error " + str(e))
+        print("Error " + String(e))
     return ""
 
 
@@ -38,23 +37,22 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
         fn measure_time_mojo_sort[
             T: DType
         ](n_samples: Int, n_iterations: Int, sd: SwapData) -> Float32:
-            var best_time_ms: Int = 1 << 62
-            var CONST_buff: Pointer[Scalar[T], 0] = Pointer[Scalar[T]].alloc(
-                sd.channels * n_iterations
-            )
+            var best_time_ms = Int.MAX
+            var CONST_buff = UnsafePointer[Scalar[T]].alloc(sd.channels * n_iterations)
             for iteration in range(sd.channels * n_iterations):
                 CONST_buff[iteration] = random_ui64(0, 100).cast[T]()
 
-            for sample in range(n_samples):
+            for _sample in range(n_samples):
                 var ptr = CONST_buff
-                var CONST_n_layerstart_time_ms = now()
+                var CONST_n_layerstart_time_ms = perf_counter_ns()
 
-                for iteration in range(n_iterations):
-                    # sort[type: DType](inout CONST_buff: Pointer[SIMD[type, 1], 0], len: Int)
-                    sort[T](ptr, sd.channels)
+                for _iteration in range(n_iterations):
+                    sort(Span[Scalar[T]](ptr, sd.channels))
                     ptr += sd.channels
 
-                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                var CONST_elapsed_time_ms = (
+                    perf_counter_ns() - CONST_n_layerstart_time_ms
+                )
 
                 if CONST_elapsed_time_ms < best_time_ms:
                     best_time_ms = CONST_elapsed_time_ms
@@ -70,13 +68,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 return -1
             else:
                 var data2 = gen_random_SIMD[T, sd.channels]()
-                var best_time_ms: Int = 1 << 62
-                for sample in range(n_samples):
-                    var CONST_n_layerstart_time_ms = now()
-                    for i in range(n_iterations):
+                var best_time_ms = Int.MAX
+                for _sample in range(n_samples):
+                    var CONST_n_layerstart_time_ms = perf_counter_ns()
+                    for _i in range(n_iterations):
                         data2 = sn[T, sd](data2)
 
-                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                    var CONST_elapsed_time_ms = (
+                        perf_counter_ns() - CONST_n_layerstart_time_ms
+                    )
                     keep(data2)
 
                     if CONST_elapsed_time_ms < best_time_ms:
@@ -92,13 +92,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 return -1
             else:
                 var data2 = gen_random_SIMD[T, sd.channels]()
-                var best_time_ms: Int = 1 << 62
-                for sample in range(n_samples):
-                    var CONST_n_layerstart_time_ms = now()
-                    for i in range(n_iterations):
+                var best_time_ms = Int.MAX
+                for _sample in range(n_samples):
+                    var CONST_n_layerstart_time_ms = perf_counter_ns()
+                    for _i in range(n_iterations):
                         data2 = sn_ml_4n[T, sd.channels, True](data2)
 
-                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                    var CONST_elapsed_time_ms = (
+                        perf_counter_ns() - CONST_n_layerstart_time_ms
+                    )
                     keep(data2)
 
                     if CONST_elapsed_time_ms < best_time_ms:
@@ -114,13 +116,15 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
                 return -1
             else:
                 var data2 = gen_random_SIMD[T, sd.channels]()
-                var best_time_ms: Int = 1 << 62
-                for sample in range(n_samples):
-                    var CONST_n_layerstart_time_ms = now()
-                    for i in range(n_iterations):
+                var best_time_ms = Int.MAX
+                for _sample in range(n_samples):
+                    var CONST_n_layerstart_time_ms = perf_counter_ns()
+                    for _i in range(n_iterations):
                         data2 = sn_ml_8n[T, sd.channels, True](data2)
 
-                    var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                    var CONST_elapsed_time_ms = (
+                        perf_counter_ns() - CONST_n_layerstart_time_ms
+                    )
                     keep(data2)
 
                     if CONST_elapsed_time_ms < best_time_ms:
@@ -134,24 +138,26 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
             if channels == 256 or channels == 512:
                 return -1
 
-            var best_time_ms: Int = 1 << 62
+            var best_time_ms = Int.MAX
 
-            #var CONST_buff = DTypePointer[T].aligned_alloc(16, channels * n_iterations)
-            var CONST_buff = DTypePointer[T].alloc(channels * n_iterations)
+            # var CONST_buff = UnsafePointer[Scalar[T]].aligned_alloc(16, channels * n_iterations)
+            var CONST_buff = UnsafePointer[Scalar[T]].alloc(channels * n_iterations)
 
-            for sample in range(n_samples):
+            for _sample in range(n_samples):
                 for iteration in range(channels * n_iterations):
                     CONST_buff[iteration] = random_ui64(0, 100).cast[T]()
 
                 var ptr = CONST_buff
-                var CONST_n_layerstart_time_ms = now()
+                var CONST_n_layerstart_time_ms = perf_counter_ns()
 
-                for iteration in range(n_iterations):
-                    # sort[type: DType](inout CONST_buff: Pointer[SIMD[type, 1], 0], len: Int)
-                    sn[T](ptr, channels)
+                for _i in range(n_iterations):
+                    sp = Span[Scalar[T]](ptr, sd.channels)                  
+                    sn[T](sp)
                     ptr += channels
 
-                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                var CONST_elapsed_time_ms = (
+                    perf_counter_ns() - CONST_n_layerstart_time_ms
+                )
 
                 if CONST_elapsed_time_ms < best_time_ms:
                     best_time_ms = CONST_elapsed_time_ms
@@ -162,30 +168,56 @@ fn test_performance1(n_samples: Int, n_iterations: Int):
 
         var result = name
         result += sep
-        result += str(sd.channels)
+        result += String(sd.channels)
         result += sep
-        result += str(measure_time_mojo_sort[T](n_samples, n_iterations, sd))
+        result += String(measure_time_mojo_sort[T](n_samples, n_iterations, sd))
         result += sep
-        result += str(measure_time_netw_sort_SIMD[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_netw_sort_SIMD[T, sd](n_samples, n_iterations)
+        )
         result += sep
-        result += str(measure_time_netw_sort_generic[T](n_samples, n_iterations, sd.channels))
+        result += String(
+            measure_time_netw_sort_generic[T](
+                n_samples, n_iterations, sd.channels
+            )
+        )
         result += sep
-        result += str(measure_time_netw_sort_SIMD_ml4[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_netw_sort_SIMD_ml4[T, sd](n_samples, n_iterations)
+        )
         result += sep
-        result += str(measure_time_netw_sort_SIMD_ml8[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_netw_sort_SIMD_ml8[T, sd](n_samples, n_iterations)
+        )
         return result
 
     fn test_perf[T: DType](n_samples: Int, n_iterations: Int, name: String):
-        print(experiment1[T, swap_data[8]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[16]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[32]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[64]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[128]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[256]()](n_samples, n_iterations, name, sep))
-        print(experiment1[T, swap_data[512]()](n_samples, n_iterations, name, sep))
+        print(
+            experiment1[T, swap_data[8]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[16]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[32]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[64]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[128]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[256]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment1[T, swap_data[512]()](n_samples, n_iterations, name, sep)
+        )
         print("")
 
-    print(sep + "channels" + sep + "mojo" + sep + "netw_SIMD" + sep + "netw_vec")
+    print(
+        sep + "channels" + sep + "mojo" + sep + "netw_SIMD" + sep + "netw_vec"
+    )
     test_perf[DType.uint8](n_samples, n_iterations, "uint8")
     test_perf[DType.int8](n_samples, n_iterations, "int8")
     test_perf[DType.uint16](n_samples, n_iterations, "uint16")
@@ -211,14 +243,16 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         ](samples: Int, n_iterations: Int) -> Float32:
             var data3 = gen_random_SIMD[T, sd.channels]()
             var best_time_ms: Int = 1 << 62
-            for sample in range(samples):
+            for _sample in range(samples):
                 var data4 = data3
-                var CONST_n_layerstart_time_ms = now()
-                for i in range(n_iterations):
+                var CONST_n_layerstart_time_ms = perf_counter_ns()
+                for _i in range(n_iterations):
                     data3 = sn[T, sd, True](data3)
                     data4 = sn[T, sd, True](data4)
 
-                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                var CONST_elapsed_time_ms = (
+                    perf_counter_ns() - CONST_n_layerstart_time_ms
+                )
                 keep(data3)
                 keep(data4)
 
@@ -232,15 +266,17 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         ](samples: Int, n_iterations: Int) -> Float32:
             var data3 = gen_random_SIMD[T, sd.channels]()
             var best_time_ms: Int = 1 << 62
-            for sample in range(samples):
+            for _sample in range(samples):
                 var data4 = data3
-                var CONST_n_layerstart_time_ms = now()
-                for i in range(n_iterations):
+                var CONST_n_layerstart_time_ms = perf_counter_ns()
+                for _i in range(n_iterations):
                     data3, data4 = sn_2x_interleave[T, T, sd, True, True](
                         data3, data4
                     )
 
-                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                var CONST_elapsed_time_ms = (
+                    perf_counter_ns() - CONST_n_layerstart_time_ms
+                )
                 keep(data3)
                 keep(data4)
 
@@ -254,13 +290,15 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
         ](samples: Int, n_iterations: Int) -> Float32:
             var data3 = gen_random_SIMD[T, sd.channels]()
             var best_time_ms: Int = 1 << 62
-            for sample in range(samples):
+            for _sample in range(samples):
                 var data4 = data3
-                var CONST_n_layerstart_time_ms = now()
-                for i in range(n_iterations):
+                var CONST_n_layerstart_time_ms = perf_counter_ns()
+                for _i in range(n_iterations):
                     data3, data4 = sn_2x_parallel[T, sd, True](data3, data4)
 
-                var CONST_elapsed_time_ms = now() - CONST_n_layerstart_time_ms
+                var CONST_elapsed_time_ms = (
+                    perf_counter_ns() - CONST_n_layerstart_time_ms
+                )
                 keep(data3)
                 keep(data4)
 
@@ -271,36 +309,57 @@ fn test_performance2(n_samples: Int, n_iterations: Int):
 
         var result = name
         result += sep
-        result += str(sd.channels)
+        result += String(sd.channels)
         result += sep
-        result += str(measure_time_2x_sequential[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_2x_sequential[T, sd](n_samples, n_iterations)
+        )
         result += sep
-        result += str(measure_time_2x_interleaved[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_2x_interleaved[T, sd](n_samples, n_iterations)
+        )
         result += sep
-        result += str(measure_time_2x_parallel[T, sd](n_samples, n_iterations))
+        result += String(
+            measure_time_2x_parallel[T, sd](n_samples, n_iterations)
+        )
         return result
 
     fn test_perf[T: DType](n_samples: Int, n_iterations: Int, name: String):
-        print(experiment2[T, swap_data[8]()](n_samples, n_iterations, name, sep))
-        print(experiment2[T, swap_data[16]()](n_samples, n_iterations, name, sep))
-        print(experiment2[T, swap_data[32]()](n_samples, n_iterations, name, sep))
-        print(experiment2[T, swap_data[64]()](n_samples, n_iterations, name, sep))
+        print(
+            experiment2[T, swap_data[8]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment2[T, swap_data[16]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment2[T, swap_data[32]()](n_samples, n_iterations, name, sep)
+        )
+        print(
+            experiment2[T, swap_data[64]()](n_samples, n_iterations, name, sep)
+        )
         # print(experiment2[T, swap_data[128]()](n_samples, n_iterations, name, sep))
         # print(experiment2[T, swap_data[256]()](n_samples, n_iterations, name, sep))
         print("")
 
     print(
-        sep + "channels" + sep + "2x seq" + sep + "2x interleaved" + sep + "2x parallel"
+        sep
+        + "channels"
+        + sep
+        + "2x seq"
+        + sep
+        + "2x interleaved"
+        + sep
+        + "2x parallel"
     )
-    test_perf[DType.uint8](n_samples, n_iterations, "uint8")
-    test_perf[DType.int8](n_samples, n_iterations, "int8")
-    test_perf[DType.uint16](n_samples, n_iterations, "uint16")
-    test_perf[DType.int16](n_samples, n_iterations, "int16")
-    test_perf[DType.float16](n_samples, n_iterations, "float16")
-    test_perf[DType.bfloat16](n_samples, n_iterations, "bfloat16")
+    #test_perf[DType.uint8](n_samples, n_iterations, "uint8")
+    #test_perf[DType.int8](n_samples, n_iterations, "int8")
+    #test_perf[DType.uint16](n_samples, n_iterations, "uint16")
+    #test_perf[DType.int16](n_samples, n_iterations, "int16")
+    #test_perf[DType.float16](n_samples, n_iterations, "float16")
+    #test_perf[DType.bfloat16](n_samples, n_iterations, "bfloat16")
     test_perf[DType.uint32](n_samples, n_iterations, "uint32")
-    test_perf[DType.int32](n_samples, n_iterations, "int32")
-    test_perf[DType.float32](n_samples, n_iterations, "float32")
-    test_perf[DType.uint64](n_samples, n_iterations, "uint64")
-    test_perf[DType.int64](n_samples, n_iterations, "int64")
-    test_perf[DType.float64](n_samples, n_iterations, "float64")
+    #test_perf[DType.int32](n_samples, n_iterations, "int32")
+    #test_perf[DType.float32](n_samples, n_iterations, "float32")
+    #test_perf[DType.uint64](n_samples, n_iterations, "uint64")
+    #test_perf[DType.int64](n_samples, n_iterations, "int64")
+    #test_perf[DType.float64](n_samples, n_iterations, "float64")

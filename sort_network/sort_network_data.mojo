@@ -2,6 +2,7 @@ from sort_network.SwapData import Layer, SwapData, SwapPair
 
 alias s = SwapPair
 
+
 # join_swap_data joins two swap data's into one sorting network.
 # The number of layers doe not increase, only the number of swaps increases
 fn join_swap_data[sd1: SwapData, sd2: SwapData]() -> SwapData:
@@ -9,7 +10,6 @@ fn join_swap_data[sd1: SwapData, sd2: SwapData]() -> SwapData:
     for i in range(sd1.count_layers()):
         result.add_layer_l(Layer.merge(sd1[i], sd2[i], sd1.channels))
     return result
-
 
 
 # chanels 0..7 are already sorted, and 8..15 are also already sorted

@@ -1,3 +1,6 @@
 /main
 /disassemble/main
 /disassemble/sort_network.mojopkg
+# pixi environments
+.pixi/*
+!.pixi/config.toml

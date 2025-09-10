@@ -1,5 +1,3 @@
-from collections.vector import InlinedFixedVector
-
 from sort_network.sort_tools import swap_n, swap_idx, gen_perm
 from sort_network.SwapData import SwapData
 from sort_network.sort_network_data import (
@@ -154,9 +152,9 @@ fn sn[
 
     print(
         "ERROR: channels "
-        + str(sd.channels)
+        + String(sd.channels)
         + " gives n_layers "
-        + str(n_layers)
+        + String(n_layers)
         + " not implemented yet"
     )
     return v
@@ -171,27 +169,30 @@ fn sn[
 
 
 @always_inline
-fn sn[type: DType, ascending: Bool = True](inout v: DTypePointer[type], size: Int):
-    """Drop-in replacement for `sort[type: DType](inout buff: Pointer[SIMD[type, 1], 0], len: Int)`."""
+fn sn[DT: DType, ascending: Bool = True](v: Span[mut=True, Scalar[DT]]):
+    """Drop-in replacement for `sort[type: DType](mut buff: Pointer[SIMD[type, 1]], len: Int)`."""
+
+    var size = v.__len__()
 
     @always_inline
     fn load_sort_store[
-        type: DType, ascending: Bool, size: Int
-    ](inout v: DTypePointer[type]):
-        var CONST_v1: SIMD[type, size] = v.load[width=size](0)
-        var CONST_v2: SIMD[type, size] = sn[type, size, ascending](CONST_v1)
-        v.store[width=size](CONST_v2)
+        DT: DType, ascending: Bool, S: Int
+    ](v: Span[mut=True, Scalar[DT]]):
+        var v2 = v.unsafe_ptr()
+        var CONST_v1: SIMD[DT, S] = v2.load(0)
+        var CONST_v2: SIMD[DT, S] = sn[DT, S, ascending](CONST_v1)
+        v2.store[width=S](CONST_v2)
 
     if size <= 8:
-        load_sort_store[type, ascending, 8](v)
+        load_sort_store[DT, ascending, 8](v)
     elif size <= 16:
-        load_sort_store[type, ascending, 16](v)
+        load_sort_store[DT, ascending, 16](v)
     elif size <= 32:
-        load_sort_store[type, ascending, 32](v)
+        load_sort_store[DT, ascending, 32](v)
     elif size <= 64:
-        load_sort_store[type, ascending, 64](v)
+        load_sort_store[DT, ascending, 64](v)
     elif size <= 128:
-        load_sort_store[type, ascending, 128](v)
+        load_sort_store[DT, ascending, 128](v)
     else:
         pass
         # TODO
@@ -346,7 +347,7 @@ fn sn_idx[
         return CONST_t26 ^
 
     # fmt: off
-    print("channels " + str(sd.channels) + " gives n_layers " + str(n_layers) + " not implemented yet")
+    print("channels " + String(sd.channels) + " gives n_layers " + String(n_layers) + " not implemented yet")
     # fmt: on
     return (v, idx)
 
@@ -529,9 +530,9 @@ fn sn_2x_interleave[
 
     print(
         "ERROR: channels "
-        + str(sd.channels)
+        + String(sd.channels)
         + " gives n_layers "
-        + str(n_layers)
+        + String(n_layers)
         + " not implemented yet"
     )
     return va, vb
@@ -685,9 +686,9 @@ fn sn_2x_parallel[
 
     print(
         "ERROR: channels "
-        + str(sd_in.channels)
+        + String(sd_in.channels)
         + " gives n_layers "
-        + str(n_layers)
+        + String(n_layers)
         + " not implemented yet"
     )
     return va, vb
@@ -731,7 +732,7 @@ fn sn_merge[
         var CONST_v2 = swap_n[T, channels, sd[2], ascending](CONST_v1)
         var CONST_v3 = swap_n[T, channels, sd[3], ascending](CONST_v2)
         var CONST_v4 = swap_n[T, channels, sd[4], ascending](CONST_v3)
-        var CONST_v5 = swap_n[T, channels, sd[5], ascending](CONST_v3)
+        var CONST_v5 = swap_n[T, channels, sd[5], ascending](CONST_v4)
         var CONST_v6 = swap_n[T, channels, sd[6], ascending](CONST_v5)
         return CONST_v6
     else:

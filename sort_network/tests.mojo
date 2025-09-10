@@ -3,30 +3,31 @@ from sort_network.test_tools import gen_random_SIMD
 
 
 fn test_sort_N[T: DType, size: Int](n_experiments: Int):
-    var buff: Pointer[SIMD[T, 1], 0] = Pointer[SIMD[T, 1]].alloc(size)
+    var buff = UnsafePointer[SIMD[T, 1]].alloc(size)
+
     for i in range(n_experiments):
         if i == 0:
-            print("test_sort_N " + str(size) + ": ", end='')
+            print("test_sort_N " + String(size) + ": ", end="")
         elif (i & 0xFFFF) == 0:
-            print("x", end='')
+            print("x", end="")
 
-        var CONST_data = gen_random_SIMD[T, size]()
-        for i in range(size):
-            buff[i] = CONST_data[i]
+        var CONST_data: SIMD[T, size] = gen_random_SIMD[T, size]()
+        for j in range(size):
+            buff[j] = CONST_data[j]
 
         # sort with Mojo as reference impl
-        sort[T](buff, size)
+        sort(Span[SIMD[T, 1]](buff, size))
 
         # sort with SortingNetwork
         var sorted_data = sn[T](CONST_data)
 
         # check if reference and SortingNetwork yield equal results
-        for i in range(size):
-            if sorted_data[i] != buff[i]:
+        for j in range(size):
+            if sorted_data[j] != buff[j]:
                 print("NOT equal!")
                 return
 
-    print(" " + str(n_experiments) + " tests successes")
+    print(" " + String(n_experiments) + " tests successes")
 
 
 fn test_sort_X(n_experiments: Int):

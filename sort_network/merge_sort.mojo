@@ -1,12 +1,11 @@
-
-#fn my_cast[T: DType, SIZE: Int](v: List[SIMD[T, SIZE]]) -> DTypePointer[T]:
+# fn my_cast[T: DType, SIZE: Int](v: List[SIMD[T, SIZE]]) -> DTypePointer[T]:
 #    return rebind[DTypePointer[T]](v.data.value)
 
-# Merge function to merge two sorted subarrays
-fn merge[T: DType, block_size: Int, ascending: Bool](
-    inout data: DTypePointer[T], data_size: Int,
-    left: Int, mid: Int, right: Int):
 
+# Merge function to merge two sorted subarrays
+fn merge[
+    T: DType, block_size: Int, ascending: Bool
+](mut data: UnsafePointer[Scalar[T]], data_size: Int, left: Int, mid: Int, right: Int):
     var left2 = left * block_size
     var mid2 = mid * block_size
     var right2 = right * block_size
@@ -19,7 +18,7 @@ fn merge[T: DType, block_size: Int, ascending: Bool](
 
     @parameter
     if ascending:
-        while (i < mid2 and j < right2):
+        while i < mid2 and j < right2:
             if data[i] <= data[j]:
                 temp[p] = data[i]
                 i += 1
@@ -27,25 +26,26 @@ fn merge[T: DType, block_size: Int, ascending: Bool](
                 temp[p] = data[j]
                 j += 1
             p += 1
-        while (i < mid2):
+        while i < mid2:
             temp[p] = data[i]
             i += 1
             p += 1
-        while (j < right2):
+        while j < right2:
             temp[p] = data[j]
             i += 1
             p += 1
     else:
         pass
-        #TODO
-    for k in range (left2, right2):
+        # TODO
+    for k in range(left2, right2):
         data[k] = temp[k - left2]
 
+
 # Merge sort function
-fn merge_sort[T: DType, block_size: Int, ascending: Bool](
-    inout data: DTypePointer[T], data_size: Int, left: Int, right: Int
-):
-    var diff: Int = right-left
+fn merge_sort[
+    T: DType, block_size: Int, ascending: Bool
+](mut data: UnsafePointer[Scalar[T]], data_size: Int, left: Int, right: Int):
+    var diff: Int = right - left
     if diff <= 0:
         pass
         # error
@@ -53,7 +53,7 @@ fn merge_sort[T: DType, block_size: Int, ascending: Bool](
         pass
         # sort_network
     else:
-        var mid: Int = left + (diff // 2) # TODO make block of block_size
+        var mid: Int = left + (diff // 2)  # TODO make block of block_size
         # sort the first half
         merge_sort[T, block_size, ascending](data, data_size, left, mid)
         # sort the second half
@@ -61,20 +61,24 @@ fn merge_sort[T: DType, block_size: Int, ascending: Bool](
         # merge the sorted halves
         merge[T, block_size, ascending](data, data_size, left, mid, right)
 
+
 fn calc_n_blocks[block_size: Int](n: Int) -> Int:
     var x: Int = n // block_size
     if (x * block_size) == n:
         return x
-    else: 
-        return x+1
+    else:
+        return x + 1
 
-fn my_sort[T: DType, block_size: Int = 64, ascending: Bool = True](inout data: List[SIMD[T, 1]]):
+
+fn my_sort[
+    T: DType, block_size: Int = 64, ascending: Bool = True
+](mut data: List[SIMD[T, 1]]):
     var n: Int = len(data)
     var n_blocks: Int = calc_n_blocks[block_size](n)
-    print("n="+str(n)+"; n_blocks="+str(n_blocks))
-    #TODO
-    #var ptr: DTypePointer[T] = my_cast[T, 1](data)
-    #merge_sort[T, block_size, ascending](ptr, n, 0, n_blocks)
+    print("n=" + String(n) + "; n_blocks=" + String(n_blocks))
+    # TODO
+    # var ptr: DTypePointer[T] = my_cast[T, 1](data)
+    # merge_sort[T, block_size, ascending](ptr, n, 0, n_blocks)
 
 
 fn main_x():
@@ -84,7 +88,7 @@ fn main_x():
     alias block_size: Int = 64
 
     for i in range(len(data)):
-        _ = print(str(data[i])+" ", end='')
+        _ = print(String(data[i]) + " ", end="")
     my_sort[T, block_size, True](data)
     for i in range(len(data)):
-        _ = print(str(data[i])+" ", end='')
+        _ = print(String(data[i]) + " ", end="")

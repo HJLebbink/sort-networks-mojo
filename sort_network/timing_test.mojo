@@ -1,5 +1,5 @@
 from benchmark import keep
-from time import time_function, now
+from time import time_function, perf_counter_ns
 from random import random_ui64
 
 
@@ -13,10 +13,10 @@ fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
 
 fn main_x():
     var a = gen_random_SIMD[DType.uint32, 16]()
-    var b: UInt32 = 0
-    var start_time_ms = now()
+    var b: UInt32
+    var start_time_ms = perf_counter_ns()
     b = a.reduce_add()
-    var elapsed_time_ms = now() - start_time_ms
+    var elapsed_time_ms = perf_counter_ns() - start_time_ms
     keep(b)
 
     #   @parameter

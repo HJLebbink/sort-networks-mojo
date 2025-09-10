@@ -1,5 +1,5 @@
-GNU gdb (Ubuntu 12.1-0ubuntu1~22.04.2) 12.1
-Copyright (C) 2022 Free Software Foundation, Inc.
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -14,2370 +14,1003 @@ Find the GDB manual and other documentation resources online at:
 For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from main...
+Downloading separate debug info for /mnt/c/Source/Github/sort-networks-mojo/disassemble/main...
+(No debugging symbols found in main)
 Dump of assembler code for function main:
-   0x0000000000006af0 <+0>:	push   rbp
-   0x0000000000006af1 <+1>:	mov    rbp,rsp
-   0x0000000000006af4 <+4>:	push   r15
-   0x0000000000006af6 <+6>:	push   r14
-   0x0000000000006af8 <+8>:	push   r13
-   0x0000000000006afa <+10>:	push   r12
-   0x0000000000006afc <+12>:	push   rbx
-   0x0000000000006afd <+13>:	and    rsp,0xffffffffffffff00
-   0x0000000000006b04 <+20>:	sub    rsp,0xa00
-   0x0000000000006b0b <+27>:	mov    rbx,rsi
-   0x0000000000006b0e <+30>:	mov    r14d,edi
-   0x0000000000006b11 <+33>:	call   0xc600 <KGEN_CompilerRT_LLCL_GetCurrentRuntime()>
-   0x0000000000006b16 <+38>:	test   rax,rax
-   0x0000000000006b19 <+41>:	jne    0x6b3c <main+76>
-   0x0000000000006b1b <+43>:	lea    rdi,[rip+0x4245e]        # 0x48f80 <static_string_a53f8c03fb0d6348caa8509ba52aa6ff7c06a31a5a3003eb524e06a97683286e>
-   0x0000000000006b22 <+50>:	lea    rcx,[rip+0x2d57]        # 0x9880 <main_closure_1>
-   0x0000000000006b29 <+57>:	lea    r8,[rip+0x2d40]        # 0x9870 <main_closure_0>
-   0x0000000000006b30 <+64>:	mov    esi,0x7
-   0x0000000000006b35 <+69>:	xor    edx,edx
-   0x0000000000006b37 <+71>:	call   0xa200 <KGEN_CompilerRT_GetGlobalOrCreate(llvm::StringRef, void*, void* (*)(void*), void (*)(void*))>
-   0x0000000000006b3c <+76>:	mov    edi,r14d
-   0x0000000000006b3f <+79>:	mov    rsi,rbx
-   0x0000000000006b42 <+82>:	call   0xcdc0 <KGEN_CompilerRT_SetArgV(int, char**)>
-   0x0000000000006b47 <+87>:	vxorps xmm0,xmm0,xmm0
-   0x0000000000006b4b <+91>:	mov    ebx,0x81
-   0x0000000000006b50 <+96>:	xor    r14d,r14d
-   0x0000000000006b53 <+99>:	vxorps xmm1,xmm1,xmm1
-   0x0000000000006b57 <+103>:	vxorps xmm3,xmm3,xmm3
-   0x0000000000006b5b <+107>:	vxorps xmm2,xmm2,xmm2
-   0x0000000000006b5f <+111>:	nop
-   0x0000000000006b60 <+112>:	vmovaps ZMMWORD PTR [rsp+0xc0],zmm0
-   0x0000000000006b68 <+120>:	vmovaps ZMMWORD PTR [rsp+0x2c0],zmm1
-   0x0000000000006b70 <+128>:	vmovaps ZMMWORD PTR [rsp+0x80],zmm3
-   0x0000000000006b78 <+136>:	vmovaps ZMMWORD PTR [rsp+0x140],zmm2
-   0x0000000000006b80 <+144>:	vzeroupper 
-   0x0000000000006b83 <+147>:	call   0xcb00 <KGEN_CompilerRT_GetRandomState()>
-   0x0000000000006b88 <+152>:	mov    edx,0x64
-   0x0000000000006b8d <+157>:	mov    rdi,rax
-   0x0000000000006b90 <+160>:	xor    esi,esi
-   0x0000000000006b92 <+162>:	call   0xcb50 <KGEN_CompilerRT_RandomUInt64(std::default_random_engine*, uint64_t, uint64_t)>
-   0x0000000000006b97 <+167>:	vmovaps zmm0,ZMMWORD PTR [rsp+0xc0]
-   0x0000000000006b9f <+175>:	vmovaps ZMMWORD PTR [rsp+0x700],zmm0
-   0x0000000000006ba7 <+183>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x2c0]
-   0x0000000000006baf <+191>:	vmovaps ZMMWORD PTR [rsp+0x740],zmm0
-   0x0000000000006bb7 <+199>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x80]
-   0x0000000000006bbf <+207>:	vmovaps ZMMWORD PTR [rsp+0x780],zmm0
-   0x0000000000006bc7 <+215>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
-   0x0000000000006bcf <+223>:	vmovaps ZMMWORD PTR [rsp+0x7c0],zmm0
-   0x0000000000006bd7 <+231>:	mov    ecx,r14d
-   0x0000000000006bda <+234>:	and    ecx,0x7f
-   0x0000000000006bdd <+237>:	mov    WORD PTR [rsp+rcx*2+0x700],ax
-   0x0000000000006be5 <+245>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x700]
-   0x0000000000006bed <+253>:	vmovaps zmm1,ZMMWORD PTR [rsp+0x740]
-   0x0000000000006bf5 <+261>:	vmovaps zmm3,ZMMWORD PTR [rsp+0x780]
-   0x0000000000006bfd <+269>:	vmovaps zmm2,ZMMWORD PTR [rsp+0x7c0]
-   0x0000000000006c05 <+277>:	dec    rbx
-   0x0000000000006c08 <+280>:	inc    r14
-   0x0000000000006c0b <+283>:	cmp    rbx,0x1
-   0x0000000000006c0f <+287>:	ja     0x6b60 <main+112>
-   0x0000000000006c15 <+293>:	vmovaps ZMMWORD PTR [rsp+0x2c0],zmm1
-   0x0000000000006c1d <+301>:	vmovaps ZMMWORD PTR [rsp+0x140],zmm2
-   0x0000000000006c25 <+309>:	vmovaps ZMMWORD PTR [rsp+0x80],zmm3
-   0x0000000000006c2d <+317>:	vmovaps ZMMWORD PTR [rsp+0xc0],zmm0
-   0x0000000000006c35 <+325>:	movabs r14,0x7fffffffffffffe0
-   0x0000000000006c3f <+335>:	vxorps xmm0,xmm0,xmm0
-   0x0000000000006c43 <+339>:	vmovaps XMMWORD PTR [rsp+0x320],xmm0
-   0x0000000000006c4c <+348>:	mov    QWORD PTR [rsp+0x330],0x0
-   0x0000000000006c58 <+360>:	vxorps xmm0,xmm0,xmm0
-   0x0000000000006c5c <+364>:	vmovaps YMMWORD PTR [rsp+0x420],ymm0
-   0x0000000000006c65 <+373>:	vmovaps YMMWORD PTR [rsp+0x400],ymm0
-   0x0000000000006c6e <+382>:	mov    BYTE PTR [rsp+0x440],0x0
-   0x0000000000006c76 <+390>:	lea    rbx,[rsp+0x400]
-   0x0000000000006c7e <+398>:	mov    esi,0x41
-   0x0000000000006c83 <+403>:	mov    edx,0x80
-   0x0000000000006c88 <+408>:	mov    rdi,rbx
-   0x0000000000006c8b <+411>:	vzeroupper 
-   0x0000000000006c8e <+414>:	call   0xa1c0 <stdlib::builtin::io::_snprintf_scalar[stdlib::builtin::dtype::DType,stdlib::builtin::string_literal::StringLiteral](stdlib::memory::unsafe_pointer::UnsafePointer[stdlib::builtin::simd::SIMD[{uint8}, {1}], {{0}}],stdlib::builtin::int::Int,stdlib::builtin::simd::SIMD[$0, {1}]),type=si64,float_format="%.17g">
-   0x0000000000006c93 <+419>:	lea    rdi,[rsp+0x320]
-   0x0000000000006c9b <+427>:	mov    rsi,rbx
-   0x0000000000006c9e <+430>:	mov    rdx,rax
-   0x0000000000006ca1 <+433>:	call   0x9890 <stdlib::builtin::string::String::_unsafe_to_formatter(stdlib::builtin::string::String&)_write_to_string(stdlib::memory::unsafe_pointer::UnsafePointer[None, {{0}}],stdlib::utils::stringref::StringRef)>
-   0x0000000000006ca6 <+438>:	mov    r12,QWORD PTR [rsp+0x320]
-   0x0000000000006cae <+446>:	mov    rbx,QWORD PTR [rsp+0x328]
-   0x0000000000006cb6 <+454>:	mov    r15d,0x8
-   0x0000000000006cbc <+460>:	mov    edi,0x1
-   0x0000000000006cc1 <+465>:	mov    esi,0x8
-   0x0000000000006cc6 <+470>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006ccb <+475>:	mov    r13,rax
-   0x0000000000006cce <+478>:	mov    DWORD PTR [rax],0x6f666562
-   0x0000000000006cd4 <+484>:	mov    DWORD PTR [rax+0x3],0x2065726f
-   0x0000000000006cdb <+491>:	mov    BYTE PTR [rax+0x7],0x0
-   0x0000000000006cdf <+495>:	dec    rbx
-   0x0000000000006ce2 <+498>:	test   r12,r12
-   0x0000000000006ce5 <+501>:	cmove  rbx,r12
-   0x0000000000006ce9 <+505>:	test   rbx,rbx
-   0x0000000000006cec <+508>:	jle    0x6d0a <main+538>
-   0x0000000000006cee <+510>:	lea    r15,[rbx+0x8]
-   0x0000000000006cf2 <+514>:	lea    rax,[r14+0x17]
-   0x0000000000006cf6 <+518>:	cmp    rbx,rax
-   0x0000000000006cf9 <+521>:	jbe    0x6e19 <main+809>
-   0x0000000000006cff <+527>:	xor    r8d,r8d
-   0x0000000000006d02 <+530>:	mov    rdi,r13
-   0x0000000000006d05 <+533>:	jmp    0x6e4b <main+859>
-   0x0000000000006d0a <+538>:	mov    QWORD PTR [rsp+0x380],r12
-   0x0000000000006d12 <+546>:	mov    edi,0x1
-   0x0000000000006d17 <+551>:	mov    esi,0x8
-   0x0000000000006d1c <+556>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006d21 <+561>:	mov    QWORD PTR [rsp+0x3c0],r13
-   0x0000000000006d29 <+569>:	add    r13,0x8
-   0x0000000000006d2d <+573>:	xor    ebx,ebx
-   0x0000000000006d2f <+575>:	mov    r12d,0x1
-   0x0000000000006d35 <+581>:	mov    r14d,0x8
-   0x0000000000006d3b <+587>:	mov    edx,0x1
-   0x0000000000006d40 <+592>:	mov    QWORD PTR [rsp+0x280],r13
-   0x0000000000006d48 <+600>:	jmp    0x6d7a <main+650>
-   0x0000000000006d4a <+602>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x0000000000006d50 <+608>:	mov    rax,r13
-   0x0000000000006d53 <+611>:	mov    edx,0x1
-   0x0000000000006d58 <+616>:	mov    r13,QWORD PTR [rsp+0x280]
-   0x0000000000006d60 <+624>:	movzx  ecx,BYTE PTR [rsp+0x100]
-   0x0000000000006d68 <+632>:	dec    r14
-   0x0000000000006d6b <+635>:	mov    BYTE PTR [rax+rbx*1],cl
-   0x0000000000006d6e <+638>:	inc    rbx
-   0x0000000000006d71 <+641>:	inc    r12
-   0x0000000000006d74 <+644>:	cmp    rbx,0x8
-   0x0000000000006d78 <+648>:	je     0x6de8 <main+760>
-   0x0000000000006d7a <+650>:	mov    rcx,r13
-   0x0000000000006d7d <+653>:	sub    rcx,r14
-   0x0000000000006d80 <+656>:	movzx  ecx,BYTE PTR [rcx]
-   0x0000000000006d83 <+659>:	cmp    rbx,r15
-   0x0000000000006d86 <+662>:	jl     0x6d68 <main+632>
-   0x0000000000006d88 <+664>:	mov    BYTE PTR [rsp+0x100],cl
-   0x0000000000006d8f <+671>:	add    r15,r15
-   0x0000000000006d92 <+674>:	cmp    r15,0x2
-   0x0000000000006d96 <+678>:	cmovl  r15,rdx
-   0x0000000000006d9a <+682>:	mov    r13,rax
-   0x0000000000006d9d <+685>:	mov    edi,0x1
-   0x0000000000006da2 <+690>:	mov    rsi,r15
-   0x0000000000006da5 <+693>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006daa <+698>:	mov    rdi,r13
-   0x0000000000006dad <+701>:	mov    r13,rax
-   0x0000000000006db0 <+704>:	test   rbx,rbx
-   0x0000000000006db3 <+707>:	je     0x6dd5 <main+741>
-   0x0000000000006db5 <+709>:	mov    rax,rdi
-   0x0000000000006db8 <+712>:	mov    rcx,r13
-   0x0000000000006dbb <+715>:	mov    rdx,r12
-   0x0000000000006dbe <+718>:	xchg   ax,ax
-   0x0000000000006dc0 <+720>:	movzx  esi,BYTE PTR [rax]
-   0x0000000000006dc3 <+723>:	mov    BYTE PTR [rcx],sil
-   0x0000000000006dc6 <+726>:	dec    rdx
-   0x0000000000006dc9 <+729>:	inc    rcx
-   0x0000000000006dcc <+732>:	inc    rax
-   0x0000000000006dcf <+735>:	cmp    rdx,0x1
-   0x0000000000006dd3 <+739>:	ja     0x6dc0 <main+720>
-   0x0000000000006dd5 <+741>:	test   rdi,rdi
-   0x0000000000006dd8 <+744>:	je     0x6d50 <main+608>
-   0x0000000000006dde <+750>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000006de3 <+755>:	jmp    0x6d50 <main+608>
-   0x0000000000006de8 <+760>:	mov    QWORD PTR [rsp+0x38],rax
-   0x0000000000006ded <+765>:	mov    r15d,0x8
-   0x0000000000006df3 <+771>:	mov    r12,QWORD PTR [rsp+0x380]
-   0x0000000000006dfb <+779>:	mov    rdi,QWORD PTR [rsp+0x3c0]
-   0x0000000000006e03 <+787>:	vzeroupper 
-   0x0000000000006e06 <+790>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000006e0b <+795>:	test   r12,r12
-   0x0000000000006e0e <+798>:	jne    0x6f32 <main+1090>
-   0x0000000000006e14 <+804>:	jmp    0x6f3a <main+1098>
-   0x0000000000006e19 <+809>:	mov    edi,0x1
-   0x0000000000006e1e <+814>:	mov    rsi,r15
-   0x0000000000006e21 <+817>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006e26 <+822>:	mov    r8,rax
-   0x0000000000006e29 <+825>:	mov    rax,r15
-   0x0000000000006e2c <+828>:	mov    rcx,r8
-   0x0000000000006e2f <+831>:	mov    rdi,r13
-   0x0000000000006e32 <+834>:	data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000006e40 <+848>:	mov    BYTE PTR [rcx],0x0
-   0x0000000000006e43 <+851>:	inc    rcx
-   0x0000000000006e46 <+854>:	dec    rax
-   0x0000000000006e49 <+857>:	jne    0x6e40 <main+848>
-   0x0000000000006e4b <+859>:	mov    eax,DWORD PTR [rdi]
-   0x0000000000006e4d <+861>:	mov    DWORD PTR [r8],eax
-   0x0000000000006e50 <+864>:	mov    eax,DWORD PTR [rdi+0x3]
-   0x0000000000006e53 <+867>:	mov    DWORD PTR [r8+0x3],eax
-   0x0000000000006e57 <+871>:	lea    rax,[rbx+0x1]
-   0x0000000000006e5b <+875>:	cmp    rax,0x4
-   0x0000000000006e5f <+879>:	mov    QWORD PTR [rsp+0x38],r8
-   0x0000000000006e64 <+884>:	jg     0x6e9d <main+941>
-   0x0000000000006e66 <+886>:	movzx  ecx,BYTE PTR [r12]
-   0x0000000000006e6b <+891>:	mov    BYTE PTR [r8+0x7],cl
-   0x0000000000006e6f <+895>:	movzx  ecx,BYTE PTR [r12+rbx*1]
-   0x0000000000006e74 <+900>:	mov    BYTE PTR [r8+rbx*1+0x7],cl
-   0x0000000000006e79 <+905>:	cmp    rax,0x3
-   0x0000000000006e7d <+909>:	jl     0x6f2a <main+1082>
-   0x0000000000006e83 <+915>:	movzx  eax,BYTE PTR [r12+0x1]
-   0x0000000000006e89 <+921>:	mov    BYTE PTR [r8+0x8],al
-   0x0000000000006e8d <+925>:	movzx  eax,BYTE PTR [r12+rbx*1-0x1]
-   0x0000000000006e93 <+931>:	mov    BYTE PTR [r8+rbx*1+0x6],al
-   0x0000000000006e98 <+936>:	jmp    0x6f2a <main+1082>
-   0x0000000000006e9d <+941>:	cmp    rbx,0xf
-   0x0000000000006ea1 <+945>:	ja     0x6ebc <main+972>
-   0x0000000000006ea3 <+947>:	cmp    rax,0x8
-   0x0000000000006ea7 <+951>:	jl     0x6f18 <main+1064>
-   0x0000000000006ea9 <+953>:	mov    rax,QWORD PTR [r12]
-   0x0000000000006ead <+957>:	mov    QWORD PTR [r8+0x7],rax
-   0x0000000000006eb1 <+961>:	mov    rax,QWORD PTR [r12+rbx*1-0x7]
-   0x0000000000006eb6 <+966>:	mov    QWORD PTR [r8+rbx*1],rax
-   0x0000000000006eba <+970>:	jmp    0x6f2a <main+1082>
-   0x0000000000006ebc <+972>:	mov    rcx,rax
-   0x0000000000006ebf <+975>:	movabs rdx,0x7fffffffffffffe0
-   0x0000000000006ec9 <+985>:	and    rcx,rdx
-   0x0000000000006ecc <+988>:	je     0x6ee9 <main+1017>
-   0x0000000000006ece <+990>:	xor    edx,edx
-   0x0000000000006ed0 <+992>:	vmovups ymm0,YMMWORD PTR [r12+rdx*1]
-   0x0000000000006ed6 <+998>:	vmovups YMMWORD PTR [r8+rdx*1+0x7],ymm0
-   0x0000000000006edd <+1005>:	lea    rsi,[rdx+0x20]
-   0x0000000000006ee1 <+1009>:	mov    rdx,rsi
-   0x0000000000006ee4 <+1012>:	cmp    rsi,rcx
-   0x0000000000006ee7 <+1015>:	jb     0x6ed0 <main+992>
-   0x0000000000006ee9 <+1017>:	cmp    rcx,rax
-   0x0000000000006eec <+1020>:	jge    0x6e03 <main+787>
-   0x0000000000006ef2 <+1026>:	data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000006f00 <+1040>:	movzx  edx,BYTE PTR [r12+rcx*1]
-   0x0000000000006f05 <+1045>:	mov    BYTE PTR [r8+rcx*1+0x7],dl
-   0x0000000000006f0a <+1050>:	lea    rdx,[rcx+0x1]
-   0x0000000000006f0e <+1054>:	mov    rcx,rdx
-   0x0000000000006f11 <+1057>:	cmp    rax,rdx
-   0x0000000000006f14 <+1060>:	jne    0x6f00 <main+1040>
-   0x0000000000006f16 <+1062>:	jmp    0x6f2a <main+1082>
-   0x0000000000006f18 <+1064>:	mov    eax,DWORD PTR [r12]
-   0x0000000000006f1c <+1068>:	mov    DWORD PTR [r8+0x7],eax
-   0x0000000000006f20 <+1072>:	mov    eax,DWORD PTR [r12+rbx*1-0x3]
-   0x0000000000006f25 <+1077>:	mov    DWORD PTR [r8+rbx*1+0x4],eax
-   0x0000000000006f2a <+1082>:	vzeroupper 
-   0x0000000000006f2d <+1085>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000006f32 <+1090>:	mov    rdi,r12
-   0x0000000000006f35 <+1093>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000006f3a <+1098>:	mov    edi,0x1
-   0x0000000000006f3f <+1103>:	mov    esi,0x3
-   0x0000000000006f44 <+1108>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006f49 <+1113>:	mov    rbx,rax
-   0x0000000000006f4c <+1116>:	mov    WORD PTR [rax],0x203a
-   0x0000000000006f51 <+1121>:	mov    BYTE PTR [rax+0x2],0x0
-   0x0000000000006f55 <+1125>:	dec    r15
-   0x0000000000006f58 <+1128>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x0000000000006f5d <+1133>:	test   rdi,rdi
-   0x0000000000006f60 <+1136>:	cmove  r15,rdi
-   0x0000000000006f64 <+1140>:	test   r15,r15
-   0x0000000000006f67 <+1143>:	jle    0x6fd8 <main+1256>
-   0x0000000000006f69 <+1145>:	lea    r14,[r15+0x3]
-   0x0000000000006f6d <+1149>:	movabs rcx,0x7fffffffffffffe0
-   0x0000000000006f77 <+1159>:	lea    rax,[rcx+0x1c]
-   0x0000000000006f7b <+1163>:	xor    esi,esi
-   0x0000000000006f7d <+1165>:	mov    r12d,0x0
-   0x0000000000006f83 <+1171>:	cmp    r15,rax
-   0x0000000000006f86 <+1174>:	jbe    0x70d6 <main+1510>
-   0x0000000000006f8c <+1180>:	mov    rax,r15
-   0x0000000000006f8f <+1183>:	and    rax,rcx
-   0x0000000000006f92 <+1186>:	je     0x6fb6 <main+1222>
-   0x0000000000006f94 <+1188>:	xor    ecx,ecx
-   0x0000000000006f96 <+1190>:	cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000006fa0 <+1200>:	vmovups ymm0,YMMWORD PTR [rdi+rcx*1]
-   0x0000000000006fa5 <+1205>:	vmovups YMMWORD PTR [rsi+rcx*1],ymm0
-   0x0000000000006faa <+1210>:	lea    rdx,[rcx+0x20]
-   0x0000000000006fae <+1214>:	mov    rcx,rdx
-   0x0000000000006fb1 <+1217>:	cmp    rdx,rax
-   0x0000000000006fb4 <+1220>:	jb     0x6fa0 <main+1200>
-   0x0000000000006fb6 <+1222>:	cmp    rax,r15
-   0x0000000000006fb9 <+1225>:	jge    0x717e <main+1678>
-   0x0000000000006fbf <+1231>:	nop
-   0x0000000000006fc0 <+1232>:	movzx  ecx,BYTE PTR [rdi+rax*1]
-   0x0000000000006fc4 <+1236>:	mov    BYTE PTR [rsi+rax*1],cl
-   0x0000000000006fc7 <+1239>:	lea    rcx,[rax+0x1]
-   0x0000000000006fcb <+1243>:	mov    rax,rcx
-   0x0000000000006fce <+1246>:	cmp    rcx,r15
-   0x0000000000006fd1 <+1249>:	jl     0x6fc0 <main+1232>
-   0x0000000000006fd3 <+1251>:	jmp    0x717e <main+1678>
-   0x0000000000006fd8 <+1256>:	mov    edi,0x1
-   0x0000000000006fdd <+1261>:	mov    esi,0x3
-   0x0000000000006fe2 <+1266>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000006fe7 <+1271>:	mov    r15,rax
-   0x0000000000006fea <+1274>:	mov    QWORD PTR [rsp+0x380],rbx
-   0x0000000000006ff2 <+1282>:	mov    rcx,rbx
-   0x0000000000006ff5 <+1285>:	add    rcx,0x3
-   0x0000000000006ff9 <+1289>:	xor    ebx,ebx
-   0x0000000000006ffb <+1291>:	mov    r13d,0x1
-   0x0000000000007001 <+1297>:	mov    r14d,0x3
-   0x0000000000007007 <+1303>:	mov    esi,0x3
-   0x000000000000700c <+1308>:	mov    QWORD PTR [rsp+0x280],rcx
-   0x0000000000007014 <+1316>:	jmp    0x7043 <main+1363>
-   0x0000000000007016 <+1318>:	cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000007020 <+1328>:	mov    rsi,QWORD PTR [rsp+0x100]
-   0x0000000000007028 <+1336>:	mov    rcx,QWORD PTR [rsp+0x280]
-   0x0000000000007030 <+1344>:	dec    r14
-   0x0000000000007033 <+1347>:	mov    BYTE PTR [r15+rbx*1],r12b
-   0x0000000000007037 <+1351>:	inc    rbx
-   0x000000000000703a <+1354>:	inc    r13
-   0x000000000000703d <+1357>:	cmp    rbx,0x3
-   0x0000000000007041 <+1361>:	je     0x70b8 <main+1480>
-   0x0000000000007043 <+1363>:	mov    rax,rcx
-   0x0000000000007046 <+1366>:	sub    rax,r14
-   0x0000000000007049 <+1369>:	movzx  r12d,BYTE PTR [rax]
-   0x000000000000704d <+1373>:	cmp    rbx,rsi
-   0x0000000000007050 <+1376>:	jl     0x7030 <main+1344>
-   0x0000000000007052 <+1378>:	add    rsi,rsi
-   0x0000000000007055 <+1381>:	cmp    rsi,0x2
-   0x0000000000007059 <+1385>:	mov    eax,0x1
-   0x000000000000705e <+1390>:	cmovl  rsi,rax
-   0x0000000000007062 <+1394>:	mov    edi,0x1
-   0x0000000000007067 <+1399>:	mov    QWORD PTR [rsp+0x100],rsi
-   0x000000000000706f <+1407>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000007074 <+1412>:	mov    rdi,r15
-   0x0000000000007077 <+1415>:	mov    r15,rax
-   0x000000000000707a <+1418>:	test   rbx,rbx
-   0x000000000000707d <+1421>:	je     0x70a5 <main+1461>
-   0x000000000000707f <+1423>:	mov    rax,rdi
-   0x0000000000007082 <+1426>:	mov    rcx,r15
-   0x0000000000007085 <+1429>:	mov    rdx,r13
-   0x0000000000007088 <+1432>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000007090 <+1440>:	movzx  esi,BYTE PTR [rax]
-   0x0000000000007093 <+1443>:	mov    BYTE PTR [rcx],sil
-   0x0000000000007096 <+1446>:	dec    rdx
-   0x0000000000007099 <+1449>:	inc    rcx
-   0x000000000000709c <+1452>:	inc    rax
-   0x000000000000709f <+1455>:	cmp    rdx,0x1
-   0x00000000000070a3 <+1459>:	ja     0x7090 <main+1440>
-   0x00000000000070a5 <+1461>:	test   rdi,rdi
-   0x00000000000070a8 <+1464>:	je     0x7020 <main+1328>
-   0x00000000000070ae <+1470>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000070b3 <+1475>:	jmp    0x7020 <main+1328>
-   0x00000000000070b8 <+1480>:	mov    r12,rsi
-   0x00000000000070bb <+1483>:	mov    QWORD PTR [rsp+0x100],r15
-   0x00000000000070c3 <+1491>:	mov    r14d,0x3
-   0x00000000000070c9 <+1497>:	mov    rbx,QWORD PTR [rsp+0x380]
-   0x00000000000070d1 <+1505>:	jmp    0x719f <main+1711>
-   0x00000000000070d6 <+1510>:	mov    edi,0x1
-   0x00000000000070db <+1515>:	mov    rsi,r14
-   0x00000000000070de <+1518>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000070e3 <+1523>:	mov    rsi,rax
-   0x00000000000070e6 <+1526>:	xor    eax,eax
-   0x00000000000070e8 <+1528>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x00000000000070f0 <+1536>:	mov    BYTE PTR [rsi+rax*1],0x0
-   0x00000000000070f4 <+1540>:	inc    rax
-   0x00000000000070f7 <+1543>:	cmp    r14,rax
-   0x00000000000070fa <+1546>:	jne    0x70f0 <main+1536>
-   0x00000000000070fc <+1548>:	cmp    r15,0x4
-   0x0000000000007100 <+1552>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x0000000000007105 <+1557>:	jg     0x7131 <main+1601>
-   0x0000000000007107 <+1559>:	movzx  eax,BYTE PTR [rdi]
-   0x000000000000710a <+1562>:	mov    BYTE PTR [rsi],al
-   0x000000000000710c <+1564>:	movzx  eax,BYTE PTR [rdi+r15*1-0x1]
-   0x0000000000007112 <+1570>:	mov    BYTE PTR [rsi+r15*1-0x1],al
-   0x0000000000007117 <+1575>:	cmp    r15,0x3
-   0x000000000000711b <+1579>:	jl     0x717b <main+1675>
-   0x000000000000711d <+1581>:	movzx  eax,BYTE PTR [rdi+0x1]
-   0x0000000000007121 <+1585>:	mov    BYTE PTR [rsi+0x1],al
-   0x0000000000007124 <+1588>:	movzx  eax,BYTE PTR [rdi+r15*1-0x2]
-   0x000000000000712a <+1594>:	mov    BYTE PTR [rsi+r15*1-0x2],al
-   0x000000000000712f <+1599>:	jmp    0x717b <main+1675>
-   0x0000000000007131 <+1601>:	cmp    r15,0x10
-   0x0000000000007135 <+1605>:	ja     0x714f <main+1631>
-   0x0000000000007137 <+1607>:	cmp    r15,0x8
-   0x000000000000713b <+1611>:	jb     0x716d <main+1661>
-   0x000000000000713d <+1613>:	mov    rax,QWORD PTR [rdi]
-   0x0000000000007140 <+1616>:	mov    QWORD PTR [rsi],rax
-   0x0000000000007143 <+1619>:	mov    rax,QWORD PTR [rdi+r15*1-0x8]
-   0x0000000000007148 <+1624>:	mov    QWORD PTR [rsi+r15*1-0x8],rax
-   0x000000000000714d <+1629>:	jmp    0x717b <main+1675>
-   0x000000000000714f <+1631>:	mov    r12,r14
-   0x0000000000007152 <+1634>:	movabs rcx,0x7fffffffffffffe0
-   0x000000000000715c <+1644>:	mov    rax,r15
-   0x000000000000715f <+1647>:	and    rax,rcx
-   0x0000000000007162 <+1650>:	jne    0x6f94 <main+1188>
-   0x0000000000007168 <+1656>:	jmp    0x6fb6 <main+1222>
-   0x000000000000716d <+1661>:	mov    eax,DWORD PTR [rdi]
-   0x000000000000716f <+1663>:	mov    DWORD PTR [rsi],eax
-   0x0000000000007171 <+1665>:	mov    eax,DWORD PTR [rdi+r15*1-0x4]
-   0x0000000000007176 <+1670>:	mov    DWORD PTR [rsi+r15*1-0x4],eax
-   0x000000000000717b <+1675>:	mov    r12,r14
-   0x000000000000717e <+1678>:	movzx  eax,BYTE PTR [rbx]
-   0x0000000000007181 <+1681>:	mov    BYTE PTR [r15+rsi*1],al
-   0x0000000000007185 <+1685>:	movzx  eax,BYTE PTR [rbx+0x2]
-   0x0000000000007189 <+1689>:	mov    BYTE PTR [r15+rsi*1+0x2],al
-   0x000000000000718e <+1694>:	movzx  eax,BYTE PTR [rbx+0x1]
-   0x0000000000007192 <+1698>:	mov    QWORD PTR [rsp+0x100],rsi
-   0x000000000000719a <+1706>:	mov    BYTE PTR [r15+rsi*1+0x1],al
-   0x000000000000719f <+1711>:	mov    rdi,rbx
-   0x00000000000071a2 <+1714>:	vzeroupper 
-   0x00000000000071a5 <+1717>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000071aa <+1722>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x00000000000071af <+1727>:	test   rdi,rdi
-   0x00000000000071b2 <+1730>:	je     0x71b9 <main+1737>
-   0x00000000000071b4 <+1732>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000071b9 <+1737>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x2c0]
-   0x00000000000071c1 <+1745>:	vmovaps ZMMWORD PTR [rsp+0x840],zmm0
-   0x00000000000071c9 <+1753>:	vmovaps zmm0,ZMMWORD PTR [rsp+0xc0]
-   0x00000000000071d1 <+1761>:	vmovaps ZMMWORD PTR [rsp+0x800],zmm0
-   0x00000000000071d9 <+1769>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x80]
-   0x00000000000071e1 <+1777>:	vmovaps ZMMWORD PTR [rsp+0x880],zmm0
-   0x00000000000071e9 <+1785>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
-   0x00000000000071f1 <+1793>:	vmovaps ZMMWORD PTR [rsp+0x8c0],zmm0
-   0x00000000000071f9 <+1801>:	lea    rdi,[rsp+0x800]
-   0x0000000000007201 <+1809>:	lea    rdx,[rsp+0x1d8]
-   0x0000000000007209 <+1817>:	xor    esi,esi
-   0x000000000000720b <+1819>:	vzeroupper 
-   0x000000000000720e <+1822>:	call   0x9d80 <stdlib::builtin::string::String::format_sequence[*stdlib::utils::_format::Formattable](*$0),Ts=[[simd<128, si16>, {"format_to" : (!kgen.pointer<simd<128, si16>> borrow_in_mem, !kgen.pointer<struct<((!kgen.pointer<none> borrow, !kgen.struct<(pointer<none>, index)> borrow) -> !kgen.none, pointer<none>) memoryOnly>> inout) -> !kgen.none = @"stdlib::builtin::simd::SIMD::format_to(stdlib::builtin::simd::SIMD[$0, $1],stdlib::utils::_format::Formatter&)_thunk"<:dtype si16, 128>, "__del__" : (!kgen.pointer<simd<128, si16>> owned_in_mem) -> !kgen.none = @"stdlib::builtin::simd::SIMD::__del__(stdlib::builtin::simd::SIMD[$0, $1])_thunk"<:dtype si16, 128>}]]>
-   0x0000000000007213 <+1827>:	lea    r15,[r14-0x1]
-   0x0000000000007217 <+1831>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x000000000000721f <+1839>:	test   r9,r9
-   0x0000000000007222 <+1842>:	cmove  r15,r9
-   0x0000000000007226 <+1846>:	test   r15,r15
-   0x0000000000007229 <+1849>:	jle    0x7319 <main+2089>
-   0x000000000000722f <+1855>:	mov    r13,QWORD PTR [rsp+0x1d8]
-   0x0000000000007237 <+1863>:	mov    rbx,QWORD PTR [rsp+0x1e0]
-   0x000000000000723f <+1871>:	dec    rbx
-   0x0000000000007242 <+1874>:	test   r13,r13
-   0x0000000000007245 <+1877>:	cmove  rbx,r13
-   0x0000000000007249 <+1881>:	test   rbx,rbx
-   0x000000000000724c <+1884>:	jle    0x744c <main+2396>
-   0x0000000000007252 <+1890>:	lea    rdx,[rbx+r15*1]
-   0x0000000000007256 <+1894>:	lea    r12,[rbx+r15*1+0x1]
-   0x000000000000725b <+1899>:	movabs rax,0x7fffffffffffffe0
-   0x0000000000007265 <+1909>:	lea    rsi,[rax+0x1e]
-   0x0000000000007269 <+1913>:	xor    eax,eax
-   0x000000000000726b <+1915>:	mov    ecx,0x0
-   0x0000000000007270 <+1920>:	cmp    rdx,rsi
-   0x0000000000007273 <+1923>:	ja     0x72a6 <main+1974>
-   0x0000000000007275 <+1925>:	mov    edi,0x1
-   0x000000000000727a <+1930>:	mov    rsi,r12
-   0x000000000000727d <+1933>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000007282 <+1938>:	mov    rcx,rax
-   0x0000000000007285 <+1941>:	mov    rdx,r12
-   0x0000000000007288 <+1944>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000007290 <+1952>:	mov    BYTE PTR [rcx],0x0
-   0x0000000000007293 <+1955>:	inc    rcx
-   0x0000000000007296 <+1958>:	dec    rdx
-   0x0000000000007299 <+1961>:	jne    0x7290 <main+1952>
-   0x000000000000729b <+1963>:	mov    rcx,r12
-   0x000000000000729e <+1966>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x00000000000072a6 <+1974>:	cmp    r15,0x4
-   0x00000000000072aa <+1978>:	jg     0x7576 <main+2694>
-   0x00000000000072b0 <+1984>:	movzx  edx,BYTE PTR [r9]
-   0x00000000000072b4 <+1988>:	mov    BYTE PTR [rax],dl
-   0x00000000000072b6 <+1990>:	movzx  edx,BYTE PTR [r9+r15*1-0x1]
-   0x00000000000072bc <+1996>:	mov    BYTE PTR [rax+r15*1-0x1],dl
-   0x00000000000072c1 <+2001>:	cmp    r15,0x3
-   0x00000000000072c5 <+2005>:	jl     0x7675 <main+2949>
-   0x00000000000072cb <+2011>:	movzx  edx,BYTE PTR [r9+0x1]
-   0x00000000000072d0 <+2016>:	mov    BYTE PTR [rax+0x1],dl
-   0x00000000000072d3 <+2019>:	movzx  edx,BYTE PTR [r9+r15*1-0x2]
-   0x00000000000072d9 <+2025>:	mov    BYTE PTR [rax+r15*1-0x2],dl
-   0x00000000000072de <+2030>:	add    r15,rax
-   0x00000000000072e1 <+2033>:	lea    rdx,[rbx+0x1]
-   0x00000000000072e5 <+2037>:	cmp    rdx,0x4
-   0x00000000000072e9 <+2041>:	jle    0x7686 <main+2966>
-   0x00000000000072ef <+2047>:	cmp    rbx,0xf
-   0x00000000000072f3 <+2051>:	ja     0x75c0 <main+2768>
-   0x00000000000072f9 <+2057>:	cmp    rdx,0x8
-   0x00000000000072fd <+2061>:	jl     0x76be <main+3022>
-   0x0000000000007303 <+2067>:	mov    rdx,QWORD PTR [r13+0x0]
-   0x0000000000007307 <+2071>:	mov    QWORD PTR [r15],rdx
-   0x000000000000730a <+2074>:	mov    rdx,QWORD PTR [r13+rbx*1-0x7]
-   0x000000000000730f <+2079>:	mov    QWORD PTR [r15+rbx*1-0x7],rdx
-   0x0000000000007314 <+2084>:	jmp    0x76cf <main+3039>
-   0x0000000000007319 <+2089>:	mov    r14,QWORD PTR [rsp+0x1e8]
-   0x0000000000007321 <+2097>:	mov    edi,0x1
-   0x0000000000007326 <+2102>:	mov    rsi,r14
-   0x0000000000007329 <+2105>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x000000000000732e <+2110>:	mov    QWORD PTR [rsp+0x40],rax
-   0x0000000000007333 <+2115>:	mov    QWORD PTR [rsp+0x48],0x0
-   0x000000000000733c <+2124>:	mov    QWORD PTR [rsp+0x50],r14
-   0x0000000000007341 <+2129>:	mov    rax,QWORD PTR [rsp+0x1d8]
-   0x0000000000007349 <+2137>:	mov    r13,QWORD PTR [rsp+0x1e0]
-   0x0000000000007351 <+2145>:	test   r13,r13
-   0x0000000000007354 <+2148>:	jle    0x75b0 <main+2752>
-   0x000000000000735a <+2154>:	mov    QWORD PTR [rsp+0x38],rax
-   0x000000000000735f <+2159>:	lea    rsi,[r13+rax*1+0x0]
-   0x0000000000007364 <+2164>:	xor    eax,eax
-   0x0000000000007366 <+2166>:	mov    rbx,r13
-   0x0000000000007369 <+2169>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x0000000000007371 <+2177>:	mov    QWORD PTR [rsp+0x280],rsi
-   0x0000000000007379 <+2185>:	jmp    0x73a7 <main+2231>
-   0x000000000000737b <+2187>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000007380 <+2192>:	mov    r12,QWORD PTR [rsp+0x40]
-   0x0000000000007385 <+2197>:	lea    rcx,[rbx-0x1]
-   0x0000000000007389 <+2201>:	mov    BYTE PTR [rax+r12*1],r14b
-   0x000000000000738d <+2205>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x0000000000007392 <+2210>:	inc    rax
-   0x0000000000007395 <+2213>:	mov    QWORD PTR [rsp+0x48],rax
-   0x000000000000739a <+2218>:	cmp    rbx,0x1
-   0x000000000000739e <+2222>:	mov    rbx,rcx
-   0x00000000000073a1 <+2225>:	jle    0x756c <main+2684>
-   0x00000000000073a7 <+2231>:	cmp    r13,rbx
-   0x00000000000073aa <+2234>:	mov    ecx,0x0
-   0x00000000000073af <+2239>:	cmovl  rcx,r13
-   0x00000000000073b3 <+2243>:	mov    rdx,rsi
-   0x00000000000073b6 <+2246>:	sub    rdx,rbx
-   0x00000000000073b9 <+2249>:	movzx  r14d,BYTE PTR [rdx+rcx*1]
-   0x00000000000073be <+2254>:	mov    r15,QWORD PTR [rsp+0x50]
-   0x00000000000073c3 <+2259>:	cmp    rax,r15
-   0x00000000000073c6 <+2262>:	jl     0x7380 <main+2192>
-   0x00000000000073c8 <+2264>:	add    r15,r15
-   0x00000000000073cb <+2267>:	cmp    r15,0x2
-   0x00000000000073cf <+2271>:	mov    eax,0x1
-   0x00000000000073d4 <+2276>:	cmovl  r15,rax
-   0x00000000000073d8 <+2280>:	mov    edi,0x1
-   0x00000000000073dd <+2285>:	mov    rsi,r15
-   0x00000000000073e0 <+2288>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000073e5 <+2293>:	mov    r12,rax
-   0x00000000000073e8 <+2296>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x00000000000073ed <+2301>:	test   rax,rax
-   0x00000000000073f0 <+2304>:	mov    ecx,0x0
-   0x00000000000073f5 <+2309>:	cmovle rax,rcx
-   0x00000000000073f9 <+2313>:	jle    0x7419 <main+2345>
-   0x00000000000073fb <+2315>:	inc    rax
-   0x00000000000073fe <+2318>:	xor    ecx,ecx
-   0x0000000000007400 <+2320>:	mov    rdx,QWORD PTR [rsp+0x40]
-   0x0000000000007405 <+2325>:	movzx  edx,BYTE PTR [rcx+rdx*1]
-   0x0000000000007409 <+2329>:	mov    BYTE PTR [r12+rcx*1],dl
-   0x000000000000740d <+2333>:	dec    rax
-   0x0000000000007410 <+2336>:	inc    rcx
-   0x0000000000007413 <+2339>:	cmp    rax,0x1
-   0x0000000000007417 <+2343>:	ja     0x7400 <main+2320>
-   0x0000000000007419 <+2345>:	mov    rdi,QWORD PTR [rsp+0x40]
-   0x000000000000741e <+2350>:	test   rdi,rdi
-   0x0000000000007421 <+2353>:	je     0x7428 <main+2360>
-   0x0000000000007423 <+2355>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000007428 <+2360>:	mov    QWORD PTR [rsp+0x40],r12
-   0x000000000000742d <+2365>:	mov    QWORD PTR [rsp+0x50],r15
-   0x0000000000007432 <+2370>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x0000000000007437 <+2375>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x000000000000743f <+2383>:	mov    rsi,QWORD PTR [rsp+0x280]
-   0x0000000000007447 <+2391>:	jmp    0x7385 <main+2197>
-   0x000000000000744c <+2396>:	mov    edi,0x1
-   0x0000000000007451 <+2401>:	mov    rsi,r12
-   0x0000000000007454 <+2404>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000007459 <+2409>:	mov    QWORD PTR [rsp+0x40],rax
-   0x000000000000745e <+2414>:	mov    QWORD PTR [rsp+0x48],0x0
-   0x0000000000007467 <+2423>:	mov    QWORD PTR [rsp+0x50],r12
-   0x000000000000746c <+2428>:	test   r14,r14
-   0x000000000000746f <+2431>:	jle    0x76b4 <main+3012>
-   0x0000000000007475 <+2437>:	mov    QWORD PTR [rsp+0x38],r13
-   0x000000000000747a <+2442>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x0000000000007482 <+2450>:	lea    rsi,[r14+r9*1]
-   0x0000000000007486 <+2454>:	xor    eax,eax
-   0x0000000000007488 <+2456>:	mov    r13,r14
-   0x000000000000748b <+2459>:	mov    QWORD PTR [rsp+0x280],rsi
-   0x0000000000007493 <+2467>:	jmp    0x74c7 <main+2519>
-   0x0000000000007495 <+2469>:	data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x00000000000074a0 <+2480>:	mov    r12,QWORD PTR [rsp+0x40]
-   0x00000000000074a5 <+2485>:	lea    rcx,[r13-0x1]
-   0x00000000000074a9 <+2489>:	mov    BYTE PTR [rax+r12*1],bl
-   0x00000000000074ad <+2493>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x00000000000074b2 <+2498>:	inc    rax
-   0x00000000000074b5 <+2501>:	mov    QWORD PTR [rsp+0x48],rax
-   0x00000000000074ba <+2506>:	cmp    r13,0x1
-   0x00000000000074be <+2510>:	mov    r13,rcx
-   0x00000000000074c1 <+2513>:	jle    0x756c <main+2684>
-   0x00000000000074c7 <+2519>:	cmp    r14,r13
-   0x00000000000074ca <+2522>:	mov    ecx,0x0
-   0x00000000000074cf <+2527>:	cmovl  rcx,r14
-   0x00000000000074d3 <+2531>:	mov    rdx,rsi
-   0x00000000000074d6 <+2534>:	sub    rdx,r13
-   0x00000000000074d9 <+2537>:	movzx  ebx,BYTE PTR [rdx+rcx*1]
-   0x00000000000074dd <+2541>:	mov    r15,QWORD PTR [rsp+0x50]
-   0x00000000000074e2 <+2546>:	cmp    rax,r15
-   0x00000000000074e5 <+2549>:	jl     0x74a0 <main+2480>
-   0x00000000000074e7 <+2551>:	add    r15,r15
-   0x00000000000074ea <+2554>:	cmp    r15,0x2
-   0x00000000000074ee <+2558>:	mov    eax,0x1
-   0x00000000000074f3 <+2563>:	cmovl  r15,rax
-   0x00000000000074f7 <+2567>:	mov    edi,0x1
-   0x00000000000074fc <+2572>:	mov    rsi,r15
-   0x00000000000074ff <+2575>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000007504 <+2580>:	mov    r12,rax
-   0x0000000000007507 <+2583>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x000000000000750c <+2588>:	test   rax,rax
-   0x000000000000750f <+2591>:	mov    ecx,0x0
-   0x0000000000007514 <+2596>:	cmovle rax,rcx
-   0x0000000000007518 <+2600>:	jle    0x7539 <main+2633>
-   0x000000000000751a <+2602>:	inc    rax
-   0x000000000000751d <+2605>:	xor    ecx,ecx
-   0x000000000000751f <+2607>:	nop
-   0x0000000000007520 <+2608>:	mov    rdx,QWORD PTR [rsp+0x40]
-   0x0000000000007525 <+2613>:	movzx  edx,BYTE PTR [rcx+rdx*1]
-   0x0000000000007529 <+2617>:	mov    BYTE PTR [r12+rcx*1],dl
-   0x000000000000752d <+2621>:	dec    rax
-   0x0000000000007530 <+2624>:	inc    rcx
-   0x0000000000007533 <+2627>:	cmp    rax,0x1
-   0x0000000000007537 <+2631>:	ja     0x7520 <main+2608>
-   0x0000000000007539 <+2633>:	mov    rdi,QWORD PTR [rsp+0x40]
-   0x000000000000753e <+2638>:	test   rdi,rdi
-   0x0000000000007541 <+2641>:	je     0x7548 <main+2648>
-   0x0000000000007543 <+2643>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000007548 <+2648>:	mov    QWORD PTR [rsp+0x40],r12
-   0x000000000000754d <+2653>:	mov    QWORD PTR [rsp+0x50],r15
-   0x0000000000007552 <+2658>:	mov    rax,QWORD PTR [rsp+0x48]
-   0x0000000000007557 <+2663>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x000000000000755f <+2671>:	mov    rsi,QWORD PTR [rsp+0x280]
-   0x0000000000007567 <+2679>:	jmp    0x74a5 <main+2485>
-   0x000000000000756c <+2684>:	mov    r13,QWORD PTR [rsp+0x38]
-   0x0000000000007571 <+2689>:	jmp    0x76de <main+3054>
-   0x0000000000007576 <+2694>:	cmp    r15,0x10
-   0x000000000000757a <+2698>:	ja     0x762b <main+2875>
-   0x0000000000007580 <+2704>:	cmp    r15,0x8
-   0x0000000000007584 <+2708>:	jl     0x8b21 <main+8241>
-   0x000000000000758a <+2714>:	mov    rdx,QWORD PTR [r9]
-   0x000000000000758d <+2717>:	mov    QWORD PTR [rax],rdx
-   0x0000000000007590 <+2720>:	mov    rdx,QWORD PTR [r9+r15*1-0x8]
-   0x0000000000007595 <+2725>:	mov    QWORD PTR [rax+r15*1-0x8],rdx
-   0x000000000000759a <+2730>:	add    r15,rax
-   0x000000000000759d <+2733>:	lea    rdx,[rbx+0x1]
-   0x00000000000075a1 <+2737>:	cmp    rdx,0x4
-   0x00000000000075a5 <+2741>:	jle    0x7686 <main+2966>
-   0x00000000000075ab <+2747>:	jmp    0x72ef <main+2047>
-   0x00000000000075b0 <+2752>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x00000000000075b8 <+2760>:	mov    r13,rax
-   0x00000000000075bb <+2763>:	jmp    0x76de <main+3054>
-   0x00000000000075c0 <+2768>:	mov    rsi,rdx
-   0x00000000000075c3 <+2771>:	movabs rdi,0x7fffffffffffffe0
-   0x00000000000075cd <+2781>:	and    rsi,rdi
-   0x00000000000075d0 <+2784>:	je     0x75f9 <main+2825>
-   0x00000000000075d2 <+2786>:	xor    edi,edi
-   0x00000000000075d4 <+2788>:	data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x00000000000075e0 <+2800>:	vmovups ymm0,YMMWORD PTR [r13+rdi*1+0x0]
-   0x00000000000075e7 <+2807>:	vmovups YMMWORD PTR [r15+rdi*1],ymm0
-   0x00000000000075ed <+2813>:	lea    r8,[rdi+0x20]
-   0x00000000000075f1 <+2817>:	mov    rdi,r8
-   0x00000000000075f4 <+2820>:	cmp    r8,rsi
-   0x00000000000075f7 <+2823>:	jb     0x75e0 <main+2800>
-   0x00000000000075f9 <+2825>:	cmp    rsi,rdx
-   0x00000000000075fc <+2828>:	jge    0x76cf <main+3039>
-   0x0000000000007602 <+2834>:	data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000007610 <+2848>:	movzx  edi,BYTE PTR [r13+rsi*1+0x0]
-   0x0000000000007616 <+2854>:	mov    BYTE PTR [r15+rsi*1],dil
-   0x000000000000761a <+2858>:	lea    rdi,[rsi+0x1]
-   0x000000000000761e <+2862>:	mov    rsi,rdi
-   0x0000000000007621 <+2865>:	cmp    rdx,rdi
-   0x0000000000007624 <+2868>:	jne    0x7610 <main+2848>
-   0x0000000000007626 <+2870>:	jmp    0x76cf <main+3039>
-   0x000000000000762b <+2875>:	mov    rdx,r15
-   0x000000000000762e <+2878>:	movabs rsi,0x7fffffffffffffe0
-   0x0000000000007638 <+2888>:	and    rdx,rsi
-   0x000000000000763b <+2891>:	je     0x7657 <main+2919>
-   0x000000000000763d <+2893>:	xor    esi,esi
-   0x000000000000763f <+2895>:	nop
-   0x0000000000007640 <+2896>:	vmovups ymm0,YMMWORD PTR [r9+rsi*1]
-   0x0000000000007646 <+2902>:	vmovups YMMWORD PTR [rax+rsi*1],ymm0
-   0x000000000000764b <+2907>:	lea    rdi,[rsi+0x20]
-   0x000000000000764f <+2911>:	mov    rsi,rdi
-   0x0000000000007652 <+2914>:	cmp    rdi,rdx
-   0x0000000000007655 <+2917>:	jb     0x7640 <main+2896>
-   0x0000000000007657 <+2919>:	cmp    rdx,r15
-   0x000000000000765a <+2922>:	jge    0x7675 <main+2949>
-   0x000000000000765c <+2924>:	nop    DWORD PTR [rax+0x0]
-   0x0000000000007660 <+2928>:	movzx  esi,BYTE PTR [r9+rdx*1]
-   0x0000000000007665 <+2933>:	mov    BYTE PTR [rax+rdx*1],sil
-   0x0000000000007669 <+2937>:	lea    rsi,[rdx+0x1]
-   0x000000000000766d <+2941>:	mov    rdx,rsi
-   0x0000000000007670 <+2944>:	cmp    rsi,r15
-   0x0000000000007673 <+2947>:	jl     0x7660 <main+2928>
-   0x0000000000007675 <+2949>:	add    r15,rax
-   0x0000000000007678 <+2952>:	lea    rdx,[rbx+0x1]
-   0x000000000000767c <+2956>:	cmp    rdx,0x4
-   0x0000000000007680 <+2960>:	jg     0x72ef <main+2047>
-   0x0000000000007686 <+2966>:	movzx  esi,BYTE PTR [r13+0x0]
-   0x000000000000768b <+2971>:	mov    BYTE PTR [r15],sil
-   0x000000000000768e <+2974>:	movzx  esi,BYTE PTR [r13+rbx*1+0x0]
-   0x0000000000007694 <+2980>:	mov    BYTE PTR [r15+rbx*1],sil
-   0x0000000000007698 <+2984>:	cmp    rdx,0x3
-   0x000000000000769c <+2988>:	jl     0x76cf <main+3039>
-   0x000000000000769e <+2990>:	movzx  edx,BYTE PTR [r13+0x1]
-   0x00000000000076a3 <+2995>:	mov    BYTE PTR [r15+0x1],dl
-   0x00000000000076a7 <+2999>:	movzx  edx,BYTE PTR [r13+rbx*1-0x1]
-   0x00000000000076ad <+3005>:	mov    BYTE PTR [r15+rbx*1-0x1],dl
-   0x00000000000076b2 <+3010>:	jmp    0x76cf <main+3039>
-   0x00000000000076b4 <+3012>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x00000000000076bc <+3020>:	jmp    0x76de <main+3054>
-   0x00000000000076be <+3022>:	mov    edx,DWORD PTR [r13+0x0]
-   0x00000000000076c2 <+3026>:	mov    DWORD PTR [r15],edx
-   0x00000000000076c5 <+3029>:	mov    edx,DWORD PTR [r13+rbx*1-0x3]
-   0x00000000000076ca <+3034>:	mov    DWORD PTR [r15+rbx*1-0x3],edx
-   0x00000000000076cf <+3039>:	mov    QWORD PTR [rsp+0x40],rax
-   0x00000000000076d4 <+3044>:	mov    QWORD PTR [rsp+0x48],r12
-   0x00000000000076d9 <+3049>:	mov    QWORD PTR [rsp+0x50],rcx
-   0x00000000000076de <+3054>:	test   r13,r13
-   0x00000000000076e1 <+3057>:	je     0x76f6 <main+3078>
-   0x00000000000076e3 <+3059>:	mov    rdi,r13
-   0x00000000000076e6 <+3062>:	vzeroupper 
-   0x00000000000076e9 <+3065>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000076ee <+3070>:	mov    r9,QWORD PTR [rsp+0x100]
-   0x00000000000076f6 <+3078>:	test   r9,r9
-   0x00000000000076f9 <+3081>:	je     0x7706 <main+3094>
-   0x00000000000076fb <+3083>:	mov    rdi,r9
-   0x00000000000076fe <+3086>:	vzeroupper 
-   0x0000000000007701 <+3089>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000007706 <+3094>:	mov    QWORD PTR [rsp+0x1f0],0x1
-   0x0000000000007712 <+3106>:	lea    rdi,[rsp+0x40]
-   0x0000000000007717 <+3111>:	lea    rcx,[rsp+0x1f0]
-   0x000000000000771f <+3119>:	xor    esi,esi
-   0x0000000000007721 <+3121>:	xor    edx,edx
-   0x0000000000007723 <+3123>:	vzeroupper 
-   0x0000000000007726 <+3126>:	call   0x9f20 <stdlib::builtin::io::print[*stdlib::builtin::str::Stringable](*$0,stdlib::builtin::bool::Bool,stdlib::builtin::file_descriptor::FileDescriptor),Ts=[[struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>, {"__str__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> borrow_in_mem, !kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> byref_result) -> !kgen.none = @"stdlib::builtin::string::String::__str__(stdlib::builtin::string::String)", "__del__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> owned_in_mem) -> !kgen.none = @"stdlib::builtin::string::String::__del__(stdlib::builtin::string::String)"}]]>
-   0x000000000000772b <+3131>:	mov    rdi,QWORD PTR [rsp+0x40]
-   0x0000000000007730 <+3136>:	test   rdi,rdi
-   0x0000000000007733 <+3139>:	je     0x773a <main+3146>
-   0x0000000000007735 <+3141>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000773a <+3146>:	vxorps xmm0,xmm0,xmm0
-   0x000000000000773e <+3150>:	vmovaps XMMWORD PTR [rsp+0x180],xmm0
-   0x0000000000007747 <+3159>:	mov    ebx,0x1
-   0x000000000000774c <+3164>:	lea    rsi,[rsp+0x180]
-   0x0000000000007754 <+3172>:	mov    edi,0x1
-   0x0000000000007759 <+3177>:	call   0x6490 <clock_gettime@plt>
-   0x000000000000775e <+3182>:	vmovdqa64 zmm11,ZMMWORD PTR [rsp+0x2c0]
-   0x0000000000007766 <+3190>:	vpshufd zmm0,zmm11,0xb1
-   0x000000000000776d <+3197>:	vmovdqa64 zmm8,ZMMWORD PTR [rsp+0xc0]
-   0x0000000000007775 <+3205>:	vpshufd zmm1,zmm8,0xb1
-   0x000000000000777c <+3212>:	vmovdqa64 zmm10,ZMMWORD PTR [rsp+0x140]
-   0x0000000000007784 <+3220>:	vpshufd zmm2,zmm10,0xb1
-   0x000000000000778b <+3227>:	vmovdqa64 zmm9,ZMMWORD PTR [rsp+0x80]
-   0x0000000000007793 <+3235>:	vpshufd zmm3,zmm9,0xb1
-   0x000000000000779a <+3242>:	vpminsw zmm4,zmm9,zmm3
-   0x00000000000077a0 <+3248>:	vpminsw zmm5,zmm10,zmm2
-   0x00000000000077a6 <+3254>:	vpminsw zmm6,zmm8,zmm1
-   0x00000000000077ac <+3260>:	vpminsw zmm7,zmm11,zmm0
-   0x00000000000077b2 <+3266>:	mov    eax,0xcccccccc
-   0x00000000000077b7 <+3271>:	kmovd  k1,eax
-   0x00000000000077bb <+3275>:	vpmaxsw zmm7{k1},zmm11,zmm0
-   0x00000000000077c1 <+3281>:	vpmaxsw zmm6{k1},zmm8,zmm1
-   0x00000000000077c7 <+3287>:	vpmaxsw zmm5{k1},zmm10,zmm2
-   0x00000000000077cd <+3293>:	vpmaxsw zmm4{k1},zmm9,zmm3
-   0x00000000000077d3 <+3299>:	vprold zmm0,zmm4,0x10
-   0x00000000000077da <+3306>:	vprold zmm1,zmm5,0x10
-   0x00000000000077e1 <+3313>:	vprold zmm2,zmm6,0x10
-   0x00000000000077e8 <+3320>:	vprold zmm3,zmm7,0x10
-   0x00000000000077ef <+3327>:	vpminsw zmm8,zmm7,zmm3
-   0x00000000000077f5 <+3333>:	vpminsw zmm9,zmm6,zmm2
-   0x00000000000077fb <+3339>:	vpminsw zmm10,zmm5,zmm1
-   0x0000000000007801 <+3345>:	vpminsw zmm11,zmm4,zmm0
-   0x0000000000007807 <+3351>:	mov    eax,0xaaaaaaaa
-   0x000000000000780c <+3356>:	kmovd  k2,eax
-   0x0000000000007810 <+3360>:	vpmaxsw zmm9{k2},zmm6,zmm2
-   0x0000000000007816 <+3366>:	vpmaxsw zmm8{k2},zmm7,zmm3
-   0x000000000000781c <+3372>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x4179a]        # 0x48fc0
-   0x0000000000007826 <+3382>:	vmovdqa64 zmm3,zmm9
-   0x000000000000782c <+3388>:	vpermt2w zmm3,zmm2,zmm8
-   0x0000000000007832 <+3394>:	vpmaxsw zmm11{k2},zmm4,zmm0
-   0x0000000000007838 <+3400>:	kmovd  DWORD PTR [rsp+0x7c],k2
-   0x000000000000783f <+3407>:	vpmaxsw zmm10{k2},zmm5,zmm1
-   0x0000000000007845 <+3413>:	vpermi2w zmm2,zmm11,zmm10
-   0x000000000000784b <+3419>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x4178b]        # 0x48fe0
-   0x0000000000007855 <+3429>:	vmovdqa64 zmm1,zmm10
-   0x000000000000785b <+3435>:	vpermt2w zmm1,zmm0,zmm11
-   0x0000000000007861 <+3441>:	vpermi2w zmm0,zmm8,zmm9
-   0x0000000000007867 <+3447>:	vpmaxsw zmm4,zmm8,zmm0
-   0x000000000000786d <+3453>:	mov    eax,0x2222bb2b
-   0x0000000000007872 <+3458>:	kmovd  k2,eax
-   0x0000000000007876 <+3462>:	vpminsw zmm4{k2},zmm8,zmm0
-   0x000000000000787c <+3468>:	vpmaxsw zmm0,zmm10,zmm1
-   0x0000000000007882 <+3474>:	vpminsw zmm0{k2},zmm10,zmm1
-   0x0000000000007888 <+3480>:	vpminsw zmm1,zmm11,zmm2
-   0x000000000000788e <+3486>:	mov    eax,0xd4dd4444
-   0x0000000000007893 <+3491>:	kmovd  k2,eax
-   0x0000000000007897 <+3495>:	vpmaxsw zmm1{k2},zmm11,zmm2
-   0x000000000000789d <+3501>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x41759]        # 0x49000
-   0x00000000000078a7 <+3511>:	vmovdqa64 zmm5,zmm1
-   0x00000000000078ad <+3517>:	vpermt2w zmm5,zmm2,zmm0
-   0x00000000000078b3 <+3523>:	vpminsw zmm6,zmm9,zmm3
-   0x00000000000078b9 <+3529>:	vpmaxsw zmm6{k2},zmm9,zmm3
-   0x00000000000078bf <+3535>:	vpermi2w zmm2,zmm6,zmm4
-   0x00000000000078c5 <+3541>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x41751]        # 0x49020
-   0x00000000000078cf <+3551>:	vmovdqa64 zmm7,zmm4
-   0x00000000000078d5 <+3557>:	vpermt2w zmm7,zmm3,zmm6
-   0x00000000000078db <+3563>:	vpermi2w zmm3,zmm0,zmm1
-   0x00000000000078e1 <+3569>:	vpmaxsw zmm8,zmm0,zmm3
-   0x00000000000078e7 <+3575>:	mov    eax,0x90669f
-   0x00000000000078ec <+3580>:	kmovd  k2,eax
-   0x00000000000078f0 <+3584>:	vpminsw zmm8{k2},zmm0,zmm3
-   0x00000000000078f6 <+3590>:	vpmaxsw zmm0,zmm4,zmm7
-   0x00000000000078fc <+3596>:	vpminsw zmm0{k2},zmm4,zmm7
-   0x0000000000007902 <+3602>:	vpminsw zmm3,zmm6,zmm2
-   0x0000000000007908 <+3608>:	mov    eax,0xf9660900
-   0x000000000000790d <+3613>:	kmovd  k2,eax
-   0x0000000000007911 <+3617>:	vpmaxsw zmm3{k2},zmm6,zmm2
-   0x0000000000007917 <+3623>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x4171f]        # 0x49040
-   0x0000000000007921 <+3633>:	vmovdqa64 zmm4,zmm3
-   0x0000000000007927 <+3639>:	vpermt2w zmm4,zmm2,zmm0
-   0x000000000000792d <+3645>:	vpminsw zmm6,zmm1,zmm5
-   0x0000000000007933 <+3651>:	vpmaxsw zmm6{k2},zmm1,zmm5
-   0x0000000000007939 <+3657>:	vpermi2w zmm2,zmm6,zmm8
-   0x000000000000793f <+3663>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x41717]        # 0x49060
-   0x0000000000007949 <+3673>:	vpminsw zmm5,zmm6,zmm2
-   0x000000000000794f <+3679>:	mov    eax,0x66009600
-   0x0000000000007954 <+3684>:	kmovd  k2,eax
-   0x0000000000007958 <+3688>:	vmovdqa64 zmm7,zmm5
-   0x000000000000795e <+3694>:	vpmaxsw zmm7{k2},zmm6,zmm2
-   0x0000000000007964 <+3700>:	vpermt2w zmm6,zmm1,zmm8
-   0x000000000000796a <+3706>:	vpermi2w zmm1,zmm3,zmm0
-   0x0000000000007970 <+3712>:	vpmaxsw zmm2,zmm0,zmm1
-   0x0000000000007976 <+3718>:	mov    eax,0x690066
-   0x000000000000797b <+3723>:	kmovd  k3,eax
-   0x000000000000797f <+3727>:	vpminsw zmm2{k3},zmm0,zmm1
-   0x0000000000007985 <+3733>:	vpmaxsw zmm0,zmm8,zmm6
-   0x000000000000798b <+3739>:	vpminsw zmm0{k3},zmm8,zmm6
-   0x0000000000007991 <+3745>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x416e5]        # 0x49080
-   0x000000000000799b <+3755>:	vmovdqa64 zmm6,zmm7
-   0x00000000000079a1 <+3761>:	vpermt2w zmm6,zmm1,zmm0
-   0x00000000000079a7 <+3767>:	vpminsw zmm8,zmm3,zmm4
-   0x00000000000079ad <+3773>:	vmovdqa64 zmm9,zmm8
-   0x00000000000079b3 <+3779>:	vpmaxsw zmm9{k2},zmm3,zmm4
-   0x00000000000079b9 <+3785>:	vpermi2w zmm1,zmm9,zmm2
-   0x00000000000079bf <+3791>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x416d7]        # 0x490a0
-   0x00000000000079c9 <+3801>:	vpermt2w zmm8,zmm3,zmm2
-   0x00000000000079cf <+3807>:	vpermt2w zmm5,zmm3,zmm0
-   0x00000000000079d5 <+3813>:	vpmaxsw zmm3,zmm2,zmm1
-   0x00000000000079db <+3819>:	mov    eax,0x9069090
-   0x00000000000079e0 <+3824>:	kmovd  k2,eax
-   0x00000000000079e4 <+3828>:	vmovdqa64 zmm4,zmm3
-   0x00000000000079ea <+3834>:	vpminsw zmm4{k2},zmm2,zmm1
-   0x00000000000079f0 <+3840>:	vpminsw zmm1,zmm7,zmm5
-   0x00000000000079f6 <+3846>:	vpminsw zmm2,zmm9,zmm8
-   0x00000000000079fc <+3852>:	mov    eax,0x9096090
-   0x0000000000007a01 <+3857>:	kmovd  k3,eax
-   0x0000000000007a05 <+3861>:	vmovdqa64 zmm10,zmm2
-   0x0000000000007a0b <+3867>:	vpmaxsw zmm10{k3},zmm9,zmm8
-   0x0000000000007a11 <+3873>:	vpmovsxbw zmm8,YMMWORD PTR [rip+0x416a5]        # 0x490c0
-   0x0000000000007a1b <+3883>:	vpermi2w zmm8,zmm10,zmm4
-   0x0000000000007a21 <+3889>:	kmovd  k4,ebx
-   0x0000000000007a25 <+3893>:	vmovdqu16 zmm8{k4},zmm1
-   0x0000000000007a2b <+3899>:	vpmaxsw zmm9,zmm0,zmm6
-   0x0000000000007a31 <+3905>:	vpmovsxbw zmm11,YMMWORD PTR [rip+0x416a5]        # 0x490e0
-   0x0000000000007a3b <+3915>:	vpermi2w zmm11,zmm4,zmm10
-   0x0000000000007a41 <+3921>:	mov    eax,0x80000000
-   0x0000000000007a46 <+3926>:	kmovd  k4,eax
-   0x0000000000007a4a <+3930>:	vpmaxsw zmm1{k3},zmm7,zmm5
-   0x0000000000007a50 <+3936>:	vpmovsxbw zmm5,YMMWORD PTR [rip+0x416a6]        # 0x49100
-   0x0000000000007a5a <+3946>:	vpermi2w zmm5,zmm1,zmm2
-   0x0000000000007a60 <+3952>:	vmovdqu16 zmm11{k4},zmm9
-   0x0000000000007a66 <+3958>:	vpminsw zmm9{k2},zmm0,zmm6
-   0x0000000000007a6c <+3964>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x416aa]        # 0x49120
-   0x0000000000007a76 <+3974>:	vpermi2w zmm0,zmm5,zmm9
-   0x0000000000007a7c <+3980>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x416ba]        # 0x49140
-   0x0000000000007a86 <+3990>:	vpermi2w zmm2,zmm1,zmm3
-   0x0000000000007a8c <+3996>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x416ca]        # 0x49160
-   0x0000000000007a96 <+4006>:	vpermi2w zmm3,zmm9,zmm2
-   0x0000000000007a9c <+4012>:	vpmaxsw zmm2,zmm9,zmm3
-   0x0000000000007aa2 <+4018>:	mov    eax,0x6096960
-   0x0000000000007aa7 <+4023>:	kmovd  k2,eax
-   0x0000000000007aab <+4027>:	vpminsw zmm2{k2},zmm9,zmm3
-   0x0000000000007ab1 <+4033>:	vpmaxsw zmm3,zmm4,zmm11
-   0x0000000000007ab7 <+4039>:	mov    eax,0x86096960
-   0x0000000000007abc <+4044>:	kmovd  k2,eax
-   0x0000000000007ac0 <+4048>:	vpminsw zmm3{k2},zmm4,zmm11
-   0x0000000000007ac6 <+4054>:	vpminsw zmm4,zmm1,zmm0
-   0x0000000000007acc <+4060>:	vpminsw zmm5,zmm10,zmm8
-   0x0000000000007ad2 <+4066>:	mov    eax,0x6969069
-   0x0000000000007ad7 <+4071>:	kmovd  k2,eax
-   0x0000000000007adb <+4075>:	vpmaxsw zmm4{k2},zmm1,zmm0
-   0x0000000000007ae1 <+4081>:	mov    eax,0x6969068
-   0x0000000000007ae6 <+4086>:	kmovd  k2,eax
-   0x0000000000007aea <+4090>:	vpmaxsw zmm5{k2},zmm10,zmm8
-   0x0000000000007af0 <+4096>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x41686]        # 0x49180
-   0x0000000000007afa <+4106>:	vmovdqa64 zmm1,zmm4
-   0x0000000000007b00 <+4112>:	vpermt2w zmm1,zmm0,zmm2
-   0x0000000000007b06 <+4118>:	vpmovsxbw zmm6,YMMWORD PTR [rip+0x41690]        # 0x491a0
-   0x0000000000007b10 <+4128>:	vmovdqa64 zmm7,zmm2
-   0x0000000000007b16 <+4134>:	vpermt2w zmm7,zmm6,zmm4
-   0x0000000000007b1c <+4140>:	vpermi2w zmm0,zmm5,zmm3
-   0x0000000000007b22 <+4146>:	vpermi2w zmm6,zmm3,zmm5
-   0x0000000000007b28 <+4152>:	vpmaxsw zmm8,zmm2,zmm7
-   0x0000000000007b2e <+4158>:	vpmaxsw zmm9,zmm3,zmm6
-   0x0000000000007b34 <+4164>:	vpminsw zmm10,zmm4,zmm1
-   0x0000000000007b3a <+4170>:	vpminsw zmm11,zmm5,zmm0
-   0x0000000000007b40 <+4176>:	mov    eax,0xf0690f
-   0x0000000000007b45 <+4181>:	kmovd  k2,eax
-   0x0000000000007b49 <+4185>:	vpmaxsw zmm10{k2},zmm4,zmm1
-   0x0000000000007b4f <+4191>:	vpmaxsw zmm11{k2},zmm5,zmm0
-   0x0000000000007b55 <+4197>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x41661]        # 0x491c0
-   0x0000000000007b5f <+4207>:	vmovdqa64 zmm1,zmm10
-   0x0000000000007b65 <+4213>:	vpermt2w zmm1,zmm0,zmm8
-   0x0000000000007b6b <+4219>:	vpermi2w zmm0,zmm11,zmm9
-   0x0000000000007b71 <+4225>:	mov    eax,0x960f00
-   0x0000000000007b76 <+4230>:	kmovd  k2,eax
-   0x0000000000007b7a <+4234>:	vpminsw zmm8{k2},zmm2,zmm7
-   0x0000000000007b80 <+4240>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x41656]        # 0x491e0
-   0x0000000000007b8a <+4250>:	vmovdqa64 zmm4,zmm8
-   0x0000000000007b90 <+4256>:	vpermt2w zmm4,zmm2,zmm10
-   0x0000000000007b96 <+4262>:	vpminsw zmm9{k2},zmm3,zmm6
-   0x0000000000007b9c <+4268>:	vpermi2w zmm2,zmm9,zmm11
-   0x0000000000007ba2 <+4274>:	vpmaxsw zmm3,zmm8,zmm4
-   0x0000000000007ba8 <+4280>:	mov    eax,0x690f09
-   0x0000000000007bad <+4285>:	kmovd  k2,eax
-   0x0000000000007bb1 <+4289>:	vpminsw zmm3{k2},zmm8,zmm4
-   0x0000000000007bb7 <+4295>:	vpmaxsw zmm4,zmm9,zmm2
-   0x0000000000007bbd <+4301>:	vpminsw zmm4{k2},zmm9,zmm2
-   0x0000000000007bc3 <+4307>:	vpmaxsw zmm2,zmm10,zmm1
-   0x0000000000007bc9 <+4313>:	mov    eax,0x6f0f6960
-   0x0000000000007bce <+4318>:	kmovd  k2,eax
-   0x0000000000007bd2 <+4322>:	vpminsw zmm2{k2},zmm10,zmm1
-   0x0000000000007bd8 <+4328>:	vpmaxsw zmm1,zmm11,zmm0
-   0x0000000000007bde <+4334>:	vpminsw zmm1{k2},zmm11,zmm0
-   0x0000000000007be4 <+4340>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x41612]        # 0x49200
-   0x0000000000007bee <+4350>:	vpermw zmm5,zmm0,zmm3
-   0x0000000000007bf4 <+4356>:	vpmovsxbw zmm6,YMMWORD PTR [rip+0x41622]        # 0x49220
-   0x0000000000007bfe <+4366>:	vpermw zmm7,zmm6,zmm2
-   0x0000000000007c04 <+4372>:	vpermw zmm0,zmm0,zmm4
-   0x0000000000007c0a <+4378>:	vpermw zmm6,zmm6,zmm1
-   0x0000000000007c10 <+4384>:	vpminsw zmm8,zmm3,zmm5
-   0x0000000000007c16 <+4390>:	vpmaxsw zmm3,zmm3,zmm5
-   0x0000000000007c1c <+4396>:	mov    eax,0x6069f
-   0x0000000000007c21 <+4401>:	kmovd  k2,eax
-   0x0000000000007c25 <+4405>:	vmovdqu16 zmm3{k2},zmm8
-   0x0000000000007c2b <+4411>:	vpminsw zmm5,zmm4,zmm0
-   0x0000000000007c31 <+4417>:	vpmaxsw zmm0,zmm4,zmm0
-   0x0000000000007c37 <+4423>:	vmovdqu16 zmm0{k2},zmm5
-   0x0000000000007c3d <+4429>:	vpmaxsw zmm4,zmm2,zmm7
-   0x0000000000007c43 <+4435>:	mov    eax,0x69f0600
-   0x0000000000007c48 <+4440>:	kmovd  k2,eax
-   0x0000000000007c4c <+4444>:	vpminsw zmm4{k2},zmm2,zmm7
-   0x0000000000007c52 <+4450>:	vpmaxsw zmm2,zmm1,zmm6
-   0x0000000000007c58 <+4456>:	vpminsw zmm2{k2},zmm1,zmm6
-   0x0000000000007c5e <+4462>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x415d8]        # 0x49240
-   0x0000000000007c68 <+4472>:	vmovdqa64 zmm6,zmm3
-   0x0000000000007c6e <+4478>:	vpermt2w zmm6,zmm1,zmm4
-   0x0000000000007c74 <+4484>:	vpmovsxbw zmm7,YMMWORD PTR [rip+0x415e2]        # 0x49260
-   0x0000000000007c7e <+4494>:	vmovdqa64 zmm9,zmm4
-   0x0000000000007c84 <+4500>:	vpermt2w zmm9,zmm7,zmm8
-   0x0000000000007c8a <+4506>:	vpermi2w zmm1,zmm0,zmm2
-   0x0000000000007c90 <+4512>:	vpermi2w zmm7,zmm2,zmm5
-   0x0000000000007c96 <+4518>:	vpmaxsw zmm5,zmm3,zmm6
-   0x0000000000007c9c <+4524>:	mov    eax,0x90f6
-   0x0000000000007ca1 <+4529>:	kmovd  k2,eax
-   0x0000000000007ca5 <+4533>:	vpminsw zmm5{k2},zmm3,zmm6
-   0x0000000000007cab <+4539>:	vpmaxsw zmm3,zmm0,zmm1
-   0x0000000000007cb1 <+4545>:	vpminsw zmm3{k2},zmm0,zmm1
-   0x0000000000007cb7 <+4551>:	vpmaxsw zmm0,zmm4,zmm9
-   0x0000000000007cbd <+4557>:	mov    eax,0x90f69000
-   0x0000000000007cc2 <+4562>:	kmovd  k2,eax
-   0x0000000000007cc6 <+4566>:	vpminsw zmm0{k2},zmm4,zmm9
-   0x0000000000007ccc <+4572>:	vpmaxsw zmm1,zmm2,zmm7
-   0x0000000000007cd2 <+4578>:	vpminsw zmm1{k2},zmm2,zmm7
-   0x0000000000007cd8 <+4584>:	vpmovsxbw zmm4,YMMWORD PTR [rip+0x4159e]        # 0x49280
-   0x0000000000007ce2 <+4594>:	vmovdqa64 zmm6,zmm5
-   0x0000000000007ce8 <+4600>:	vpermt2w zmm6,zmm4,zmm0
-   0x0000000000007cee <+4606>:	vpmovsxbw zmm7,YMMWORD PTR [rip+0x415a8]        # 0x492a0
-   0x0000000000007cf8 <+4616>:	vmovdqa64 zmm2,zmm0
-   0x0000000000007cfe <+4622>:	vpermt2w zmm2,zmm7,zmm5
-   0x0000000000007d04 <+4628>:	vpermi2w zmm4,zmm3,zmm1
-   0x0000000000007d0a <+4634>:	vpermi2w zmm7,zmm1,zmm3
-   0x0000000000007d10 <+4640>:	vpmaxsw zmm8,zmm0,zmm2
-   0x0000000000007d16 <+4646>:	mov    eax,0xe8e06666
-   0x0000000000007d1b <+4651>:	kmovd  k2,eax
-   0x0000000000007d1f <+4655>:	vpminsw zmm8{k2},zmm0,zmm2
-   0x0000000000007d25 <+4661>:	vpmaxsw zmm2,zmm5,zmm6
-   0x0000000000007d2b <+4667>:	mov    eax,0xe8e0
-   0x0000000000007d30 <+4672>:	kmovd  k3,eax
-   0x0000000000007d34 <+4676>:	vpminsw zmm2{k3},zmm5,zmm6
-   0x0000000000007d3a <+4682>:	vpmaxsw zmm5,zmm1,zmm7
-   0x0000000000007d40 <+4688>:	vpminsw zmm5{k2},zmm1,zmm7
-   0x0000000000007d46 <+4694>:	vpmaxsw zmm6,zmm3,zmm4
-   0x0000000000007d4c <+4700>:	vpminsw zmm6{k3},zmm3,zmm4
-   0x0000000000007d52 <+4706>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x41564]        # 0x492c0
-   0x0000000000007d5c <+4716>:	vmovdqa64 zmm7,zmm2
-   0x0000000000007d62 <+4722>:	vpermt2w zmm7,zmm3,zmm8
-   0x0000000000007d68 <+4728>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x4156e]        # 0x492e0
-   0x0000000000007d72 <+4738>:	vmovdqa64 zmm9,zmm8
-   0x0000000000007d78 <+4744>:	vpermt2w zmm9,zmm1,zmm2
-   0x0000000000007d7e <+4750>:	vpermi2w zmm3,zmm6,zmm5
-   0x0000000000007d84 <+4756>:	mov    rax,QWORD PTR [rsp+0x180]
-   0x0000000000007d8c <+4764>:	mov    QWORD PTR [rsp+0x1c8],rax
-   0x0000000000007d94 <+4772>:	vpermi2w zmm1,zmm5,zmm6
-   0x0000000000007d9a <+4778>:	vpminsw zmm10,zmm5,zmm1
-   0x0000000000007da0 <+4784>:	mov    eax,0xb3931331
-   0x0000000000007da5 <+4789>:	kmovd  k3,eax
-   0x0000000000007da9 <+4793>:	vmovdqa64 zmm0,zmm10
-   0x0000000000007daf <+4799>:	vpmaxsw zmm0{k3},zmm5,zmm1
-   0x0000000000007db5 <+4805>:	vpmaxsw zmm5,zmm6,zmm3
-   0x0000000000007dbb <+4811>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x4153b]        # 0x49300
-   0x0000000000007dc5 <+4821>:	vpermi2w zmm1,zmm0,zmm5
-   0x0000000000007dcb <+4827>:	vpminsw zmm4,zmm8,zmm9
-   0x0000000000007dd1 <+4833>:	mov    eax,0x2
-   0x0000000000007dd6 <+4838>:	kmovd  k2,eax
-   0x0000000000007dda <+4842>:	vmovdqu16 zmm1{k2},zmm4
-   0x0000000000007de0 <+4848>:	mov    eax,0x8880088
-   0x0000000000007de5 <+4853>:	kmovd  k2,eax
-   0x0000000000007de9 <+4857>:	vpmaxsw zmm4{k3},zmm8,zmm9
-   0x0000000000007def <+4863>:	vbroadcasti64x4 zmm8,YMMWORD PTR [rip+0x411a7]        # 0x48fa0
-   0x0000000000007df9 <+4873>:	vpermi2d zmm8,zmm4,zmm5
-   0x0000000000007dff <+4879>:	vpminsw zmm5{k2},zmm6,zmm3
-   0x0000000000007e05 <+4885>:	vpmovsxbw zmm6,YMMWORD PTR [rip+0x41511]        # 0x49320
-   0x0000000000007e0f <+4895>:	vpermi2w zmm6,zmm5,zmm0
-   0x0000000000007e15 <+4901>:	mov    rax,QWORD PTR [rsp+0x188]
-   0x0000000000007e1d <+4909>:	mov    QWORD PTR [rsp+0x1c0],rax
-   0x0000000000007e25 <+4917>:	vpmaxsw zmm3,zmm2,zmm7
-   0x0000000000007e2b <+4923>:	vpmovsxbw zmm9,YMMWORD PTR [rip+0x4150b]        # 0x49340
-   0x0000000000007e35 <+4933>:	vpermi2w zmm9,zmm4,zmm10
-   0x0000000000007e3b <+4939>:	mov    eax,0x40000000
-   0x0000000000007e40 <+4944>:	kmovd  k3,eax
-   0x0000000000007e44 <+4948>:	vmovdqu16 zmm6{k3},zmm3
-   0x0000000000007e4a <+4954>:	vpmovsxbw zmm10,YMMWORD PTR [rip+0x4150c]        # 0x49360
-   0x0000000000007e54 <+4964>:	vpermi2w zmm10,zmm9,zmm3
-   0x0000000000007e5a <+4970>:	vpminsw zmm3{k2},zmm2,zmm7
-   0x0000000000007e60 <+4976>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x41516]        # 0x49380
-   0x0000000000007e6a <+4986>:	vpermi2w zmm2,zmm3,zmm8
-   0x0000000000007e70 <+4992>:	vpminsw zmm7,zmm4,zmm10
-   0x0000000000007e76 <+4998>:	vpmaxsw zmm8,zmm5,zmm6
-   0x0000000000007e7c <+5004>:	mov    eax,0x4a00ca4c
-   0x0000000000007e81 <+5009>:	kmovd  k2,eax
-   0x0000000000007e85 <+5013>:	vpmaxsw zmm4,zmm4,zmm10
-   0x0000000000007e8b <+5019>:	mov    eax,0xc48cd9ac
-   0x0000000000007e90 <+5024>:	kmovd  k3,eax
-   0x0000000000007e94 <+5028>:	vmovdqu16 zmm4{k3},zmm7
-   0x0000000000007e9a <+5034>:	vpmovsxbw zmm9,YMMWORD PTR [rip+0x414fc]        # 0x493a0
-   0x0000000000007ea4 <+5044>:	vpermi2w zmm9,zmm4,zmm8
-   0x0000000000007eaa <+5050>:	vpminsw zmm8{k2},zmm5,zmm6
-   0x0000000000007eb0 <+5056>:	vpminsw zmm5,zmm0,zmm1
-   0x0000000000007eb6 <+5062>:	mov    eax,0x3b732651
-   0x0000000000007ebb <+5067>:	kmovd  k2,eax
-   0x0000000000007ebf <+5071>:	vpmovsxbw zmm6,YMMWORD PTR [rip+0x414f7]        # 0x493c0
-   0x0000000000007ec9 <+5081>:	vpermi2w zmm6,zmm4,zmm5
-   0x0000000000007ecf <+5087>:	vpmaxsw zmm5{k2},zmm0,zmm1
-   0x0000000000007ed5 <+5093>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x41501]        # 0x493e0
-   0x0000000000007edf <+5103>:	vpermi2w zmm0,zmm5,zmm8
-   0x0000000000007ee5 <+5109>:	mov    eax,0x4
-   0x0000000000007eea <+5114>:	kmovd  k2,eax
-   0x0000000000007eee <+5118>:	vmovdqu16 zmm0{k2},zmm7
-   0x0000000000007ef4 <+5124>:	vpmaxsw zmm1,zmm3,zmm2
-   0x0000000000007efa <+5130>:	mov    eax,0xa00ca4c
-   0x0000000000007eff <+5135>:	kmovd  k2,eax
-   0x0000000000007f03 <+5139>:	vpmovsxbw zmm7,YMMWORD PTR [rip+0x414f3]        # 0x49400
-   0x0000000000007f0d <+5149>:	vpermi2w zmm7,zmm8,zmm5
-   0x0000000000007f13 <+5155>:	mov    eax,0x20000000
-   0x0000000000007f18 <+5160>:	kmovd  k3,eax
-   0x0000000000007f1c <+5164>:	vmovdqu16 zmm7{k3},zmm1
-   0x0000000000007f22 <+5170>:	vpminsw zmm1{k2},zmm3,zmm2
-   0x0000000000007f28 <+5176>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x414ee]        # 0x49420
-   0x0000000000007f32 <+5186>:	vpermi2w zmm2,zmm1,zmm9
-   0x0000000000007f38 <+5192>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x414fe]        # 0x49440
-   0x0000000000007f42 <+5202>:	vpermi2w zmm3,zmm6,zmm1
-   0x0000000000007f48 <+5208>:	vpmaxsw zmm6,zmm4,zmm3
-   0x0000000000007f4e <+5214>:	mov    eax,0x88ca8888
-   0x0000000000007f53 <+5219>:	kmovd  k2,eax
-   0x0000000000007f57 <+5223>:	vpminsw zmm6{k2},zmm4,zmm3
-   0x0000000000007f5d <+5229>:	vpmaxsw zmm3,zmm1,zmm2
-   0x0000000000007f63 <+5235>:	mov    eax,0x2466
-   0x0000000000007f68 <+5240>:	kmovd  k2,eax
-   0x0000000000007f6c <+5244>:	vpminsw zmm3{k2},zmm1,zmm2
-   0x0000000000007f72 <+5250>:	vpmaxsw zmm1,zmm5,zmm0
-   0x0000000000007f78 <+5256>:	mov    eax,0x88ca888c
-   0x0000000000007f7d <+5261>:	kmovd  k2,eax
-   0x0000000000007f81 <+5265>:	vpminsw zmm1{k2},zmm5,zmm0
-   0x0000000000007f87 <+5271>:	vpmaxsw zmm0,zmm8,zmm7
-   0x0000000000007f8d <+5277>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x414c9]        # 0x49460
-   0x0000000000007f97 <+5287>:	vmovdqa64 zmm4,zmm3
-   0x0000000000007f9d <+5293>:	vpermt2w zmm4,zmm2,zmm6
-   0x0000000000007fa3 <+5299>:	mov    eax,0x20002466
-   0x0000000000007fa8 <+5304>:	kmovd  k2,eax
-   0x0000000000007fac <+5308>:	vpminsw zmm0{k2},zmm8,zmm7
-   0x0000000000007fb2 <+5314>:	vpmovsxbw zmm5,YMMWORD PTR [rip+0x414c4]        # 0x49480
-   0x0000000000007fbc <+5324>:	vmovdqa64 zmm7,zmm6
-   0x0000000000007fc2 <+5330>:	vpermt2w zmm7,zmm5,zmm3
-   0x0000000000007fc8 <+5336>:	vpermi2w zmm2,zmm0,zmm1
-   0x0000000000007fce <+5342>:	vpermi2w zmm5,zmm1,zmm0
-   0x0000000000007fd4 <+5348>:	vpmaxsw zmm8,zmm6,zmm7
-   0x0000000000007fda <+5354>:	mov    eax,0xeeca8888
-   0x0000000000007fdf <+5359>:	kmovd  k3,eax
-   0x0000000000007fe3 <+5363>:	vpminsw zmm8{k3},zmm6,zmm7
-   0x0000000000007fe9 <+5369>:	vpmaxsw zmm6,zmm3,zmm4
-   0x0000000000007fef <+5375>:	mov    eax,0xac88
-   0x0000000000007ff4 <+5380>:	kmovd  k2,eax
-   0x0000000000007ff8 <+5384>:	vpmovsxbw zmm7,YMMWORD PTR [rip+0x4149e]        # 0x494a0
-   0x0000000000008002 <+5394>:	vmovdqa64 zmm9,zmm8
-   0x0000000000008008 <+5400>:	vpermt2w zmm9,zmm7,zmm6
-   0x000000000000800e <+5406>:	vpminsw zmm6{k2},zmm3,zmm4
-   0x0000000000008014 <+5412>:	vpmaxsw zmm3,zmm1,zmm5
-   0x000000000000801a <+5418>:	vpminsw zmm3{k3},zmm1,zmm5
-   0x0000000000008020 <+5424>:	vpmaxsw zmm1,zmm0,zmm2
-   0x0000000000008026 <+5430>:	vpermi2w zmm7,zmm3,zmm1
-   0x000000000000802c <+5436>:	vpminsw zmm1{k2},zmm0,zmm2
-   0x0000000000008032 <+5442>:	vpmovsxbw zmm0,YMMWORD PTR [rip+0x41484]        # 0x494c0
-   0x000000000000803c <+5452>:	vmovdqa64 zmm2,zmm6
-   0x0000000000008042 <+5458>:	vpermt2w zmm2,zmm0,zmm8
-   0x0000000000008048 <+5464>:	vpermi2w zmm0,zmm1,zmm3
-   0x000000000000804e <+5470>:	vpmaxsw zmm4,zmm6,zmm2
-   0x0000000000008054 <+5476>:	mov    eax,0x44caaa
-   0x0000000000008059 <+5481>:	kmovd  k2,eax
-   0x000000000000805d <+5485>:	vpminsw zmm4{k2},zmm6,zmm2
-   0x0000000000008063 <+5491>:	vpmaxsw zmm2,zmm1,zmm0
-   0x0000000000008069 <+5497>:	vpminsw zmm2{k2},zmm1,zmm0
-   0x000000000000806f <+5503>:	vpmaxsw zmm0,zmm8,zmm9
-   0x0000000000008075 <+5509>:	mov    eax,0xaaaccc88
-   0x000000000000807a <+5514>:	kmovd  k2,eax
-   0x000000000000807e <+5518>:	vpminsw zmm0{k2},zmm8,zmm9
-   0x0000000000008084 <+5524>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x41452]        # 0x494e0
-   0x000000000000808e <+5534>:	vmovdqa64 zmm5,zmm4
-   0x0000000000008094 <+5540>:	vpermt2w zmm5,zmm1,zmm0
-   0x000000000000809a <+5546>:	vpmaxsw zmm6,zmm3,zmm7
-   0x00000000000080a0 <+5552>:	vpminsw zmm6{k2},zmm3,zmm7
-   0x00000000000080a6 <+5558>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x41450]        # 0x49500
-   0x00000000000080b0 <+5568>:	vmovdqa64 zmm7,zmm0
-   0x00000000000080b6 <+5574>:	vpermt2w zmm7,zmm3,zmm4
-   0x00000000000080bc <+5580>:	vpermi2w zmm1,zmm2,zmm6
-   0x00000000000080c2 <+5586>:	vpermi2w zmm3,zmm6,zmm2
-   0x00000000000080c8 <+5592>:	vpmaxsw zmm8,zmm0,zmm7
-   0x00000000000080ce <+5598>:	mov    eax,0xcaacaa88
-   0x00000000000080d3 <+5603>:	kmovd  k2,eax
-   0x00000000000080d7 <+5607>:	vpminsw zmm8{k2},zmm0,zmm7
-   0x00000000000080dd <+5613>:	vpmaxsw zmm0,zmm4,zmm5
-   0x00000000000080e3 <+5619>:	mov    eax,0xaacaac
-   0x00000000000080e8 <+5624>:	kmovd  k3,eax
-   0x00000000000080ec <+5628>:	vpminsw zmm0{k3},zmm4,zmm5
-   0x00000000000080f2 <+5634>:	vpmaxsw zmm4,zmm6,zmm3
-   0x00000000000080f8 <+5640>:	vpminsw zmm4{k2},zmm6,zmm3
-   0x00000000000080fe <+5646>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x41418]        # 0x49520
-   0x0000000000008108 <+5656>:	vmovdqa64 zmm5,zmm0
-   0x000000000000810e <+5662>:	vpermt2w zmm5,zmm3,zmm8
-   0x0000000000008114 <+5668>:	vpmaxsw zmm6,zmm2,zmm1
-   0x000000000000811a <+5674>:	vpminsw zmm6{k3},zmm2,zmm1
-   0x0000000000008120 <+5680>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x41416]        # 0x49540
-   0x000000000000812a <+5690>:	vmovdqa64 zmm2,zmm8
-   0x0000000000008130 <+5696>:	vpermt2w zmm2,zmm1,zmm0
-   0x0000000000008136 <+5702>:	vpermi2w zmm3,zmm6,zmm4
-   0x000000000000813c <+5708>:	vpermi2w zmm1,zmm4,zmm6
-   0x0000000000008142 <+5714>:	vpmaxsw zmm7,zmm8,zmm2
-   0x0000000000008148 <+5720>:	mov    eax,0xaccaccc8
-   0x000000000000814d <+5725>:	kmovd  k3,eax
-   0x0000000000008151 <+5729>:	vpminsw zmm7{k3},zmm8,zmm2
-   0x0000000000008157 <+5735>:	vpmaxsw zmm2,zmm0,zmm5
-   0x000000000000815d <+5741>:	mov    eax,0x4ccacca
-   0x0000000000008162 <+5746>:	kmovd  k2,eax
-   0x0000000000008166 <+5750>:	vpmovsxbw zmm8,YMMWORD PTR [rip+0x413f0]        # 0x49560
-   0x0000000000008170 <+5760>:	vmovdqa64 zmm9,zmm7
-   0x0000000000008176 <+5766>:	vpermt2w zmm9,zmm8,zmm2
-   0x000000000000817c <+5772>:	vpminsw zmm2{k2},zmm0,zmm5
-   0x0000000000008182 <+5778>:	vpmaxsw zmm0,zmm4,zmm1
-   0x0000000000008188 <+5784>:	vpminsw zmm0{k3},zmm4,zmm1
-   0x000000000000818e <+5790>:	vpmaxsw zmm1,zmm6,zmm3
-   0x0000000000008194 <+5796>:	vpermi2w zmm8,zmm0,zmm1
-   0x000000000000819a <+5802>:	vpminsw zmm1{k2},zmm6,zmm3
-   0x00000000000081a0 <+5808>:	vpmovsxbw zmm3,YMMWORD PTR [rip+0x413d6]        # 0x49580
-   0x00000000000081aa <+5818>:	vmovdqa64 zmm4,zmm2
-   0x00000000000081b0 <+5824>:	vpermt2w zmm4,zmm3,zmm7
-   0x00000000000081b6 <+5830>:	vpermi2w zmm3,zmm1,zmm0
-   0x00000000000081bc <+5836>:	vpmaxsw zmm5,zmm2,zmm4
-   0x00000000000081c2 <+5842>:	mov    eax,0xaaaaaaa
-   0x00000000000081c7 <+5847>:	kmovd  k3,eax
-   0x00000000000081cb <+5851>:	vpminsw zmm5{k3},zmm2,zmm4
-   0x00000000000081d1 <+5857>:	vpmaxsw zmm2,zmm1,zmm3
-   0x00000000000081d7 <+5863>:	vpmaxsw zmm4,zmm7,zmm9
-   0x00000000000081dd <+5869>:	mov    eax,0xaaaaaaa8
-   0x00000000000081e2 <+5874>:	kmovd  k4,eax
-   0x00000000000081e6 <+5878>:	vpminsw zmm4{k4},zmm7,zmm9
-   0x00000000000081ec <+5884>:	vpmaxsw zmm6,zmm0,zmm8
-   0x00000000000081f2 <+5890>:	mov    eax,0xe0000000
-   0x00000000000081f7 <+5895>:	kmovd  k2,eax
-   0x00000000000081fb <+5899>:	vpblendmw zmm7{k2},zmm5,zmm2
-   0x0000000000008201 <+5905>:	vpminsw zmm2{k3},zmm1,zmm3
-   0x0000000000008207 <+5911>:	mov    eax,0x7
-   0x000000000000820c <+5916>:	kmovd  k3,eax
-   0x0000000000008210 <+5920>:	vpblendmw zmm1{k3},zmm4,zmm6
-   0x0000000000008216 <+5926>:	vpminsw zmm6{k4},zmm0,zmm8
-   0x000000000000821c <+5932>:	vpblendmw zmm0{k2},zmm2,zmm5
-   0x0000000000008222 <+5938>:	vpblendmw zmm3{k3},zmm6,zmm4
-   0x0000000000008228 <+5944>:	vpminsw zmm8,zmm2,zmm7
-   0x000000000000822e <+5950>:	vpminsw zmm9,zmm6,zmm1
-   0x0000000000008234 <+5956>:	vpmaxsw zmm0,zmm5,zmm0
-   0x000000000000823a <+5962>:	vpmaxsw zmm8{k2},zmm2,zmm7
-   0x0000000000008240 <+5968>:	vpmaxsw zmm9{k3},zmm6,zmm1
-   0x0000000000008246 <+5974>:	vpmaxsw zmm1,zmm4,zmm3
-   0x000000000000824c <+5980>:	vpminsw zmm2,zmm8,zmm1
-   0x0000000000008252 <+5986>:	vpmaxsw zmm1,zmm1,zmm8
-   0x0000000000008258 <+5992>:	vshufi64x2 zmm3,zmm1,zmm0,0xee
-   0x000000000000825f <+5999>:	vshufi64x2 zmm4,zmm2,zmm0,0x4e
-   0x0000000000008266 <+6006>:	vshufi64x2 zmm5,zmm9,zmm1,0x4e
-   0x000000000000826d <+6013>:	vinserti64x4 zmm6,zmm9,ymm2,0x1
-   0x0000000000008274 <+6020>:	vpmaxsw zmm7,zmm1,zmm4
-   0x000000000000827a <+6026>:	mov    eax,0xffff0000
-   0x000000000000827f <+6031>:	kmovd  k2,eax
-   0x0000000000008283 <+6035>:	vmovdqa64 zmm8,zmm7
-   0x0000000000008289 <+6041>:	vpminsw zmm8{k2},zmm1,zmm4
-   0x000000000000828f <+6047>:	vpmaxsw zmm1,zmm9,zmm6
-   0x0000000000008295 <+6053>:	vpminsw zmm1{k2},zmm9,zmm6
-   0x000000000000829b <+6059>:	vpminsw zmm4,zmm2,zmm5
-   0x00000000000082a1 <+6065>:	vpmaxsw zmm0,zmm0,zmm3
-   0x00000000000082a7 <+6071>:	vpmaxsw zmm2,zmm2,zmm5
-   0x00000000000082ad <+6077>:	vshufi64x2 zmm3,zmm2,zmm4,0xe4
-   0x00000000000082b4 <+6084>:	vpmovsxbq zmm5,QWORD PTR [rip+0x413b2]        # 0x49670
-   0x00000000000082be <+6094>:	vpermi2q zmm5,zmm1,zmm2
-   0x00000000000082c4 <+6100>:	vpmovsxbq zmm2,QWORD PTR [rip+0x413aa]        # 0x49678
-   0x00000000000082ce <+6110>:	vmovdqa64 zmm6,zmm8
-   0x00000000000082d4 <+6116>:	vpermt2q zmm6,zmm2,zmm4
-   0x00000000000082da <+6122>:	vinserti32x4 zmm4,zmm6,xmm0,0x3
-   0x00000000000082e1 <+6129>:	vpmovsxbq zmm6,QWORD PTR [rip+0x41395]        # 0x49680
-   0x00000000000082eb <+6139>:	vpermi2q zmm6,zmm0,zmm8
-   0x00000000000082f1 <+6145>:	vpermi2q zmm2,zmm3,zmm1
-   0x00000000000082f7 <+6151>:	vinserti32x4 zmm2,zmm2,xmm7,0x3
-   0x00000000000082fe <+6158>:	vpminsw zmm7,zmm3,zmm2
-   0x0000000000008304 <+6164>:	vpmaxsw zmm2,zmm3,zmm2
-   0x000000000000830a <+6170>:	mov    al,0xcc
-   0x000000000000830c <+6172>:	kmovd  k2,eax
-   0x0000000000008310 <+6176>:	vpblendmq zmm3{k2},zmm2,zmm7
-   0x0000000000008316 <+6182>:	vpmaxsw zmm9,zmm0,zmm6
-   0x000000000000831c <+6188>:	mov    eax,0xff00
-   0x0000000000008321 <+6193>:	kmovd  k2,eax
-   0x0000000000008325 <+6197>:	vpmaxsw zmm10,zmm8,zmm4
-   0x000000000000832b <+6203>:	mov    eax,0xff00ff00
-   0x0000000000008330 <+6208>:	kmovd  k3,eax
-   0x0000000000008334 <+6212>:	vmovdqa64 zmm11,zmm10
-   0x000000000000833a <+6218>:	vpminsw zmm11{k3},zmm8,zmm4
-   0x0000000000008340 <+6224>:	vpmovsxbq zmm4,QWORD PTR [rip+0x4133e]        # 0x49688
-   0x000000000000834a <+6234>:	vmovdqa64 zmm8,zmm11
-   0x0000000000008350 <+6240>:	vpermt2q zmm8,zmm4,zmm7
-   0x0000000000008356 <+6246>:	vpmovsxbq zmm7,QWORD PTR [rip+0x41330]        # 0x49690
-   0x0000000000008360 <+6256>:	vpermt2q zmm8,zmm7,zmm9
-   0x0000000000008366 <+6262>:	vpminsw zmm9{k2},zmm0,zmm6
-   0x000000000000836c <+6268>:	vpmaxsw zmm0,zmm1,zmm5
-   0x0000000000008372 <+6274>:	vpminsw zmm0{k3},zmm1,zmm5
-   0x0000000000008378 <+6280>:	vpmovsxbq zmm1,QWORD PTR [rip+0x41316]        # 0x49698
-   0x0000000000008382 <+6290>:	vpermi2q zmm1,zmm0,zmm2
-   0x0000000000008388 <+6296>:	vpmovsxbq zmm2,QWORD PTR [rip+0x4130e]        # 0x496a0
-   0x0000000000008392 <+6306>:	vpermi2q zmm2,zmm9,zmm11
-   0x0000000000008398 <+6312>:	vpermi2q zmm4,zmm3,zmm0
-   0x000000000000839e <+6318>:	vpermt2q zmm4,zmm7,zmm10
-   0x00000000000083a4 <+6324>:	vpminsw zmm5,zmm3,zmm4
-   0x00000000000083aa <+6330>:	vpmaxsw zmm3,zmm3,zmm4
-   0x00000000000083b0 <+6336>:	mov    al,0xaa
-   0x00000000000083b2 <+6338>:	kmovd  k2,eax
-   0x00000000000083b6 <+6342>:	vpblendmq zmm4{k2},zmm3,zmm5
-   0x00000000000083bc <+6348>:	vpmaxsw zmm6,zmm9,zmm2
-   0x00000000000083c2 <+6354>:	mov    eax,0xf0f0f0
-   0x00000000000083c7 <+6359>:	kmovd  k2,eax
-   0x00000000000083cb <+6363>:	vpmaxsw zmm7,zmm11,zmm8
-   0x00000000000083d1 <+6369>:	mov    eax,0xf0f0f0f0
-   0x00000000000083d6 <+6374>:	kmovd  k3,eax
-   0x00000000000083da <+6378>:	vmovdqa64 zmm10,zmm7
-   0x00000000000083e0 <+6384>:	vpminsw zmm10{k3},zmm11,zmm8
-   0x00000000000083e6 <+6390>:	vpmovsxbd zmm8,XMMWORD PTR [rip+0x41240]        # 0x49630
-   0x00000000000083f0 <+6400>:	vmovdqa64 zmm11,zmm10
-   0x00000000000083f6 <+6406>:	vpermt2d zmm11,zmm8,zmm5
-   0x00000000000083fc <+6412>:	vpmovsxbd zmm5,XMMWORD PTR [rip+0x4123a]        # 0x49640
-   0x0000000000008406 <+6422>:	vpermt2d zmm11,zmm5,zmm6
-   0x000000000000840c <+6428>:	vpminsw zmm6{k2},zmm9,zmm2
-   0x0000000000008412 <+6434>:	vpmaxsw zmm2,zmm0,zmm1
-   0x0000000000008418 <+6440>:	vpminsw zmm2{k3},zmm0,zmm1
-   0x000000000000841e <+6446>:	vpmovsxbd zmm0,XMMWORD PTR [rip+0x41228]        # 0x49650
-   0x0000000000008428 <+6456>:	vpermi2d zmm0,zmm2,zmm3
-   0x000000000000842e <+6462>:	vpmovsxbd zmm1,XMMWORD PTR [rip+0x41228]        # 0x49660
-   0x0000000000008438 <+6472>:	vpermi2d zmm1,zmm6,zmm10
-   0x000000000000843e <+6478>:	vpermi2d zmm8,zmm4,zmm2
-   0x0000000000008444 <+6484>:	vpermt2d zmm8,zmm5,zmm7
-   0x000000000000844a <+6490>:	vpminsw zmm3,zmm4,zmm8
-   0x0000000000008450 <+6496>:	vpmaxsw zmm4,zmm4,zmm8
-   0x0000000000008456 <+6502>:	mov    ax,0xaaaa
-   0x000000000000845a <+6506>:	kmovd  k2,eax
-   0x000000000000845e <+6510>:	vpblendmd zmm5{k2},zmm4,zmm3
-   0x0000000000008464 <+6516>:	vpmaxsw zmm7,zmm6,zmm1
-   0x000000000000846a <+6522>:	mov    eax,0xccccccc
-   0x000000000000846f <+6527>:	kmovd  k2,eax
-   0x0000000000008473 <+6531>:	vpmaxsw zmm8,zmm2,zmm0
-   0x0000000000008479 <+6537>:	vpminsw zmm8{k1},zmm2,zmm0
-   0x000000000000847f <+6543>:	vpmovsxbw zmm9,YMMWORD PTR [rip+0x41117]        # 0x495a0
-   0x0000000000008489 <+6553>:	vmovdqa64 ZMMWORD PTR [rsp+0x380],zmm5
-   0x0000000000008491 <+6561>:	vpermt2w zmm5,zmm9,zmm8
-   0x0000000000008497 <+6567>:	vpmaxsw zmm0,zmm10,zmm11
-   0x000000000000849d <+6573>:	vpmovsxbw zmm2,YMMWORD PTR [rip+0x41119]        # 0x495c0
-   0x00000000000084a7 <+6583>:	vpermt2w zmm5,zmm2,zmm0
-   0x00000000000084ad <+6589>:	vmovdqa64 ZMMWORD PTR [rsp+0x680],zmm5
-   0x00000000000084b5 <+6597>:	vpminsw zmm0{k1},zmm10,zmm11
-   0x00000000000084bb <+6603>:	vpermi2w zmm9,zmm0,zmm3
-   0x00000000000084c1 <+6609>:	vpermt2w zmm9,zmm2,zmm7
-   0x00000000000084c7 <+6615>:	vmovdqa64 ZMMWORD PTR [rsp+0x640],zmm9
-   0x00000000000084cf <+6623>:	vpminsw zmm7{k2},zmm6,zmm1
-   0x00000000000084d5 <+6629>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x41101]        # 0x495e0
-   0x00000000000084df <+6639>:	vmovdqa64 ZMMWORD PTR [rsp+0x6c0],zmm8
-   0x00000000000084e7 <+6647>:	vpermi2w zmm1,zmm8,zmm4
-   0x00000000000084ed <+6653>:	vmovdqa64 ZMMWORD PTR [rsp+0x5c0],zmm1
-   0x00000000000084f5 <+6661>:	vpmovsxbw zmm1,YMMWORD PTR [rip+0x41101]        # 0x49600
-   0x00000000000084ff <+6671>:	vmovdqa64 ZMMWORD PTR [rsp+0x3c0],zmm7
-   0x0000000000008507 <+6679>:	vmovdqa64 ZMMWORD PTR [rsp+0x600],zmm0
-   0x000000000000850f <+6687>:	vpermi2w zmm1,zmm7,zmm0
-   0x0000000000008515 <+6693>:	vmovdqa64 ZMMWORD PTR [rsp+0x580],zmm1
-   0x000000000000851d <+6701>:	mov    r15d,0x2aaaaaaa
-   0x0000000000008523 <+6707>:	vpxor  xmm0,xmm0,xmm0
-   0x0000000000008527 <+6711>:	vmovdqa XMMWORD PTR [rsp+0x190],xmm0
-   0x0000000000008530 <+6720>:	lea    rsi,[rsp+0x190]
-   0x0000000000008538 <+6728>:	mov    edi,0x1
-   0x000000000000853d <+6733>:	vzeroupper 
-   0x0000000000008540 <+6736>:	call   0x6490 <clock_gettime@plt>
-   0x0000000000008545 <+6741>:	mov    rax,QWORD PTR [rsp+0x190]
-   0x000000000000854d <+6749>:	mov    QWORD PTR [rsp+0x1b0],rax
-   0x0000000000008555 <+6757>:	mov    rax,QWORD PTR [rsp+0x198]
-   0x000000000000855d <+6765>:	mov    QWORD PTR [rsp+0x1b8],rax
-   0x0000000000008565 <+6773>:	vpxor  xmm0,xmm0,xmm0
-   0x0000000000008569 <+6777>:	vmovdqa XMMWORD PTR [rsp+0x340],xmm0
-   0x0000000000008572 <+6786>:	mov    QWORD PTR [rsp+0x350],0x0
-   0x000000000000857e <+6798>:	vpxor  xmm0,xmm0,xmm0
-   0x0000000000008582 <+6802>:	vmovdqa YMMWORD PTR [rsp+0x420],ymm0
-   0x000000000000858b <+6811>:	vmovdqa YMMWORD PTR [rsp+0x400],ymm0
-   0x0000000000008594 <+6820>:	mov    BYTE PTR [rsp+0x440],0x0
-   0x000000000000859c <+6828>:	lea    rbx,[rsp+0x400]
-   0x00000000000085a4 <+6836>:	mov    esi,0x41
-   0x00000000000085a9 <+6841>:	mov    edx,0x80
-   0x00000000000085ae <+6846>:	mov    rdi,rbx
-   0x00000000000085b1 <+6849>:	vzeroupper 
-   0x00000000000085b4 <+6852>:	call   0xa1c0 <stdlib::builtin::io::_snprintf_scalar[stdlib::builtin::dtype::DType,stdlib::builtin::string_literal::StringLiteral](stdlib::memory::unsafe_pointer::UnsafePointer[stdlib::builtin::simd::SIMD[{uint8}, {1}], {{0}}],stdlib::builtin::int::Int,stdlib::builtin::simd::SIMD[$0, {1}]),type=si64,float_format="%.17g">
-   0x00000000000085b9 <+6857>:	lea    rdi,[rsp+0x340]
-   0x00000000000085c1 <+6865>:	mov    rsi,rbx
-   0x00000000000085c4 <+6868>:	mov    rdx,rax
-   0x00000000000085c7 <+6871>:	call   0x9890 <stdlib::builtin::string::String::_unsafe_to_formatter(stdlib::builtin::string::String&)_write_to_string(stdlib::memory::unsafe_pointer::UnsafePointer[None, {{0}}],stdlib::utils::stringref::StringRef)>
-   0x00000000000085cc <+6876>:	mov    r13,QWORD PTR [rsp+0x340]
-   0x00000000000085d4 <+6884>:	mov    rbx,QWORD PTR [rsp+0x348]
-   0x00000000000085dc <+6892>:	mov    r12d,0x7
-   0x00000000000085e2 <+6898>:	mov    edi,0x1
-   0x00000000000085e7 <+6903>:	mov    esi,0x7
-   0x00000000000085ec <+6908>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000085f1 <+6913>:	mov    DWORD PTR [rax],0x65746661
-   0x00000000000085f7 <+6919>:	mov    DWORD PTR [rax+0x2],0x20726574
-   0x00000000000085fe <+6926>:	mov    BYTE PTR [rax+0x6],0x0
-   0x0000000000008602 <+6930>:	dec    rbx
-   0x0000000000008605 <+6933>:	test   r13,r13
-   0x0000000000008608 <+6936>:	cmove  rbx,r13
-   0x000000000000860c <+6940>:	test   rbx,rbx
-   0x000000000000860f <+6943>:	mov    QWORD PTR [rsp+0x140],rax
-   0x0000000000008617 <+6951>:	jle    0x863c <main+6988>
-   0x0000000000008619 <+6953>:	lea    r12,[rbx+0x7]
-   0x000000000000861d <+6957>:	movabs r14,0x7fffffffffffffe0
-   0x0000000000008627 <+6967>:	lea    rax,[r14+0x18]
-   0x000000000000862b <+6971>:	cmp    rbx,rax
-   0x000000000000862e <+6974>:	jbe    0x874f <main+7263>
-   0x0000000000008634 <+6980>:	xor    r8d,r8d
-   0x0000000000008637 <+6983>:	jmp    0x877b <main+7307>
-   0x000000000000863c <+6988>:	mov    r14,rax
-   0x000000000000863f <+6991>:	mov    QWORD PTR [rsp+0x2c0],r13
-   0x0000000000008647 <+6999>:	mov    edi,0x1
-   0x000000000000864c <+7004>:	mov    esi,0x7
-   0x0000000000008651 <+7009>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008656 <+7014>:	mov    r13,rax
-   0x0000000000008659 <+7017>:	mov    rdx,r14
-   0x000000000000865c <+7020>:	add    rdx,0x7
-   0x0000000000008660 <+7024>:	xor    r14d,r14d
-   0x0000000000008663 <+7027>:	mov    ebx,0x1
-   0x0000000000008668 <+7032>:	mov    r15d,0x7
-   0x000000000000866e <+7038>:	mov    ecx,0x1
-   0x0000000000008673 <+7043>:	mov    QWORD PTR [rsp+0x80],rdx
-   0x000000000000867b <+7051>:	jmp    0x86a9 <main+7097>
-   0x000000000000867d <+7053>:	nop    DWORD PTR [rax]
-   0x0000000000008680 <+7056>:	mov    ecx,0x1
-   0x0000000000008685 <+7061>:	mov    rdx,QWORD PTR [rsp+0x80]
-   0x000000000000868d <+7069>:	movzx  eax,BYTE PTR [rsp+0xc0]
-   0x0000000000008695 <+7077>:	dec    r15
-   0x0000000000008698 <+7080>:	mov    BYTE PTR [r13+r14*1+0x0],al
-   0x000000000000869d <+7085>:	inc    r14
-   0x00000000000086a0 <+7088>:	inc    rbx
-   0x00000000000086a3 <+7091>:	cmp    r14,0x7
-   0x00000000000086a7 <+7095>:	je     0x8718 <main+7208>
-   0x00000000000086a9 <+7097>:	mov    rax,rdx
-   0x00000000000086ac <+7100>:	sub    rax,r15
-   0x00000000000086af <+7103>:	movzx  eax,BYTE PTR [rax]
-   0x00000000000086b2 <+7106>:	cmp    r14,r12
-   0x00000000000086b5 <+7109>:	jl     0x8695 <main+7077>
-   0x00000000000086b7 <+7111>:	mov    BYTE PTR [rsp+0xc0],al
-   0x00000000000086be <+7118>:	add    r12,r12
-   0x00000000000086c1 <+7121>:	cmp    r12,0x2
-   0x00000000000086c5 <+7125>:	cmovl  r12,rcx
-   0x00000000000086c9 <+7129>:	mov    edi,0x1
-   0x00000000000086ce <+7134>:	mov    rsi,r12
-   0x00000000000086d1 <+7137>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000086d6 <+7142>:	mov    rdi,r13
-   0x00000000000086d9 <+7145>:	mov    r13,rax
-   0x00000000000086dc <+7148>:	test   r14,r14
-   0x00000000000086df <+7151>:	je     0x8705 <main+7189>
-   0x00000000000086e1 <+7153>:	mov    rax,rdi
-   0x00000000000086e4 <+7156>:	mov    rcx,r13
-   0x00000000000086e7 <+7159>:	mov    rdx,rbx
-   0x00000000000086ea <+7162>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x00000000000086f0 <+7168>:	movzx  esi,BYTE PTR [rax]
-   0x00000000000086f3 <+7171>:	mov    BYTE PTR [rcx],sil
-   0x00000000000086f6 <+7174>:	dec    rdx
-   0x00000000000086f9 <+7177>:	inc    rcx
-   0x00000000000086fc <+7180>:	inc    rax
-   0x00000000000086ff <+7183>:	cmp    rdx,0x1
-   0x0000000000008703 <+7187>:	ja     0x86f0 <main+7168>
-   0x0000000000008705 <+7189>:	test   rdi,rdi
-   0x0000000000008708 <+7192>:	je     0x8680 <main+7056>
-   0x000000000000870e <+7198>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008713 <+7203>:	jmp    0x8680 <main+7056>
-   0x0000000000008718 <+7208>:	mov    QWORD PTR [rsp+0x38],r13
-   0x000000000000871d <+7213>:	mov    r12d,0x7
-   0x0000000000008723 <+7219>:	mov    r15d,0x2aaaaaaa
-   0x0000000000008729 <+7225>:	mov    r13,QWORD PTR [rsp+0x2c0]
-   0x0000000000008731 <+7233>:	mov    rdi,QWORD PTR [rsp+0x140]
-   0x0000000000008739 <+7241>:	vzeroupper 
-   0x000000000000873c <+7244>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008741 <+7249>:	test   r13,r13
-   0x0000000000008744 <+7252>:	jne    0x887b <main+7563>
-   0x000000000000874a <+7258>:	jmp    0x8883 <main+7571>
-   0x000000000000874f <+7263>:	mov    edi,0x1
-   0x0000000000008754 <+7268>:	mov    rsi,r12
-   0x0000000000008757 <+7271>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x000000000000875c <+7276>:	mov    r8,rax
-   0x000000000000875f <+7279>:	mov    rax,r12
-   0x0000000000008762 <+7282>:	mov    rcx,r8
-   0x0000000000008765 <+7285>:	data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000008770 <+7296>:	mov    BYTE PTR [rcx],0x0
-   0x0000000000008773 <+7299>:	inc    rcx
-   0x0000000000008776 <+7302>:	dec    rax
-   0x0000000000008779 <+7305>:	jne    0x8770 <main+7296>
-   0x000000000000877b <+7307>:	mov    rcx,QWORD PTR [rsp+0x140]
-   0x0000000000008783 <+7315>:	mov    eax,DWORD PTR [rcx]
-   0x0000000000008785 <+7317>:	mov    DWORD PTR [r8],eax
-   0x0000000000008788 <+7320>:	mov    eax,DWORD PTR [rcx+0x2]
-   0x000000000000878b <+7323>:	mov    DWORD PTR [r8+0x2],eax
-   0x000000000000878f <+7327>:	lea    rax,[rbx+0x1]
-   0x0000000000008793 <+7331>:	cmp    rax,0x4
-   0x0000000000008797 <+7335>:	mov    QWORD PTR [rsp+0x38],r8
-   0x000000000000879c <+7340>:	jg     0x87dd <main+7405>
-   0x000000000000879e <+7342>:	movzx  ecx,BYTE PTR [r13+0x0]
-   0x00000000000087a3 <+7347>:	mov    BYTE PTR [r8+0x6],cl
-   0x00000000000087a7 <+7351>:	movzx  ecx,BYTE PTR [r13+rbx*1+0x0]
-   0x00000000000087ad <+7357>:	mov    BYTE PTR [r8+rbx*1+0x6],cl
-   0x00000000000087b2 <+7362>:	cmp    rax,0x3
-   0x00000000000087b6 <+7366>:	mov    rdi,QWORD PTR [rsp+0x140]
-   0x00000000000087be <+7374>:	jl     0x8873 <main+7555>
-   0x00000000000087c4 <+7380>:	movzx  eax,BYTE PTR [r13+0x1]
-   0x00000000000087c9 <+7385>:	mov    BYTE PTR [r8+0x7],al
-   0x00000000000087cd <+7389>:	movzx  eax,BYTE PTR [r13+rbx*1-0x1]
-   0x00000000000087d3 <+7395>:	mov    BYTE PTR [r8+rbx*1+0x5],al
-   0x00000000000087d8 <+7400>:	jmp    0x8873 <main+7555>
-   0x00000000000087dd <+7405>:	cmp    rbx,0xf
-   0x00000000000087e1 <+7409>:	ja     0x87fd <main+7437>
-   0x00000000000087e3 <+7411>:	cmp    rax,0x8
-   0x00000000000087e7 <+7415>:	jl     0x8859 <main+7529>
-   0x00000000000087e9 <+7417>:	mov    rax,QWORD PTR [r13+0x0]
-   0x00000000000087ed <+7421>:	mov    QWORD PTR [r8+0x6],rax
-   0x00000000000087f1 <+7425>:	mov    rax,QWORD PTR [r13+rbx*1-0x7]
-   0x00000000000087f6 <+7430>:	mov    QWORD PTR [r8+rbx*1-0x1],rax
-   0x00000000000087fb <+7435>:	jmp    0x886b <main+7547>
-   0x00000000000087fd <+7437>:	mov    rcx,rax
-   0x0000000000008800 <+7440>:	and    rcx,r14
-   0x0000000000008803 <+7443>:	je     0x882a <main+7482>
-   0x0000000000008805 <+7445>:	xor    edx,edx
-   0x0000000000008807 <+7447>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x0000000000008810 <+7456>:	vmovdqu ymm0,YMMWORD PTR [r13+rdx*1+0x0]
-   0x0000000000008817 <+7463>:	vmovdqu YMMWORD PTR [r8+rdx*1+0x6],ymm0
-   0x000000000000881e <+7470>:	lea    rsi,[rdx+0x20]
-   0x0000000000008822 <+7474>:	mov    rdx,rsi
-   0x0000000000008825 <+7477>:	cmp    rsi,rcx
-   0x0000000000008828 <+7480>:	jb     0x8810 <main+7456>
-   0x000000000000882a <+7482>:	cmp    rcx,rax
-   0x000000000000882d <+7485>:	mov    rdi,QWORD PTR [rsp+0x140]
-   0x0000000000008835 <+7493>:	jge    0x8739 <main+7241>
-   0x000000000000883b <+7499>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000008840 <+7504>:	movzx  edx,BYTE PTR [r13+rcx*1+0x0]
-   0x0000000000008846 <+7510>:	mov    BYTE PTR [r8+rcx*1+0x6],dl
-   0x000000000000884b <+7515>:	lea    rdx,[rcx+0x1]
-   0x000000000000884f <+7519>:	mov    rcx,rdx
-   0x0000000000008852 <+7522>:	cmp    rax,rdx
-   0x0000000000008855 <+7525>:	jne    0x8840 <main+7504>
-   0x0000000000008857 <+7527>:	jmp    0x8873 <main+7555>
-   0x0000000000008859 <+7529>:	mov    eax,DWORD PTR [r13+0x0]
-   0x000000000000885d <+7533>:	mov    DWORD PTR [r8+0x6],eax
-   0x0000000000008861 <+7537>:	mov    eax,DWORD PTR [r13+rbx*1-0x3]
-   0x0000000000008866 <+7542>:	mov    DWORD PTR [r8+rbx*1+0x3],eax
-   0x000000000000886b <+7547>:	mov    rdi,QWORD PTR [rsp+0x140]
-   0x0000000000008873 <+7555>:	vzeroupper 
-   0x0000000000008876 <+7558>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000887b <+7563>:	mov    rdi,r13
-   0x000000000000887e <+7566>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008883 <+7571>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x580]
-   0x000000000000888b <+7579>:	vpmaxsw zmm0,zmm0,ZMMWORD PTR [rsp+0x3c0]
-   0x0000000000008893 <+7587>:	vmovdqa64 ZMMWORD PTR [rsp+0x140],zmm0
-   0x000000000000889b <+7595>:	kmovd  k1,r15d
-   0x00000000000088a0 <+7600>:	kmovd  DWORD PTR [rsp+0x78],k1
-   0x00000000000088a7 <+7607>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x5c0]
-   0x00000000000088af <+7615>:	vpmaxsw zmm0,zmm0,ZMMWORD PTR [rsp+0x6c0]
-   0x00000000000088b7 <+7623>:	vmovdqa64 ZMMWORD PTR [rsp+0x2c0],zmm0
-   0x00000000000088bf <+7631>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x600]
-   0x00000000000088c7 <+7639>:	vpmaxsw zmm0,zmm0,ZMMWORD PTR [rsp+0x640]
-   0x00000000000088cf <+7647>:	vmovdqa64 ZMMWORD PTR [rsp+0x280],zmm0
-   0x00000000000088d7 <+7655>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x680]
-   0x00000000000088df <+7663>:	vpmaxsw zmm0,zmm0,ZMMWORD PTR [rsp+0x380]
-   0x00000000000088e7 <+7671>:	vmovdqa64 ZMMWORD PTR [rsp+0x100],zmm0
-   0x00000000000088ef <+7679>:	mov    edi,0x1
-   0x00000000000088f4 <+7684>:	mov    esi,0x3
-   0x00000000000088f9 <+7689>:	vzeroupper 
-   0x00000000000088fc <+7692>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008901 <+7697>:	mov    r14,rax
-   0x0000000000008904 <+7700>:	mov    WORD PTR [rax],0x203a
-   0x0000000000008909 <+7705>:	mov    BYTE PTR [rax+0x2],0x0
-   0x000000000000890d <+7709>:	dec    r12
-   0x0000000000008910 <+7712>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x0000000000008915 <+7717>:	test   rdi,rdi
-   0x0000000000008918 <+7720>:	cmove  r12,rdi
-   0x000000000000891c <+7724>:	test   r12,r12
-   0x000000000000891f <+7727>:	jle    0x8988 <main+7832>
-   0x0000000000008921 <+7729>:	lea    r15,[r12+0x3]
-   0x0000000000008926 <+7734>:	movabs rcx,0x7fffffffffffffe0
-   0x0000000000008930 <+7744>:	lea    rax,[rcx+0x1c]
-   0x0000000000008934 <+7748>:	xor    esi,esi
-   0x0000000000008936 <+7750>:	mov    r8d,0x0
-   0x000000000000893c <+7756>:	cmp    r12,rax
-   0x000000000000893f <+7759>:	jbe    0x8a8b <main+8091>
-   0x0000000000008945 <+7765>:	mov    rax,r12
-   0x0000000000008948 <+7768>:	and    rax,rcx
-   0x000000000000894b <+7771>:	je     0x8966 <main+7798>
-   0x000000000000894d <+7773>:	xor    ecx,ecx
-   0x000000000000894f <+7775>:	nop
-   0x0000000000008950 <+7776>:	vmovdqu ymm0,YMMWORD PTR [rdi+rcx*1]
-   0x0000000000008955 <+7781>:	vmovdqu YMMWORD PTR [rsi+rcx*1],ymm0
-   0x000000000000895a <+7786>:	lea    rdx,[rcx+0x20]
-   0x000000000000895e <+7790>:	mov    rcx,rdx
-   0x0000000000008961 <+7793>:	cmp    rdx,rax
-   0x0000000000008964 <+7796>:	jb     0x8950 <main+7776>
-   0x0000000000008966 <+7798>:	cmp    rax,r12
-   0x0000000000008969 <+7801>:	jge    0x8b57 <main+8295>
-   0x000000000000896f <+7807>:	nop
-   0x0000000000008970 <+7808>:	movzx  ecx,BYTE PTR [rdi+rax*1]
-   0x0000000000008974 <+7812>:	mov    BYTE PTR [rsi+rax*1],cl
-   0x0000000000008977 <+7815>:	lea    rcx,[rax+0x1]
-   0x000000000000897b <+7819>:	mov    rax,rcx
-   0x000000000000897e <+7822>:	cmp    rcx,r12
-   0x0000000000008981 <+7825>:	jl     0x8970 <main+7808>
-   0x0000000000008983 <+7827>:	jmp    0x8b57 <main+8295>
-   0x0000000000008988 <+7832>:	mov    edi,0x1
-   0x000000000000898d <+7837>:	mov    esi,0x3
-   0x0000000000008992 <+7842>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008997 <+7847>:	mov    rbx,rax
-   0x000000000000899a <+7850>:	mov    QWORD PTR [rsp+0x1a8],r14
-   0x00000000000089a2 <+7858>:	mov    rcx,r14
-   0x00000000000089a5 <+7861>:	add    rcx,0x3
-   0x00000000000089a9 <+7865>:	xor    r14d,r14d
-   0x00000000000089ac <+7868>:	mov    r12d,0x1
-   0x00000000000089b2 <+7874>:	mov    r15d,0x3
-   0x00000000000089b8 <+7880>:	mov    esi,0x3
-   0x00000000000089bd <+7885>:	mov    QWORD PTR [rsp+0x80],rcx
-   0x00000000000089c5 <+7893>:	jmp    0x89f3 <main+7939>
-   0x00000000000089c7 <+7895>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x00000000000089d0 <+7904>:	mov    rsi,QWORD PTR [rsp+0xc0]
-   0x00000000000089d8 <+7912>:	mov    rcx,QWORD PTR [rsp+0x80]
-   0x00000000000089e0 <+7920>:	dec    r15
-   0x00000000000089e3 <+7923>:	mov    BYTE PTR [rbx+r14*1],r13b
-   0x00000000000089e7 <+7927>:	inc    r14
-   0x00000000000089ea <+7930>:	inc    r12
-   0x00000000000089ed <+7933>:	cmp    r14,0x3
-   0x00000000000089f1 <+7937>:	je     0x8a68 <main+8056>
-   0x00000000000089f3 <+7939>:	mov    rax,rcx
-   0x00000000000089f6 <+7942>:	sub    rax,r15
-   0x00000000000089f9 <+7945>:	movzx  r13d,BYTE PTR [rax]
-   0x00000000000089fd <+7949>:	cmp    r14,rsi
-   0x0000000000008a00 <+7952>:	jl     0x89e0 <main+7920>
-   0x0000000000008a02 <+7954>:	add    rsi,rsi
-   0x0000000000008a05 <+7957>:	cmp    rsi,0x2
-   0x0000000000008a09 <+7961>:	mov    eax,0x1
-   0x0000000000008a0e <+7966>:	cmovl  rsi,rax
-   0x0000000000008a12 <+7970>:	mov    edi,0x1
-   0x0000000000008a17 <+7975>:	mov    QWORD PTR [rsp+0xc0],rsi
-   0x0000000000008a1f <+7983>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008a24 <+7988>:	mov    rdi,rbx
-   0x0000000000008a27 <+7991>:	mov    rbx,rax
-   0x0000000000008a2a <+7994>:	test   r14,r14
-   0x0000000000008a2d <+7997>:	je     0x8a55 <main+8037>
-   0x0000000000008a2f <+7999>:	mov    rax,rdi
-   0x0000000000008a32 <+8002>:	mov    rcx,rbx
-   0x0000000000008a35 <+8005>:	mov    rdx,r12
-   0x0000000000008a38 <+8008>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000008a40 <+8016>:	movzx  esi,BYTE PTR [rax]
-   0x0000000000008a43 <+8019>:	mov    BYTE PTR [rcx],sil
-   0x0000000000008a46 <+8022>:	dec    rdx
-   0x0000000000008a49 <+8025>:	inc    rcx
-   0x0000000000008a4c <+8028>:	inc    rax
-   0x0000000000008a4f <+8031>:	cmp    rdx,0x1
-   0x0000000000008a53 <+8035>:	ja     0x8a40 <main+8016>
-   0x0000000000008a55 <+8037>:	test   rdi,rdi
-   0x0000000000008a58 <+8040>:	je     0x89d0 <main+7904>
-   0x0000000000008a5e <+8046>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008a63 <+8051>:	jmp    0x89d0 <main+7904>
-   0x0000000000008a68 <+8056>:	mov    QWORD PTR [rsp+0xc0],rsi
-   0x0000000000008a70 <+8064>:	mov    QWORD PTR [rsp+0x80],rbx
-   0x0000000000008a78 <+8072>:	mov    r15d,0x3
-   0x0000000000008a7e <+8078>:	mov    r14,QWORD PTR [rsp+0x1a8]
-   0x0000000000008a86 <+8086>:	jmp    0x8b83 <main+8339>
-   0x0000000000008a8b <+8091>:	mov    edi,0x1
-   0x0000000000008a90 <+8096>:	mov    rsi,r15
-   0x0000000000008a93 <+8099>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008a98 <+8104>:	mov    rsi,rax
-   0x0000000000008a9b <+8107>:	xor    eax,eax
-   0x0000000000008a9d <+8109>:	nop    DWORD PTR [rax]
-   0x0000000000008aa0 <+8112>:	mov    BYTE PTR [rsi+rax*1],0x0
-   0x0000000000008aa4 <+8116>:	inc    rax
-   0x0000000000008aa7 <+8119>:	cmp    r15,rax
-   0x0000000000008aaa <+8122>:	jne    0x8aa0 <main+8112>
-   0x0000000000008aac <+8124>:	cmp    r12,0x4
-   0x0000000000008ab0 <+8128>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x0000000000008ab5 <+8133>:	jg     0x8ae5 <main+8181>
-   0x0000000000008ab7 <+8135>:	movzx  eax,BYTE PTR [rdi]
-   0x0000000000008aba <+8138>:	mov    BYTE PTR [rsi],al
-   0x0000000000008abc <+8140>:	movzx  eax,BYTE PTR [rdi+r12*1-0x1]
-   0x0000000000008ac2 <+8146>:	mov    BYTE PTR [rsi+r12*1-0x1],al
-   0x0000000000008ac7 <+8151>:	cmp    r12,0x3
-   0x0000000000008acb <+8155>:	jl     0x8b54 <main+8292>
-   0x0000000000008ad1 <+8161>:	movzx  eax,BYTE PTR [rdi+0x1]
-   0x0000000000008ad5 <+8165>:	mov    BYTE PTR [rsi+0x1],al
-   0x0000000000008ad8 <+8168>:	movzx  eax,BYTE PTR [rdi+r12*1-0x2]
-   0x0000000000008ade <+8174>:	mov    BYTE PTR [rsi+r12*1-0x2],al
-   0x0000000000008ae3 <+8179>:	jmp    0x8b54 <main+8292>
-   0x0000000000008ae5 <+8181>:	cmp    r12,0x10
-   0x0000000000008ae9 <+8185>:	ja     0x8b03 <main+8211>
-   0x0000000000008aeb <+8187>:	cmp    r12,0x8
-   0x0000000000008aef <+8191>:	jb     0x8b46 <main+8278>
-   0x0000000000008af1 <+8193>:	mov    rax,QWORD PTR [rdi]
-   0x0000000000008af4 <+8196>:	mov    QWORD PTR [rsi],rax
-   0x0000000000008af7 <+8199>:	mov    rax,QWORD PTR [rdi+r12*1-0x8]
-   0x0000000000008afc <+8204>:	mov    QWORD PTR [rsi+r12*1-0x8],rax
-   0x0000000000008b01 <+8209>:	jmp    0x8b54 <main+8292>
-   0x0000000000008b03 <+8211>:	mov    r8,r15
-   0x0000000000008b06 <+8214>:	movabs rcx,0x7fffffffffffffe0
-   0x0000000000008b10 <+8224>:	mov    rax,r12
-   0x0000000000008b13 <+8227>:	and    rax,rcx
-   0x0000000000008b16 <+8230>:	jne    0x894d <main+7773>
-   0x0000000000008b1c <+8236>:	jmp    0x8966 <main+7798>
-   0x0000000000008b21 <+8241>:	mov    edx,DWORD PTR [r9]
-   0x0000000000008b24 <+8244>:	mov    DWORD PTR [rax],edx
-   0x0000000000008b26 <+8246>:	mov    edx,DWORD PTR [r9+r15*1-0x4]
-   0x0000000000008b2b <+8251>:	mov    DWORD PTR [rax+r15*1-0x4],edx
-   0x0000000000008b30 <+8256>:	add    r15,rax
-   0x0000000000008b33 <+8259>:	lea    rdx,[rbx+0x1]
-   0x0000000000008b37 <+8263>:	cmp    rdx,0x4
-   0x0000000000008b3b <+8267>:	jle    0x7686 <main+2966>
-   0x0000000000008b41 <+8273>:	jmp    0x72ef <main+2047>
-   0x0000000000008b46 <+8278>:	mov    eax,DWORD PTR [rdi]
-   0x0000000000008b48 <+8280>:	mov    DWORD PTR [rsi],eax
-   0x0000000000008b4a <+8282>:	mov    eax,DWORD PTR [rdi+r12*1-0x4]
-   0x0000000000008b4f <+8287>:	mov    DWORD PTR [rsi+r12*1-0x4],eax
-   0x0000000000008b54 <+8292>:	mov    r8,r15
-   0x0000000000008b57 <+8295>:	mov    QWORD PTR [rsp+0xc0],r8
-   0x0000000000008b5f <+8303>:	movzx  eax,BYTE PTR [r14]
-   0x0000000000008b63 <+8307>:	mov    BYTE PTR [r12+rsi*1],al
-   0x0000000000008b67 <+8311>:	movzx  eax,BYTE PTR [r14+0x2]
-   0x0000000000008b6c <+8316>:	mov    BYTE PTR [r12+rsi*1+0x2],al
-   0x0000000000008b71 <+8321>:	movzx  eax,BYTE PTR [r14+0x1]
-   0x0000000000008b76 <+8326>:	mov    QWORD PTR [rsp+0x80],rsi
-   0x0000000000008b7e <+8334>:	mov    BYTE PTR [r12+rsi*1+0x1],al
-   0x0000000000008b83 <+8339>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x140]
-   0x0000000000008b8b <+8347>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x580]
-   0x0000000000008b93 <+8355>:	kmovd  k1,DWORD PTR [rsp+0x78]
-   0x0000000000008b9a <+8362>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x3c0]
-   0x0000000000008ba2 <+8370>:	vmovdqa64 ZMMWORD PTR [rsp+0x140],zmm0
-   0x0000000000008baa <+8378>:	kmovd  k1,DWORD PTR [rsp+0x7c]
-   0x0000000000008bb1 <+8385>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x2c0]
-   0x0000000000008bb9 <+8393>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x5c0]
-   0x0000000000008bc1 <+8401>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x6c0]
-   0x0000000000008bc9 <+8409>:	vmovdqa64 ZMMWORD PTR [rsp+0x2c0],zmm0
-   0x0000000000008bd1 <+8417>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x280]
-   0x0000000000008bd9 <+8425>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x600]
-   0x0000000000008be1 <+8433>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x640]
-   0x0000000000008be9 <+8441>:	vmovdqa64 ZMMWORD PTR [rsp+0x280],zmm0
-   0x0000000000008bf1 <+8449>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x100]
-   0x0000000000008bf9 <+8457>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x680]
-   0x0000000000008c01 <+8465>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x380]
-   0x0000000000008c09 <+8473>:	vmovdqa64 ZMMWORD PTR [rsp+0x100],zmm0
-   0x0000000000008c11 <+8481>:	mov    rdi,r14
-   0x0000000000008c14 <+8484>:	vzeroupper 
-   0x0000000000008c17 <+8487>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008c1c <+8492>:	mov    rdi,QWORD PTR [rsp+0x38]
-   0x0000000000008c21 <+8497>:	test   rdi,rdi
-   0x0000000000008c24 <+8500>:	je     0x8c2b <main+8507>
-   0x0000000000008c26 <+8502>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008c2b <+8507>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x100]
-   0x0000000000008c33 <+8515>:	vmovaps ZMMWORD PTR [rsp+0x440],zmm0
-   0x0000000000008c3b <+8523>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x2c0]
-   0x0000000000008c43 <+8531>:	vmovaps ZMMWORD PTR [rsp+0x400],zmm0
-   0x0000000000008c4b <+8539>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x280]
-   0x0000000000008c53 <+8547>:	vmovaps ZMMWORD PTR [rsp+0x480],zmm0
-   0x0000000000008c5b <+8555>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
-   0x0000000000008c63 <+8563>:	vmovaps ZMMWORD PTR [rsp+0x4c0],zmm0
-   0x0000000000008c6b <+8571>:	lea    rdi,[rsp+0x400]
-   0x0000000000008c73 <+8579>:	lea    rdx,[rsp+0x1f8]
-   0x0000000000008c7b <+8587>:	xor    esi,esi
-   0x0000000000008c7d <+8589>:	vzeroupper 
-   0x0000000000008c80 <+8592>:	call   0x9d80 <stdlib::builtin::string::String::format_sequence[*stdlib::utils::_format::Formattable](*$0),Ts=[[simd<128, si16>, {"format_to" : (!kgen.pointer<simd<128, si16>> borrow_in_mem, !kgen.pointer<struct<((!kgen.pointer<none> borrow, !kgen.struct<(pointer<none>, index)> borrow) -> !kgen.none, pointer<none>) memoryOnly>> inout) -> !kgen.none = @"stdlib::builtin::simd::SIMD::format_to(stdlib::builtin::simd::SIMD[$0, $1],stdlib::utils::_format::Formatter&)_thunk"<:dtype si16, 128>, "__del__" : (!kgen.pointer<simd<128, si16>> owned_in_mem) -> !kgen.none = @"stdlib::builtin::simd::SIMD::__del__(stdlib::builtin::simd::SIMD[$0, $1])_thunk"<:dtype si16, 128>}]]>
-   0x0000000000008c85 <+8597>:	lea    r12,[r15-0x1]
-   0x0000000000008c89 <+8601>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008c91 <+8609>:	test   rdi,rdi
-   0x0000000000008c94 <+8612>:	cmove  r12,rdi
-   0x0000000000008c98 <+8616>:	test   r12,r12
-   0x0000000000008c9b <+8619>:	jle    0x8d88 <main+8856>
-   0x0000000000008ca1 <+8625>:	mov    r13,QWORD PTR [rsp+0x1f8]
-   0x0000000000008ca9 <+8633>:	mov    r14,QWORD PTR [rsp+0x200]
-   0x0000000000008cb1 <+8641>:	dec    r14
-   0x0000000000008cb4 <+8644>:	test   r13,r13
-   0x0000000000008cb7 <+8647>:	cmove  r14,r13
-   0x0000000000008cbb <+8651>:	test   r14,r14
-   0x0000000000008cbe <+8654>:	jle    0x8ebc <main+9164>
-   0x0000000000008cc4 <+8660>:	lea    rdx,[r14+r12*1]
-   0x0000000000008cc8 <+8664>:	lea    rbx,[r14+r12*1+0x1]
-   0x0000000000008ccd <+8669>:	movabs r15,0x7fffffffffffffe0
-   0x0000000000008cd7 <+8679>:	lea    rsi,[r15+0x1e]
-   0x0000000000008cdb <+8683>:	xor    eax,eax
-   0x0000000000008cdd <+8685>:	mov    ecx,0x0
-   0x0000000000008ce2 <+8690>:	cmp    rdx,rsi
-   0x0000000000008ce5 <+8693>:	ja     0x8d16 <main+8742>
-   0x0000000000008ce7 <+8695>:	mov    edi,0x1
-   0x0000000000008cec <+8700>:	mov    rsi,rbx
-   0x0000000000008cef <+8703>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008cf4 <+8708>:	mov    rcx,rax
-   0x0000000000008cf7 <+8711>:	mov    rdx,rbx
-   0x0000000000008cfa <+8714>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x0000000000008d00 <+8720>:	mov    BYTE PTR [rcx],0x0
-   0x0000000000008d03 <+8723>:	inc    rcx
-   0x0000000000008d06 <+8726>:	dec    rdx
-   0x0000000000008d09 <+8729>:	jne    0x8d00 <main+8720>
-   0x0000000000008d0b <+8731>:	mov    rcx,rbx
-   0x0000000000008d0e <+8734>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008d16 <+8742>:	cmp    r12,0x4
-   0x0000000000008d1a <+8746>:	jg     0x9008 <main+9496>
-   0x0000000000008d20 <+8752>:	movzx  edx,BYTE PTR [rdi]
-   0x0000000000008d23 <+8755>:	mov    BYTE PTR [rax],dl
-   0x0000000000008d25 <+8757>:	movzx  edx,BYTE PTR [rdi+r12*1-0x1]
-   0x0000000000008d2b <+8763>:	mov    BYTE PTR [rax+r12*1-0x1],dl
-   0x0000000000008d30 <+8768>:	cmp    r12,0x3
-   0x0000000000008d34 <+8772>:	jl     0x90e4 <main+9716>
-   0x0000000000008d3a <+8778>:	movzx  edx,BYTE PTR [rdi+0x1]
-   0x0000000000008d3e <+8782>:	mov    BYTE PTR [rax+0x1],dl
-   0x0000000000008d41 <+8785>:	movzx  edx,BYTE PTR [rdi+r12*1-0x2]
-   0x0000000000008d47 <+8791>:	mov    BYTE PTR [rax+r12*1-0x2],dl
-   0x0000000000008d4c <+8796>:	add    r12,rax
-   0x0000000000008d4f <+8799>:	lea    rdx,[r14+0x1]
-   0x0000000000008d53 <+8803>:	cmp    rdx,0x4
-   0x0000000000008d57 <+8807>:	jle    0x90f5 <main+9733>
-   0x0000000000008d5d <+8813>:	cmp    r14,0xf
-   0x0000000000008d61 <+8817>:	ja     0x9042 <main+9554>
-   0x0000000000008d67 <+8823>:	cmp    rdx,0x8
-   0x0000000000008d6b <+8827>:	jl     0x9125 <main+9781>
-   0x0000000000008d71 <+8833>:	mov    rdx,QWORD PTR [r13+0x0]
-   0x0000000000008d75 <+8837>:	mov    QWORD PTR [r12],rdx
-   0x0000000000008d79 <+8841>:	mov    rdx,QWORD PTR [r13+r14*1-0x7]
-   0x0000000000008d7e <+8846>:	mov    QWORD PTR [r12+r14*1-0x7],rdx
-   0x0000000000008d83 <+8851>:	jmp    0x9137 <main+9799>
-   0x0000000000008d88 <+8856>:	mov    rbx,QWORD PTR [rsp+0x208]
-   0x0000000000008d90 <+8864>:	mov    edi,0x1
-   0x0000000000008d95 <+8869>:	mov    rsi,rbx
-   0x0000000000008d98 <+8872>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008d9d <+8877>:	mov    QWORD PTR [rsp+0x58],rax
-   0x0000000000008da2 <+8882>:	mov    QWORD PTR [rsp+0x60],0x0
-   0x0000000000008dab <+8891>:	mov    QWORD PTR [rsp+0x68],rbx
-   0x0000000000008db0 <+8896>:	mov    r13,QWORD PTR [rsp+0x1f8]
-   0x0000000000008db8 <+8904>:	mov    r15,QWORD PTR [rsp+0x200]
-   0x0000000000008dc0 <+8912>:	test   r15,r15
-   0x0000000000008dc3 <+8915>:	jle    0x8ff1 <main+9473>
-   0x0000000000008dc9 <+8921>:	mov    QWORD PTR [rsp+0x38],r13
-   0x0000000000008dce <+8926>:	lea    rsi,[r15+r13*1]
-   0x0000000000008dd2 <+8930>:	xor    eax,eax
-   0x0000000000008dd4 <+8932>:	mov    r14,r15
-   0x0000000000008dd7 <+8935>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008ddf <+8943>:	mov    QWORD PTR [rsp+0xc0],rsi
-   0x0000000000008de7 <+8951>:	jmp    0x8e17 <main+8999>
-   0x0000000000008de9 <+8953>:	nop    DWORD PTR [rax+0x0]
-   0x0000000000008df0 <+8960>:	mov    r12,QWORD PTR [rsp+0x58]
-   0x0000000000008df5 <+8965>:	lea    rcx,[r14-0x1]
-   0x0000000000008df9 <+8969>:	mov    BYTE PTR [rax+r12*1],r13b
-   0x0000000000008dfd <+8973>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008e02 <+8978>:	inc    rax
-   0x0000000000008e05 <+8981>:	mov    QWORD PTR [rsp+0x60],rax
-   0x0000000000008e0a <+8986>:	cmp    r14,0x1
-   0x0000000000008e0e <+8990>:	mov    r14,rcx
-   0x0000000000008e11 <+8993>:	jle    0x8fdd <main+9453>
-   0x0000000000008e17 <+8999>:	cmp    r15,r14
-   0x0000000000008e1a <+9002>:	mov    ecx,0x0
-   0x0000000000008e1f <+9007>:	cmovl  rcx,r15
-   0x0000000000008e23 <+9011>:	mov    rdx,rsi
-   0x0000000000008e26 <+9014>:	sub    rdx,r14
-   0x0000000000008e29 <+9017>:	movzx  r13d,BYTE PTR [rdx+rcx*1]
-   0x0000000000008e2e <+9022>:	mov    rbx,QWORD PTR [rsp+0x68]
-   0x0000000000008e33 <+9027>:	cmp    rax,rbx
-   0x0000000000008e36 <+9030>:	jl     0x8df0 <main+8960>
-   0x0000000000008e38 <+9032>:	add    rbx,rbx
-   0x0000000000008e3b <+9035>:	cmp    rbx,0x2
-   0x0000000000008e3f <+9039>:	mov    eax,0x1
-   0x0000000000008e44 <+9044>:	cmovl  rbx,rax
-   0x0000000000008e48 <+9048>:	mov    edi,0x1
-   0x0000000000008e4d <+9053>:	mov    rsi,rbx
-   0x0000000000008e50 <+9056>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008e55 <+9061>:	mov    r12,rax
-   0x0000000000008e58 <+9064>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008e5d <+9069>:	test   rax,rax
-   0x0000000000008e60 <+9072>:	mov    ecx,0x0
-   0x0000000000008e65 <+9077>:	cmovle rax,rcx
-   0x0000000000008e69 <+9081>:	jle    0x8e89 <main+9113>
-   0x0000000000008e6b <+9083>:	inc    rax
-   0x0000000000008e6e <+9086>:	xor    ecx,ecx
-   0x0000000000008e70 <+9088>:	mov    rdx,QWORD PTR [rsp+0x58]
-   0x0000000000008e75 <+9093>:	movzx  edx,BYTE PTR [rcx+rdx*1]
-   0x0000000000008e79 <+9097>:	mov    BYTE PTR [r12+rcx*1],dl
-   0x0000000000008e7d <+9101>:	dec    rax
-   0x0000000000008e80 <+9104>:	inc    rcx
-   0x0000000000008e83 <+9107>:	cmp    rax,0x1
-   0x0000000000008e87 <+9111>:	ja     0x8e70 <main+9088>
-   0x0000000000008e89 <+9113>:	mov    rdi,QWORD PTR [rsp+0x58]
-   0x0000000000008e8e <+9118>:	test   rdi,rdi
-   0x0000000000008e91 <+9121>:	je     0x8e98 <main+9128>
-   0x0000000000008e93 <+9123>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008e98 <+9128>:	mov    QWORD PTR [rsp+0x58],r12
-   0x0000000000008e9d <+9133>:	mov    QWORD PTR [rsp+0x68],rbx
-   0x0000000000008ea2 <+9138>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008ea7 <+9143>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008eaf <+9151>:	mov    rsi,QWORD PTR [rsp+0xc0]
-   0x0000000000008eb7 <+9159>:	jmp    0x8df5 <main+8965>
-   0x0000000000008ebc <+9164>:	mov    edi,0x1
-   0x0000000000008ec1 <+9169>:	mov    rbx,QWORD PTR [rsp+0xc0]
-   0x0000000000008ec9 <+9177>:	mov    rsi,rbx
-   0x0000000000008ecc <+9180>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008ed1 <+9185>:	mov    QWORD PTR [rsp+0x58],rax
-   0x0000000000008ed6 <+9190>:	mov    QWORD PTR [rsp+0x60],0x0
-   0x0000000000008edf <+9199>:	mov    QWORD PTR [rsp+0x68],rbx
-   0x0000000000008ee4 <+9204>:	test   r15,r15
-   0x0000000000008ee7 <+9207>:	jle    0x8ff1 <main+9473>
-   0x0000000000008eed <+9213>:	mov    QWORD PTR [rsp+0x38],r13
-   0x0000000000008ef2 <+9218>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008efa <+9226>:	lea    rsi,[r15+rdi*1]
-   0x0000000000008efe <+9230>:	xor    eax,eax
-   0x0000000000008f00 <+9232>:	mov    rbx,r15
-   0x0000000000008f03 <+9235>:	mov    QWORD PTR [rsp+0xc0],rsi
-   0x0000000000008f0b <+9243>:	jmp    0x8f37 <main+9287>
-   0x0000000000008f0d <+9245>:	nop    DWORD PTR [rax]
-   0x0000000000008f10 <+9248>:	mov    r13,QWORD PTR [rsp+0x58]
-   0x0000000000008f15 <+9253>:	lea    rcx,[rbx-0x1]
-   0x0000000000008f19 <+9257>:	mov    BYTE PTR [rax+r13*1],r14b
-   0x0000000000008f1d <+9261>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008f22 <+9266>:	inc    rax
-   0x0000000000008f25 <+9269>:	mov    QWORD PTR [rsp+0x60],rax
-   0x0000000000008f2a <+9274>:	cmp    rbx,0x1
-   0x0000000000008f2e <+9278>:	mov    rbx,rcx
-   0x0000000000008f31 <+9281>:	jle    0x8fdd <main+9453>
-   0x0000000000008f37 <+9287>:	cmp    r15,rbx
-   0x0000000000008f3a <+9290>:	mov    ecx,0x0
-   0x0000000000008f3f <+9295>:	cmovl  rcx,r15
-   0x0000000000008f43 <+9299>:	mov    rdx,rsi
-   0x0000000000008f46 <+9302>:	sub    rdx,rbx
-   0x0000000000008f49 <+9305>:	movzx  r14d,BYTE PTR [rdx+rcx*1]
-   0x0000000000008f4e <+9310>:	mov    r12,QWORD PTR [rsp+0x68]
-   0x0000000000008f53 <+9315>:	cmp    rax,r12
-   0x0000000000008f56 <+9318>:	jl     0x8f10 <main+9248>
-   0x0000000000008f58 <+9320>:	add    r12,r12
-   0x0000000000008f5b <+9323>:	cmp    r12,0x2
-   0x0000000000008f5f <+9327>:	mov    eax,0x1
-   0x0000000000008f64 <+9332>:	cmovl  r12,rax
-   0x0000000000008f68 <+9336>:	mov    edi,0x1
-   0x0000000000008f6d <+9341>:	mov    rsi,r12
-   0x0000000000008f70 <+9344>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000008f75 <+9349>:	mov    r13,rax
-   0x0000000000008f78 <+9352>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008f7d <+9357>:	test   rax,rax
-   0x0000000000008f80 <+9360>:	mov    ecx,0x0
-   0x0000000000008f85 <+9365>:	cmovle rax,rcx
-   0x0000000000008f89 <+9369>:	jle    0x8faa <main+9402>
-   0x0000000000008f8b <+9371>:	inc    rax
-   0x0000000000008f8e <+9374>:	xor    ecx,ecx
-   0x0000000000008f90 <+9376>:	mov    rdx,QWORD PTR [rsp+0x58]
-   0x0000000000008f95 <+9381>:	movzx  edx,BYTE PTR [rcx+rdx*1]
-   0x0000000000008f99 <+9385>:	mov    BYTE PTR [r13+rcx*1+0x0],dl
-   0x0000000000008f9e <+9390>:	dec    rax
-   0x0000000000008fa1 <+9393>:	inc    rcx
-   0x0000000000008fa4 <+9396>:	cmp    rax,0x1
-   0x0000000000008fa8 <+9400>:	ja     0x8f90 <main+9376>
-   0x0000000000008faa <+9402>:	mov    rdi,QWORD PTR [rsp+0x58]
-   0x0000000000008faf <+9407>:	test   rdi,rdi
-   0x0000000000008fb2 <+9410>:	je     0x8fb9 <main+9417>
-   0x0000000000008fb4 <+9412>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000008fb9 <+9417>:	mov    QWORD PTR [rsp+0x58],r13
-   0x0000000000008fbe <+9422>:	mov    QWORD PTR [rsp+0x68],r12
-   0x0000000000008fc3 <+9427>:	mov    rax,QWORD PTR [rsp+0x60]
-   0x0000000000008fc8 <+9432>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000008fd0 <+9440>:	mov    rsi,QWORD PTR [rsp+0xc0]
-   0x0000000000008fd8 <+9448>:	jmp    0x8f15 <main+9253>
-   0x0000000000008fdd <+9453>:	movabs r15,0x7fffffffffffffe0
-   0x0000000000008fe7 <+9463>:	mov    r13,QWORD PTR [rsp+0x38]
-   0x0000000000008fec <+9468>:	jmp    0x9146 <main+9814>
-   0x0000000000008ff1 <+9473>:	movabs r15,0x7fffffffffffffe0
-   0x0000000000008ffb <+9483>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000009003 <+9491>:	jmp    0x9146 <main+9814>
-   0x0000000000009008 <+9496>:	cmp    r12,0x10
-   0x000000000000900c <+9500>:	ja     0x909b <main+9643>
-   0x0000000000009012 <+9506>:	cmp    r12,0x8
-   0x0000000000009016 <+9510>:	jl     0x9783 <main+11411>
-   0x000000000000901c <+9516>:	mov    rdx,QWORD PTR [rdi]
-   0x000000000000901f <+9519>:	mov    QWORD PTR [rax],rdx
-   0x0000000000009022 <+9522>:	mov    rdx,QWORD PTR [rdi+r12*1-0x8]
-   0x0000000000009027 <+9527>:	mov    QWORD PTR [rax+r12*1-0x8],rdx
-   0x000000000000902c <+9532>:	add    r12,rax
-   0x000000000000902f <+9535>:	lea    rdx,[r14+0x1]
-   0x0000000000009033 <+9539>:	cmp    rdx,0x4
-   0x0000000000009037 <+9543>:	jle    0x90f5 <main+9733>
-   0x000000000000903d <+9549>:	jmp    0x8d5d <main+8813>
-   0x0000000000009042 <+9554>:	mov    rsi,rdx
-   0x0000000000009045 <+9557>:	and    rsi,r15
-   0x0000000000009048 <+9560>:	je     0x9069 <main+9593>
-   0x000000000000904a <+9562>:	xor    r9d,r9d
-   0x000000000000904d <+9565>:	nop    DWORD PTR [rax]
-   0x0000000000009050 <+9568>:	vmovups ymm0,YMMWORD PTR [r13+r9*1+0x0]
-   0x0000000000009057 <+9575>:	vmovups YMMWORD PTR [r12+r9*1],ymm0
-   0x000000000000905d <+9581>:	lea    r8,[r9+0x20]
-   0x0000000000009061 <+9585>:	mov    r9,r8
-   0x0000000000009064 <+9588>:	cmp    r8,rsi
-   0x0000000000009067 <+9591>:	jb     0x9050 <main+9568>
-   0x0000000000009069 <+9593>:	cmp    rsi,rdx
-   0x000000000000906c <+9596>:	jge    0x9137 <main+9799>
-   0x0000000000009072 <+9602>:	data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000009080 <+9616>:	movzx  r8d,BYTE PTR [r13+rsi*1+0x0]
-   0x0000000000009086 <+9622>:	mov    BYTE PTR [r12+rsi*1],r8b
-   0x000000000000908a <+9626>:	lea    r8,[rsi+0x1]
-   0x000000000000908e <+9630>:	mov    rsi,r8
-   0x0000000000009091 <+9633>:	cmp    rdx,r8
-   0x0000000000009094 <+9636>:	jne    0x9080 <main+9616>
-   0x0000000000009096 <+9638>:	jmp    0x9137 <main+9799>
-   0x000000000000909b <+9643>:	mov    rdx,r12
-   0x000000000000909e <+9646>:	and    rdx,r15
-   0x00000000000090a1 <+9649>:	je     0x90c6 <main+9686>
-   0x00000000000090a3 <+9651>:	xor    esi,esi
-   0x00000000000090a5 <+9653>:	data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x00000000000090b0 <+9664>:	vmovups ymm0,YMMWORD PTR [rdi+rsi*1]
-   0x00000000000090b5 <+9669>:	vmovups YMMWORD PTR [rax+rsi*1],ymm0
-   0x00000000000090ba <+9674>:	lea    r8,[rsi+0x20]
-   0x00000000000090be <+9678>:	mov    rsi,r8
-   0x00000000000090c1 <+9681>:	cmp    r8,rdx
-   0x00000000000090c4 <+9684>:	jb     0x90b0 <main+9664>
-   0x00000000000090c6 <+9686>:	cmp    rdx,r12
-   0x00000000000090c9 <+9689>:	jge    0x90e4 <main+9716>
-   0x00000000000090cb <+9691>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x00000000000090d0 <+9696>:	movzx  esi,BYTE PTR [rdi+rdx*1]
-   0x00000000000090d4 <+9700>:	mov    BYTE PTR [rax+rdx*1],sil
-   0x00000000000090d8 <+9704>:	lea    rsi,[rdx+0x1]
-   0x00000000000090dc <+9708>:	mov    rdx,rsi
-   0x00000000000090df <+9711>:	cmp    rsi,r12
-   0x00000000000090e2 <+9714>:	jl     0x90d0 <main+9696>
-   0x00000000000090e4 <+9716>:	add    r12,rax
-   0x00000000000090e7 <+9719>:	lea    rdx,[r14+0x1]
-   0x00000000000090eb <+9723>:	cmp    rdx,0x4
-   0x00000000000090ef <+9727>:	jg     0x8d5d <main+8813>
-   0x00000000000090f5 <+9733>:	movzx  esi,BYTE PTR [r13+0x0]
-   0x00000000000090fa <+9738>:	mov    BYTE PTR [r12],sil
-   0x00000000000090fe <+9742>:	movzx  esi,BYTE PTR [r13+r14*1+0x0]
-   0x0000000000009104 <+9748>:	mov    BYTE PTR [r12+r14*1],sil
-   0x0000000000009108 <+9752>:	cmp    rdx,0x3
-   0x000000000000910c <+9756>:	jl     0x9137 <main+9799>
-   0x000000000000910e <+9758>:	movzx  edx,BYTE PTR [r13+0x1]
-   0x0000000000009113 <+9763>:	mov    BYTE PTR [r12+0x1],dl
-   0x0000000000009118 <+9768>:	movzx  edx,BYTE PTR [r13+r14*1-0x1]
-   0x000000000000911e <+9774>:	mov    BYTE PTR [r12+r14*1-0x1],dl
-   0x0000000000009123 <+9779>:	jmp    0x9137 <main+9799>
-   0x0000000000009125 <+9781>:	mov    edx,DWORD PTR [r13+0x0]
-   0x0000000000009129 <+9785>:	mov    DWORD PTR [r12],edx
-   0x000000000000912d <+9789>:	mov    edx,DWORD PTR [r13+r14*1-0x3]
-   0x0000000000009132 <+9794>:	mov    DWORD PTR [r12+r14*1-0x3],edx
-   0x0000000000009137 <+9799>:	mov    QWORD PTR [rsp+0x58],rax
-   0x000000000000913c <+9804>:	mov    QWORD PTR [rsp+0x60],rbx
-   0x0000000000009141 <+9809>:	mov    QWORD PTR [rsp+0x68],rcx
-   0x0000000000009146 <+9814>:	mov    rbx,QWORD PTR [rsp+0x1b0]
-   0x000000000000914e <+9822>:	sub    rbx,QWORD PTR [rsp+0x1c8]
-   0x0000000000009156 <+9830>:	test   r13,r13
-   0x0000000000009159 <+9833>:	mov    r14,QWORD PTR [rsp+0x1b8]
-   0x0000000000009161 <+9841>:	je     0x9176 <main+9862>
-   0x0000000000009163 <+9843>:	mov    rdi,r13
-   0x0000000000009166 <+9846>:	vzeroupper 
-   0x0000000000009169 <+9849>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000916e <+9854>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000009176 <+9862>:	imul   rbx,rbx,0x3b9aca00
-   0x000000000000917d <+9869>:	sub    r14,QWORD PTR [rsp+0x1c0]
-   0x0000000000009185 <+9877>:	test   rdi,rdi
-   0x0000000000009188 <+9880>:	je     0x9192 <main+9890>
-   0x000000000000918a <+9882>:	vzeroupper 
-   0x000000000000918d <+9885>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000009192 <+9890>:	add    r14,rbx
-   0x0000000000009195 <+9893>:	mov    QWORD PTR [rsp+0x210],0x1
-   0x00000000000091a1 <+9905>:	lea    rdi,[rsp+0x58]
-   0x00000000000091a6 <+9910>:	lea    rcx,[rsp+0x210]
-   0x00000000000091ae <+9918>:	xor    esi,esi
-   0x00000000000091b0 <+9920>:	xor    edx,edx
-   0x00000000000091b2 <+9922>:	vzeroupper 
-   0x00000000000091b5 <+9925>:	call   0x9f20 <stdlib::builtin::io::print[*stdlib::builtin::str::Stringable](*$0,stdlib::builtin::bool::Bool,stdlib::builtin::file_descriptor::FileDescriptor),Ts=[[struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>, {"__str__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> borrow_in_mem, !kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> byref_result) -> !kgen.none = @"stdlib::builtin::string::String::__str__(stdlib::builtin::string::String)", "__del__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> owned_in_mem) -> !kgen.none = @"stdlib::builtin::string::String::__del__(stdlib::builtin::string::String)"}]]>
-   0x00000000000091ba <+9930>:	mov    rdi,QWORD PTR [rsp+0x58]
-   0x00000000000091bf <+9935>:	test   rdi,rdi
-   0x00000000000091c2 <+9938>:	je     0x91c9 <main+9945>
-   0x00000000000091c4 <+9940>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000091c9 <+9945>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x280]
-   0x00000000000091d1 <+9953>:	vpaddw zmm0,zmm0,ZMMWORD PTR [rsp+0x2c0]
-   0x00000000000091d9 <+9961>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x100]
-   0x00000000000091e1 <+9969>:	vpaddw zmm1,zmm1,ZMMWORD PTR [rsp+0x140]
-   0x00000000000091e9 <+9977>:	vpaddw zmm0,zmm0,zmm1
-   0x00000000000091ef <+9983>:	vextracti64x4 ymm1,zmm0,0x1
-   0x00000000000091f6 <+9990>:	vpaddw ymm0,ymm1,ymm0
-   0x00000000000091fa <+9994>:	vextracti128 xmm1,ymm0,0x1
-   0x0000000000009200 <+10000>:	vpaddw xmm0,xmm0,xmm1
-   0x0000000000009204 <+10004>:	vpshufd xmm1,xmm0,0xee
-   0x0000000000009209 <+10009>:	vpaddw xmm0,xmm0,xmm1
-   0x000000000000920d <+10013>:	vpshufd xmm1,xmm0,0x55
-   0x0000000000009212 <+10018>:	vpaddw xmm0,xmm0,xmm1
-   0x0000000000009216 <+10022>:	vpsrld xmm1,xmm0,0x10
-   0x000000000000921b <+10027>:	vpaddw xmm0,xmm0,xmm1
-   0x000000000000921f <+10031>:	vmovw  eax,xmm0
-   0x0000000000009225 <+10037>:	vmovw  WORD PTR [rsp+0x76],xmm0
-   0x000000000000922d <+10045>:	lea    rcx,[rsp+0x76]
-   0x0000000000009232 <+10050>:	mov    QWORD PTR [rsp+0x1d0],rcx
-   0x000000000000923a <+10058>:	vpxor  xmm0,xmm0,xmm0
-   0x000000000000923e <+10062>:	vmovdqa XMMWORD PTR [rsp+0x360],xmm0
-   0x0000000000009247 <+10071>:	mov    QWORD PTR [rsp+0x370],0x0
-   0x0000000000009253 <+10083>:	vpxor  xmm0,xmm0,xmm0
-   0x0000000000009257 <+10087>:	vmovdqa YMMWORD PTR [rsp+0x240],ymm0
-   0x0000000000009260 <+10096>:	vmovdqa YMMWORD PTR [rsp+0x220],ymm0
-   0x0000000000009269 <+10105>:	mov    BYTE PTR [rsp+0x260],0x0
-   0x0000000000009271 <+10113>:	lea    rbx,[rsp+0x220]
-   0x0000000000009279 <+10121>:	mov    esi,0x41
-   0x000000000000927e <+10126>:	mov    rdi,rbx
-   0x0000000000009281 <+10129>:	mov    rdx,r14
-   0x0000000000009284 <+10132>:	vzeroupper 
-   0x0000000000009287 <+10135>:	call   0xa1c0 <stdlib::builtin::io::_snprintf_scalar[stdlib::builtin::dtype::DType,stdlib::builtin::string_literal::StringLiteral](stdlib::memory::unsafe_pointer::UnsafePointer[stdlib::builtin::simd::SIMD[{uint8}, {1}], {{0}}],stdlib::builtin::int::Int,stdlib::builtin::simd::SIMD[$0, {1}]),type=si64,float_format="%.17g">
-   0x000000000000928c <+10140>:	lea    rdi,[rsp+0x360]
-   0x0000000000009294 <+10148>:	mov    rsi,rbx
-   0x0000000000009297 <+10151>:	mov    rdx,rax
-   0x000000000000929a <+10154>:	call   0x9890 <stdlib::builtin::string::String::_unsafe_to_formatter(stdlib::builtin::string::String&)_write_to_string(stdlib::memory::unsafe_pointer::UnsafePointer[None, {{0}}],stdlib::utils::stringref::StringRef)>
-   0x000000000000929f <+10159>:	mov    r12,QWORD PTR [rsp+0x360]
-   0x00000000000092a7 <+10167>:	mov    rbx,QWORD PTR [rsp+0x368]
-   0x00000000000092af <+10175>:	mov    r14d,0xc
-   0x00000000000092b5 <+10181>:	mov    edi,0x1
-   0x00000000000092ba <+10186>:	mov    esi,0xc
-   0x00000000000092bf <+10191>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000092c4 <+10196>:	mov    r13,rax
-   0x00000000000092c7 <+10199>:	movabs rax,0x65707320656d6974
-   0x00000000000092d1 <+10209>:	mov    QWORD PTR [r13+0x0],rax
-   0x00000000000092d5 <+10213>:	movabs rax,0x20646e6570732065
-   0x00000000000092df <+10223>:	mov    QWORD PTR [r13+0x3],rax
-   0x00000000000092e3 <+10227>:	mov    BYTE PTR [r13+0xb],0x0
-   0x00000000000092e8 <+10232>:	dec    rbx
-   0x00000000000092eb <+10235>:	test   r12,r12
-   0x00000000000092ee <+10238>:	cmove  rbx,r12
-   0x00000000000092f2 <+10242>:	test   rbx,rbx
-   0x00000000000092f5 <+10245>:	jle    0x930f <main+10271>
-   0x00000000000092f7 <+10247>:	lea    r14,[rbx+0xc]
-   0x00000000000092fb <+10251>:	lea    rax,[r15+0x13]
-   0x00000000000092ff <+10255>:	cmp    rbx,rax
-   0x0000000000009302 <+10258>:	jbe    0x9439 <main+10569>
-   0x0000000000009308 <+10264>:	xor    edi,edi
-   0x000000000000930a <+10266>:	jmp    0x945b <main+10603>
-   0x000000000000930f <+10271>:	mov    QWORD PTR [rsp+0x140],r12
-   0x0000000000009317 <+10279>:	mov    edi,0x1
-   0x000000000000931c <+10284>:	mov    esi,0xc
-   0x0000000000009321 <+10289>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000009326 <+10294>:	mov    rcx,r13
-   0x0000000000009329 <+10297>:	mov    r13,rax
-   0x000000000000932c <+10300>:	mov    QWORD PTR [rsp+0x2c0],rcx
-   0x0000000000009334 <+10308>:	mov    rdx,rcx
-   0x0000000000009337 <+10311>:	add    rdx,0xc
-   0x000000000000933b <+10315>:	xor    r15d,r15d
-   0x000000000000933e <+10318>:	mov    ebx,0x1
-   0x0000000000009343 <+10323>:	mov    r12d,0xc
-   0x0000000000009349 <+10329>:	mov    ecx,0x1
-   0x000000000000934e <+10334>:	mov    QWORD PTR [rsp+0x80],rdx
-   0x0000000000009356 <+10342>:	jmp    0x9389 <main+10393>
-   0x0000000000009358 <+10344>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000009360 <+10352>:	mov    ecx,0x1
-   0x0000000000009365 <+10357>:	mov    rdx,QWORD PTR [rsp+0x80]
-   0x000000000000936d <+10365>:	movzx  eax,BYTE PTR [rsp+0xc0]
-   0x0000000000009375 <+10373>:	dec    r12
-   0x0000000000009378 <+10376>:	mov    BYTE PTR [r13+r15*1+0x0],al
-   0x000000000000937d <+10381>:	inc    r15
-   0x0000000000009380 <+10384>:	inc    rbx
-   0x0000000000009383 <+10387>:	cmp    r15,0xc
-   0x0000000000009387 <+10391>:	je     0x93f8 <main+10504>
-   0x0000000000009389 <+10393>:	mov    rax,rdx
-   0x000000000000938c <+10396>:	sub    rax,r12
-   0x000000000000938f <+10399>:	movzx  eax,BYTE PTR [rax]
-   0x0000000000009392 <+10402>:	cmp    r15,r14
-   0x0000000000009395 <+10405>:	jl     0x9375 <main+10373>
-   0x0000000000009397 <+10407>:	mov    BYTE PTR [rsp+0xc0],al
-   0x000000000000939e <+10414>:	add    r14,r14
-   0x00000000000093a1 <+10417>:	cmp    r14,0x2
-   0x00000000000093a5 <+10421>:	cmovl  r14,rcx
-   0x00000000000093a9 <+10425>:	mov    edi,0x1
-   0x00000000000093ae <+10430>:	mov    rsi,r14
-   0x00000000000093b1 <+10433>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000093b6 <+10438>:	mov    rdi,r13
-   0x00000000000093b9 <+10441>:	mov    r13,rax
-   0x00000000000093bc <+10444>:	test   r15,r15
-   0x00000000000093bf <+10447>:	je     0x93e5 <main+10485>
-   0x00000000000093c1 <+10449>:	mov    rax,rdi
-   0x00000000000093c4 <+10452>:	mov    rcx,r13
-   0x00000000000093c7 <+10455>:	mov    rdx,rbx
-   0x00000000000093ca <+10458>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x00000000000093d0 <+10464>:	movzx  esi,BYTE PTR [rax]
-   0x00000000000093d3 <+10467>:	mov    BYTE PTR [rcx],sil
-   0x00000000000093d6 <+10470>:	dec    rdx
-   0x00000000000093d9 <+10473>:	inc    rcx
-   0x00000000000093dc <+10476>:	inc    rax
-   0x00000000000093df <+10479>:	cmp    rdx,0x1
-   0x00000000000093e3 <+10483>:	ja     0x93d0 <main+10464>
-   0x00000000000093e5 <+10485>:	test   rdi,rdi
-   0x00000000000093e8 <+10488>:	je     0x9360 <main+10352>
-   0x00000000000093ee <+10494>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000093f3 <+10499>:	jmp    0x9360 <main+10352>
-   0x00000000000093f8 <+10504>:	mov    QWORD PTR [rsp+0x80],r13
-   0x0000000000009400 <+10512>:	mov    r14d,0xc
-   0x0000000000009406 <+10518>:	movabs r15,0x7fffffffffffffe0
-   0x0000000000009410 <+10528>:	mov    r12,QWORD PTR [rsp+0x140]
-   0x0000000000009418 <+10536>:	mov    r13,QWORD PTR [rsp+0x2c0]
-   0x0000000000009420 <+10544>:	mov    rdi,r13
-   0x0000000000009423 <+10547>:	vzeroupper 
-   0x0000000000009426 <+10550>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000942b <+10555>:	test   r12,r12
-   0x000000000000942e <+10558>:	jne    0x9542 <main+10834>
-   0x0000000000009434 <+10564>:	jmp    0x954a <main+10842>
-   0x0000000000009439 <+10569>:	mov    edi,0x1
-   0x000000000000943e <+10574>:	mov    rsi,r14
-   0x0000000000009441 <+10577>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000009446 <+10582>:	mov    rdi,rax
-   0x0000000000009449 <+10585>:	mov    rax,r14
-   0x000000000000944c <+10588>:	mov    rcx,rdi
-   0x000000000000944f <+10591>:	nop
-   0x0000000000009450 <+10592>:	mov    BYTE PTR [rcx],0x0
-   0x0000000000009453 <+10595>:	inc    rcx
-   0x0000000000009456 <+10598>:	dec    rax
-   0x0000000000009459 <+10601>:	jne    0x9450 <main+10592>
-   0x000000000000945b <+10603>:	mov    rax,QWORD PTR [r13+0x0]
-   0x000000000000945f <+10607>:	mov    QWORD PTR [rdi],rax
-   0x0000000000009462 <+10610>:	mov    rax,QWORD PTR [r13+0x3]
-   0x0000000000009466 <+10614>:	mov    QWORD PTR [rdi+0x3],rax
-   0x000000000000946a <+10618>:	lea    rax,[rbx+0x1]
-   0x000000000000946e <+10622>:	cmp    rax,0x4
-   0x0000000000009472 <+10626>:	mov    QWORD PTR [rsp+0x80],rdi
-   0x000000000000947a <+10634>:	jg     0x94af <main+10687>
-   0x000000000000947c <+10636>:	movzx  ecx,BYTE PTR [r12]
-   0x0000000000009481 <+10641>:	mov    BYTE PTR [rdi+0xb],cl
-   0x0000000000009484 <+10644>:	movzx  ecx,BYTE PTR [r12+rbx*1]
-   0x0000000000009489 <+10649>:	mov    BYTE PTR [rdi+rbx*1+0xb],cl
-   0x000000000000948d <+10653>:	cmp    rax,0x3
-   0x0000000000009491 <+10657>:	jl     0x9537 <main+10823>
-   0x0000000000009497 <+10663>:	movzx  eax,BYTE PTR [r12+0x1]
-   0x000000000000949d <+10669>:	mov    BYTE PTR [rdi+0xc],al
-   0x00000000000094a0 <+10672>:	movzx  eax,BYTE PTR [r12+rbx*1-0x1]
-   0x00000000000094a6 <+10678>:	mov    BYTE PTR [rdi+rbx*1+0xa],al
-   0x00000000000094aa <+10682>:	jmp    0x9537 <main+10823>
-   0x00000000000094af <+10687>:	cmp    rbx,0xf
-   0x00000000000094b3 <+10691>:	ja     0x94cf <main+10719>
-   0x00000000000094b5 <+10693>:	cmp    rax,0x8
-   0x00000000000094b9 <+10697>:	jl     0x9527 <main+10807>
-   0x00000000000094bb <+10699>:	mov    rax,QWORD PTR [r12]
-   0x00000000000094bf <+10703>:	mov    QWORD PTR [rdi+0xb],rax
-   0x00000000000094c3 <+10707>:	mov    rax,QWORD PTR [r12+rbx*1-0x7]
-   0x00000000000094c8 <+10712>:	mov    QWORD PTR [rdi+rbx*1+0x4],rax
-   0x00000000000094cd <+10717>:	jmp    0x9537 <main+10823>
-   0x00000000000094cf <+10719>:	mov    rcx,rax
-   0x00000000000094d2 <+10722>:	and    rcx,r15
-   0x00000000000094d5 <+10725>:	je     0x94f8 <main+10760>
-   0x00000000000094d7 <+10727>:	xor    edx,edx
-   0x00000000000094d9 <+10729>:	nop    DWORD PTR [rax+0x0]
-   0x00000000000094e0 <+10736>:	vmovdqu ymm0,YMMWORD PTR [r12+rdx*1]
-   0x00000000000094e6 <+10742>:	vmovdqu YMMWORD PTR [rdi+rdx*1+0xb],ymm0
-   0x00000000000094ec <+10748>:	lea    rsi,[rdx+0x20]
-   0x00000000000094f0 <+10752>:	mov    rdx,rsi
-   0x00000000000094f3 <+10755>:	cmp    rsi,rcx
-   0x00000000000094f6 <+10758>:	jb     0x94e0 <main+10736>
-   0x00000000000094f8 <+10760>:	cmp    rcx,rax
-   0x00000000000094fb <+10763>:	jge    0x9420 <main+10544>
-   0x0000000000009501 <+10769>:	data16 data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
-   0x0000000000009510 <+10784>:	movzx  edx,BYTE PTR [r12+rcx*1]
-   0x0000000000009515 <+10789>:	mov    BYTE PTR [rdi+rcx*1+0xb],dl
-   0x0000000000009519 <+10793>:	lea    rdx,[rcx+0x1]
-   0x000000000000951d <+10797>:	mov    rcx,rdx
-   0x0000000000009520 <+10800>:	cmp    rax,rdx
-   0x0000000000009523 <+10803>:	jne    0x9510 <main+10784>
-   0x0000000000009525 <+10805>:	jmp    0x9537 <main+10823>
-   0x0000000000009527 <+10807>:	mov    eax,DWORD PTR [r12]
-   0x000000000000952b <+10811>:	mov    DWORD PTR [rdi+0xb],eax
-   0x000000000000952e <+10814>:	mov    eax,DWORD PTR [r12+rbx*1-0x3]
-   0x0000000000009533 <+10819>:	mov    DWORD PTR [rdi+rbx*1+0x8],eax
-   0x0000000000009537 <+10823>:	mov    rdi,r13
-   0x000000000000953a <+10826>:	vzeroupper 
-   0x000000000000953d <+10829>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000009542 <+10834>:	mov    rdi,r12
-   0x0000000000009545 <+10837>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000954a <+10842>:	mov    r12d,0x4
-   0x0000000000009550 <+10848>:	mov    edi,0x1
-   0x0000000000009555 <+10853>:	mov    esi,0x4
-   0x000000000000955a <+10858>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x000000000000955f <+10863>:	mov    rbx,rax
-   0x0000000000009562 <+10866>:	mov    DWORD PTR [rax],0x736e20
-   0x0000000000009568 <+10872>:	dec    r14
-   0x000000000000956b <+10875>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000009573 <+10883>:	test   rdi,rdi
-   0x0000000000009576 <+10886>:	cmove  r14,rdi
-   0x000000000000957a <+10890>:	test   r14,r14
-   0x000000000000957d <+10893>:	mov    QWORD PTR [rsp+0x140],rax
-   0x0000000000009585 <+10901>:	jle    0x95ea <main+11002>
-   0x0000000000009587 <+10903>:	lea    r12,[r14+0x4]
-   0x000000000000958b <+10907>:	lea    rdx,[r15+0x1b]
-   0x000000000000958f <+10911>:	xor    eax,eax
-   0x0000000000009591 <+10913>:	mov    ecx,0x0
-   0x0000000000009596 <+10918>:	cmp    r14,rdx
-   0x0000000000009599 <+10921>:	jbe    0x96fc <main+11276>
-   0x000000000000959f <+10927>:	and    r15,r14
-   0x00000000000095a2 <+10930>:	je     0x95c6 <main+10966>
-   0x00000000000095a4 <+10932>:	xor    edx,edx
-   0x00000000000095a6 <+10934>:	cs nop WORD PTR [rax+rax*1+0x0]
-   0x00000000000095b0 <+10944>:	vmovdqu ymm0,YMMWORD PTR [rdi+rdx*1]
-   0x00000000000095b5 <+10949>:	vmovdqu YMMWORD PTR [rax+rdx*1],ymm0
-   0x00000000000095ba <+10954>:	lea    rsi,[rdx+0x20]
-   0x00000000000095be <+10958>:	mov    rdx,rsi
-   0x00000000000095c1 <+10961>:	cmp    rsi,r15
-   0x00000000000095c4 <+10964>:	jb     0x95b0 <main+10944>
-   0x00000000000095c6 <+10966>:	cmp    r15,r14
-   0x00000000000095c9 <+10969>:	jge    0x97b8 <main+11464>
-   0x00000000000095cf <+10975>:	nop
-   0x00000000000095d0 <+10976>:	movzx  edx,BYTE PTR [rdi+r15*1]
-   0x00000000000095d5 <+10981>:	mov    BYTE PTR [rax+r15*1],dl
-   0x00000000000095d9 <+10985>:	lea    rdx,[r15+0x1]
-   0x00000000000095dd <+10989>:	mov    r15,rdx
-   0x00000000000095e0 <+10992>:	cmp    rdx,r14
-   0x00000000000095e3 <+10995>:	jl     0x95d0 <main+10976>
-   0x00000000000095e5 <+10997>:	jmp    0x97b8 <main+11464>
-   0x00000000000095ea <+11002>:	mov    edi,0x1
-   0x00000000000095ef <+11007>:	mov    esi,0x4
-   0x00000000000095f4 <+11012>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x00000000000095f9 <+11017>:	mov    QWORD PTR [rsp+0x220],rax
-   0x0000000000009601 <+11025>:	mov    QWORD PTR [rsp+0x228],0x0
-   0x000000000000960d <+11037>:	mov    QWORD PTR [rsp+0x230],0x4
-   0x0000000000009619 <+11049>:	mov    rdx,rbx
-   0x000000000000961c <+11052>:	add    rdx,0x4
-   0x0000000000009620 <+11056>:	xor    r15d,r15d
-   0x0000000000009623 <+11059>:	mov    ebx,0x4
-   0x0000000000009628 <+11064>:	mov    ecx,0x1
-   0x000000000000962d <+11069>:	mov    QWORD PTR [rsp+0xc0],rdx
-   0x0000000000009635 <+11077>:	jmp    0x9663 <main+11123>
-   0x0000000000009637 <+11079>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x0000000000009640 <+11088>:	mov    r13,rax
-   0x0000000000009643 <+11091>:	lea    rsi,[rbx-0x1]
-   0x0000000000009647 <+11095>:	mov    BYTE PTR [r15+r13*1],r14b
-   0x000000000000964b <+11099>:	inc    r15
-   0x000000000000964e <+11102>:	mov    QWORD PTR [rsp+0x228],r15
-   0x0000000000009656 <+11110>:	cmp    rbx,0x1
-   0x000000000000965a <+11114>:	mov    rbx,rsi
-   0x000000000000965d <+11117>:	jbe    0x97f2 <main+11522>
-   0x0000000000009663 <+11123>:	mov    rsi,rdx
-   0x0000000000009666 <+11126>:	sub    rsi,rbx
-   0x0000000000009669 <+11129>:	movzx  r14d,BYTE PTR [rsi]
-   0x000000000000966d <+11133>:	cmp    r15,r12
-   0x0000000000009670 <+11136>:	jl     0x9640 <main+11088>
-   0x0000000000009672 <+11138>:	add    r12,r12
-   0x0000000000009675 <+11141>:	cmp    r12,0x2
-   0x0000000000009679 <+11145>:	cmovl  r12,rcx
-   0x000000000000967d <+11149>:	mov    r13,rax
-   0x0000000000009680 <+11152>:	mov    edi,0x1
-   0x0000000000009685 <+11157>:	mov    rsi,r12
-   0x0000000000009688 <+11160>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x000000000000968d <+11165>:	mov    rdi,r13
-   0x0000000000009690 <+11168>:	mov    r13,rax
-   0x0000000000009693 <+11171>:	mov    eax,0x0
-   0x0000000000009698 <+11176>:	test   r15,r15
-   0x000000000000969b <+11179>:	cmovg  rax,r15
-   0x000000000000969f <+11183>:	jle    0x96c5 <main+11221>
-   0x00000000000096a1 <+11185>:	inc    rax
-   0x00000000000096a4 <+11188>:	mov    rcx,rdi
-   0x00000000000096a7 <+11191>:	mov    rdx,r13
-   0x00000000000096aa <+11194>:	nop    WORD PTR [rax+rax*1+0x0]
-   0x00000000000096b0 <+11200>:	movzx  esi,BYTE PTR [rcx]
-   0x00000000000096b3 <+11203>:	mov    BYTE PTR [rdx],sil
-   0x00000000000096b6 <+11206>:	dec    rax
-   0x00000000000096b9 <+11209>:	inc    rdx
-   0x00000000000096bc <+11212>:	inc    rcx
-   0x00000000000096bf <+11215>:	cmp    rax,0x1
-   0x00000000000096c3 <+11219>:	ja     0x96b0 <main+11200>
-   0x00000000000096c5 <+11221>:	test   rdi,rdi
-   0x00000000000096c8 <+11224>:	je     0x96d7 <main+11239>
-   0x00000000000096ca <+11226>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x00000000000096cf <+11231>:	mov    r15,QWORD PTR [rsp+0x228]
-   0x00000000000096d7 <+11239>:	mov    QWORD PTR [rsp+0x220],r13
-   0x00000000000096df <+11247>:	mov    QWORD PTR [rsp+0x230],r12
-   0x00000000000096e7 <+11255>:	mov    rax,r13
-   0x00000000000096ea <+11258>:	mov    ecx,0x1
-   0x00000000000096ef <+11263>:	mov    rdx,QWORD PTR [rsp+0xc0]
-   0x00000000000096f7 <+11271>:	jmp    0x9643 <main+11091>
-   0x00000000000096fc <+11276>:	mov    edi,0x1
-   0x0000000000009701 <+11281>:	mov    rsi,r12
-   0x0000000000009704 <+11284>:	call   0xc9f0 <KGEN_CompilerRT_AlignedAlloc(ssize_t, ssize_t)>
-   0x0000000000009709 <+11289>:	xor    ecx,ecx
-   0x000000000000970b <+11291>:	nop    DWORD PTR [rax+rax*1+0x0]
-   0x0000000000009710 <+11296>:	mov    BYTE PTR [rax+rcx*1],0x0
-   0x0000000000009714 <+11300>:	inc    rcx
-   0x0000000000009717 <+11303>:	cmp    r12,rcx
-   0x000000000000971a <+11306>:	jne    0x9710 <main+11296>
-   0x000000000000971c <+11308>:	cmp    r14,0x4
-   0x0000000000009720 <+11312>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x0000000000009728 <+11320>:	jg     0x9754 <main+11364>
-   0x000000000000972a <+11322>:	movzx  ecx,BYTE PTR [rdi]
-   0x000000000000972d <+11325>:	mov    BYTE PTR [rax],cl
-   0x000000000000972f <+11327>:	movzx  ecx,BYTE PTR [rdi+r14*1-0x1]
-   0x0000000000009735 <+11333>:	mov    BYTE PTR [rax+r14*1-0x1],cl
-   0x000000000000973a <+11338>:	cmp    r14,0x3
-   0x000000000000973e <+11342>:	jl     0x97b5 <main+11461>
-   0x0000000000009740 <+11344>:	movzx  ecx,BYTE PTR [rdi+0x1]
-   0x0000000000009744 <+11348>:	mov    BYTE PTR [rax+0x1],cl
-   0x0000000000009747 <+11351>:	movzx  ecx,BYTE PTR [rdi+r14*1-0x2]
-   0x000000000000974d <+11357>:	mov    BYTE PTR [rax+r14*1-0x2],cl
-   0x0000000000009752 <+11362>:	jmp    0x97b5 <main+11461>
-   0x0000000000009754 <+11364>:	cmp    r14,0x10
-   0x0000000000009758 <+11368>:	ja     0x9772 <main+11394>
-   0x000000000000975a <+11370>:	cmp    r14,0x8
-   0x000000000000975e <+11374>:	jb     0x97a7 <main+11447>
-   0x0000000000009760 <+11376>:	mov    rcx,QWORD PTR [rdi]
-   0x0000000000009763 <+11379>:	mov    QWORD PTR [rax],rcx
-   0x0000000000009766 <+11382>:	mov    rcx,QWORD PTR [rdi+r14*1-0x8]
-   0x000000000000976b <+11387>:	mov    QWORD PTR [rax+r14*1-0x8],rcx
-   0x0000000000009770 <+11392>:	jmp    0x97b5 <main+11461>
-   0x0000000000009772 <+11394>:	mov    rcx,r12
-   0x0000000000009775 <+11397>:	and    r15,r14
-   0x0000000000009778 <+11400>:	jne    0x95a4 <main+10932>
-   0x000000000000977e <+11406>:	jmp    0x95c6 <main+10966>
-   0x0000000000009783 <+11411>:	mov    edx,DWORD PTR [rdi]
-   0x0000000000009785 <+11413>:	mov    DWORD PTR [rax],edx
-   0x0000000000009787 <+11415>:	mov    edx,DWORD PTR [rdi+r12*1-0x4]
-   0x000000000000978c <+11420>:	mov    DWORD PTR [rax+r12*1-0x4],edx
-   0x0000000000009791 <+11425>:	add    r12,rax
-   0x0000000000009794 <+11428>:	lea    rdx,[r14+0x1]
-   0x0000000000009798 <+11432>:	cmp    rdx,0x4
-   0x000000000000979c <+11436>:	jle    0x90f5 <main+9733>
-   0x00000000000097a2 <+11442>:	jmp    0x8d5d <main+8813>
-   0x00000000000097a7 <+11447>:	mov    ecx,DWORD PTR [rdi]
-   0x00000000000097a9 <+11449>:	mov    DWORD PTR [rax],ecx
-   0x00000000000097ab <+11451>:	mov    ecx,DWORD PTR [rdi+r14*1-0x4]
-   0x00000000000097b0 <+11456>:	mov    DWORD PTR [rax+r14*1-0x4],ecx
-   0x00000000000097b5 <+11461>:	mov    rcx,r12
-   0x00000000000097b8 <+11464>:	movzx  edx,BYTE PTR [rbx]
-   0x00000000000097bb <+11467>:	mov    BYTE PTR [r14+rax*1],dl
-   0x00000000000097bf <+11471>:	movzx  edx,BYTE PTR [rbx+0x3]
-   0x00000000000097c3 <+11475>:	mov    BYTE PTR [r14+rax*1+0x3],dl
-   0x00000000000097c8 <+11480>:	movzx  edx,BYTE PTR [rbx+0x1]
-   0x00000000000097cc <+11484>:	mov    BYTE PTR [r14+rax*1+0x1],dl
-   0x00000000000097d1 <+11489>:	movzx  edx,BYTE PTR [rbx+0x2]
-   0x00000000000097d5 <+11493>:	mov    BYTE PTR [r14+rax*1+0x2],dl
-   0x00000000000097da <+11498>:	mov    QWORD PTR [rsp+0x220],rax
-   0x00000000000097e2 <+11506>:	mov    QWORD PTR [rsp+0x228],r12
-   0x00000000000097ea <+11514>:	mov    QWORD PTR [rsp+0x230],rcx
-   0x00000000000097f2 <+11522>:	mov    rdi,QWORD PTR [rsp+0x140]
-   0x00000000000097fa <+11530>:	vzeroupper 
-   0x00000000000097fd <+11533>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000009802 <+11538>:	mov    rdi,QWORD PTR [rsp+0x80]
-   0x000000000000980a <+11546>:	test   rdi,rdi
-   0x000000000000980d <+11549>:	je     0x9814 <main+11556>
-   0x000000000000980f <+11551>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x0000000000009814 <+11556>:	mov    QWORD PTR [rsp+0x218],0x1
-   0x0000000000009820 <+11568>:	lea    rdi,[rsp+0x220]
-   0x0000000000009828 <+11576>:	lea    rcx,[rsp+0x218]
-   0x0000000000009830 <+11584>:	xor    esi,esi
-   0x0000000000009832 <+11586>:	xor    edx,edx
-   0x0000000000009834 <+11588>:	call   0x9f20 <stdlib::builtin::io::print[*stdlib::builtin::str::Stringable](*$0,stdlib::builtin::bool::Bool,stdlib::builtin::file_descriptor::FileDescriptor),Ts=[[struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>, {"__str__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> borrow_in_mem, !kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> byref_result) -> !kgen.none = @"stdlib::builtin::string::String::__str__(stdlib::builtin::string::String)", "__del__" : (!kgen.pointer<struct<(struct<(pointer<none>, index, index) memoryOnly>) memoryOnly>> owned_in_mem) -> !kgen.none = @"stdlib::builtin::string::String::__del__(stdlib::builtin::string::String)"}]]>
-   0x0000000000009839 <+11593>:	mov    rdi,QWORD PTR [rsp+0x220]
-   0x0000000000009841 <+11601>:	test   rdi,rdi
-   0x0000000000009844 <+11604>:	je     0x984b <main+11611>
-   0x0000000000009846 <+11606>:	call   0xca80 <KGEN_CompilerRT_AlignedFree(void*)>
-   0x000000000000984b <+11611>:	call   0xa7b0 <KGEN_CompilerRT_DestroyGlobals()>
-   0x0000000000009850 <+11616>:	xor    eax,eax
-   0x0000000000009852 <+11618>:	lea    rsp,[rbp-0x28]
-   0x0000000000009856 <+11622>:	pop    rbx
-   0x0000000000009857 <+11623>:	pop    r12
-   0x0000000000009859 <+11625>:	pop    r13
-   0x000000000000985b <+11627>:	pop    r14
-   0x000000000000985d <+11629>:	pop    r15
-   0x000000000000985f <+11631>:	pop    rbp
-   0x0000000000009860 <+11632>:	ret    
+   0x0000000000001260 <+0>:	push   rbp
+   0x0000000000001261 <+1>:	mov    rbp,rsp
+   0x0000000000001264 <+4>:	push   r15
+   0x0000000000001266 <+6>:	push   r14
+   0x0000000000001268 <+8>:	push   r13
+   0x000000000000126a <+10>:	push   r12
+   0x000000000000126c <+12>:	push   rbx
+   0x000000000000126d <+13>:	and    rsp,0xffffffffffffffc0
+   0x0000000000001271 <+17>:	sub    rsp,0x4c0
+   0x0000000000001278 <+24>:	mov    rbx,rsi
+   0x000000000000127b <+27>:	mov    r14d,edi
+   0x000000000000127e <+30>:	call   0x1100 <KGEN_CompilerRT_AsyncRT_GetCurrentRuntime@plt>
+   0x0000000000001283 <+35>:	test   rax,rax
+   0x0000000000001286 <+38>:	jne    0x12a7 <main+71>
+   0x0000000000001288 <+40>:	lea    rdi,[rip+0x4d31]        # 0x5fc0 <static_string_a61c3395ab9379d9>
+   0x000000000000128f <+47>:	lea    rdx,[rip+0xffffffffffffffaa]        # 0x1240 <main_closure_0>
+   0x0000000000001296 <+54>:	lea    rcx,[rip+0xffffffffffffffb3]        # 0x1250 <main_closure_1>
+   0x000000000000129d <+61>:	mov    esi,0x7
+   0x00000000000012a2 <+66>:	call   0x1050 <KGEN_CompilerRT_GetOrCreateGlobal@plt>
+   0x00000000000012a7 <+71>:	mov    edi,r14d
+   0x00000000000012aa <+74>:	mov    rsi,rbx
+   0x00000000000012ad <+77>:	call   0x1060 <KGEN_CompilerRT_SetArgV@plt>
+   0x00000000000012b2 <+82>:	call   0x10c0 <KGEN_CompilerRT_PrintStackTraceOnFault@plt>
+   0x00000000000012b7 <+87>:	vxorps xmm0,xmm0,xmm0
+   0x00000000000012bb <+91>:	mov    ebx,0x81
+   0x00000000000012c0 <+96>:	xor    r14d,r14d
+   0x00000000000012c3 <+99>:	vxorps xmm1,xmm1,xmm1
+   0x00000000000012c7 <+103>:	vxorps xmm3,xmm3,xmm3
+   0x00000000000012cb <+107>:	vxorps xmm2,xmm2,xmm2
+   0x00000000000012cf <+111>:	nop
+   0x00000000000012d0 <+112>:	vmovaps ZMMWORD PTR [rsp+0x140],zmm0
+   0x00000000000012d8 <+120>:	vmovaps ZMMWORD PTR [rsp+0x100],zmm1
+   0x00000000000012e0 <+128>:	vmovaps ZMMWORD PTR [rsp+0x80],zmm3
+   0x00000000000012e8 <+136>:	vmovaps ZMMWORD PTR [rsp+0xc0],zmm2
+   0x00000000000012f0 <+144>:	mov    esi,0x64
+   0x00000000000012f5 <+149>:	xor    edi,edi
+   0x00000000000012f7 <+151>:	vzeroupper
+   0x00000000000012fa <+154>:	call   0x1120 <KGEN_CompilerRT_RandomUInt64@plt>
+   0x00000000000012ff <+159>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
+   0x0000000000001307 <+167>:	vmovaps ZMMWORD PTR [rsp+0x180],zmm0
+   0x000000000000130f <+175>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x100]
+   0x0000000000001317 <+183>:	vmovaps ZMMWORD PTR [rsp+0x1c0],zmm0
+   0x000000000000131f <+191>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x80]
+   0x0000000000001327 <+199>:	vmovaps ZMMWORD PTR [rsp+0x200],zmm0
+   0x000000000000132f <+207>:	vmovaps zmm0,ZMMWORD PTR [rsp+0xc0]
+   0x0000000000001337 <+215>:	vmovaps ZMMWORD PTR [rsp+0x240],zmm0
+   0x000000000000133f <+223>:	mov    ecx,r14d
+   0x0000000000001342 <+226>:	and    ecx,0x7f
+   0x0000000000001345 <+229>:	mov    WORD PTR [rsp+rcx*2+0x180],ax
+   0x000000000000134d <+237>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x180]
+   0x0000000000001355 <+245>:	vmovaps zmm1,ZMMWORD PTR [rsp+0x1c0]
+   0x000000000000135d <+253>:	vmovaps zmm3,ZMMWORD PTR [rsp+0x200]
+   0x0000000000001365 <+261>:	vmovaps zmm2,ZMMWORD PTR [rsp+0x240]
+   0x000000000000136d <+269>:	dec    rbx
+   0x0000000000001370 <+272>:	inc    r14
+   0x0000000000001373 <+275>:	cmp    rbx,0x1
+   0x0000000000001377 <+279>:	ja     0x12d0 <main+112>
+   0x000000000000137d <+285>:	vmovaps ZMMWORD PTR [rsp+0x80],zmm3
+   0x0000000000001385 <+293>:	vmovaps ZMMWORD PTR [rsp+0xc0],zmm2
+   0x000000000000138d <+301>:	vmovaps ZMMWORD PTR [rsp+0x100],zmm1
+   0x0000000000001395 <+309>:	vmovaps ZMMWORD PTR [rsp+0x140],zmm0
+   0x000000000000139d <+317>:	movabs r14,0x4000000000000000
+   0x00000000000013a7 <+327>:	mov    edi,0x80
+   0x00000000000013ac <+332>:	vzeroupper
+   0x00000000000013af <+335>:	call   0x2840 <stdlib::builtin::int::Int::__str__(::Int)>
+   0x00000000000013b4 <+340>:	mov    QWORD PTR [rsp+0x38],rax
+   0x00000000000013b9 <+345>:	mov    QWORD PTR [rsp+0x40],rdx
+   0x00000000000013be <+350>:	mov    QWORD PTR [rsp+0x48],rcx
+   0x00000000000013c3 <+355>:	mov    r8,rcx
+   0x00000000000013c6 <+358>:	shr    r8,0x38
+   0x00000000000013ca <+362>:	and    r8d,0x1f
+   0x00000000000013ce <+366>:	test   rcx,rcx
+   0x00000000000013d1 <+369>:	lea    rbx,[rsp+0x38]
+   0x00000000000013d6 <+374>:	cmovs  rax,rbx
+   0x00000000000013da <+378>:	cmovns r8,rdx
+   0x00000000000013de <+382>:	lea    rdi,[rip+0x4c1b]        # 0x6000 <static_string_436df8abfba1a8cd>
+   0x00000000000013e5 <+389>:	mov    esi,0x7
+   0x00000000000013ea <+394>:	mov    rdx,rax
+   0x00000000000013ed <+397>:	mov    rcx,r8
+   0x00000000000013f0 <+400>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x00000000000013f5 <+405>:	mov    QWORD PTR [rsp+0x20],rax
+   0x00000000000013fa <+410>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x00000000000013ff <+415>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x0000000000001404 <+420>:	test   BYTE PTR [rsp+0x4f],0x40
+   0x0000000000001409 <+425>:	je     0x1420 <main+448>
+   0x000000000000140b <+427>:	mov    rdi,QWORD PTR [rsp+0x38]
+   0x0000000000001410 <+432>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000001415 <+437>:	jne    0x1420 <main+448>
+   0x0000000000001417 <+439>:	add    rdi,0xfffffffffffffff8
+   0x000000000000141b <+443>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000001420 <+448>:	mov    rax,QWORD PTR [rsp+0x30]
+   0x0000000000001425 <+453>:	mov    rsi,rax
+   0x0000000000001428 <+456>:	shr    rsi,0x38
+   0x000000000000142c <+460>:	and    esi,0x1f
+   0x000000000000142f <+463>:	test   rax,rax
+   0x0000000000001432 <+466>:	lea    rdi,[rsp+0x20]
+   0x0000000000001437 <+471>:	cmovns rdi,QWORD PTR [rsp+0x20]
+   0x000000000000143d <+477>:	cmovns rsi,QWORD PTR [rsp+0x28]
+   0x0000000000001443 <+483>:	lea    rdx,[rip+0x4b96]        # 0x5fe0 <static_string_7f1562353e292282>
+   0x000000000000144a <+490>:	mov    ecx,0x2
+   0x000000000000144f <+495>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x0000000000001454 <+500>:	mov    QWORD PTR [rsp+0x50],rax
+   0x0000000000001459 <+505>:	mov    QWORD PTR [rsp+0x58],rdx
+   0x000000000000145e <+510>:	mov    QWORD PTR [rsp+0x60],rcx
+   0x0000000000001463 <+515>:	test   QWORD PTR [rsp+0x30],r14
+   0x0000000000001468 <+520>:	je     0x147f <main+543>
+   0x000000000000146a <+522>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x000000000000146f <+527>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000001474 <+532>:	jne    0x147f <main+543>
+   0x0000000000001476 <+534>:	add    rdi,0xfffffffffffffff8
+   0x000000000000147a <+538>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x000000000000147f <+543>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
+   0x0000000000001487 <+551>:	vmovaps zmm1,ZMMWORD PTR [rsp+0x100]
+   0x000000000000148f <+559>:	vmovaps zmm2,ZMMWORD PTR [rsp+0x80]
+   0x0000000000001497 <+567>:	vmovaps zmm3,ZMMWORD PTR [rsp+0xc0]
+   0x000000000000149f <+575>:	call   0x28e0 <stdlib::builtin::simd::SIMD::__str__(::SIMD[$0, $1]),dtype=si16,size=128>
+   0x00000000000014a4 <+580>:	mov    rsi,rcx
+   0x00000000000014a7 <+583>:	mov    QWORD PTR [rsp+0x38],rax
+   0x00000000000014ac <+588>:	mov    QWORD PTR [rsp+0x40],rdx
+   0x00000000000014b1 <+593>:	mov    QWORD PTR [rsp+0x48],rcx
+   0x00000000000014b6 <+598>:	shr    rcx,0x38
+   0x00000000000014ba <+602>:	and    ecx,0x1f
+   0x00000000000014bd <+605>:	test   rsi,rsi
+   0x00000000000014c0 <+608>:	cmovs  rax,rbx
+   0x00000000000014c4 <+612>:	cmovns rcx,rdx
+   0x00000000000014c8 <+616>:	mov    rdx,QWORD PTR [rsp+0x60]
+   0x00000000000014cd <+621>:	mov    rsi,rdx
+   0x00000000000014d0 <+624>:	shr    rsi,0x38
+   0x00000000000014d4 <+628>:	and    esi,0x1f
+   0x00000000000014d7 <+631>:	test   rdx,rdx
+   0x00000000000014da <+634>:	lea    rdx,[rsp+0x50]
+   0x00000000000014df <+639>:	mov    rdi,QWORD PTR [rsp+0x50]
+   0x00000000000014e4 <+644>:	cmovs  rdi,rdx
+   0x00000000000014e8 <+648>:	cmovns rsi,QWORD PTR [rsp+0x58]
+   0x00000000000014ee <+654>:	mov    rdx,rax
+   0x00000000000014f1 <+657>:	vzeroupper
+   0x00000000000014f4 <+660>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x00000000000014f9 <+665>:	mov    QWORD PTR [rsp+0x20],rax
+   0x00000000000014fe <+670>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x0000000000001503 <+675>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x0000000000001508 <+680>:	test   QWORD PTR [rsp+0x60],r14
+   0x000000000000150d <+685>:	je     0x1524 <main+708>
+   0x000000000000150f <+687>:	mov    rdi,QWORD PTR [rsp+0x50]
+   0x0000000000001514 <+692>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000001519 <+697>:	jne    0x1524 <main+708>
+   0x000000000000151b <+699>:	add    rdi,0xfffffffffffffff8
+   0x000000000000151f <+703>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000001524 <+708>:	test   QWORD PTR [rsp+0x48],r14
+   0x0000000000001529 <+713>:	je     0x1540 <main+736>
+   0x000000000000152b <+715>:	mov    rdi,QWORD PTR [rsp+0x38]
+   0x0000000000001530 <+720>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000001535 <+725>:	jne    0x1540 <main+736>
+   0x0000000000001537 <+727>:	add    rdi,0xfffffffffffffff8
+   0x000000000000153b <+731>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000001540 <+736>:	lea    rsi,[rip+0x4a89]        # 0x5fd0 <static_string_bbe01a6a523daf15>
+   0x0000000000001547 <+743>:	lea    rdi,[rsp+0x20]
+   0x000000000000154c <+748>:	mov    edx,0x1
+   0x0000000000001551 <+753>:	mov    r8d,0x1
+   0x0000000000001557 <+759>:	xor    ecx,ecx
+   0x0000000000001559 <+761>:	call   0x3f00 <stdlib::io::io::print[*::Writable](*$0,::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::Bool,::FileDescriptor),Ts=[[typevalue<#kgen.instref<"stdlib::collections::string::string::String">>, struct<(pointer<none>, index, index) memoryOnly>]]>
+   0x000000000000155e <+766>:	test   QWORD PTR [rsp+0x30],r14
+   0x0000000000001563 <+771>:	je     0x157a <main+794>
+   0x0000000000001565 <+773>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x000000000000156a <+778>:	lock dec QWORD PTR [rdi-0x8]
+   0x000000000000156f <+783>:	jne    0x157a <main+794>
+   0x0000000000001571 <+785>:	add    rdi,0xfffffffffffffff8
+   0x0000000000001575 <+789>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x000000000000157a <+794>:	vxorps xmm0,xmm0,xmm0
+   0x000000000000157e <+798>:	vmovaps XMMWORD PTR [rsp+0x20],xmm0
+   0x0000000000001584 <+804>:	mov    r14d,0x1
+   0x000000000000158a <+810>:	lea    rsi,[rsp+0x20]
+   0x000000000000158f <+815>:	mov    edi,0x1
+   0x0000000000001594 <+820>:	call   0x1080 <clock_gettime@plt>
+   0x0000000000001599 <+825>:	vmovdqa64 zmm8,ZMMWORD PTR [rsp+0x80]
+   0x00000000000015a1 <+833>:	vpshufd zmm0,zmm8,0xb1
+   0x00000000000015a8 <+840>:	vmovdqa64 zmm9,ZMMWORD PTR [rsp+0xc0]
+   0x00000000000015b0 <+848>:	vpshufd zmm1,zmm9,0xb1
+   0x00000000000015b7 <+855>:	vmovdqa64 zmm10,ZMMWORD PTR [rsp+0x140]
+   0x00000000000015bf <+863>:	vpshufd zmm2,zmm10,0xb1
+   0x00000000000015c6 <+870>:	vmovdqa64 zmm11,ZMMWORD PTR [rsp+0x100]
+   0x00000000000015ce <+878>:	vpshufd zmm3,zmm11,0xb1
+   0x00000000000015d5 <+885>:	vpminsw zmm4,zmm11,zmm3
+   0x00000000000015db <+891>:	vpminsw zmm5,zmm10,zmm2
+   0x00000000000015e1 <+897>:	vpminsw zmm6,zmm9,zmm1
+   0x00000000000015e7 <+903>:	vpminsw zmm7,zmm8,zmm0
+   0x00000000000015ed <+909>:	vpmaxsw zmm0,zmm8,zmm0
+   0x00000000000015f3 <+915>:	mov    ax,0xaaaa
+   0x00000000000015f7 <+919>:	kmovd  k1,eax
+   0x00000000000015fb <+923>:	vpblendmd zmm8{k1},zmm7,zmm0
+   0x0000000000001601 <+929>:	vpmaxsw zmm1,zmm9,zmm1
+   0x0000000000001607 <+935>:	vpblendmd zmm9{k1},zmm6,zmm1
+   0x000000000000160d <+941>:	vpmaxsw zmm2,zmm10,zmm2
+   0x0000000000001613 <+947>:	vpblendmd zmm10{k1},zmm5,zmm2
+   0x0000000000001619 <+953>:	vpmaxsw zmm3,zmm11,zmm3
+   0x000000000000161f <+959>:	vpblendmd zmm11{k1},zmm4,zmm3
+   0x0000000000001625 <+965>:	vmovdqa64 zmm12,ZMMWORD PTR [rip+0x39d1]        # 0x5000
+   0x000000000000162f <+975>:	vpermt2w zmm7,zmm12,zmm0
+   0x0000000000001635 <+981>:	vpermt2w zmm6,zmm12,zmm1
+   0x000000000000163b <+987>:	vpermt2w zmm5,zmm12,zmm2
+   0x0000000000001641 <+993>:	vpermt2w zmm4,zmm12,zmm3
+   0x0000000000001647 <+999>:	vpminsw zmm0,zmm11,zmm4
+   0x000000000000164d <+1005>:	vpminsw zmm1,zmm10,zmm5
+   0x0000000000001653 <+1011>:	vpminsw zmm2,zmm9,zmm6
+   0x0000000000001659 <+1017>:	vpminsw zmm3,zmm8,zmm7
+   0x000000000000165f <+1023>:	mov    eax,0xaaaaaaaa
+   0x0000000000001664 <+1028>:	kmovd  k2,eax
+   0x0000000000001668 <+1032>:	vpmaxsw zmm1{k2},zmm10,zmm5
+   0x000000000000166e <+1038>:	vpmaxsw zmm0{k2},zmm11,zmm4
+   0x0000000000001674 <+1044>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x39c2]        # 0x5040
+   0x000000000000167e <+1054>:	vmovdqa64 zmm5,zmm1
+   0x0000000000001684 <+1060>:	vpermt2w zmm5,zmm4,zmm0
+   0x000000000000168a <+1066>:	vpmaxsw zmm3{k2},zmm8,zmm7
+   0x0000000000001690 <+1072>:	kmovd  DWORD PTR [rsp+0x6c],k2
+   0x0000000000001697 <+1079>:	vpmaxsw zmm2{k2},zmm9,zmm6
+   0x000000000000169d <+1085>:	vpermi2w zmm4,zmm3,zmm2
+   0x00000000000016a3 <+1091>:	vmovdqa64 zmm6,ZMMWORD PTR [rip+0x39d3]        # 0x5080
+   0x00000000000016ad <+1101>:	vmovdqa64 zmm7,zmm2
+   0x00000000000016b3 <+1107>:	vpermt2w zmm7,zmm6,zmm3
+   0x00000000000016b9 <+1113>:	vpermi2w zmm6,zmm0,zmm1
+   0x00000000000016bf <+1119>:	vpmaxsw zmm8,zmm0,zmm6
+   0x00000000000016c5 <+1125>:	mov    eax,0x2222bb2b
+   0x00000000000016ca <+1130>:	kmovd  k2,eax
+   0x00000000000016ce <+1134>:	vpminsw zmm8{k2},zmm0,zmm6
+   0x00000000000016d4 <+1140>:	vpmaxsw zmm0,zmm2,zmm7
+   0x00000000000016da <+1146>:	vpminsw zmm0{k2},zmm2,zmm7
+   0x00000000000016e0 <+1152>:	vpminsw zmm2,zmm3,zmm4
+   0x00000000000016e6 <+1158>:	mov    eax,0xd4dd4444
+   0x00000000000016eb <+1163>:	kmovd  k2,eax
+   0x00000000000016ef <+1167>:	vpmaxsw zmm2{k2},zmm3,zmm4
+   0x00000000000016f5 <+1173>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x39c1]        # 0x50c0
+   0x00000000000016ff <+1183>:	vmovdqa64 zmm4,zmm2
+   0x0000000000001705 <+1189>:	vpermt2w zmm4,zmm3,zmm0
+   0x000000000000170b <+1195>:	vpminsw zmm6,zmm1,zmm5
+   0x0000000000001711 <+1201>:	vpmaxsw zmm6{k2},zmm1,zmm5
+   0x0000000000001717 <+1207>:	vpermi2w zmm3,zmm6,zmm8
+   0x000000000000171d <+1213>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x39d9]        # 0x5100
+   0x0000000000001727 <+1223>:	vmovdqa64 zmm5,zmm8
+   0x000000000000172d <+1229>:	vpermt2w zmm5,zmm1,zmm6
+   0x0000000000001733 <+1235>:	vpermi2w zmm1,zmm0,zmm2
+   0x0000000000001739 <+1241>:	vpmaxsw zmm7,zmm0,zmm1
+   0x000000000000173f <+1247>:	mov    eax,0x90669f
+   0x0000000000001744 <+1252>:	kmovd  k2,eax
+   0x0000000000001748 <+1256>:	vpminsw zmm7{k2},zmm0,zmm1
+   0x000000000000174e <+1262>:	vpmaxsw zmm0,zmm8,zmm5
+   0x0000000000001754 <+1268>:	vpminsw zmm0{k2},zmm8,zmm5
+   0x000000000000175a <+1274>:	vpminsw zmm1,zmm6,zmm3
+   0x0000000000001760 <+1280>:	mov    eax,0xf9660900
+   0x0000000000001765 <+1285>:	kmovd  k2,eax
+   0x0000000000001769 <+1289>:	vpmaxsw zmm1{k2},zmm6,zmm3
+   0x000000000000176f <+1295>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x39c7]        # 0x5140
+   0x0000000000001779 <+1305>:	vmovdqa64 zmm5,zmm1
+   0x000000000000177f <+1311>:	vpermt2w zmm5,zmm3,zmm0
+   0x0000000000001785 <+1317>:	vpminsw zmm6,zmm2,zmm4
+   0x000000000000178b <+1323>:	vpmaxsw zmm6{k2},zmm2,zmm4
+   0x0000000000001791 <+1329>:	vpermi2w zmm3,zmm6,zmm7
+   0x0000000000001797 <+1335>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x39df]        # 0x5180
+   0x00000000000017a1 <+1345>:	vpminsw zmm4,zmm1,zmm5
+   0x00000000000017a7 <+1351>:	mov    eax,0x66009600
+   0x00000000000017ac <+1356>:	kmovd  k3,eax
+   0x00000000000017b0 <+1360>:	vmovdqa64 zmm8,zmm4
+   0x00000000000017b6 <+1366>:	vpmaxsw zmm8{k3},zmm1,zmm5
+   0x00000000000017bc <+1372>:	vpermt2w zmm1,zmm2,zmm0
+   0x00000000000017c2 <+1378>:	vpermi2w zmm2,zmm6,zmm7
+   0x00000000000017c8 <+1384>:	vpmaxsw zmm5,zmm7,zmm2
+   0x00000000000017ce <+1390>:	mov    eax,0x690066
+   0x00000000000017d3 <+1395>:	kmovd  k2,eax
+   0x00000000000017d7 <+1399>:	vpminsw zmm9,zmm6,zmm3
+   0x00000000000017dd <+1405>:	vmovdqa64 zmm10,zmm9
+   0x00000000000017e3 <+1411>:	vpmaxsw zmm10{k3},zmm6,zmm3
+   0x00000000000017e9 <+1417>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x39cd]        # 0x51c0
+   0x00000000000017f3 <+1427>:	vmovdqa64 zmm6,zmm10
+   0x00000000000017f9 <+1433>:	vpermt2w zmm6,zmm3,zmm5
+   0x00000000000017ff <+1439>:	vpminsw zmm5{k2},zmm7,zmm2
+   0x0000000000001805 <+1445>:	vpmaxsw zmm2,zmm0,zmm1
+   0x000000000000180b <+1451>:	vpermi2w zmm3,zmm8,zmm2
+   0x0000000000001811 <+1457>:	vpminsw zmm2{k2},zmm0,zmm1
+   0x0000000000001817 <+1463>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x39df]        # 0x5200
+   0x0000000000001821 <+1473>:	vpermt2w zmm4,zmm0,zmm2
+   0x0000000000001827 <+1479>:	vpermt2w zmm9,zmm0,zmm5
+   0x000000000000182d <+1485>:	vpminsw zmm0,zmm10,zmm9
+   0x0000000000001833 <+1491>:	vpmaxsw zmm1,zmm2,zmm3
+   0x0000000000001839 <+1497>:	mov    eax,0x9069090
+   0x000000000000183e <+1502>:	kmovd  k2,eax
+   0x0000000000001842 <+1506>:	vmovdqa64 zmm7,zmm1
+   0x0000000000001848 <+1512>:	vpminsw zmm7{k2},zmm2,zmm3
+   0x000000000000184e <+1518>:	vpminsw zmm2,zmm8,zmm4
+   0x0000000000001854 <+1524>:	mov    eax,0x9096090
+   0x0000000000001859 <+1529>:	kmovd  k3,eax
+   0x000000000000185d <+1533>:	vmovdqa64 zmm3,zmm2
+   0x0000000000001863 <+1539>:	vpmaxsw zmm3{k3},zmm8,zmm4
+   0x0000000000001869 <+1545>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x39cd]        # 0x5240
+   0x0000000000001873 <+1555>:	vpermi2w zmm4,zmm3,zmm7
+   0x0000000000001879 <+1561>:	kmovd  k4,r14d
+   0x000000000000187e <+1566>:	vmovdqu16 zmm4{k4},zmm0
+   0x0000000000001884 <+1572>:	vpmaxsw zmm8,zmm5,zmm6
+   0x000000000000188a <+1578>:	vmovdqa64 zmm11,ZMMWORD PTR [rip+0x39ec]        # 0x5280
+   0x0000000000001894 <+1588>:	vpermi2w zmm11,zmm7,zmm3
+   0x000000000000189a <+1594>:	mov    eax,0x80000000
+   0x000000000000189f <+1599>:	kmovd  k4,eax
+   0x00000000000018a3 <+1603>:	vpmaxsw zmm0{k3},zmm10,zmm9
+   0x00000000000018a9 <+1609>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3a0d]        # 0x52c0
+   0x00000000000018b3 <+1619>:	vpermi2w zmm9,zmm0,zmm2
+   0x00000000000018b9 <+1625>:	vmovdqu16 zmm11{k4},zmm8
+   0x00000000000018bf <+1631>:	vpminsw zmm8{k2},zmm5,zmm6
+   0x00000000000018c5 <+1637>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3a31]        # 0x5300
+   0x00000000000018cf <+1647>:	vpermi2w zmm2,zmm9,zmm8
+   0x00000000000018d5 <+1653>:	vmovdqa64 zmm5,ZMMWORD PTR [rip+0x3a61]        # 0x5340
+   0x00000000000018df <+1663>:	vpermi2w zmm5,zmm0,zmm1
+   0x00000000000018e5 <+1669>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3a91]        # 0x5380
+   0x00000000000018ef <+1679>:	vpermi2w zmm1,zmm8,zmm5
+   0x00000000000018f5 <+1685>:	vpmaxsw zmm5,zmm7,zmm11
+   0x00000000000018fb <+1691>:	mov    eax,0x86096960
+   0x0000000000001900 <+1696>:	kmovd  k2,eax
+   0x0000000000001904 <+1700>:	vpminsw zmm5{k2},zmm7,zmm11
+   0x000000000000190a <+1706>:	vpmaxsw zmm6,zmm8,zmm1
+   0x0000000000001910 <+1712>:	mov    eax,0x6096960
+   0x0000000000001915 <+1717>:	kmovd  k2,eax
+   0x0000000000001919 <+1721>:	vpminsw zmm6{k2},zmm8,zmm1
+   0x000000000000191f <+1727>:	vpminsw zmm1,zmm0,zmm2
+   0x0000000000001925 <+1733>:	vpminsw zmm7,zmm3,zmm4
+   0x000000000000192b <+1739>:	mov    eax,0x6969068
+   0x0000000000001930 <+1744>:	kmovd  k2,eax
+   0x0000000000001934 <+1748>:	vpmaxsw zmm7{k2},zmm3,zmm4
+   0x000000000000193a <+1754>:	mov    eax,0x6969069
+   0x000000000000193f <+1759>:	kmovd  k2,eax
+   0x0000000000001943 <+1763>:	vpmaxsw zmm1{k2},zmm0,zmm2
+   0x0000000000001949 <+1769>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3a6d]        # 0x53c0
+   0x0000000000001953 <+1779>:	vmovdqa64 zmm2,zmm1
+   0x0000000000001959 <+1785>:	vpermt2w zmm2,zmm0,zmm6
+   0x000000000000195f <+1791>:	vpermi2w zmm0,zmm7,zmm5
+   0x0000000000001965 <+1797>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x3a91]        # 0x5400
+   0x000000000000196f <+1807>:	vmovdqa64 zmm4,zmm5
+   0x0000000000001975 <+1813>:	vpermt2w zmm4,zmm3,zmm7
+   0x000000000000197b <+1819>:	vpermi2w zmm3,zmm6,zmm1
+   0x0000000000001981 <+1825>:	vpmaxsw zmm8,zmm6,zmm3
+   0x0000000000001987 <+1831>:	mov    eax,0x960f00
+   0x000000000000198c <+1836>:	kmovd  k2,eax
+   0x0000000000001990 <+1840>:	vpmaxsw zmm9,zmm5,zmm4
+   0x0000000000001996 <+1846>:	vmovdqa64 zmm10,zmm9
+   0x000000000000199c <+1852>:	vpminsw zmm10{k2},zmm5,zmm4
+   0x00000000000019a2 <+1858>:	vpminsw zmm4,zmm7,zmm0
+   0x00000000000019a8 <+1864>:	vpminsw zmm5,zmm1,zmm2
+   0x00000000000019ae <+1870>:	mov    eax,0xf0690f
+   0x00000000000019b3 <+1875>:	kmovd  k3,eax
+   0x00000000000019b7 <+1879>:	vmovdqa64 zmm11,zmm5
+   0x00000000000019bd <+1885>:	vpmaxsw zmm11{k3},zmm1,zmm2
+   0x00000000000019c3 <+1891>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3a73]        # 0x5440
+   0x00000000000019cd <+1901>:	vmovdqa64 zmm2,zmm10
+   0x00000000000019d3 <+1907>:	vpermt2w zmm2,zmm1,zmm4
+   0x00000000000019d9 <+1913>:	vpmaxsw zmm4{k3},zmm7,zmm0
+   0x00000000000019df <+1919>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3a97]        # 0x5480
+   0x00000000000019e9 <+1929>:	vmovdqa64 zmm7,zmm4
+   0x00000000000019ef <+1935>:	vpermt2w zmm7,zmm0,zmm9
+   0x00000000000019f5 <+1941>:	vpermi2w zmm0,zmm11,zmm8
+   0x00000000000019fb <+1947>:	vpminsw zmm8{k2},zmm6,zmm3
+   0x0000000000001a01 <+1953>:	vpermi2w zmm1,zmm8,zmm5
+   0x0000000000001a07 <+1959>:	vpminsw zmm3,zmm11,zmm0
+   0x0000000000001a0d <+1965>:	vpmaxsw zmm0,zmm11,zmm0
+   0x0000000000001a13 <+1971>:	mov    eax,0x6f0f6960
+   0x0000000000001a18 <+1976>:	kmovd  k2,eax
+   0x0000000000001a1c <+1980>:	vpblendmw zmm5{k2},zmm0,zmm3
+   0x0000000000001a22 <+1986>:	vpminsw zmm6,zmm4,zmm7
+   0x0000000000001a28 <+1992>:	vpmaxsw zmm4,zmm4,zmm7
+   0x0000000000001a2e <+1998>:	vpblendmw zmm7{k2},zmm4,zmm6
+   0x0000000000001a34 <+2004>:	vpminsw zmm9,zmm8,zmm1
+   0x0000000000001a3a <+2010>:	vpmaxsw zmm1,zmm8,zmm1
+   0x0000000000001a40 <+2016>:	mov    eax,0x690f09
+   0x0000000000001a45 <+2021>:	kmovd  k2,eax
+   0x0000000000001a49 <+2025>:	vpblendmw zmm8{k2},zmm1,zmm9
+   0x0000000000001a4f <+2031>:	vmovdqa64 zmm11,ZMMWORD PTR [rip+0x3a67]        # 0x54c0
+   0x0000000000001a59 <+2041>:	vpermt2w zmm0,zmm11,zmm3
+   0x0000000000001a5f <+2047>:	vpermt2w zmm4,zmm11,zmm6
+   0x0000000000001a65 <+2053>:	vpminsw zmm3,zmm10,zmm2
+   0x0000000000001a6b <+2059>:	vpmaxsw zmm2,zmm10,zmm2
+   0x0000000000001a71 <+2065>:	vmovdqa64 zmm6,ZMMWORD PTR [rip+0x3a85]        # 0x5500
+   0x0000000000001a7b <+2075>:	vpermt2w zmm1,zmm6,zmm9
+   0x0000000000001a81 <+2081>:	vpblendmw zmm9{k2},zmm2,zmm3
+   0x0000000000001a87 <+2087>:	vpermt2w zmm2,zmm6,zmm3
+   0x0000000000001a8d <+2093>:	vpminsw zmm3,zmm9,zmm2
+   0x0000000000001a93 <+2099>:	vpmaxsw zmm2,zmm9,zmm2
+   0x0000000000001a99 <+2105>:	mov    eax,0x6069f
+   0x0000000000001a9e <+2110>:	kmovd  k2,eax
+   0x0000000000001aa2 <+2114>:	vmovdqu16 zmm2{k2},zmm3
+   0x0000000000001aa8 <+2120>:	vpminsw zmm6,zmm8,zmm1
+   0x0000000000001aae <+2126>:	vpmaxsw zmm1,zmm8,zmm1
+   0x0000000000001ab4 <+2132>:	vmovdqu16 zmm1{k2},zmm6
+   0x0000000000001aba <+2138>:	vpmaxsw zmm8,zmm7,zmm4
+   0x0000000000001ac0 <+2144>:	mov    eax,0x69f0600
+   0x0000000000001ac5 <+2149>:	kmovd  k2,eax
+   0x0000000000001ac9 <+2153>:	vpmaxsw zmm9,zmm5,zmm0
+   0x0000000000001acf <+2159>:	vmovdqa64 zmm10,ZMMWORD PTR [rip+0x3a67]        # 0x5540
+   0x0000000000001ad9 <+2169>:	vmovdqa64 zmm11,zmm1
+   0x0000000000001adf <+2175>:	vpermt2w zmm11,zmm10,zmm9
+   0x0000000000001ae5 <+2181>:	vpermi2w zmm10,zmm2,zmm8
+   0x0000000000001aeb <+2187>:	vpminsw zmm8{k2},zmm7,zmm4
+   0x0000000000001af1 <+2193>:	vpminsw zmm9{k2},zmm5,zmm0
+   0x0000000000001af7 <+2199>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3a7f]        # 0x5580
+   0x0000000000001b01 <+2209>:	vmovdqa64 zmm4,zmm9
+   0x0000000000001b07 <+2215>:	vpermt2w zmm4,zmm0,zmm6
+   0x0000000000001b0d <+2221>:	vpermi2w zmm0,zmm8,zmm3
+   0x0000000000001b13 <+2227>:	vpmaxsw zmm3,zmm8,zmm0
+   0x0000000000001b19 <+2233>:	mov    eax,0x90f69000
+   0x0000000000001b1e <+2238>:	kmovd  k2,eax
+   0x0000000000001b22 <+2242>:	vpminsw zmm3{k2},zmm8,zmm0
+   0x0000000000001b28 <+2248>:	mov    eax,0x90f6
+   0x0000000000001b2d <+2253>:	kmovd  k3,eax
+   0x0000000000001b31 <+2257>:	vpmaxsw zmm0,zmm9,zmm4
+   0x0000000000001b37 <+2263>:	vpminsw zmm0{k2},zmm9,zmm4
+   0x0000000000001b3d <+2269>:	vpmaxsw zmm4,zmm1,zmm11
+   0x0000000000001b43 <+2275>:	vpminsw zmm4{k3},zmm1,zmm11
+   0x0000000000001b49 <+2281>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3a6d]        # 0x55c0
+   0x0000000000001b53 <+2291>:	vmovdqa64 zmm5,zmm4
+   0x0000000000001b59 <+2297>:	vpermt2w zmm5,zmm1,zmm0
+   0x0000000000001b5f <+2303>:	vpmaxsw zmm6,zmm2,zmm10
+   0x0000000000001b65 <+2309>:	vpminsw zmm6{k3},zmm2,zmm10
+   0x0000000000001b6b <+2315>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3a8b]        # 0x5600
+   0x0000000000001b75 <+2325>:	vmovdqa64 zmm7,zmm0
+   0x0000000000001b7b <+2331>:	vpermt2w zmm7,zmm2,zmm4
+   0x0000000000001b81 <+2337>:	vpermi2w zmm1,zmm6,zmm3
+   0x0000000000001b87 <+2343>:	vpermi2w zmm2,zmm3,zmm6
+   0x0000000000001b8d <+2349>:	vpmaxsw zmm8,zmm3,zmm2
+   0x0000000000001b93 <+2355>:	mov    eax,0xe8e06666
+   0x0000000000001b98 <+2360>:	kmovd  k2,eax
+   0x0000000000001b9c <+2364>:	vpminsw zmm8{k2},zmm3,zmm2
+   0x0000000000001ba2 <+2370>:	vpmaxsw zmm3,zmm6,zmm1
+   0x0000000000001ba8 <+2376>:	mov    eax,0xe8e0
+   0x0000000000001bad <+2381>:	kmovd  k3,eax
+   0x0000000000001bb1 <+2385>:	vpminsw zmm3{k3},zmm6,zmm1
+   0x0000000000001bb7 <+2391>:	vpmaxsw zmm6,zmm0,zmm7
+   0x0000000000001bbd <+2397>:	vpminsw zmm6{k2},zmm0,zmm7
+   0x0000000000001bc3 <+2403>:	vpmaxsw zmm7,zmm4,zmm5
+   0x0000000000001bc9 <+2409>:	vpminsw zmm7{k3},zmm4,zmm5
+   0x0000000000001bcf <+2415>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3a67]        # 0x5640
+   0x0000000000001bd9 <+2425>:	vmovdqa64 zmm5,zmm7
+   0x0000000000001bdf <+2431>:	vpermt2w zmm5,zmm4,zmm6
+   0x0000000000001be5 <+2437>:	vpermi2w zmm4,zmm3,zmm8
+   0x0000000000001beb <+2443>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3a8b]        # 0x5680
+   0x0000000000001bf5 <+2453>:	vmovdqa64 zmm1,zmm8
+   0x0000000000001bfb <+2459>:	vpermt2w zmm1,zmm9,zmm3
+   0x0000000000001c01 <+2465>:	vpermi2w zmm9,zmm6,zmm7
+   0x0000000000001c07 <+2471>:	vpminsw zmm10,zmm8,zmm1
+   0x0000000000001c0d <+2477>:	mov    eax,0xb3931331
+   0x0000000000001c12 <+2482>:	kmovd  k3,eax
+   0x0000000000001c16 <+2486>:	vmovdqa64 zmm0,zmm10
+   0x0000000000001c1c <+2492>:	vpmaxsw zmm0{k3},zmm8,zmm1
+   0x0000000000001c22 <+2498>:	vpmaxsw zmm8,zmm3,zmm4
+   0x0000000000001c28 <+2504>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3a8e]        # 0x56c0
+   0x0000000000001c32 <+2514>:	vpermi2w zmm1,zmm0,zmm8
+   0x0000000000001c38 <+2520>:	vpminsw zmm11,zmm6,zmm9
+   0x0000000000001c3e <+2526>:	mov    eax,0x2
+   0x0000000000001c43 <+2531>:	kmovd  k2,eax
+   0x0000000000001c47 <+2535>:	vmovdqu16 zmm1{k2},zmm11
+   0x0000000000001c4d <+2541>:	mov    eax,0x8880088
+   0x0000000000001c52 <+2546>:	kmovd  k2,eax
+   0x0000000000001c56 <+2550>:	vmovdqa64 zmm2,zmm8
+   0x0000000000001c5c <+2556>:	vpminsw zmm2{k2},zmm3,zmm4
+   0x0000000000001c62 <+2562>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x3a94]        # 0x5700
+   0x0000000000001c6c <+2572>:	vpermi2w zmm3,zmm2,zmm0
+   0x0000000000001c72 <+2578>:	vpmaxsw zmm11{k3},zmm6,zmm9
+   0x0000000000001c78 <+2584>:	vbroadcasti64x4 zmm6,YMMWORD PTR [rip+0x443e]        # 0x60c0
+   0x0000000000001c82 <+2594>:	vpermi2d zmm6,zmm11,zmm8
+   0x0000000000001c88 <+2600>:	vpmaxsw zmm4,zmm7,zmm5
+   0x0000000000001c8e <+2606>:	vmovdqa64 zmm8,ZMMWORD PTR [rip+0x3ae8]        # 0x5780
+   0x0000000000001c98 <+2616>:	vpermi2w zmm8,zmm11,zmm10
+   0x0000000000001c9e <+2622>:	mov    eax,0x40000000
+   0x0000000000001ca3 <+2627>:	kmovd  k3,eax
+   0x0000000000001ca7 <+2631>:	vmovdqu16 zmm3{k3},zmm4
+   0x0000000000001cad <+2637>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3b09]        # 0x57c0
+   0x0000000000001cb7 <+2647>:	vpermi2w zmm9,zmm8,zmm4
+   0x0000000000001cbd <+2653>:	vpminsw zmm4{k2},zmm7,zmm5
+   0x0000000000001cc3 <+2659>:	vmovdqa64 zmm5,ZMMWORD PTR [rip+0x3a73]        # 0x5740
+   0x0000000000001ccd <+2669>:	vpermi2w zmm5,zmm4,zmm6
+   0x0000000000001cd3 <+2675>:	vpmaxsw zmm6,zmm2,zmm3
+   0x0000000000001cd9 <+2681>:	mov    eax,0x4a00ca4c
+   0x0000000000001cde <+2686>:	kmovd  k2,eax
+   0x0000000000001ce2 <+2690>:	vpminsw zmm7,zmm11,zmm9
+   0x0000000000001ce8 <+2696>:	vpmaxsw zmm8,zmm11,zmm9
+   0x0000000000001cee <+2702>:	mov    eax,0xc48cd9ac
+   0x0000000000001cf3 <+2707>:	kmovd  k3,eax
+   0x0000000000001cf7 <+2711>:	vmovdqu16 zmm8{k3},zmm7
+   0x0000000000001cfd <+2717>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3bf9]        # 0x5900
+   0x0000000000001d07 <+2727>:	vpermi2w zmm9,zmm8,zmm6
+   0x0000000000001d0d <+2733>:	vpminsw zmm6{k2},zmm2,zmm3
+   0x0000000000001d13 <+2739>:	vpminsw zmm2,zmm0,zmm1
+   0x0000000000001d19 <+2745>:	mov    eax,0x3b732651
+   0x0000000000001d1e <+2750>:	kmovd  k2,eax
+   0x0000000000001d22 <+2754>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x3b54]        # 0x5880
+   0x0000000000001d2c <+2764>:	vpermi2w zmm3,zmm8,zmm2
+   0x0000000000001d32 <+2770>:	vpmaxsw zmm2{k2},zmm0,zmm1
+   0x0000000000001d38 <+2776>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3abe]        # 0x5800
+   0x0000000000001d42 <+2786>:	vpermi2w zmm0,zmm2,zmm6
+   0x0000000000001d48 <+2792>:	mov    eax,0x4
+   0x0000000000001d4d <+2797>:	kmovd  k2,eax
+   0x0000000000001d51 <+2801>:	vmovdqu16 zmm0{k2},zmm7
+   0x0000000000001d57 <+2807>:	vpmaxsw zmm1,zmm4,zmm5
+   0x0000000000001d5d <+2813>:	mov    eax,0xa00ca4c
+   0x0000000000001d62 <+2818>:	kmovd  k2,eax
+   0x0000000000001d66 <+2822>:	vmovdqa64 zmm7,ZMMWORD PTR [rip+0x3ad0]        # 0x5840
+   0x0000000000001d70 <+2832>:	vpermi2w zmm7,zmm6,zmm2
+   0x0000000000001d76 <+2838>:	mov    eax,0x20000000
+   0x0000000000001d7b <+2843>:	kmovd  k3,eax
+   0x0000000000001d7f <+2847>:	vmovdqu16 zmm7{k3},zmm1
+   0x0000000000001d85 <+2853>:	vpminsw zmm1{k2},zmm4,zmm5
+   0x0000000000001d8b <+2859>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3b2b]        # 0x58c0
+   0x0000000000001d95 <+2869>:	vpermi2w zmm4,zmm3,zmm1
+   0x0000000000001d9b <+2875>:	vmovdqa64 zmm3,ZMMWORD PTR [rip+0x3b9b]        # 0x5940
+   0x0000000000001da5 <+2885>:	vpermi2w zmm3,zmm1,zmm9
+   0x0000000000001dab <+2891>:	vpmaxsw zmm5,zmm1,zmm3
+   0x0000000000001db1 <+2897>:	mov    eax,0x2466
+   0x0000000000001db6 <+2902>:	kmovd  k2,eax
+   0x0000000000001dba <+2906>:	vpminsw zmm5{k2},zmm1,zmm3
+   0x0000000000001dc0 <+2912>:	vpmaxsw zmm1,zmm8,zmm4
+   0x0000000000001dc6 <+2918>:	mov    eax,0x88ca8888
+   0x0000000000001dcb <+2923>:	kmovd  k2,eax
+   0x0000000000001dcf <+2927>:	vpminsw zmm1{k2},zmm8,zmm4
+   0x0000000000001dd5 <+2933>:	vpmaxsw zmm3,zmm6,zmm7
+   0x0000000000001ddb <+2939>:	mov    eax,0x20002466
+   0x0000000000001de0 <+2944>:	kmovd  k2,eax
+   0x0000000000001de4 <+2948>:	vpminsw zmm3{k2},zmm6,zmm7
+   0x0000000000001dea <+2954>:	vpmaxsw zmm4,zmm2,zmm0
+   0x0000000000001df0 <+2960>:	vmovdqa64 zmm6,ZMMWORD PTR [rip+0x3b86]        # 0x5980
+   0x0000000000001dfa <+2970>:	vmovdqa64 zmm7,zmm1
+   0x0000000000001e00 <+2976>:	vpermt2w zmm7,zmm6,zmm5
+   0x0000000000001e06 <+2982>:	mov    eax,0x88ca888c
+   0x0000000000001e0b <+2987>:	kmovd  k2,eax
+   0x0000000000001e0f <+2991>:	vpminsw zmm4{k2},zmm2,zmm0
+   0x0000000000001e15 <+2997>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3ba1]        # 0x59c0
+   0x0000000000001e1f <+3007>:	vmovdqa64 zmm2,zmm5
+   0x0000000000001e25 <+3013>:	vpermt2w zmm2,zmm0,zmm1
+   0x0000000000001e2b <+3019>:	vpermi2w zmm6,zmm4,zmm3
+   0x0000000000001e31 <+3025>:	vpermi2w zmm0,zmm3,zmm4
+   0x0000000000001e37 <+3031>:	vpmaxsw zmm8,zmm5,zmm2
+   0x0000000000001e3d <+3037>:	mov    eax,0xac88
+   0x0000000000001e42 <+3042>:	kmovd  k2,eax
+   0x0000000000001e46 <+3046>:	vpminsw zmm9,zmm1,zmm7
+   0x0000000000001e4c <+3052>:	vpmaxsw zmm1,zmm1,zmm7
+   0x0000000000001e52 <+3058>:	mov    eax,0xeeca8888
+   0x0000000000001e57 <+3063>:	kmovd  k3,eax
+   0x0000000000001e5b <+3067>:	vmovdqu16 zmm1{k3},zmm9
+   0x0000000000001e61 <+3073>:	vmovdqa64 zmm7,ZMMWORD PTR [rip+0x3b95]        # 0x5a00
+   0x0000000000001e6b <+3083>:	vmovdqa64 zmm10,zmm1
+   0x0000000000001e71 <+3089>:	vpermt2w zmm10,zmm7,zmm8
+   0x0000000000001e77 <+3095>:	vpminsw zmm8{k2},zmm5,zmm2
+   0x0000000000001e7d <+3101>:	vpmaxsw zmm2,zmm3,zmm0
+   0x0000000000001e83 <+3107>:	vpminsw zmm5,zmm4,zmm6
+   0x0000000000001e89 <+3113>:	vpmaxsw zmm4,zmm4,zmm6
+   0x0000000000001e8f <+3119>:	vmovdqu16 zmm4{k3},zmm5
+   0x0000000000001e95 <+3125>:	vmovdqa64 zmm6,ZMMWORD PTR [rip+0x3ba1]        # 0x5a40
+   0x0000000000001e9f <+3135>:	vmovdqa64 zmm11,zmm8
+   0x0000000000001ea5 <+3141>:	vpermt2w zmm11,zmm6,zmm9
+   0x0000000000001eab <+3147>:	vpermi2w zmm7,zmm4,zmm2
+   0x0000000000001eb1 <+3153>:	vpminsw zmm2{k2},zmm3,zmm0
+   0x0000000000001eb7 <+3159>:	vpermi2w zmm6,zmm2,zmm5
+   0x0000000000001ebd <+3165>:	vpmaxsw zmm0,zmm8,zmm11
+   0x0000000000001ec3 <+3171>:	mov    eax,0x44caaa
+   0x0000000000001ec8 <+3176>:	kmovd  k2,eax
+   0x0000000000001ecc <+3180>:	vpminsw zmm0{k2},zmm8,zmm11
+   0x0000000000001ed2 <+3186>:	vpmaxsw zmm3,zmm1,zmm10
+   0x0000000000001ed8 <+3192>:	mov    eax,0xaaaccc88
+   0x0000000000001edd <+3197>:	kmovd  k3,eax
+   0x0000000000001ee1 <+3201>:	vpminsw zmm3{k3},zmm1,zmm10
+   0x0000000000001ee7 <+3207>:	vpmaxsw zmm1,zmm2,zmm6
+   0x0000000000001eed <+3213>:	vpminsw zmm1{k2},zmm2,zmm6
+   0x0000000000001ef3 <+3219>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3b83]        # 0x5a80
+   0x0000000000001efd <+3229>:	vmovdqa64 zmm5,zmm3
+   0x0000000000001f03 <+3235>:	vpermt2w zmm5,zmm2,zmm0
+   0x0000000000001f09 <+3241>:	vpmaxsw zmm6,zmm4,zmm7
+   0x0000000000001f0f <+3247>:	vpminsw zmm6{k3},zmm4,zmm7
+   0x0000000000001f15 <+3253>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3ba1]        # 0x5ac0
+   0x0000000000001f1f <+3263>:	vmovdqa64 zmm7,zmm0
+   0x0000000000001f25 <+3269>:	vpermt2w zmm7,zmm4,zmm3
+   0x0000000000001f2b <+3275>:	vpermi2w zmm2,zmm6,zmm1
+   0x0000000000001f31 <+3281>:	vpermi2w zmm4,zmm1,zmm6
+   0x0000000000001f37 <+3287>:	vpmaxsw zmm8,zmm0,zmm7
+   0x0000000000001f3d <+3293>:	mov    eax,0xaacaac
+   0x0000000000001f42 <+3298>:	kmovd  k2,eax
+   0x0000000000001f46 <+3302>:	vpminsw zmm8{k2},zmm0,zmm7
+   0x0000000000001f4c <+3308>:	vpmaxsw zmm0,zmm3,zmm5
+   0x0000000000001f52 <+3314>:	mov    eax,0xcaacaa88
+   0x0000000000001f57 <+3319>:	kmovd  k3,eax
+   0x0000000000001f5b <+3323>:	vpminsw zmm0{k3},zmm3,zmm5
+   0x0000000000001f61 <+3329>:	vpmaxsw zmm3,zmm1,zmm4
+   0x0000000000001f67 <+3335>:	vpminsw zmm3{k2},zmm1,zmm4
+   0x0000000000001f6d <+3341>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3b89]        # 0x5b00
+   0x0000000000001f77 <+3351>:	vmovdqa64 zmm4,zmm0
+   0x0000000000001f7d <+3357>:	vpermt2w zmm4,zmm1,zmm8
+   0x0000000000001f83 <+3363>:	vpmaxsw zmm5,zmm6,zmm2
+   0x0000000000001f89 <+3369>:	vpminsw zmm5{k3},zmm6,zmm2
+   0x0000000000001f8f <+3375>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3ba7]        # 0x5b40
+   0x0000000000001f99 <+3385>:	vmovdqa64 zmm6,zmm8
+   0x0000000000001f9f <+3391>:	vpermt2w zmm6,zmm2,zmm0
+   0x0000000000001fa5 <+3397>:	vpermi2w zmm1,zmm5,zmm3
+   0x0000000000001fab <+3403>:	vpermi2w zmm2,zmm3,zmm5
+   0x0000000000001fb1 <+3409>:	mov    r14,QWORD PTR [rsp+0x20]
+   0x0000000000001fb6 <+3414>:	vpmaxsw zmm7,zmm8,zmm6
+   0x0000000000001fbc <+3420>:	mov    eax,0x4ccacca
+   0x0000000000001fc1 <+3425>:	kmovd  k2,eax
+   0x0000000000001fc5 <+3429>:	vpminsw zmm9,zmm0,zmm4
+   0x0000000000001fcb <+3435>:	vpmaxsw zmm0,zmm0,zmm4
+   0x0000000000001fd1 <+3441>:	mov    eax,0xaccaccc8
+   0x0000000000001fd6 <+3446>:	kmovd  k3,eax
+   0x0000000000001fda <+3450>:	vmovdqu16 zmm0{k3},zmm9
+   0x0000000000001fe0 <+3456>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3b96]        # 0x5b80
+   0x0000000000001fea <+3466>:	vmovdqa64 zmm10,zmm0
+   0x0000000000001ff0 <+3472>:	vpermt2w zmm10,zmm4,zmm7
+   0x0000000000001ff6 <+3478>:	vpminsw zmm7{k2},zmm8,zmm6
+   0x0000000000001ffc <+3484>:	vpmaxsw zmm6,zmm3,zmm2
+   0x0000000000002002 <+3490>:	vpminsw zmm8,zmm5,zmm1
+   0x0000000000002008 <+3496>:	vpmaxsw zmm1,zmm5,zmm1
+   0x000000000000200e <+3502>:	vmovdqu16 zmm1{k3},zmm8
+   0x0000000000002014 <+3508>:	vmovdqa64 zmm5,ZMMWORD PTR [rip+0x3ba2]        # 0x5bc0
+   0x000000000000201e <+3518>:	vmovdqa64 zmm11,zmm7
+   0x0000000000002024 <+3524>:	vpermt2w zmm11,zmm5,zmm9
+   0x000000000000202a <+3530>:	vpermi2w zmm4,zmm1,zmm6
+   0x0000000000002030 <+3536>:	mov    rax,QWORD PTR [rsp+0x28]
+   0x0000000000002035 <+3541>:	mov    QWORD PTR [rsp+0x70],rax
+   0x000000000000203a <+3546>:	vpminsw zmm6{k2},zmm3,zmm2
+   0x0000000000002040 <+3552>:	vpermi2w zmm5,zmm6,zmm8
+   0x0000000000002046 <+3558>:	vpmaxsw zmm2,zmm7,zmm11
+   0x000000000000204c <+3564>:	mov    eax,0xaaaaaaa
+   0x0000000000002051 <+3569>:	kmovd  k2,eax
+   0x0000000000002055 <+3573>:	vpminsw zmm2{k2},zmm7,zmm11
+   0x000000000000205b <+3579>:	vpmaxsw zmm3,zmm0,zmm10
+   0x0000000000002061 <+3585>:	mov    eax,0xaaaaaaa8
+   0x0000000000002066 <+3590>:	kmovd  k3,eax
+   0x000000000000206a <+3594>:	vpminsw zmm3{k3},zmm0,zmm10
+   0x0000000000002070 <+3600>:	vpmaxsw zmm0,zmm6,zmm5
+   0x0000000000002076 <+3606>:	vpmaxsw zmm7,zmm1,zmm4
+   0x000000000000207c <+3612>:	mov    eax,0x7
+   0x0000000000002081 <+3617>:	kmovd  k4,eax
+   0x0000000000002085 <+3621>:	vpblendmw zmm8{k4},zmm3,zmm7
+   0x000000000000208b <+3627>:	vpminsw zmm7{k3},zmm1,zmm4
+   0x0000000000002091 <+3633>:	mov    eax,0xe0000000
+   0x0000000000002096 <+3638>:	kmovd  k3,eax
+   0x000000000000209a <+3642>:	vpblendmw zmm1{k3},zmm2,zmm0
+   0x00000000000020a0 <+3648>:	vpminsw zmm0{k2},zmm6,zmm5
+   0x00000000000020a6 <+3654>:	vpblendmw zmm4{k4},zmm7,zmm3
+   0x00000000000020ac <+3660>:	vpblendmw zmm5{k3},zmm0,zmm2
+   0x00000000000020b2 <+3666>:	vpminsw zmm6,zmm0,zmm1
+   0x00000000000020b8 <+3672>:	vpminsw zmm9,zmm7,zmm8
+   0x00000000000020be <+3678>:	vpmaxsw zmm9{k4},zmm7,zmm8
+   0x00000000000020c4 <+3684>:	vpmaxsw zmm2,zmm2,zmm5
+   0x00000000000020ca <+3690>:	vpmaxsw zmm6{k3},zmm0,zmm1
+   0x00000000000020d0 <+3696>:	vpmaxsw zmm0,zmm3,zmm4
+   0x00000000000020d6 <+3702>:	vpminsw zmm1,zmm6,zmm0
+   0x00000000000020dc <+3708>:	vpmaxsw zmm0,zmm0,zmm6
+   0x00000000000020e2 <+3714>:	vshufi64x2 zmm3,zmm0,zmm2,0xee
+   0x00000000000020e9 <+3721>:	vshufi64x2 zmm4,zmm9,zmm0,0x4e
+   0x00000000000020f0 <+3728>:	vinserti64x4 zmm5,zmm9,ymm1,0x1
+   0x00000000000020f7 <+3735>:	vshufi64x2 zmm6,zmm1,zmm2,0x4e
+   0x00000000000020fe <+3742>:	vpminsw zmm7,zmm0,zmm6
+   0x0000000000002104 <+3748>:	vpmaxsw zmm0,zmm0,zmm6
+   0x000000000000210a <+3754>:	vshufi64x2 zmm6,zmm0,zmm7,0xe4
+   0x0000000000002111 <+3761>:	vpminsw zmm8,zmm9,zmm5
+   0x0000000000002117 <+3767>:	vpmaxsw zmm5,zmm9,zmm5
+   0x000000000000211d <+3773>:	vshufi64x2 zmm5,zmm5,zmm8,0xe4
+   0x0000000000002124 <+3780>:	vpminsw zmm9,zmm1,zmm4
+   0x000000000000212a <+3786>:	vpmaxsw zmm1,zmm1,zmm4
+   0x0000000000002130 <+3792>:	vpmaxsw zmm2,zmm2,zmm3
+   0x0000000000002136 <+3798>:	vshufi64x2 zmm3,zmm1,zmm9,0xe4
+   0x000000000000213d <+3805>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3ab9]        # 0x5c00
+   0x0000000000002147 <+3815>:	vmovdqa64 zmm10,zmm6
+   0x000000000000214d <+3821>:	vpermt2q zmm10,zmm4,zmm9
+   0x0000000000002153 <+3827>:	vinserti32x4 zmm9,zmm10,xmm2,0x3
+   0x000000000000215a <+3834>:	vmovdqa64 zmm10,ZMMWORD PTR [rip+0x3adc]        # 0x5c40
+   0x0000000000002164 <+3844>:	vpermi2q zmm10,zmm5,zmm1
+   0x000000000000216a <+3850>:	vpermi2q zmm4,zmm3,zmm8
+   0x0000000000002170 <+3856>:	vinserti32x4 zmm0,zmm4,xmm0,0x3
+   0x0000000000002177 <+3863>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3aff]        # 0x5c80
+   0x0000000000002181 <+3873>:	vpermi2q zmm1,zmm2,zmm7
+   0x0000000000002187 <+3879>:	vpminsw zmm4,zmm3,zmm0
+   0x000000000000218d <+3885>:	vpmaxsw zmm0,zmm3,zmm0
+   0x0000000000002193 <+3891>:	mov    al,0xcc
+   0x0000000000002195 <+3893>:	kmovd  k2,eax
+   0x0000000000002199 <+3897>:	vpblendmq zmm3{k2},zmm0,zmm4
+   0x000000000000219f <+3903>:	vpmaxsw zmm7,zmm5,zmm10
+   0x00000000000021a5 <+3909>:	mov    eax,0xff00ff00
+   0x00000000000021aa <+3914>:	kmovd  k2,eax
+   0x00000000000021ae <+3918>:	vpminsw zmm7{k2},zmm5,zmm10
+   0x00000000000021b4 <+3924>:	vpmaxsw zmm5,zmm6,zmm9
+   0x00000000000021ba <+3930>:	vmovdqa64 zmm8,zmm5
+   0x00000000000021c0 <+3936>:	vpminsw zmm8{k2},zmm6,zmm9
+   0x00000000000021c6 <+3942>:	vpmaxsw zmm6,zmm2,zmm1
+   0x00000000000021cc <+3948>:	mov    eax,0xff00
+   0x00000000000021d1 <+3953>:	kmovd  k2,eax
+   0x00000000000021d5 <+3957>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3ae1]        # 0x5cc0
+   0x00000000000021df <+3967>:	vmovdqa64 zmm10,zmm8
+   0x00000000000021e5 <+3973>:	vpermt2q zmm10,zmm9,zmm4
+   0x00000000000021eb <+3979>:	vmovdqa64 zmm4,ZMMWORD PTR [rip+0x3b0b]        # 0x5d00
+   0x00000000000021f5 <+3989>:	vpermt2q zmm10,zmm4,zmm6
+   0x00000000000021fb <+3995>:	vpminsw zmm6{k2},zmm2,zmm1
+   0x0000000000002201 <+4001>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3b35]        # 0x5d40
+   0x000000000000220b <+4011>:	vpermi2q zmm1,zmm7,zmm0
+   0x0000000000002211 <+4017>:	vpermi2q zmm9,zmm3,zmm7
+   0x0000000000002217 <+4023>:	vpermt2q zmm9,zmm4,zmm5
+   0x000000000000221d <+4029>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3b59]        # 0x5d80
+   0x0000000000002227 <+4039>:	vpermi2q zmm0,zmm6,zmm8
+   0x000000000000222d <+4045>:	vpminsw zmm2,zmm3,zmm9
+   0x0000000000002233 <+4051>:	vpmaxsw zmm3,zmm3,zmm9
+   0x0000000000002239 <+4057>:	mov    al,0xaa
+   0x000000000000223b <+4059>:	kmovd  k2,eax
+   0x000000000000223f <+4063>:	vpblendmq zmm4{k2},zmm3,zmm2
+   0x0000000000002245 <+4069>:	vpmaxsw zmm5,zmm7,zmm1
+   0x000000000000224b <+4075>:	mov    eax,0xf0f0f0f0
+   0x0000000000002250 <+4080>:	kmovd  k2,eax
+   0x0000000000002254 <+4084>:	vpminsw zmm5{k2},zmm7,zmm1
+   0x000000000000225a <+4090>:	vpmaxsw zmm1,zmm8,zmm10
+   0x0000000000002260 <+4096>:	vmovdqa64 zmm7,zmm1
+   0x0000000000002266 <+4102>:	vpminsw zmm7{k2},zmm8,zmm10
+   0x000000000000226c <+4108>:	vpmaxsw zmm8,zmm6,zmm0
+   0x0000000000002272 <+4114>:	mov    eax,0xf0f0f0
+   0x0000000000002277 <+4119>:	kmovd  k2,eax
+   0x000000000000227b <+4123>:	vmovdqa64 zmm9,ZMMWORD PTR [rip+0x3b3b]        # 0x5dc0
+   0x0000000000002285 <+4133>:	vmovdqa64 zmm10,zmm7
+   0x000000000000228b <+4139>:	vpermt2d zmm10,zmm9,zmm2
+   0x0000000000002291 <+4145>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3b65]        # 0x5e00
+   0x000000000000229b <+4155>:	vpermt2d zmm10,zmm2,zmm8
+   0x00000000000022a1 <+4161>:	vpminsw zmm8{k2},zmm6,zmm0
+   0x00000000000022a7 <+4167>:	vmovdqa64 zmm0,ZMMWORD PTR [rip+0x3b8f]        # 0x5e40
+   0x00000000000022b1 <+4177>:	vpermi2d zmm0,zmm5,zmm3
+   0x00000000000022b7 <+4183>:	vpermi2d zmm9,zmm4,zmm5
+   0x00000000000022bd <+4189>:	vpermt2d zmm9,zmm2,zmm1
+   0x00000000000022c3 <+4195>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3bb3]        # 0x5e80
+   0x00000000000022cd <+4205>:	vpermi2d zmm1,zmm8,zmm7
+   0x00000000000022d3 <+4211>:	vpminsw zmm2,zmm4,zmm9
+   0x00000000000022d9 <+4217>:	vpmaxsw zmm3,zmm4,zmm9
+   0x00000000000022df <+4223>:	vpblendmd zmm6{k1},zmm3,zmm2
+   0x00000000000022e5 <+4229>:	vpminsw zmm4,zmm5,zmm0
+   0x00000000000022eb <+4235>:	vpmaxsw zmm9,zmm5,zmm0
+   0x00000000000022f1 <+4241>:	mov    eax,0xcccccccc
+   0x00000000000022f6 <+4246>:	kmovd  k1,eax
+   0x00000000000022fa <+4250>:	vpminsw zmm0,zmm7,zmm10
+   0x0000000000002300 <+4256>:	vpmaxsw zmm7,zmm7,zmm10
+   0x0000000000002306 <+4262>:	vmovdqa64 zmm12,ZMMWORD PTR [rip+0x3bb0]        # 0x5ec0
+   0x0000000000002310 <+4272>:	vmovdqa64 zmm11,zmm6
+   0x0000000000002316 <+4278>:	vpermt2w zmm11,zmm12,zmm4
+   0x000000000000231c <+4284>:	vpmaxsw zmm10,zmm8,zmm1
+   0x0000000000002322 <+4290>:	vmovdqa64 zmm5,ZMMWORD PTR [rip+0x3bd4]        # 0x5f00
+   0x000000000000232c <+4300>:	vpermt2w zmm11,zmm5,zmm7
+   0x0000000000002332 <+4306>:	vmovdqu16 zmm7{k1},zmm0
+   0x0000000000002338 <+4312>:	vpermi2w zmm12,zmm7,zmm2
+   0x000000000000233e <+4318>:	vpermt2w zmm12,zmm5,zmm10
+   0x0000000000002344 <+4324>:	vmovdqu16 zmm9{k1},zmm4
+   0x000000000000234a <+4330>:	mov    eax,0xccccccc
+   0x000000000000234f <+4335>:	kmovd  k1,eax
+   0x0000000000002353 <+4339>:	vmovdqa64 zmm2,ZMMWORD PTR [rip+0x3be3]        # 0x5f40
+   0x000000000000235d <+4349>:	vpermi2w zmm2,zmm9,zmm3
+   0x0000000000002363 <+4355>:	vpminsw zmm10{k1},zmm8,zmm1
+   0x0000000000002369 <+4361>:	vmovdqa64 zmm1,ZMMWORD PTR [rip+0x3c0d]        # 0x5f80
+   0x0000000000002373 <+4371>:	vpermi2w zmm1,zmm10,zmm0
+   0x0000000000002379 <+4377>:	vmovdqa64 ZMMWORD PTR [rsp+0x400],zmm9
+   0x0000000000002381 <+4385>:	vmovdqa64 ZMMWORD PTR [rsp+0x280],zmm2
+   0x0000000000002389 <+4393>:	vpmaxsw zmm0,zmm9,zmm2
+   0x000000000000238f <+4399>:	vmovdqa64 ZMMWORD PTR [rsp+0x140],zmm0
+   0x0000000000002397 <+4407>:	vmovdqa64 ZMMWORD PTR [rsp+0x3c0],zmm7
+   0x000000000000239f <+4415>:	vmovdqa64 ZMMWORD PTR [rsp+0x300],zmm12
+   0x00000000000023a7 <+4423>:	vpmaxsw zmm0,zmm7,zmm12
+   0x00000000000023ad <+4429>:	vmovdqa64 ZMMWORD PTR [rsp+0xc0],zmm0
+   0x00000000000023b5 <+4437>:	vmovdqa64 ZMMWORD PTR [rsp+0x440],zmm6
+   0x00000000000023bd <+4445>:	vmovdqa64 ZMMWORD PTR [rsp+0x340],zmm11
+   0x00000000000023c5 <+4453>:	vpmaxsw zmm0,zmm6,zmm11
+   0x00000000000023cb <+4459>:	vmovdqa64 ZMMWORD PTR [rsp+0x100],zmm0
+   0x00000000000023d3 <+4467>:	vmovdqa64 ZMMWORD PTR [rsp+0x380],zmm10
+   0x00000000000023db <+4475>:	vmovdqa64 ZMMWORD PTR [rsp+0x2c0],zmm1
+   0x00000000000023e3 <+4483>:	vpmaxsw zmm0,zmm10,zmm1
+   0x00000000000023e9 <+4489>:	vmovdqa64 ZMMWORD PTR [rsp+0x80],zmm0
+   0x00000000000023f1 <+4497>:	mov    eax,0x2aaaaaaa
+   0x00000000000023f6 <+4502>:	kmovd  k1,eax
+   0x00000000000023fa <+4506>:	kmovd  DWORD PTR [rsp+0x68],k1
+   0x0000000000002401 <+4513>:	vpxor  xmm0,xmm0,xmm0
+   0x0000000000002405 <+4517>:	vmovdqa XMMWORD PTR [rsp+0x20],xmm0
+   0x000000000000240b <+4523>:	lea    r12,[rsp+0x20]
+   0x0000000000002410 <+4528>:	mov    edi,0x1
+   0x0000000000002415 <+4533>:	mov    rsi,r12
+   0x0000000000002418 <+4536>:	vzeroupper
+   0x000000000000241b <+4539>:	call   0x1080 <clock_gettime@plt>
+   0x0000000000002420 <+4544>:	mov    r13,QWORD PTR [rsp+0x20]
+   0x0000000000002425 <+4549>:	mov    r15,QWORD PTR [rsp+0x28]
+   0x000000000000242a <+4554>:	mov    edi,0x80
+   0x000000000000242f <+4559>:	call   0x2840 <stdlib::builtin::int::Int::__str__(::Int)>
+   0x0000000000002434 <+4564>:	mov    QWORD PTR [rsp+0x38],rax
+   0x0000000000002439 <+4569>:	mov    QWORD PTR [rsp+0x40],rdx
+   0x000000000000243e <+4574>:	mov    QWORD PTR [rsp+0x48],rcx
+   0x0000000000002443 <+4579>:	mov    r8,rcx
+   0x0000000000002446 <+4582>:	shr    r8,0x38
+   0x000000000000244a <+4586>:	and    r8d,0x1f
+   0x000000000000244e <+4590>:	test   rcx,rcx
+   0x0000000000002451 <+4593>:	cmovs  rax,rbx
+   0x0000000000002455 <+4597>:	cmovns r8,rdx
+   0x0000000000002459 <+4601>:	lea    rdi,[rip+0x3bb0]        # 0x6010 <static_string_1965bbc3e0e93178>
+   0x0000000000002460 <+4608>:	mov    esi,0x6
+   0x0000000000002465 <+4613>:	mov    rdx,rax
+   0x0000000000002468 <+4616>:	mov    rcx,r8
+   0x000000000000246b <+4619>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x0000000000002470 <+4624>:	mov    QWORD PTR [rsp+0x20],rax
+   0x0000000000002475 <+4629>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x000000000000247a <+4634>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x000000000000247f <+4639>:	movabs rax,0x4000000000000000
+   0x0000000000002489 <+4649>:	test   QWORD PTR [rsp+0x48],rax
+   0x000000000000248e <+4654>:	je     0x24a5 <main+4677>
+   0x0000000000002490 <+4656>:	mov    rdi,QWORD PTR [rsp+0x38]
+   0x0000000000002495 <+4661>:	lock dec QWORD PTR [rdi-0x8]
+   0x000000000000249a <+4666>:	jne    0x24a5 <main+4677>
+   0x000000000000249c <+4668>:	add    rdi,0xfffffffffffffff8
+   0x00000000000024a0 <+4672>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x00000000000024a5 <+4677>:	kmovd  k1,DWORD PTR [rsp+0x6c]
+   0x00000000000024ac <+4684>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x140]
+   0x00000000000024b4 <+4692>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x280]
+   0x00000000000024bc <+4700>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x400]
+   0x00000000000024c4 <+4708>:	vmovdqa64 ZMMWORD PTR [rsp+0x140],zmm0
+   0x00000000000024cc <+4716>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0xc0]
+   0x00000000000024d4 <+4724>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x300]
+   0x00000000000024dc <+4732>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x3c0]
+   0x00000000000024e4 <+4740>:	vmovdqa64 ZMMWORD PTR [rsp+0xc0],zmm0
+   0x00000000000024ec <+4748>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x100]
+   0x00000000000024f4 <+4756>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x340]
+   0x00000000000024fc <+4764>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x440]
+   0x0000000000002504 <+4772>:	vmovdqa64 ZMMWORD PTR [rsp+0x100],zmm0
+   0x000000000000250c <+4780>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0x80]
+   0x0000000000002514 <+4788>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x2c0]
+   0x000000000000251c <+4796>:	kmovd  k1,DWORD PTR [rsp+0x68]
+   0x0000000000002523 <+4803>:	vpminsw zmm0{k1},zmm1,ZMMWORD PTR [rsp+0x380]
+   0x000000000000252b <+4811>:	vmovdqa64 ZMMWORD PTR [rsp+0x80],zmm0
+   0x0000000000002533 <+4819>:	mov    rax,QWORD PTR [rsp+0x30]
+   0x0000000000002538 <+4824>:	mov    rsi,rax
+   0x000000000000253b <+4827>:	shr    rsi,0x38
+   0x000000000000253f <+4831>:	and    esi,0x1f
+   0x0000000000002542 <+4834>:	test   rax,rax
+   0x0000000000002545 <+4837>:	cmovns r12,QWORD PTR [rsp+0x20]
+   0x000000000000254b <+4843>:	cmovns rsi,QWORD PTR [rsp+0x28]
+   0x0000000000002551 <+4849>:	lea    rdx,[rip+0x3a88]        # 0x5fe0 <static_string_7f1562353e292282>
+   0x0000000000002558 <+4856>:	mov    ecx,0x2
+   0x000000000000255d <+4861>:	mov    rdi,r12
+   0x0000000000002560 <+4864>:	vzeroupper
+   0x0000000000002563 <+4867>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x0000000000002568 <+4872>:	mov    QWORD PTR [rsp+0x50],rax
+   0x000000000000256d <+4877>:	mov    QWORD PTR [rsp+0x58],rdx
+   0x0000000000002572 <+4882>:	mov    QWORD PTR [rsp+0x60],rcx
+   0x0000000000002577 <+4887>:	movabs r12,0x4000000000000000
+   0x0000000000002581 <+4897>:	test   QWORD PTR [rsp+0x30],r12
+   0x0000000000002586 <+4902>:	je     0x259d <main+4925>
+   0x0000000000002588 <+4904>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x000000000000258d <+4909>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000002592 <+4914>:	jne    0x259d <main+4925>
+   0x0000000000002594 <+4916>:	add    rdi,0xfffffffffffffff8
+   0x0000000000002598 <+4920>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x000000000000259d <+4925>:	sub    r13,r14
+   0x00000000000025a0 <+4928>:	vmovaps zmm0,ZMMWORD PTR [rsp+0x140]
+   0x00000000000025a8 <+4936>:	vmovaps zmm1,ZMMWORD PTR [rsp+0x100]
+   0x00000000000025b0 <+4944>:	vmovaps zmm2,ZMMWORD PTR [rsp+0xc0]
+   0x00000000000025b8 <+4952>:	vmovaps zmm3,ZMMWORD PTR [rsp+0x80]
+   0x00000000000025c0 <+4960>:	call   0x28e0 <stdlib::builtin::simd::SIMD::__str__(::SIMD[$0, $1]),dtype=si16,size=128>
+   0x00000000000025c5 <+4965>:	mov    QWORD PTR [rsp+0x38],rax
+   0x00000000000025ca <+4970>:	mov    QWORD PTR [rsp+0x40],rdx
+   0x00000000000025cf <+4975>:	mov    QWORD PTR [rsp+0x48],rcx
+   0x00000000000025d4 <+4980>:	mov    r8,rcx
+   0x00000000000025d7 <+4983>:	shr    r8,0x38
+   0x00000000000025db <+4987>:	and    r8d,0x1f
+   0x00000000000025df <+4991>:	test   rcx,rcx
+   0x00000000000025e2 <+4994>:	cmovs  rax,rbx
+   0x00000000000025e6 <+4998>:	cmovns r8,rdx
+   0x00000000000025ea <+5002>:	mov    rcx,QWORD PTR [rsp+0x60]
+   0x00000000000025ef <+5007>:	mov    rsi,rcx
+   0x00000000000025f2 <+5010>:	shr    rsi,0x38
+   0x00000000000025f6 <+5014>:	and    esi,0x1f
+   0x00000000000025f9 <+5017>:	test   rcx,rcx
+   0x00000000000025fc <+5020>:	lea    rdi,[rsp+0x50]
+   0x0000000000002601 <+5025>:	cmovns rdi,QWORD PTR [rsp+0x50]
+   0x0000000000002607 <+5031>:	cmovns rsi,QWORD PTR [rsp+0x58]
+   0x000000000000260d <+5037>:	mov    rdx,rax
+   0x0000000000002610 <+5040>:	mov    rcx,r8
+   0x0000000000002613 <+5043>:	vzeroupper
+   0x0000000000002616 <+5046>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x000000000000261b <+5051>:	mov    QWORD PTR [rsp+0x20],rax
+   0x0000000000002620 <+5056>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x0000000000002625 <+5061>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x000000000000262a <+5066>:	test   QWORD PTR [rsp+0x60],r12
+   0x000000000000262f <+5071>:	je     0x2646 <main+5094>
+   0x0000000000002631 <+5073>:	mov    rdi,QWORD PTR [rsp+0x50]
+   0x0000000000002636 <+5078>:	lock dec QWORD PTR [rdi-0x8]
+   0x000000000000263b <+5083>:	jne    0x2646 <main+5094>
+   0x000000000000263d <+5085>:	add    rdi,0xfffffffffffffff8
+   0x0000000000002641 <+5089>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000002646 <+5094>:	imul   r14,r13,0x3b9aca00
+   0x000000000000264d <+5101>:	sub    r15,QWORD PTR [rsp+0x70]
+   0x0000000000002652 <+5106>:	test   QWORD PTR [rsp+0x48],r12
+   0x0000000000002657 <+5111>:	je     0x266e <main+5134>
+   0x0000000000002659 <+5113>:	mov    rdi,QWORD PTR [rsp+0x38]
+   0x000000000000265e <+5118>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000002663 <+5123>:	jne    0x266e <main+5134>
+   0x0000000000002665 <+5125>:	add    rdi,0xfffffffffffffff8
+   0x0000000000002669 <+5129>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x000000000000266e <+5134>:	add    r15,r14
+   0x0000000000002671 <+5137>:	lea    rsi,[rip+0x3958]        # 0x5fd0 <static_string_bbe01a6a523daf15>
+   0x0000000000002678 <+5144>:	lea    r14,[rsp+0x20]
+   0x000000000000267d <+5149>:	mov    edx,0x1
+   0x0000000000002682 <+5154>:	mov    r8d,0x1
+   0x0000000000002688 <+5160>:	mov    rdi,r14
+   0x000000000000268b <+5163>:	xor    ecx,ecx
+   0x000000000000268d <+5165>:	call   0x3f00 <stdlib::io::io::print[*::Writable](*$0,::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::Bool,::FileDescriptor),Ts=[[typevalue<#kgen.instref<"stdlib::collections::string::string::String">>, struct<(pointer<none>, index, index) memoryOnly>]]>
+   0x0000000000002692 <+5170>:	test   QWORD PTR [rsp+0x30],r12
+   0x0000000000002697 <+5175>:	je     0x26ae <main+5198>
+   0x0000000000002699 <+5177>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x000000000000269e <+5182>:	lock dec QWORD PTR [rdi-0x8]
+   0x00000000000026a3 <+5187>:	jne    0x26ae <main+5198>
+   0x00000000000026a5 <+5189>:	add    rdi,0xfffffffffffffff8
+   0x00000000000026a9 <+5193>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x00000000000026ae <+5198>:	vmovdqa64 zmm0,ZMMWORD PTR [rsp+0xc0]
+   0x00000000000026b6 <+5206>:	vpaddw zmm0,zmm0,ZMMWORD PTR [rsp+0x140]
+   0x00000000000026be <+5214>:	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x80]
+   0x00000000000026c6 <+5222>:	vpaddw zmm1,zmm1,ZMMWORD PTR [rsp+0x100]
+   0x00000000000026ce <+5230>:	vpaddw zmm0,zmm0,zmm1
+   0x00000000000026d4 <+5236>:	vextracti64x4 ymm1,zmm0,0x1
+   0x00000000000026db <+5243>:	vpaddw ymm0,ymm1,ymm0
+   0x00000000000026df <+5247>:	vextracti128 xmm1,ymm0,0x1
+   0x00000000000026e5 <+5253>:	vpaddw xmm0,xmm0,xmm1
+   0x00000000000026e9 <+5257>:	vpshufd xmm1,xmm0,0xee
+   0x00000000000026ee <+5262>:	vpaddw xmm0,xmm0,xmm1
+   0x00000000000026f2 <+5266>:	vpshufd xmm1,xmm0,0x55
+   0x00000000000026f7 <+5271>:	vpaddw xmm0,xmm0,xmm1
+   0x00000000000026fb <+5275>:	vpsrld xmm1,xmm0,0x10
+   0x0000000000002700 <+5280>:	vpaddw xmm0,xmm0,xmm1
+   0x0000000000002704 <+5284>:	vmovw  eax,xmm0
+   0x000000000000270a <+5290>:	vmovw  WORD PTR [rsp+0x20],xmm0
+   0x0000000000002712 <+5298>:	mov    QWORD PTR [rsp+0x78],r14
+   0x0000000000002717 <+5303>:	mov    rdi,r15
+   0x000000000000271a <+5306>:	vzeroupper
+   0x000000000000271d <+5309>:	call   0x3940 <stdlib::builtin::uint::UInt::__str__(::UInt)>
+   0x0000000000002722 <+5314>:	mov    QWORD PTR [rsp+0x20],rax
+   0x0000000000002727 <+5319>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x000000000000272c <+5324>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x0000000000002731 <+5329>:	mov    r8,rcx
+   0x0000000000002734 <+5332>:	shr    r8,0x38
+   0x0000000000002738 <+5336>:	and    r8d,0x1f
+   0x000000000000273c <+5340>:	test   rcx,rcx
+   0x000000000000273f <+5343>:	cmovns r14,rax
+   0x0000000000002743 <+5347>:	cmovns r8,rdx
+   0x0000000000002747 <+5351>:	lea    rdi,[rip+0x38d2]        # 0x6020 <static_string_418889f2b6fd4056>
+   0x000000000000274e <+5358>:	mov    esi,0xb
+   0x0000000000002753 <+5363>:	mov    rdx,r14
+   0x0000000000002756 <+5366>:	mov    rcx,r8
+   0x0000000000002759 <+5369>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x000000000000275e <+5374>:	mov    QWORD PTR [rsp+0x38],rax
+   0x0000000000002763 <+5379>:	mov    QWORD PTR [rsp+0x40],rdx
+   0x0000000000002768 <+5384>:	mov    QWORD PTR [rsp+0x48],rcx
+   0x000000000000276d <+5389>:	test   QWORD PTR [rsp+0x30],r12
+   0x0000000000002772 <+5394>:	je     0x2789 <main+5417>
+   0x0000000000002774 <+5396>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x0000000000002779 <+5401>:	lock dec QWORD PTR [rdi-0x8]
+   0x000000000000277e <+5406>:	jne    0x2789 <main+5417>
+   0x0000000000002780 <+5408>:	add    rdi,0xfffffffffffffff8
+   0x0000000000002784 <+5412>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000002789 <+5417>:	mov    rax,QWORD PTR [rsp+0x48]
+   0x000000000000278e <+5422>:	mov    rsi,rax
+   0x0000000000002791 <+5425>:	shr    rsi,0x38
+   0x0000000000002795 <+5429>:	and    esi,0x1f
+   0x0000000000002798 <+5432>:	test   rax,rax
+   0x000000000000279b <+5435>:	cmovns rbx,QWORD PTR [rsp+0x38]
+   0x00000000000027a1 <+5441>:	cmovns rsi,QWORD PTR [rsp+0x40]
+   0x00000000000027a7 <+5447>:	lea    rdx,[rip+0x3842]        # 0x5ff0 <static_string_e9252add9d2cff9b>
+   0x00000000000027ae <+5454>:	mov    ecx,0x3
+   0x00000000000027b3 <+5459>:	mov    rdi,rbx
+   0x00000000000027b6 <+5462>:	call   0x4290 <stdlib::collections::string::string::String::_add[::Bool,::Origin[$0],::Bool,::Origin[$2]](::Span[$0, ::SIMD[::DType(uint8), ::Int(1)], $1, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()],::Span[$2, ::SIMD[::DType(uint8), ::Int(1)], $3, ::AddressSpace(::Int(0)), ::AnyType,__mlir_type.!kgen.target]()[::SIMD[::DType(uint8), ::Int(1)], ::_current_target()()]()])_REMOVED_ARG>
+   0x00000000000027bb <+5467>:	mov    QWORD PTR [rsp+0x20],rax
+   0x00000000000027c0 <+5472>:	mov    QWORD PTR [rsp+0x28],rdx
+   0x00000000000027c5 <+5477>:	mov    QWORD PTR [rsp+0x30],rcx
+   0x00000000000027ca <+5482>:	test   QWORD PTR [rsp+0x48],r12
+   0x00000000000027cf <+5487>:	je     0x27e6 <main+5510>
+   0x00000000000027d1 <+5489>:	mov    rdi,QWORD PTR [rsp+0x38]
+   0x00000000000027d6 <+5494>:	lock dec QWORD PTR [rdi-0x8]
+   0x00000000000027db <+5499>:	jne    0x27e6 <main+5510>
+   0x00000000000027dd <+5501>:	add    rdi,0xfffffffffffffff8
+   0x00000000000027e1 <+5505>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x00000000000027e6 <+5510>:	lea    rsi,[rip+0x37e3]        # 0x5fd0 <static_string_bbe01a6a523daf15>
+   0x00000000000027ed <+5517>:	lea    rdi,[rsp+0x20]
+   0x00000000000027f2 <+5522>:	mov    edx,0x1
+   0x00000000000027f7 <+5527>:	mov    r8d,0x1
+   0x00000000000027fd <+5533>:	xor    ecx,ecx
+   0x00000000000027ff <+5535>:	call   0x3f00 <stdlib::io::io::print[*::Writable](*$0,::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::StringSlice[::Bool(False), ::Origin[::Bool(False)](StaticConstantOrigin)],::Bool,::FileDescriptor),Ts=[[typevalue<#kgen.instref<"stdlib::collections::string::string::String">>, struct<(pointer<none>, index, index) memoryOnly>]]>
+   0x0000000000002804 <+5540>:	test   QWORD PTR [rsp+0x30],r12
+   0x0000000000002809 <+5545>:	je     0x2820 <main+5568>
+   0x000000000000280b <+5547>:	mov    rdi,QWORD PTR [rsp+0x20]
+   0x0000000000002810 <+5552>:	lock dec QWORD PTR [rdi-0x8]
+   0x0000000000002815 <+5557>:	jne    0x2820 <main+5568>
+   0x0000000000002817 <+5559>:	add    rdi,0xfffffffffffffff8
+   0x000000000000281b <+5563>:	call   0x10e0 <KGEN_CompilerRT_AlignedFree@plt>
+   0x0000000000002820 <+5568>:	call   0x10d0 <KGEN_CompilerRT_DestroyGlobals@plt>
+   0x0000000000002825 <+5573>:	xor    eax,eax
+   0x0000000000002827 <+5575>:	lea    rsp,[rbp-0x28]
+   0x000000000000282b <+5579>:	pop    rbx
+   0x000000000000282c <+5580>:	pop    r12
+   0x000000000000282e <+5582>:	pop    r13
+   0x0000000000002830 <+5584>:	pop    r14
+   0x0000000000002832 <+5586>:	pop    r15
+   0x0000000000002834 <+5588>:	pop    rbp
+   0x0000000000002835 <+5589>:	ret
 End of assembler dump.
