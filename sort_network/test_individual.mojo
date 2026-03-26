@@ -1,5 +1,5 @@
-from time import perf_counter_ns
-from benchmark import keep
+from std.time import perf_counter_ns
+from std.benchmark import keep
 from sort_network.sort_network_data import swap_data
 from sort_network.SwapData import SwapData
 
@@ -7,8 +7,7 @@ from sort_network.sort_network import (
     sn,
     sn_idx,
     sn_2x_interleave,
-    sn_2x_parallel,
-)
+    sn_2x_parallel)
 
 from sort_network.sort_network_ml import sn_ml_4n
 
@@ -16,11 +15,10 @@ from sort_network.performance import (
     gen_random_SIMD,
     gen_random_vec,
     gen_random_pointer_SCALAR,
-    gen_random_pointer_SIMD,
-)
+    gen_random_pointer_SIMD)
 
 
-fn test_mojo_sort[T: DType](size: Int):
+def test_mojo_sort[T: DType](size: Int):
     var buff = gen_random_pointer_SIMD[T](size)
 
     for i in range(size):
@@ -39,7 +37,7 @@ fn test_mojo_sort[T: DType](size: Int):
     buff.free()
 
 
-fn test_netw_vec_sort[T: DType](size: Int):
+def test_netw_vec_sort[T: DType](size: Int):
     var buff = gen_random_pointer_SCALAR[T](size)
 
     for i in range(size):
@@ -58,7 +56,7 @@ fn test_netw_vec_sort[T: DType](size: Int):
     buff.free()
 
 
-fn test_netw_SIMD_sort[T: DType, channels: Int, ascending: Bool]():
+def test_netw_SIMD_sort[T: DType, channels: Int, ascending: Bool]():
     var data1 = gen_random_SIMD[T, channels]()
     print("before " + String(channels) + ": " + String(data1))
     var start_time_ms = perf_counter_ns()
@@ -70,8 +68,8 @@ fn test_netw_SIMD_sort[T: DType, channels: Int, ascending: Bool]():
     print("time spend " + String(elapsed_time_ms) + " ns")
 
 
-fn test_netw_SIMD_sort_multi_layer[T: DType, ascending: Bool]():
-    alias channels: Int = 128
+def test_netw_SIMD_sort_multi_layer[T: DType, ascending: Bool]():
+    comptime channels: Int = 128
     var data1 = gen_random_SIMD[T, channels]()
     print("before " + String(channels) + ": " + String(data1))
     var start_time_ms = perf_counter_ns()
@@ -82,7 +80,7 @@ fn test_netw_SIMD_sort_multi_layer[T: DType, ascending: Bool]():
     print("time spend " + String(elapsed_time_ms) + " ns")
 
 
-fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, sd: SwapData, ascending: Bool]():
+def test_netw_SIMD_sort_idx[T1: DType, T2: DType, sd: SwapData, ascending: Bool]():
     var data = gen_random_SIMD[T1, sd.channels]()
     var idx = SIMD[T2, sd.channels]()
     for i in range(sd.channels):
@@ -100,7 +98,7 @@ fn test_netw_SIMD_sort_idx[T1: DType, T2: DType, sd: SwapData, ascending: Bool](
 # sort_16element_2x is slightly more efficient, but not much
 
 
-fn test_netw_SIMD_sort_2x_A[
+def test_netw_SIMD_sort_2x_A[
     T1: DType,
     T2: DType,
     channels: Int,
@@ -118,10 +116,10 @@ fn test_netw_SIMD_sort_2x_A[
     print("after:  " + String(data2b))
 
 
-fn test_netw_SIMD_sort_2x_B[
+def test_netw_SIMD_sort_2x_B[
     T1: DType, T2: DType, ascending1: Bool = True, ascending2: Bool = True
 ]():
-    alias sd: SwapData = swap_data[16]()
+    comptime sd: SwapData = swap_data[16]()
     var data1a = gen_random_SIMD[T1, sd.channels]()
     var data1b = gen_random_SIMD[T2, sd.channels]()
 

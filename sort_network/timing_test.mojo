@@ -1,9 +1,9 @@
-from benchmark import keep
-from time import time_function, perf_counter_ns
-from random import random_ui64
+from std.benchmark import keep
+from std.time import time_function, perf_counter_ns
+from std.random import random_ui64
 
 
-fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
+def gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     var result = SIMD[T, width]()
     # TODO: use faster methods
     for i in range(width):
@@ -11,7 +11,7 @@ fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     return result
 
 
-fn main_x():
+def main_x():
     var a = gen_random_SIMD[DType.uint32, 16]()
     var b: UInt32
     var start_time_ms = perf_counter_ns()
@@ -20,11 +20,11 @@ fn main_x():
     keep(b)
 
     #   @parameter
-    #   fn runner():
+    #   def runner():
     #       b = a.reduce_add()
     #       keep(b)
 
-    #   let elapsed_time_ms = time_function[runner]()
+    #   var elapsed_time_ms = time_function[runner]()
 
     print(elapsed_time_ms)
     # print(b)

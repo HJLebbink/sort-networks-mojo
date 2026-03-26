@@ -2,8 +2,8 @@ from sort_network.sort_network import sn_idx, sn
 from sort_network.test_tools import gen_random_SIMD
 
 
-fn test_sort_N[T: DType, size: Int](n_experiments: Int):
-    var buff = UnsafePointer[SIMD[T, 1]].alloc(size)
+def test_sort_N[T: DType, size: Int](n_experiments: Int):
+    var buff = alloc[SIMD[T, 1]](size)
 
     for i in range(n_experiments):
         if i == 0:
@@ -30,7 +30,7 @@ fn test_sort_N[T: DType, size: Int](n_experiments: Int):
     print(" " + String(n_experiments) + " tests successes")
 
 
-fn test_sort_X(n_experiments: Int):
+def test_sort_X(n_experiments: Int):
     test_sort_N[DType.uint8, 8](n_experiments)
     test_sort_N[DType.uint8, 16](n_experiments)
     test_sort_N[DType.uint8, 32](n_experiments)

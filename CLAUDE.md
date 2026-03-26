@@ -36,10 +36,12 @@ The project is organized around several key components:
 
 ## Development Commands
 
-### Building and Running
+### Building and Running (Windows)
+**IMPORTANT: Mojo runs on Windows. No GB10 access needed or permitted.**
+
 ```bash
 # Build the main executable
-mojo build main.mojo -o main
+mojo build main.mojo -o main.exe
 
 # Run the main program (includes performance tests)
 mojo run main.mojo
@@ -58,15 +60,6 @@ mojo run main.mojo
 # - Line 37: Float32 sorting tests  
 # - Line 92: Performance benchmarks
 ```
-
-### Performance Analysis
-```bash
-# Generate assembly disassembly for performance analysis
-cd disassemble
-bash run_all.sh
-```
-
-This will create assembly files showing the generated code for different data types and sizes.
 
 ### Project Management
 The project uses Pixi for environment management (see `pixi.toml`):

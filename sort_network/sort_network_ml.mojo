@@ -2,21 +2,18 @@ from sort_network.sort_network import (
     sn,
     sn_merge,
     sn_2x_interleave,
-    sn_2x_parallel,
-)
+    sn_2x_parallel)
 from sort_network.SwapData import SwapData
 
 # sort both inputs sequentially or interleaved
-fn sort_2x[
+def sort_2x[
     T: DType, sd: SwapData, sequential: Bool, ascending: Bool
 ](
     d0: SIMD[T, sd.channels],
-    d1: SIMD[T, sd.channels],
-) -> (
+    d1: SIMD[T, sd.channels]) -> (
     SIMD[T, sd.channels],
-    SIMD[T, sd.channels],
-):
-    @parameter
+    SIMD[T, sd.channels]):
+    comptime
     if sequential:
         return (sn[T, sd, ascending](d0), sn[T, sd, ascending](d1))
     else:
@@ -25,11 +22,11 @@ fn sort_2x[
 
 
 # sorting network multi-layer 4N: divide width in two; and use sorting network 4
-fn sn_ml_4n[
+def sn_ml_4n[
     T: DType, channels: Int, ascending: Bool
 ](data: SIMD[T, channels]) -> SIMD[T, channels]:
-    alias sub_size: Int = channels >> 2
-    alias sequential: Bool = False
+    comptime sub_size: Int = channels >> 2
+    comptime sequential: Bool = False
     # Sorting network for 4 inputs, 5 CEs, 3 layers:
     # [(0,2),(1,3)]
     # [(0,1),(2,3)]
@@ -40,7 +37,7 @@ fn sn_ml_4n[
     var d2: SIMD[T, sub_size] = data.slice[sub_size, offset = 2 * sub_size]()
     var d3: SIMD[T, sub_size] = data.slice[sub_size, offset = 3 * sub_size]()
 
-    alias sd = swap_data[sub_size * 2]()
+    comptime sd = swap_data[sub_size * 2]()
 
     var tmp1 = rebind[dest_type = SIMD[T, sd.channels]](d0.join(d2))
     var tmp2 = rebind[dest_type = SIMD[T, sd.channels]](d1.join(d3))
@@ -77,10 +74,10 @@ fn sn_ml_4n[
     return rebind[SIMD[T, channels]](CONST_d0123)
 
 
-fn sn_ml_8n[
+def sn_ml_8n[
     T: DType, channels: Int, ascending: Bool
 ](data: SIMD[T, channels]) -> SIMD[T, channels]:
-    alias sub_size: Int = channels >> 3
+    comptime sub_size: Int = channels >> 3
 
     # Sorting network for 8 inputs, 19 CEs, 6 layers:
     # [(0,2),(1,3),(4,6),(5,7)]
@@ -100,7 +97,7 @@ fn sn_ml_8n[
     var d7: SIMD[T, sub_size] = data.slice[sub_size, offset = 7 * sub_size]()
 
     # [(0,2),(1,3),(4,6),(5,7)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d02 = sn[T, 2 * sub_size, ascending](d0.join(d2))
         var CONST_d13 = sn[T, 2 * sub_size, ascending](d1.join(d3))
@@ -117,7 +114,7 @@ fn sn_ml_8n[
         d7 = CONST_d57.slice[sub_size, offset=sub_size]()
 
     # [(0,4),(1,5),(2,6),(3,7)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d04 = sn_merge[T, 2 * sub_size, ascending](d0.join(d4))
         var CONST_d15 = sn_merge[T, 2 * sub_size, ascending](d1.join(d5))
@@ -134,7 +131,7 @@ fn sn_ml_8n[
         d7 = CONST_d37.slice[sub_size, offset=sub_size]()
 
     # [(0,1),(2,3),(4,5),(6,7)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d01 = sn_merge[T, 2 * sub_size, ascending](d0.join(d1))
         var CONST_d23 = sn_merge[T, 2 * sub_size, ascending](d2.join(d3))
@@ -151,7 +148,7 @@ fn sn_ml_8n[
         d7 = CONST_d67.slice[sub_size, offset=sub_size]()
 
     # [(2,4),(3,5)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d24: SIMD[T, 2 * sub_size] = sn_merge[
             T, 2 * sub_size, ascending
@@ -166,7 +163,7 @@ fn sn_ml_8n[
         d5 = CONST_d35.slice[sub_size, offset=sub_size]()
 
     # [(1,4),(3,6)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d14 = sn_merge[T, 2 * sub_size, ascending](d1.join(d4))
         var CONST_d36 = sn_merge[T, 2 * sub_size, ascending](d3.join(d6))
@@ -177,7 +174,7 @@ fn sn_ml_8n[
         d6 = CONST_d36.slice[sub_size, offset=sub_size]()
 
     # [(1,2),(3,4),(5,6)]
-    @parameter  # just a hack to create a local scope
+    comptime  # just a hack to create a local scope
     if True:
         var CONST_d12 = sn_merge[T, 2 * sub_size, ascending](d1.join(d2))
         var CONST_d34 = sn_merge[T, 2 * sub_size, ascending](d3.join(d4))

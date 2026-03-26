@@ -2,7 +2,7 @@ from sort_network.SwapData import SwapData
 import sort_network.sort_tools
 
 
-fn batcher_odd_even_merge_network[channels: Int]() -> SwapData:
+def batcher_odd_even_merge_network[channels: Int]() -> SwapData:
     var result = List[SIMD[DType.uint16, 2]]()
     oddEvenMergeSort[0, channels](result)
     return sort_tools.linear_to_layers(result)
@@ -10,11 +10,11 @@ fn batcher_odd_even_merge_network[channels: Int]() -> SwapData:
 
 # sorts a piece of length n of the array
 # starting at position lo
-fn oddEvenMergeSort[
+def oddEvenMergeSort[
     lo: Int, channels: Int
 ](mut result: List[SIMD[DType.uint16, 2]]):
     if channels > 1:
-        alias m: Int = channels // 2
+        comptime m: Int = channels // 2
         oddEvenMergeSort[lo, m](result)
         oddEvenMergeSort[lo + m, m](result)
         oddEvenMerge[lo, channels, 1](result)
@@ -23,12 +23,12 @@ fn oddEvenMergeSort[
 # lo is the starting position and
 # n is the length of the piece to be merged,
 # r is the distance of the elements to be compared
-fn oddEvenMerge[
+def oddEvenMerge[
     lo: Int, channels: Int, r: Int
 ](mut result: List[SIMD[DType.uint16, 2]]):
-    alias m: Int = r * 2
+    comptime m: Int = r * 2
 
-    @parameter
+    comptime
     if m < channels:
         oddEvenMerge[lo, channels, m](result)
         # even subsequence

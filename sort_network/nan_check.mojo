@@ -1,19 +1,19 @@
-from random import random_ui64
-from time import perf_counter_ns
+from std.random import random_ui64
+from std.time import perf_counter_ns
 from sys.intrinsics import llvm_intrinsic
 
 
-fn gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
+def gen_random_SIMD[T: DType, width: Int]() -> SIMD[T, width]:
     var result = SIMD[T, width]()
     for i in range(width):
         result[i] = random_ui64(0, 100).cast[T]()
     return result
 
 
-fn test_float32_16():
-    alias T = DType.float32
-    alias channels = 16
-    alias T2 = SIMD[T, channels]
+def test_float32_16():
+    comptime T = DType.float32
+    comptime channels = 16
+    comptime T2 = SIMD[T, channels]
 
     var data0: T2 = gen_random_SIMD[T, channels]()
     var data1: T2 = gen_random_SIMD[T, channels]()
@@ -44,10 +44,10 @@ fn test_float32_16():
     print("Elapsed time " + String(elapsed_time_ns) + " ns")
 
 
-fn test_float64_8():
-    alias T = DType.float64
-    alias channels = 8
-    alias T2 = SIMD[T, channels]
+def test_float64_8():
+    comptime T = DType.float64
+    comptime channels = 8
+    comptime T2 = SIMD[T, channels]
     var _data0: T2 = gen_random_SIMD[T, channels]()
     var _data1: T2 = gen_random_SIMD[T, channels]()
 
@@ -95,10 +95,10 @@ fn test_float64_8():
 # comparison involving NaN results in NaN.
 
 
-fn test_intrinsic_1():
-    alias T = DType.float64
-    alias channels = 8
-    alias T2 = SIMD[T, channels]
+def test_intrinsic_1():
+    comptime T = DType.float64
+    comptime channels = 8
+    comptime T2 = SIMD[T, channels]
     var data0: T2 = gen_random_SIMD[T, channels]()
     var data1: T2 = gen_random_SIMD[T, channels]()
 
@@ -135,10 +135,10 @@ fn test_intrinsic_1():
     print("Elapsed time " + String(elapsed_time_ns) + " ns")
 
 
-fn test_intrinsic_2():
-    alias T = DType.float64
-    alias channels = 8
-    alias T2 = SIMD[T, channels]
+def test_intrinsic_2():
+    comptime T = DType.float64
+    comptime channels = 8
+    comptime T2 = SIMD[T, channels]
     var data0: T2 = gen_random_SIMD[T, channels]()
     var data1: T2 = gen_random_SIMD[T, channels]()
 
@@ -173,7 +173,7 @@ fn test_intrinsic_2():
     print("Elapsed time " + String(elapsed_time_ns) + " ns")
 
 
-fn test_llvm_1():
+def test_llvm_1():
     var data0: SIMD[DType.float32, 16] = gen_random_SIMD[DType.float32, 16]()
     var data1: SIMD[DType.float32, 16] = gen_random_SIMD[DType.float32, 16]()
     # var data0: SIMD[DType.float32, 16] = 10.
@@ -201,5 +201,5 @@ fn test_llvm_1():
     print("Elapsed time " + String(elapsed_time_ns) + " ns")
 
 
-fn main_x():
+def main_x():
     test_float32_16()

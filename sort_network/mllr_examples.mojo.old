@@ -1,7 +1,7 @@
 from benchmark import keep
 
 
-fn main_x():
+def main_x():
     # does nothing...
     var tmp1: NoneType = rebind[NoneType](__mlir_op.`llvm.debugtrap`)
 

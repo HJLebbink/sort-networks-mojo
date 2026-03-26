@@ -1,4 +1,7 @@
-from .sort_network import sn, sn_merge, swap_data
-from .sort_network_data import join_swap_data
-from .performance import test_performance1, test_performance2
-from .test_individual import test_netw_SIMD_sort
+from sort_network.sort_network import sn, sn_merge, swap_data
+from sort_network.sort_network_data import swap_data, join_swap_data
+from sort_network.performance import test_performance1, test_performance2
+from sort_network.test_individual import test_netw_SIMD_sort, test_netw_SIMD_sort_2x_A, test_netw_SIMD_sort_2x_B
+from sort_network.tests import test_sort_X
+from sort_network.sort_tools import layers_to_linear, linear_add, linear_print
+from sort_network.batcher_odd_even_merging import batcher_odd_even_merge_network

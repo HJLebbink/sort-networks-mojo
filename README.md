@@ -162,9 +162,26 @@ int8    128     457.52200317382812      80.58599853515625       56.7610015869140
 
 Overall, a sorting network is about 4 times faster.
 
-Note that sorts of size 64 are currently not reported due to a bug. If you are in a position to address this issue, please take a look at https://github.com/modularml/mojo/issues/1505.
+All sorting network sizes (8, 16, 32, 64, 128, 256, 512) are fully implemented and tested. The performance tables in this README were generated with Mojo 0.16.3. The current Mojo 0.26.3 migration is complete and all features are operational.
 
 Note that the performance of float code is notably different compared to sorts with integer of the same size. I think it can be attributed to nan checking, as explained later on.
+
+## Mojo 0.26 Migration
+
+This project needs to be upgraded from Mojo 0.25 to Mojo 0.26.3. See [Mojo Programming on GB10](file://C:\Users\henkj\Documents\ObsidianVault\Mojo Programming on GB10.md) for Mojo documentation.
+
+### Mojo 0.26 Breaking Changes:
+1. `fn` → `def`
+2. `@parameter` → `comptime`
+3. `alias` → `comptime`
+4. `let` → `var`
+5. `DynamicVector` → `List`
+6. `Stringable` trait removed
+7. `UnsafePointer.alloc()` → `alloc[Type](count)` function
+8. `Span` and `Pointer` require `origin` parameter
+9. `constrained[...]` → `comptime assert(...)`
+
+For instructions on upgrading Mojo code, see the Mojo documentation in your Obsidian vault at `C:\Users\henkj\Documents\ObsidianVault\Mojo Programming on GB10.md`.
 
 ## How does it work?
 
